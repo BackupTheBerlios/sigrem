@@ -14,61 +14,86 @@ public class GEconomiaImp implements GEconomia
 	
 	private GContratos gcontratos;
 	
-	private int ultMesFac;
+	private int ultimoMesFac;
 	
-	private int ultMesGas;
+	private int ultimoMesGas;
 	
-	private int ultMesBal;
+	private int ultimoMesBal;
 	
-	private int [] facturacion;
+	private int[] facturacion;
 	
-	private int [] gastos;
+	private int[] gastos;
 	
-	private int [] balance;
+	private int[] balance;
 		
 	private int cuotaContrato;
 	
-	public GEconomiaImp(InterfazGrafica vista,GEmpleados gempleados,GContratos gcontratos,String ultimoMesFac,String ultimoMesGas,String ultimoMesBal,String facturacion,String gastos,String balance)
+	public GEconomiaImp(InterfazGrafica vista,GEmpleados gempleados,GContratos gcontratos,String ultimoMesFac,String ultimoMesGas,String ultimoMesBal,String fac,String gas,String bal)
 	{
 		this.vista=vista;
 		this.gempleados=gempleados;
 		this.gcontratos=gcontratos;		
-		this.ultMesFac=Integer.valueOf(ultimoMesFac).intValue();
-		this.ultMesGas=Integer.valueOf(ultimoMesGas).intValue();
-		this.ultMesBal=Integer.valueOf(ultimoMesBal).intValue();
-		this.facturacion=stringAVector(facturacion);
-		this.gastos=stringAVector(gastos);
-		this.balance=stringAVector(balance);
+		this.ultimoMesFac=Integer.valueOf(ultimoMesFac).intValue();
+		this.ultimoMesGas=Integer.valueOf(ultimoMesGas).intValue();
+		this.ultimoMesBal=Integer.valueOf(ultimoMesBal).intValue();
+		this.facturacion=stringAVector(fac);
+		this.gastos=stringAVector(gas);
+		this.balance=stringAVector(bal);
+		for (int i=0;i<12;i++)
+			System.out.print(facturacion[i]+",");
+		for (int i=0;i<12;i++)
+			System.out.print(gastos[i]+",");
+		for (int i=0;i<12;i++)
+			System.out.print(balance[i]+",");
 		this.cuotaContrato=33;
 	}
-		
-	public void facturacion(int nFacturacion)
+	
+	public void facturacion(int fact)
 	{
+	/*	Calendar hoy=Calendar.getInstance();
+		int mesActual=hoy.get(Calendar.MONTH);
+		if (mesActual>ultimoMesFac)
+		
+		desplazarVectorFacturacion();
 		calculaVector(facturacion,ultMesFac,nFacturacion);
+		for (int i=0;i<12;i++)
+			System.out.println(facturacion[i]);
 		String tipo="facturacion";
 		String sUltMesFac=""+ultMesFac;
 		LinkedList datos=new LinkedList();
 		datos.add(tipo);
 		datos.add(facturacion);
 		datos.add(sUltMesFac);
-		vista.actualizaVista(3,1,datos);
+		vista.actualizaVista(3,1,datos);*/
 	}
 	
-	public void gastos(int nGastos)
+	public void gastos(int valor)
 	{
-		calculaVector(gastos,ultMesGas,nGastos);
-		String tipo="gastos";
-		String sUltMesGas=""+ultMesGas;
+		Calendar hoy=Calendar.getInstance();
+		int mesActual=hoy.get(Calendar.MONTH);
+		int desplazamiento=0;
+		if (mesActual>ultimoMesGas)
+		{	desplazamiento=mesActual-ultimoMesGas;}
+		else if (mesActual<ultimoMesGas)
+		{	desplazamiento=12-ultimoMesGas+mesActual;}
+		for (int i=0;i<=desplazamiento;i++)
+		{	for (int j=0;j<11;j++)
+			{	gastos[i]=gastos[i+1];}
+			gastos[11]=0;			
+		}
+		gastos[11]=valor;
+		ultimoMesGas=mesActual;
 		LinkedList datos=new LinkedList();
-		datos.add(tipo);
+		datos.add(new String("gastos"));
 		datos.add(gastos);
-		datos.add(sUltMesGas);
+		String nuevoUltimoMes=""+ultimoMesGas;
+		datos.add(nuevoUltimoMes);
 		vista.actualizaVista(3,1,datos);
 	}
 
 	public void balance(int nBalance)
 	{
-		calculaVector(balance,ultMesBal,nBalance);
+/*		calculaVector(balance,ultMesBal,nBalance);
 		String tipo="balance";
 		String sUltMesBal=""+ultMesBal;
 		LinkedList datos=new LinkedList();
@@ -76,7 +101,7 @@ public class GEconomiaImp implements GEconomia
 		datos.add(balance);
 		datos.add(sUltMesBal);
 		vista.actualizaVista(3,1,datos);				
-	}
+*/	}
 	
 	public int dameCuotaContrato()
 	{
@@ -92,23 +117,19 @@ public class GEconomiaImp implements GEconomia
 		String numero="";
 		char signo;
 		while ((i<s.length())&&(n<12))
-		{
-			signo=s.charAt(i);
+		{	signo=s.charAt(i);
 			i=i+1;
 			while (s.charAt(i)!=',')
-			{
-				numero=numero+s.charAt(i);
+			{	numero=numero+s.charAt(i);
 				i=i+1;
 			}
 			num=Integer.valueOf(numero).intValue();
 			i=i+1;
 			if (signo=='-')	num=num*(-1);
 			vect[n]=num;
-			System.out.println("n "+n+" "+vect[n]);
 			numero="";
 			n=n+1;
 		}
-		System.out.println("Vector "+s+" creado.");
 		return vect;
 	}
 	
@@ -124,20 +145,14 @@ public class GEconomiaImp implements GEconomia
 			int i=0;
 			int j=0;
 			while (i<12)
-			{
-				vect[j]=vect[j+dif];
-				System.out.println("Vector "+j+" "+vect[j]);
+			{	vect[j]=vect[j+dif];
 				i=i+dif;
 				j=j+1;										   
 			}
 			for(int k=j;k<11;k++)
-			{
-				vect[k]=0;
-				System.out.println("Vector "+k+" "+vect[k]);
-			}
+			{	vect[k]=0;}
 			uMes=mesActual;
 		}
-		vect[11]=uVal;		
-		System.out.println("Vector "+11+" "+vect[11]);
+		vect[11]=uVal;	
 	}
 }
