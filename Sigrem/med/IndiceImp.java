@@ -11,50 +11,38 @@ package med;
 
 public class IndiceImp implements Indice{
   ListaConIndices lista;
-  NodoIndiceImp listaIndice[];
+  NodoIndiceImp[] listaIndice;
 
   public IndiceImp(ListaConIndices lis) {
-    lista=lis;
-    //no recuerdo como se crea un vector
+    //lis tiene que ser una lista vacia
+  	lista=lis;
+    listaIndice=null;
   }
 
   int dameTamaño(){
     return lista.dameTamaño();
   }
-
-  void divideEspacio(){
-    //metodo para dividir el espacio del vector estatico;
+ 
+  void cambiaEspacio(int nuevoTamaño){
+    //metodo para cambiar el espacio del vector estatico;
+  	NodoIndiceImp[] nuevaListaIndice=new NodoIndiceImp[nuevoTamaño];
+  	int tamaño=dameTamaño();
+  	for (int i=0;i<tamaño;i++){
+  		nuevaListaIndice[i]=listaIndice[i];
+  	}
+  	listaIndice=nuevaListaIndice;
   }
-
-
-  void duplicaEspacio(){
-    //metodo para duplicar el espacio del vector estatico;
-  }
-
-
+  
 //////////////////////////////////////////////////////////////////
 //BUSQUEDA
-  public Object dameElemento(Comparable cla){
-    NodoLista nodo=dameNodoLista(cla);
-    if (nodo==null)
-      return null;
-    else
-      return nodo.elemento;
-  }
-
-
-  //da un Nodo de la lista, si no esta devuelve null
-  public NodoLista dameNodoLista(Comparable cla){
+  public NodoLista buscar(Comparable cla){
     NodoIndiceImp nodoIndice=dameNodoIndice(cla);
-    if (nodoIndice==null)
-      return null;
-    else
-      return nodoIndice.nodo;
+    return nodoIndice.nodo;
   }
 
   //da el Nodo del Indice que tiene esa clave
-  public NodoIndiceImp dameNodoIndice(Comparable cla){
-    int posicion = estaClave(cla);
+  NodoIndiceImp dameNodoIndice(Comparable cla){
+    int posicion = damePosicion(cla);
     if (posicion!=-1){
       return listaIndice[posicion];
     }else{
@@ -62,9 +50,8 @@ public class IndiceImp implements Indice{
     }
   }
 
-
   //devuelve la posicion de una clave, si no esta devuelve -1
-  int estaClave(Comparable cla){
+  int damePosicion(Comparable cla){
     int posicion = dondeIria(cla);
     if (posicion==-1){
       return -1;
@@ -106,128 +93,102 @@ public class IndiceImp implements Indice{
 //INSERCION
 
   //inserta en la lista del indice, pero no en la lista de elementos
-  public NodoIndiceImp insertarEnIndice(Comparable cla, NodoLista nodo){
-    if (lista.dameTamaño()==listaIndice.length){
-      duplicaEspacio();
-    }
-    int posicion=dondeIria(cla);
-    for (int i=lista.dameTamaño();i>=posicion;i--){
-      listaIndice[i+1]=listaIndice[i];
-    }
-    NodoIndiceImp nuevoNodoIndice=new NodoIndiceImp(cla,nodo,null,posicion);
-    listaIndice[posicion]=nuevoNodoIndice;
-    return nuevoNodoIndice;
+  public void insertar(Comparable[] cla, NodoLista nodo){
+    int[] posiciones= new int[cla.length];
+  	NodoIndiceImp[] todosNodosIndice=new NodoIndiceImp[cla.length];
+  	for (int i=0;i<lista.dameNumeroIndices();i++){
+    	posiciones[i]=dondeIria(cla[i]);
+    	todosNodosIndice[i]=new NodoIndiceImp(cla[i],nodo,todosNodosIndice,posiciones[i]);
+    	this.insertaPosicion(posiciones[i],todosNodosIndice[i]);
+  	}   
   }
 
+  boolean insertaPosicion(int posicion,NodoIndiceImp nodoIndice){
+    int tamaño=dameTamaño();
+    if (posicion<=tamaño){
+    	if (tamaño==listaIndice.length){
+    		//aqui amplia el tamaño del array
+    		cambiaEspacio(tamaño*2);
+    	}
+    	for (int i=tamaño;i>=posicion;i--){
+    		listaIndice[i].posicion=listaIndice[i].posicion+1;
+    		listaIndice[i+1]=listaIndice[i];
+    		    	}
+    	listaIndice[posicion]=nodoIndice;	
+    	return true;
+    }
+    return false;
+  }
+  
 //////////////////////////////////////////////////////////////////
 //ELIMINACION
 //elimina una clave del indice,
 //pero no toca la lista, ni el resto de los indices
 
 
-  public NodoIndiceImp eliminaEnIndice(Comparable cla){
+  public NodoLista eliminar(Comparable cla){
     //solo elimina en uno de los indices,
     //con el valor devuelto se borrar los restantes
-    int posicion=estaClave(cla);
-    int tamaño=dameTamaño();
-    if (posicion!=-1){
-      eliminaPosicion(posicion);
-      if (2*tamaño<listaIndice.length){
-        //aqui reduce el tamaño del array
-        divideEspacio();
-      }
-      return listaIndice[posicion];
+  	int posicion=damePosicion(cla);
+  	NodoLista nodoAEliminar=null;
+  	boolean bienEliminado=(posicion!=-1);
+  	if (bienEliminado){
+  		NodoIndiceImp nodoIndice=listaIndice[posicion];
+    	nodoAEliminar=nodoIndice.nodo;
+        eliminaPosicion(posicion);	
+    	for (int i=0;i<lista.dameNumeroIndices();i++){
+    		bienEliminado=bienEliminado && this.eliminaPosicion(nodoIndice.indices[i].posicion);
+    		
+    	}
     }
-    return null;
+    return nodoAEliminar;
   }
 
-  public boolean eliminaPosicion(int posicion){
+  boolean eliminaPosicion(int posicion){
     int tamaño=dameTamaño();
-    if (posicion<tamaño){
-      for (int i=posicion;i<tamaño;i++){
-        listaIndice[i]=listaIndice[i+1];
-      }
-      return true;
-    }else return false;
-  }
-  /*  public boolean eliminaEnIndice(Comparable cla, Object ele){
-  int posicion=estaClave(cla);
-  int tamaño=dameTamaño();
-  if (posicion!=-1){
-        NodoIndice nodoActual=listaIndice[posicion];
-        Object elementoActual=nodoActual.elemento;
-        boolean continuar=!elementoActual.equals(ele);
-        while (continuar && posicion+1<tamaño){
-          posicion++;
-          nodoActual = listaIndice[posicion];
-          elementoActual = nodoActual.elemento;
-          continuar = nodoActual.clave.compareTo(cla)==0 && !elementoActual.equals(ele);
-        }
-        if (elementoActual.equals(ele)){
-          for (int i=posicion; i<tamaño-1; i++){
-            listaIndice[i]=listaIndice[i+1];
-          }
-          if (2*tamaño<listaIndice.length){
-            //aqui reduce el tamaño del array
-            divideEspacio();
-          }
-          return true;
-        }
-      }
-      return false;
+    if (-1<posicion && posicion<tamaño){
+    	if (2*tamaño<listaIndice.length){
+    		//aqui reduce el tamaño del array
+    		cambiaEspacio(tamaño/2);
+    	}
+    	for (int i=posicion;i<tamaño;i++){
+    		listaIndice[i+1].posicion=listaIndice[i+1].posicion-1;
+    		listaIndice[i]=listaIndice[i+1];
+    	}
+    	return true;
     }
-  */
-
+    return false;
+  }
+  
 //////////////////////////////////////////////////////////////////
 //CAMBIO
 //cambia el valor de la clave de ese indice y reorganiza el indice,
 //pero no cambia el valor del elemnto de la lista;
-  public boolean cambioEnIndice(Comparable cla, Comparable nuevaCla){
-    int posicion=estaClave(cla);
+  public boolean cambiar(Comparable cla, Comparable nuevaCla){
+    int posicion=damePosicion(cla);
     if (posicion!=-1){
-      NodoIndiceImp nodoIndiceActual=this.listaIndice[posicion];
+      NodoIndiceImp nodoIndice=this.listaIndice[posicion];
       int nuevaPosicion=dondeIria(nuevaCla);
-      if (posicion<nuevaPosicion){
-        for (int i=posicion;i<nuevaPosicion-1;i++){
-          listaIndice[i]=listaIndice[i+1];
-        }
-        listaIndice[nuevaPosicion]= nodoIndiceActual;
-      }else if (posicion>nuevaPosicion){
-        for (int i=posicion;i>nuevaPosicion;i--){
-          listaIndice[i]=listaIndice[i-1];
-        }
-        listaIndice[nuevaPosicion]= nodoIndiceActual;
-      }
-      nodoIndiceActual.clave=nuevaCla;
-      //esto solo cambia de la clave del indice,
-      //pero no cambia el valor dentro del objeto por no poder acceder a él
-      //(por ser Object)
+      cambiaPosicion(posicion,nuevaPosicion,nodoIndice);       
       return true;
     }
     return false;
   }
-
-  /*  public boolean cambioEnIndice(Comparable cla, Comparable nuevaCla, Object ele){
-        int posicion=estaClave(cla);
-        if (this.listaIndice[posicion].elemento.equals(ele)){
-        int nuevaPosicion=dondeIria(nuevaCla);
-        if (posicion<nuevaPosicion){
-          for (int i=posicion;i<nuevaPosicion;i++){
-            listaIndice[i]=listaIndice[i+1];
-          }
-        }else if (posicion>nuevaPosicion){
-          for (int i=posicion;i>nuevaPosicion;i--){
-            listaIndice[i]=listaIndice[i-1];
-          }
-        }
-
-        listaIndice[nuevaPosicion]=new NodoIndice(nuevaCla,nodo);
-        //esto solo cambia de la clave del indice,
-        //pero no cambia el valor dentro del objeto por no poder acceder a él
-        //(por ser Object)
-        return true;
-      }
-      return false;
-    }
-  */
+  
+  boolean cambiaPosicion(int pos,int nuevaPos,NodoIndiceImp nodoIndice){
+  	int tamaño=dameTamaño();
+  	if (-1<pos && pos<tamaño && -1< nuevaPos && nuevaPos<=tamaño){	
+  		//es importantante el orden entre insertar y eliminar, para que no varien las posiciones
+  	  	if (pos<nuevaPos){
+  			insertaPosicion(nuevaPos,nodoIndice);
+			eliminaPosicion(pos);			 
+  		}else{
+  			eliminaPosicion(pos);
+  			insertaPosicion(nuevaPos,nodoIndice);
+  		}
+  		return true;
+  	}
+  	return false;
   }
+  
+}

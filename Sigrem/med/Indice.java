@@ -13,13 +13,17 @@ package med;
 
 
 public interface Indice {
-  public Object dameElemento(Comparable cla);
-
-  public NodoIndiceImp insertarEnIndice(Comparable cla, NodoLista nodo);
-
-  public NodoIndiceImp eliminaEnIndice(Comparable cla);
-  public boolean eliminaPosicion(int posicion);
-
-  public boolean cambioEnIndice(Comparable cla, Comparable nuevaCla);
+  public NodoLista buscar(Comparable cla);
+  //si no esta esa clave devuelve null
+  
+  public void insertar(Comparable[] cla, NodoLista nodo);
+  //necesita recibir las claves para cada uno de sus indices
+  
+  public NodoLista eliminar(Comparable cla);
+  //elimina todos sus indices y devuelve el nodo de la lista que debe ser eliminado
+  
+  public boolean cambiar(Comparable cla, Comparable nuevaCla);
+  //este metodo cambia el indice pero no el valor interno del objeto
+  //devuelve si ha podido o no hacer el cambio
 }
 

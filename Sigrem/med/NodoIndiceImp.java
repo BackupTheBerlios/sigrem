@@ -13,7 +13,7 @@ public class NodoIndiceImp {
   int posicion;
   Comparable clave;
   NodoLista nodo;
-  NodoIndiceImp indices[];
+  NodoIndiceImp[] indices;
   public NodoIndiceImp(Comparable cla,NodoLista nod,NodoIndiceImp[] inds,int pos){
     clave=cla;
     nodo=nod;
