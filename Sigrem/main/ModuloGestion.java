@@ -1,17 +1,11 @@
-/*
- * Created on 28-feb-2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
 package main;
 
-/**
- * @author felixmt
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
-public interface ModuloGestion {
+import java.util.LinkedList;
 
+public interface ModuloGestion 
+{
+	public boolean añadir(LinkedList datos);
+	public boolean eliminar(Integer codigo);
+	public Object modificar();
+	public Object consultarCodigo(Integer codigo);
 }

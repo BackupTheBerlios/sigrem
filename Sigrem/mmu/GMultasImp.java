@@ -9,7 +9,7 @@ package mmu;
 import interfaz.InterfazGrafica;
 import mco.Contrato;
 import med.*;
-
+import main.ModuloGestion;
 
 /**
  * @author frank
@@ -17,20 +17,20 @@ import med.*;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-class Sigrem {}
 
-public class GMultasImp {
-	EstructuraDatos multas;
-	Sigrem controlador;
-	InterfazGrafica vista; 
+public class GMultasImp 
+{
+	private EstructuraDatos multas;
+	private InterfazGrafica vista; 
 	  
-	public GMultasImp(Sigrem con, InterfazGrafica vis) {
+	public GMultasImp(InterfazGrafica vista) 
+	{
 		multas=new ListaConIndices(3);
-	    controlador=con;
-	    vista=vis;
+	    this.vista=vista;
 	}
 
-	public boolean añadirMulta(Contrato contrato, Integer codigo,String expediente, String boletin){
+	public boolean añadirMulta(Contrato contrato, Integer codigo,String expediente, String boletin)
+	{
 		//falta añadir todos los parametros de contrato
 		Multa nuevo=new MultaImp(contrato,codigo,expediente,boletin);
 		Comparable[] claves=null;
@@ -45,7 +45,8 @@ public class GMultasImp {
 		return false;
 	}
 
-	public boolean eliminarMulta(Integer codigo){
+	public boolean eliminarMulta(Integer codigo)
+	{
 		boolean eliminado=multas.eliminar(codigo,0);
 	  	if (eliminado) {
 	  		//vista.actualizaMulta();
@@ -56,7 +57,8 @@ public class GMultasImp {
 	}
 
 
-	public boolean modificarMulta(Integer codigoAntiguo,Contrato contrato, Integer codigoNuevo,String expedienteNuevo,String boletinNuevo){
+	public boolean modificarMulta(Integer codigoAntiguo,Contrato contrato, Integer codigoNuevo,String expedienteNuevo,String boletinNuevo)
+	{
 	  	//falta añadir todos los parametros de contrato
 	  	Multa nuevo=new MultaImp(contrato,codigoNuevo,expedienteNuevo,boletinNuevo);
 	  	Multa antiguo=this.consultarMultaCodigo(codigoAntiguo);
@@ -92,18 +94,19 @@ public class GMultasImp {
 	}
 
 	  
-	public Multa consultarMultaCodigo(Integer codigo){
+	public Multa consultarMultaCodigo(Integer codigo)
+	{
 	    return (Multa) this.multas.buscar(codigo,0);
 	}
 
-	public Multa consultarMultaExpediente(String expediente){
+	public Multa consultarMultaExpediente(String expediente)
+	{
 	    return (Multa) this.multas.buscar(expediente,1);
 	}
 	  
-	public Multa consultarMultasBoletin(String boletin){
+	public Multa consultarMultasBoletin(String boletin)
+	{
 	    return (Multa) this.multas.buscar(boletin,2);
 
 	}
-
-
 }
