@@ -91,8 +91,6 @@ public class PanelEmpleados extends JPanel
 	{
 		bmodificar=new JButton("Modificar");
 		bdespedir=new JButton("Despedir");
-		imodificar=new JMenuItem("Modificar");
-		idespedir=new JMenuItem("Despedir");
 		JPanel pempleado=dibujaEmpleado();
 		pempleado.setPreferredSize(new Dimension(314,0));
 		JPanel pdatos=dibujaDatos(false, ' ');
@@ -122,18 +120,54 @@ public class PanelEmpleados extends JPanel
 		formRecurso.setLocation(350,100);
 		formDescrip=new JFrame();
 		formDescrip.setResizable(false);
-		formDescrip.setLocation(350,100);		
-	}
+		formDescrip.setLocation(350,100);	
 		
-	public JPanel dibujaEmpleado()
-	{		
 		menu=new JPopupMenu();
-		JMenuItem icontratar=new JMenuItem("Contratar");
+		JMenuItem icontratar=new JMenuItem("Contratar empleado");
+		imodificar=new JMenuItem("Modificar empleado");
+		idespedir=new JMenuItem("Despedir empleado");
 		idespedir.setEnabled(false);
 		imodificar.setEnabled(false);
 		menu.add(icontratar);
 		menu.add(idespedir);
 		menu.add(imodificar);
+		icontratar.addActionListener(new ActionListener()
+				{	public void actionPerformed(ActionEvent e)
+					{
+						if (!formAlta.isVisible())
+						{	
+							formAlta.getContentPane().add(panelAltaEmpleado());
+							formAlta.pack();	
+							formAlta.setVisible(true);
+						}
+					}
+				});
+				idespedir.addActionListener(new ActionListener()
+				{	public void actionPerformed(ActionEvent e)
+					{
+						int seleccion=JOptionPane.showConfirmDialog(null,"         ¿Desea despedir al empleado "+cmostrado+"?","Despedir empleado",JOptionPane.YES_NO_CANCEL_OPTION,-1);
+						if (seleccion==JOptionPane.YES_OPTION)
+						{	
+						
+						}						
+					}
+				});
+				imodificar.addActionListener(new ActionListener()
+				{	public void actionPerformed(ActionEvent e)
+					{
+						if (!formAlta.isVisible() && !formBaja.isVisible())
+						{	
+							formMod2.getContentPane().add(panelModificaEmpleado2(cmostrado));
+							formMod2.pack();	
+							formMod2.setVisible(true);
+						}
+					}
+				});
+	}
+		
+	public JPanel dibujaEmpleado()
+	{		
+		
 		JPanel pemp=new JPanel();
 		pemp.addMouseListener(new PopupListener());
 		pemp.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos del empleado",TitledBorder.LEFT,TitledBorder.TOP));
@@ -193,39 +227,7 @@ public class PanelEmpleados extends JPanel
 		sp.setDividerSize(4);
 		sp.setEnabled(false);
 		pemp.add(sp);
-		icontratar.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-				if (!formAlta.isVisible())
-				{	
-					formAlta.getContentPane().add(panelAltaEmpleado());
-					formAlta.pack();	
-					formAlta.setVisible(true);
-				}
-			}
-		});
-		idespedir.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-				if (!formBaja.isVisible())
-				{	
-					formBaja.getContentPane().add(panelBajaEmpleado());
-					formBaja.pack();
-					formBaja.setVisible(true);
-				}
-			}
-		});
-		imodificar.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-				if (!formAlta.isVisible() && !formBaja.isVisible())
-				{	
-					formMod1.getContentPane().add(panelModificaEmpleado1());
-					formMod1.pack();	
-					formMod1.setVisible(true);
-				}
-			}
-		});
+		
 		bcontratar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
@@ -394,7 +396,8 @@ public class PanelEmpleados extends JPanel
 	
 	public JPanel dibujaRecursos()
 	{	
-		JPanel prec=new JPanel();;
+		JPanel prec=new JPanel();
+		prec.addMouseListener(new PopupListener());
 		if (pmostrado==0)
 		{			
 			Box tabla=Box.createVerticalBox();
@@ -411,6 +414,12 @@ public class PanelEmpleados extends JPanel
 			l4.setPreferredSize(new Dimension(80,25));
 			l5.setPreferredSize(new Dimension(25,25));
 			l6.setPreferredSize(new Dimension(25,25));
+			l1.addMouseListener(new PopupListener());
+			l2.addMouseListener(new PopupListener());
+			l3.addMouseListener(new PopupListener());
+			l4.addMouseListener(new PopupListener());
+			l5.addMouseListener(new PopupListener());
+			l6.addMouseListener(new PopupListener());
 			p.add(l1);
 			p.add(l2);
 			p.add(l3);
@@ -424,8 +433,11 @@ public class PanelEmpleados extends JPanel
 			}
 			JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 			ptabla.setPreferredSize(new Dimension(700,200));
+			ptabla.addMouseListener(new PopupListener());
 			JButton bcrea=new JButton("Añadir recurso");
+			bcrea.addMouseListener(new PopupListener());
 			JPanel botonera=new JPanel();
+			botonera.addMouseListener(new PopupListener());
 			botonera.add(bcrea);
 			JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,ptabla,botonera);
 			sp.setEnabled(false);
@@ -842,6 +854,7 @@ public class PanelEmpleados extends JPanel
 	public JPanel dibujaLinea()
 	{		
 		JPanel panel=new JPanel();
+		panel.addMouseListener(new PopupListener());
 		urec++;
 		final JTextField cod=new JTextField("R00"+urec);
 		final JTextField exp=new JTextField();
@@ -858,6 +871,12 @@ public class PanelEmpleados extends JPanel
 		descrip.setPreferredSize(new Dimension(80,25));		
 		modi.setPreferredSize(new Dimension (25,25));		
 		elim.setPreferredSize(new Dimension (25,25));
+		cod.addMouseListener(new PopupListener());
+		exp.addMouseListener(new PopupListener());
+		bol.addMouseListener(new PopupListener());
+		descrip.addMouseListener(new PopupListener());
+		modi.addMouseListener(new PopupListener());
+		elim.addMouseListener(new PopupListener());
 		panel.add(cod);
 		panel.add(exp);
 		panel.add(bol);
