@@ -1,9 +1,6 @@
 ==========
-= SIGREM =
-==========
-
-Sistema Integral de Gestión de REcursos de Multas
-_________________________________________________
+= SIGREM = Sistema Integral de Gestión de REcursos de Multas
+========== =================================================
 
 Producto que satisface las necesidades de una empresa de gestión de recursos de multas de tráfico,
 cuyo principal servicio será prestar asesoramiento jurídico a sus clientes. Éstos podrán crear 
@@ -13,22 +10,20 @@ de su plantilla a dicho recurso para intentar resolverlo favorablemente.
 
 La aplicación desarrollada permite: 
 
-•	Gestionar los contratos con los clientes, ya sea para crearlos, modificarlos o cancelarlos 
-•	Gestionar la asignación de tareas a los empleados 
-•	Gestionar la plantilla 
-•	Gestionar la facturación a los clientes 
-•	Controlar la gestión de nóminas de los empleados 
-•	Gestionar los datos de empleados y clientes 
-•	Gestionar los contratos asociados a cada cliente 
-•	Crear, consultar y modificar las multas asociadas a un contrato 
-•	Crear, consultar y modificar los recursos asociados a las multas. 
-
+• Gestionar los contratos con los clientes, ya sea para crearlos, modificarlos o cancelarlos 
+• Gestionar la asignación de tareas a los empleados 
+• Gestionar la plantilla 
+• Gestionar la facturación a los clientes 
+• Controlar la gestión de nóminas de los empleados 
+• Gestionar los datos de empleados y clientes 
+• Gestionar los contratos asociados a cada cliente 
+• Crear, consultar y modificar las multas asociadas a un contrato 
+• Crear, consultar y modificar los recursos asociados a las multas. 
 
 Beneficios:
 
-La introducción de SIGREM facilitará la gestión de la empresa, tanto en lo referente a la asignación 
+La introducción de SIGREM facilitará la gestión de la empresa, tanto en lo referente a la asignación
 de tareas a los empleados, como en la relación con los clientes, y en el control de la facturación.
-
 
 Autores:
 -------
