@@ -50,7 +50,7 @@ public class GClientesImp implements GClientes
 		Object[] busqueda=listaclientes.buscar(codcliente,0);
 		Cliente cliente=(Cliente)busqueda[0];
 		cliente.añadeContrato(codcontrato);
-		vista.actualizaVista(1,2,cliente.getListaDatos());
+		vista.actualizaVista(1,2,cliente.dameListaDatos());
 	}
 	
 	public void eliminarCliente(boolean actualizar,String codcliente,String codcontrato)
@@ -62,14 +62,14 @@ public class GClientesImp implements GClientes
 			if (busqueda[0]!=null)
 			{	Cliente cliente=(Cliente)busqueda[0];
 				cliente.eliminaContrato(codcontrato);
-				if (cliente.getNumeroContratos()==0)
+				if (cliente.dameNumeroContratos()==0)
 				{	boolean eliminado=listaclientes.eliminar(codcliente,0);
 					if (eliminado) 
 					{	vista.actualizaVistaMensaje("El cliente "+codcliente+" ha sido eliminado al no tener contratos asociados");}
 					else vista.actualizaVistaMensaje("Error al eliminar el cliente "+codcliente+". No se ha encontrado");
 				}
 				else
-					if (actualizar) vista.actualizaVista(1,2,cliente.getListaDatos());
+					if (actualizar) vista.actualizaVista(1,2,cliente.dameListaDatos());
 			}
 			else
 			{	vista.actualizaVistaMensaje("Error al buscar el cliente "+codcliente+". No se ha encontrado");}
@@ -83,16 +83,16 @@ public class GClientesImp implements GClientes
 		else 
 			if (busqueda[0]!=null)
 			{	Cliente cliente=(Cliente)busqueda[0];
-				cliente.setDireccion((String)datos.get(2));
-				cliente.setCp((String)datos.get(3));
-				cliente.setPoblacion((String)datos.get(4));
-				cliente.setProvincia((String)datos.get(5));
-				cliente.setTelefono1((String)datos.get(6));
-				cliente.setTelefono2((String)datos.get(7));
-				cliente.setMovil((String)datos.get(8));
-				cliente.setEmail((String)datos.get(9));
-				cliente.setFax((String)datos.get(10));
-				vista.actualizaVista(1,2,cliente.getListaDatos());				
+				cliente.ponDireccion((String)datos.get(2));
+				cliente.ponCp((String)datos.get(3));
+				cliente.ponPoblacion((String)datos.get(4));
+				cliente.ponProvincia((String)datos.get(5));
+				cliente.ponTelefono1((String)datos.get(6));
+				cliente.ponTelefono2((String)datos.get(7));
+				cliente.ponMovil((String)datos.get(8));
+				cliente.ponEmail((String)datos.get(9));
+				cliente.ponFax((String)datos.get(10));
+				vista.actualizaVista(1,2,cliente.dameListaDatos());				
 			}
 			else
 			{	vista.actualizaVistaMensaje("Error al buscar el cliente "+codigo+". No se ha encontrado");}
@@ -110,22 +110,22 @@ public class GClientesImp implements GClientes
 			{	Cliente cliente=(Cliente)busqueda[0];
 				if (modificar)
 				{	LinkedList datos=new LinkedList();
-					datos.add(cliente.getNombre());
-					datos.add(cliente.getDni());
-					datos.add(cliente.getDireccion());
-					datos.add(cliente.getCp());
-					datos.add(cliente.getPoblacion());
-					datos.add(cliente.getProvincia());
-					datos.add(cliente.getTelefono1());
-					datos.add(cliente.getTelefono2());
-					datos.add(cliente.getMovil());
-					datos.add(cliente.getEmail());
-					datos.add(cliente.getFax());
+					datos.add(cliente.dameNombre());
+					datos.add(cliente.dameDni());
+					datos.add(cliente.dameDireccion());
+					datos.add(cliente.dameCp());
+					datos.add(cliente.damePoblacion());
+					datos.add(cliente.dameProvincia());
+					datos.add(cliente.dameTelefono1());
+					datos.add(cliente.dameTelefono2());
+					datos.add(cliente.dameMovil());
+					datos.add(cliente.dameEmail());
+					datos.add(cliente.dameFax());
 					vista.actualizaVistaDatos(1,datos,true);
 				}
 				else
-				{	if (actualizar)	vista.actualizaVista(1,2,cliente.getListaDatos());}
-				return (String)cliente.getListaContratos().getFirst();
+				{	if (actualizar)	vista.actualizaVista(1,2,cliente.dameListaDatos());}
+				return (String)cliente.dameListaContratos().getFirst();
 			}
 			else
 			{	vista.actualizaVistaMensaje("Error al buscar el cliente "+codigo+". No se ha encontrado");

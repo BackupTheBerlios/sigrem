@@ -77,8 +77,8 @@ public class GContratosImp implements GContratos
 			{	Contrato contrato=(Contrato)busqueda[0];
 				Date hoy=new Date();
 				SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
-				contrato.setFechaBaja(formato.format(hoy));
-				return contrato.getCodigoCliente();
+				contrato.ponFechaBaja(formato.format(hoy));
+				return contrato.dameCodigoCliente();
 			}
 			else
 			{	vista.actualizaVistaMensaje("Error al buscar el contrato "+codigo+". No se ha encontrado");
@@ -98,15 +98,15 @@ public class GContratosImp implements GContratos
 			{	Contrato contrato=(Contrato)busqueda[0];
 				if (modificar)
 				{	LinkedList datos=new LinkedList();
-					datos.add(contrato.getCodigoContrato());
-					datos.add(contrato.getCodigoCliente());
-					datos.add(contrato.getMatricula());
-					datos.add(contrato.getFechaAlta());
+					datos.add(contrato.dameCodigoContrato());
+					datos.add(contrato.dameCodigoCliente());
+					datos.add(contrato.dameMatricula());
+					datos.add(contrato.dameFechaAlta());
 					vista.actualizaVistaDatos(1,datos,false);
 				}
 				else
-				{	vista.actualizaVista(1,1,contrato.getListaDatos());}
-				return contrato.getCodigoCliente();
+				{	vista.actualizaVista(1,1,contrato.dameListaDatos());}
+				return contrato.dameCodigoCliente();
 			}
 			else
 			{	vista.actualizaVistaMensaje("Error al buscar el contrato "+codigo+". No se ha encontrado");
@@ -124,8 +124,8 @@ public class GContratosImp implements GContratos
 		else 
 			if (busqueda[0]!=null)
 			{	Contrato contrato=(Contrato)busqueda[0];
-				vista.actualizaVista(1,1,contrato.getListaDatos());
-				return contrato.getCodigoCliente();
+				vista.actualizaVista(1,1,contrato.dameListaDatos());
+				return contrato.dameCodigoCliente();
 			}
 			else
 			{	vista.actualizaVistaMensaje("Error al buscar el contrato "+matricula+". No se ha encontrado");

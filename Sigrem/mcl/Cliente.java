@@ -47,62 +47,62 @@ public class Cliente
 		listacontratos=new LinkedList();
 	}
 
-	public String getCodigo()
+	public String dameCodigo()
 	{
 		return codigo;
 	}
 
-	public String getNombre()
+	public String dameNombre()
 	{
 		return nombre;
 	}
 	
-	public String getDni()
+	public String dameDni()
 	{
 		return dni;
 	}
 	
-	public String getDireccion()
+	public String dameDireccion()
 	{
 		return direccion;
 	}
-	public String getCp()
+	public String dameCp()
 	{
 		return cp;
 	}
-	public String getPoblacion()
+	public String damePoblacion()
 	{
 		return poblacion;
 	}
-	public String getProvincia()
+	public String dameProvincia()
 	{
 		return provincia;
 	}
-	public String getTelefono1()
+	public String dameTelefono1()
 	{
 		return telefono1;
 	}
-	public String getTelefono2()
+	public String dameTelefono2()
 	{
 		return telefono2;
 	}
-	public String getMovil()
+	public String dameMovil()
 	{
 		return movil;
 	}
-	public String getEmail()
+	public String dameEmail()
 	{
 		return email;
 	}
-	public String getFax()
+	public String dameFax()
 	{
 		return fax;
 	}
-	public LinkedList getListaContratos()
+	public LinkedList dameListaContratos()
 	{
 		return listacontratos;
 	}
-	public LinkedList getListaDatos()
+	public LinkedList dameListaDatos()
 	{
 		LinkedList datos=new LinkedList();
 		datos.add(nombre);
@@ -136,67 +136,52 @@ public class Cliente
 		if (esta)listacontratos.remove(i-1);		
 	}
 	
-	public int getNumeroContratos()
+	public int dameNumeroContratos()
 	{
 		return listacontratos.size();
 	}
 	
-	public void setCodigo(String cod)
-	{
-		this.codigo=cod;
-	}
-
-	public void setNombre(String nom)
-	{
-		this.nombre=nom;
-	}
-	
-	public void setDni(String dni)
-	{
-		this.dni=dni;
-	}
-	
-	public void setDireccion(String dir)
+	public void ponDireccion(String dir)
 	{
 		this.direccion=dir;
 	}
-	public void setCp(String cp)
+	public void ponCp(String cp)
 	{
 		this.cp=cp;
 	}
-	public void setPoblacion(String pob)
+	public void ponPoblacion(String pob)
 	{
 		this.poblacion=pob;
 	}
-	public void setProvincia(String pro)
+	public void ponProvincia(String pro)
 	{
 		this.provincia=pro;
 	}
-	public void setTelefono1(String tel)
+	public void ponTelefono1(String tel)
 	{
 		this.telefono1=tel;
 	}
-	public void setTelefono2(String tel)
+	public void ponTelefono2(String tel)
 	{
 		this.telefono2=tel;
 	}
-	public void setMovil(String mov)
+	public void ponMovil(String mov)
 	{
 		this.movil=mov;
 	}
-	public void setEmail(String email)
+	public void ponEmail(String email)
 	{
 		this.email=email;
 	}
-	public void setFax(String fax)
+	public void ponFax(String fax)
 	{
 		this.fax=fax;
 	}
-	public void setListaContratos(LinkedList lista)
+	public void ponListaContratos(LinkedList lista)
 	{
 		this.listacontratos=lista;
 	}
-	public void setListaDatos(LinkedList datos)
+	public void ponListaDatos(LinkedList datos)
 	{
 		dni=(String)datos.get(0);
 		nombre=(String)datos.get(1);
