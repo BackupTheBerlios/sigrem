@@ -1,29 +1,38 @@
 ==========
-= SIGREM = Sistema Integral de Gestión de REcursos de Multas
+= SIGREM = Sistema Integ \n ral de Gestión de REcursos de Multas
 ========== =================================================
 
-Producto que satisface las necesidades de una empresa de gestión de recursos de multas de tráfico,
-cuyo principal servicio será prestar asesoramiento jurídico a sus clientes. Éstos podrán crear 
-contratos con la empresa que harán referencia a un vehículo sobre el que pesa alguna multa, y a 
-su vez podrán solicitar un recurso para intentar anularla. La empresa asignará entonces un abogado
-de su plantilla a dicho recurso para intentar resolverlo favorablemente. 
+Producto que satisface las necesidades de una empresa de 
+gestión de recursos de multas de tráfico,cuyo principal 
+servicio será prestar asesoramiento jurídico a sus
+clientes. Éstos podrán crear contratos con la empresa que
+harán referencia a un vehículo sobre el que pesa alguna
+multa,y a su vez podrán solicitar un recurso para intentar
+anularla. La empresa asignará entonces un abogado de su
+plantilla a dicho recurso para intentar resolverlo
+favorablemente. 
 
 La aplicación desarrollada permite: 
 
-• Gestionar los contratos con los clientes, ya sea para crearlos, modificarlos o cancelarlos 
+• Gestionar los contratos con los clientes, ya sea para
+  crearlos, modificarlos o cancelarlos 
 • Gestionar la asignación de tareas a los empleados 
 • Gestionar la plantilla 
 • Gestionar la facturación a los clientes 
 • Controlar la gestión de nóminas de los empleados 
 • Gestionar los datos de empleados y clientes 
 • Gestionar los contratos asociados a cada cliente 
-• Crear, consultar y modificar las multas asociadas a un contrato 
-• Crear, consultar y modificar los recursos asociados a las multas. 
+• Crear, consultar y modificar las multas asociadas a un
+  contrato 
+• Crear, consultar y modificar los recursos asociados a
+  las multas. 
 
 Beneficios:
 
-La introducción de SIGREM facilitará la gestión de la empresa, tanto en lo referente a la asignación
-de tareas a los empleados, como en la relación con los clientes, y en el control de la facturación.
+La introducción de SIGREM facilitará la gestión de la 
+empresa, tanto en lo referente a la asignación de tareas 
+a los empleados, como en la relación con los clientes, y 
+en el control de la facturación.
 
 Autores:
 -------
