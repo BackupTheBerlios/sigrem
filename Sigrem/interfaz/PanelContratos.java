@@ -285,6 +285,9 @@ public class PanelContratos extends JPanel
 		JButton bcrea=new JButton ("Crear");
 		JButton belimcont=new JButton("Eliminar");
 		JButton bmodcont=new JButton("Modificar");
+		bcrea.setToolTipText("Crear un contrato nuevo");
+		belimcont.setToolTipText("Eliminar un contrato");
+		bmodcont.setToolTipText("Modificar un contrato");
 		bcrea.setPreferredSize(new Dimension(90,25));
 		bmodcont.setPreferredSize(new Dimension(90,25));
 		belimcont.setPreferredSize(new Dimension(90,25));
@@ -496,6 +499,7 @@ public class PanelContratos extends JPanel
 		JLabel l12=new JLabel("Contratos ",SwingConstants.RIGHT);
 		l12.setPreferredSize(new Dimension(80,20));
 		selector=new JComboBox();
+		selector.setToolTipText("Contratos del cliente");
 		selector.setEditable(false);
 		selector.setPreferredSize(new Dimension(80,20));
 		if (datos!=null)
@@ -510,6 +514,7 @@ public class PanelContratos extends JPanel
 		JLabel relleno11=new JLabel("");
 		relleno11.setPreferredSize(new Dimension(0,10));
 		JButton nuevoContrato=new JButton("Nuevo Contrato");
+		nuevoContrato.setToolTipText("Asociar un contrato nuevo al cliente");
 		Box c12=Box.createHorizontalBox();
 		c12.add(l12);
 		c12.add(selector);
@@ -585,6 +590,7 @@ public class PanelContratos extends JPanel
 			sp1.setEnabled(false);
 			sp1.setDividerSize(4);
 			JButton bcrea=new JButton("Añadir multa");
+			bcrea.setToolTipText("Añadir una multa nueva al contrato");
 			JPanel botonera=new JPanel();
 			botonera.add(bcrea);
 			JSplitPane sp2=new JSplitPane(JSplitPane.VERTICAL_SPLIT,sp1,botonera);
@@ -644,7 +650,9 @@ public class PanelContratos extends JPanel
 		sp1.setEnabled(false);
 		sp1.setDividerSize(4);
 		JButton bcrea=new JButton("Añadir recurso");
+		bcrea.setToolTipText("Añadir un recurso nuevo a la multa");
 		JButton baceptar=new JButton("Aceptar");
+		baceptar.setToolTipText("Cerrar ventana de recursos");
 		JPanel botonera=new JPanel();
 		botonera.add(bcrea);
 		JSplitPane sp2=new JSplitPane(JSplitPane.VERTICAL_SPLIT,sp1,botonera);
@@ -1348,12 +1356,16 @@ public class PanelContratos extends JPanel
 		infrac.setBackground(Color.WHITE);
 		infrac.setPreferredSize(new Dimension(250,25));
 		JButton descrip=new JButton(new ImageIcon("interfaz/find.gif"));
+		descrip.setToolTipText("Mostrar descrpción de la multa");
 		descrip.setPreferredSize(new Dimension(80,25));		
 		JButton recur=new JButton("Ver");
+		recur.setToolTipText("Mostrar los recursos asociados a la multa");
 		recur.setPreferredSize(new Dimension(80,25));
 		JButton mod=new JButton(new ImageIcon("interfaz/tick.gif"));
+		mod.setToolTipText("Modificar la multa");
 		mod.setPreferredSize(new Dimension(25,25));
 		JButton elim=new JButton(new ImageIcon("interfaz/del.gif"));
+		elim.setToolTipText("Eliminar la multa");
 		elim.setPreferredSize(new Dimension(25,25));
 		panel.add(cod);
 		panel.add(exp);
@@ -1411,8 +1423,11 @@ public class PanelContratos extends JPanel
 		JTextField est=new JTextField((String)datos.get(4));
 		final JTextField abo=new JTextField((String)datos.get(5));
 		JButton descrip=new JButton(new ImageIcon("interfaz/find.gif"));
+		descrip.setToolTipText("Mostrar la descripción del recurso");
 		JButton modi=new JButton(new ImageIcon("interfaz/tick.gif"));
+		modi.setToolTipText("Modificar el recurso");
 		JButton elim=new JButton(new ImageIcon("interfaz/del.gif"));
+		elim.setToolTipText("Eliminar el recurso");
 		cod.setEditable(false);
 		femi.setEditable(false);
 		ere.setEditable(false);
