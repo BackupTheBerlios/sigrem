@@ -39,7 +39,7 @@ public class GEconomiaImp implements GEconomia
 		this.facturacion=stringAVector(fac);
 		this.gastos=stringAVector(gas);
 		this.balance=stringAVector(bal);
-		this.cuotaContrato=33;
+		this.cuotaContrato=33;	
 	}
 	
 	public int [] stringAVector (String s) 
@@ -71,15 +71,20 @@ public class GEconomiaImp implements GEconomia
 	{
 		Calendar hoy=Calendar.getInstance();
 		int mesActual=hoy.get(Calendar.MONTH);
-		int desplazamiento=0;
-		if (mesActual>ultimoMesFac)
-		{	desplazamiento=mesActual-ultimoMesFac;}
-		else if (mesActual<ultimoMesGas)
-		{	desplazamiento=12-ultimoMesFac+mesActual;}
-		for (int i=0;i<=desplazamiento;i++)
-		{	for (int j=0;j<11;j++)
-			{	facturacion[i]=facturacion[i+1];}
-			facturacion[11]=0;			
+		if (mesActual!=ultimoMesFac)
+		{			
+			int desplazamiento=0;
+			if (mesActual>ultimoMesFac)
+			{	desplazamiento=mesActual-ultimoMesFac;}
+			else if (mesActual<ultimoMesGas)
+			{	desplazamiento=12-ultimoMesFac+mesActual;}
+			for (int i=0;i<=desplazamiento;i++)
+			{	for (int j=0;j<11;j++)
+				{						
+					facturacion[i]=facturacion[i+1];				
+				}
+				facturacion[11]=0;			
+			}
 		}
 		facturacion[11]=valor;
 		ultimoMesFac=mesActual;
@@ -95,15 +100,20 @@ public class GEconomiaImp implements GEconomia
 	{
 		Calendar hoy=Calendar.getInstance();
 		int mesActual=hoy.get(Calendar.MONTH);
-		int desplazamiento=0;
-		if (mesActual>ultimoMesGas)
-		{	desplazamiento=mesActual-ultimoMesGas;}
-		else if (mesActual<ultimoMesGas)
-		{	desplazamiento=12-ultimoMesGas+mesActual;}
-		for (int i=0;i<=desplazamiento;i++)
-		{	for (int j=0;j<11;j++)
-			{	gastos[i]=gastos[i+1];}
-			gastos[11]=0;			
+		if (mesActual!=ultimoMesGas)
+		{
+			int desplazamiento=0;
+			if (mesActual>ultimoMesGas)
+			{	desplazamiento=mesActual-ultimoMesGas;}
+			else if (mesActual<ultimoMesGas)
+			{	desplazamiento=12-ultimoMesGas+mesActual;}
+			for (int i=0;i<=desplazamiento;i++)
+			{	for (int j=0;j<11;j++)
+				{	
+					gastos[i]=gastos[i+1];				
+				}
+				gastos[11]=0;			
+			}
 		}
 		gastos[11]=valor;
 		ultimoMesGas=mesActual;
@@ -119,18 +129,23 @@ public class GEconomiaImp implements GEconomia
 	{
 		Calendar hoy=Calendar.getInstance();
 		int mesActual=hoy.get(Calendar.MONTH);
-		int desplazamiento=0;
-		if (mesActual>ultimoMesBal)
-		{	desplazamiento=mesActual-ultimoMesBal;}
-		else if (mesActual<ultimoMesBal)
-		{	desplazamiento=12-ultimoMesBal+mesActual;}
-		for (int i=0;i<=desplazamiento;i++)
-		{	for (int j=0;j<11;j++)
-			{	balance[i]=balance[i+1];}
-			balance[11]=0;			
+		if (mesActual!=ultimoMesBal)
+		{
+			int desplazamiento=0;
+			if (mesActual>ultimoMesBal)
+			{	desplazamiento=mesActual-ultimoMesBal;}
+			else if (mesActual<ultimoMesBal)
+			{	desplazamiento=12-ultimoMesBal+mesActual;}
+			for (int i=0;i<=desplazamiento;i++)
+			{	for (int j=0;j<11;j++)
+				{
+					balance[i]=balance[i+1];				
+				}
+				balance[11]=0;			
+			}
 		}
 		balance[11]=valor;
-		ultimoMesFac=mesActual;
+		ultimoMesBal=mesActual;
 		LinkedList datos=new LinkedList();
 		datos.add(new String("balance"));
 		datos.add(balance);

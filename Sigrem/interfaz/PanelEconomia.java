@@ -25,8 +25,6 @@ public class PanelEconomia extends JPanel
 	
 	private String [] mesBal;
 	
-	private int maxValorGrafico;
-	
 	private boolean actualizadoGasto;
 	
 	private boolean actualizadoFacturacion;
@@ -46,7 +44,6 @@ public class PanelEconomia extends JPanel
 		this.mesFac=new String [12];
 		this.mesGas=new String [12];
 		this.mesBal=new String [12];
-		this.maxValorGrafico=1;
 		JPanel pbalance=dibujaBalance();
 		JPanel pgrafico=dibujaGrafico(null,null,null);
 		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,pbalance,pgrafico);
@@ -74,12 +71,12 @@ public class PanelEconomia extends JPanel
 			}
 		}
 		else if (panel==1)
-		{	String tipo=(String)datos.get(0);
+		{	
+			String tipo=(String)datos.get(0);
 			if (tipo.equals("facturacion"))
 			{	facturacion=(int[])datos.get(1);
 				int mes=Integer.valueOf((String)datos.get(2)).intValue();
 				mesFac=dameMeses(mes);
-				if (facturacion[11]>maxValorGrafico) maxValorGrafico=facturacion[11];
 				JSplitPane sp=((JSplitPane)getComponent(0));
 				sp.setTopComponent(dibujaBalance());
 			}
@@ -87,7 +84,6 @@ public class PanelEconomia extends JPanel
 			{	gastos=(int[])datos.get(1);
 				int mes=Integer.valueOf((String)datos.get(2)).intValue();
 				mesGas=dameMeses(mes);
-				if (gastos[11]>maxValorGrafico) maxValorGrafico=gastos[11];
 				JSplitPane sp=((JSplitPane)getComponent(0));
 				sp.setTopComponent(dibujaBalance());
 			}
@@ -95,10 +91,9 @@ public class PanelEconomia extends JPanel
 			{	balance=(int[])datos.get(1);
 				int mes=Integer.valueOf((String)datos.get(2)).intValue();
 				mesBal=dameMeses(mes);
-				if (balance[11]>maxValorGrafico) maxValorGrafico=balance[11];
 				JSplitPane sp=((JSplitPane)getComponent(0));
 				sp.setTopComponent(dibujaBalance());
-			}
+			}					
 		}
 	}
 		
@@ -304,9 +299,13 @@ public class PanelEconomia extends JPanel
 			Box caja=Box.createHorizontalBox();				
 			caja.add(c1);	
 			Color c;
+			int maxValorGrafico=1;
+			for (int i=0;i<12;i++)
+				if (num[i]<-maxValorGrafico)	maxValorGrafico=-num[i];
+				else if (num[i]>maxValorGrafico)	maxValorGrafico=num[i];
 			for(int i=0;i<12;i++)
 				if (num[i]<0)	caja.add(dibujaBarra(-((170*num[i])/maxValorGrafico),vMeses[i],Color.RED));
-				else	caja.add(dibujaBarra(((170*num[i])/maxValorGrafico),vMeses[i],Color.GREEN));
+				else	caja.add(dibujaBarra(((170*num[i])/maxValorGrafico),vMeses[i],Color.GREEN));			
 			pgra.add(caja);
 		}
 		return pgra;
