@@ -299,7 +299,7 @@ public class Sigrem
 	
 	public void calculaFacturacion(int grafica)
 	{
-		int fac=geconomia.dameCuotaContrato()*gcontratos.dameListaContratos().dameTamaño();
+		int fac=geconomia.dameCuotaContrato()*gcontratos.dameEstructuraContratos().dameTamaño();
 		geconomia.facturacion(fac,grafica);
 	}
 	
@@ -313,7 +313,7 @@ public class Sigrem
 	
 	public void calculaBalance(int grafica)
 	{
-		int fac=geconomia.dameCuotaContrato()*gcontratos.dameListaContratos().dameTamaño();
+		int fac=geconomia.dameCuotaContrato()*gcontratos.dameEstructuraContratos().dameTamaño();
 		int gas=0;
 		for(int i=0;i<gempleados.dameListaEmpleados().dameTamaño();i++)
 		{	gas=gas+Integer.valueOf(((Empleado)gempleados.dameListaEmpleados().dameIndice(0).dameElementos().get(i)).dameNomina()).intValue();}

@@ -11,55 +11,55 @@ public class GClientesImp implements GClientes
 	  
 	private InterfazGrafica vista; 
 	
-	private String codigoCliente;
+	private String siguienteCodigoCliente;
 	 
 	public GClientesImp(InterfazGrafica vista,String codigo) 
 	{
 		this.listaClientes=new EstructuraDatosImp(3);
 	    this.vista=vista;
-	    this.codigoCliente=codigo;
+	    this.siguienteCodigoCliente=codigo;
 	}
 	
 	private void incrementaCodigo()
 	{
-		String numero=codigoCliente.substring(0,4);
-		int num=Integer.valueOf(codigoCliente.substring(4)).intValue();
+		String numero=siguienteCodigoCliente.substring(0,4);
+		int num=Integer.valueOf(siguienteCodigoCliente.substring(4)).intValue();
 		numero=numero+(num+1);
-		codigoCliente=numero;
+		siguienteCodigoCliente=numero;
 	}
 	
 	
 	
 	//clave0=codigo	clave1=nombre clave2=dni
 	public String añadirCliente(LinkedList datos)
-	{	String codCliente=null;
+	{	String codigoCliente=null;
 		String dniCliente=(String)datos.get(1);
 	//comprueba si el dni esta repetido
 		if (!listaClientes.esta(dniCliente,2))
-		{	codCliente=new String(codigoCliente);
-			Cliente nuevocliente=new Cliente(codCliente,datos);
+		{	codigoCliente=new String(siguienteCodigoCliente);
+			Cliente nuevocliente=new Cliente(codigoCliente,datos);
 			meteCliente(nuevocliente);
 			incrementaCodigo();
 		}
 		else
 		{	Cliente clienteExistente=(Cliente)listaClientes.buscar(dniCliente,2).get(0);
 			if (clienteExistente.dameNombre().equals((String)datos.get(0)))
-			{	codCliente=new String(clienteExistente.dameCodigo());
+			{	codigoCliente=new String(clienteExistente.dameCodigo());
 				vista.actualizaVistaMensaje("El cliente ya existe y se le asociara el contrato");
 			}
 			else
 			{	vista.actualizaVistaMensaje("El cliente ya existe pero no coinciden los datos. Inserción de cliente y contrato imposible");}
 			
 		}
-		return codCliente;
+		return codigoCliente;
 	}
 	
 	public void meteCliente(Cliente cliente){
-		String[] claves=new String[listaClientes.dameNumeroIndices()];
+		String[] claves=new String[this.dameEstructuraClientes().dameNumeroIndices()];
 		claves[0]=new String(cliente.dameCodigo());
 		claves[1]=new String(cliente.dameNombre());
 		claves[2]=new String(cliente.dameDni());
-		listaClientes.insertar(claves,cliente);
+		this.dameEstructuraClientes().insertar(claves,cliente);
 	}
 	
 	public void asociaClienteContrato(String codcliente,String codcontrato)
@@ -178,12 +178,12 @@ public class GClientesImp implements GClientes
 		}
 	}
 	
-	public EstructuraDatos dameListaClientes()
-	{
+	public EstructuraDatos dameEstructuraClientes(){
 		return this.listaClientes;
 	}
+	
 	public String dameCodigo()
 	{
-		return this.codigoCliente;
+		return this.siguienteCodigoCliente;
 	}
 }

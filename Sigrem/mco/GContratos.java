@@ -24,7 +24,9 @@ public interface GContratos
 	
 	public LinkedList dameListaMultasContrato(int clave,String codigo);
 	
-	public EstructuraDatos dameListaContratos();
+	public EstructuraDatos dameEstructuraContratos();
+	
+	public void meteContrato(Contrato contrato);
 	
 	public String dameCodigo();
 }

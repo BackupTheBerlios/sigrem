@@ -15,6 +15,7 @@ public interface EstructuraDatos {
   //Si no esta esa clave devuelve null
 
   public void insertar(Comparable[] claves, Object elemento);
+  public void insertarAEliminados(Object elemento);
   public boolean eliminar(Comparable clave, int indice);
   
   

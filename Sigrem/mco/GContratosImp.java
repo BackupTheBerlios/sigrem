@@ -32,20 +32,28 @@ public class GContratosImp implements GContratos
   
 	public String añadirContrato(LinkedList datos)
 	{
-		String[] claves=new String[2];
-		claves[0]=null;
-		claves[1]=(String)datos.get(1);
-		if (!listaContratos.esta(claves[1],1))
+		String codigo=null;
+		String matricula=(String)datos.get(1);
+		if (!listaContratos.esta(matricula,1))
 		{	Contrato nuevoContrato=new Contrato(codigoContrato,datos);
-			claves[0]=new String(nuevoContrato.dameCodigoContrato());
-			listaContratos.insertar(claves,nuevoContrato);
+			codigo=new String(nuevoContrato.dameCodigoContrato());
+			meteContrato(nuevoContrato);
 			incrementaCodigo();
-			datos.addFirst(claves[0]);
+			datos.addFirst(codigo);
 			vista.actualizaVista(1,1,datos);
 		}
-		else
-		{	vista.actualizaVistaMensaje("La matricula del contrato ya existe. Imposible crear contrato");}
-		return claves[0];
+		else{
+			vista.actualizaVistaMensaje("La matricula del contrato ya existe. Imposible crear contrato");
+		}
+		return codigo;
+	}
+	
+	public void meteContrato(Contrato nuevoContrato){
+		Comparable[] claves=new Comparable[this.dameEstructuraContratos().dameNumeroIndices()];
+		claves[0]=nuevoContrato.dameCodigoContrato();
+		claves[1]=nuevoContrato.dameMatricula();
+		listaContratos.insertar(claves,nuevoContrato);
+		
 	}
 	
 	public void eliminarContrato(boolean borrar, String codigo)
@@ -145,7 +153,7 @@ public class GContratosImp implements GContratos
 		return contrato.dameListaMultas();
 	}
 	
-	public EstructuraDatos dameListaContratos()
+	public EstructuraDatos dameEstructuraContratos()
 	{
 		return this.listaContratos;
 	}

@@ -52,6 +52,11 @@ public class EstructuraDatosImp implements EstructuraDatos{
 	   this.arrayIndices[0].insertar(claves,elemento);	   
 	//   this.mostrarTodosIndices();
 	  }
+	  	  
+	  public void insertarAEliminados(Object elemento){
+	  	vectorEliminados.add(elemento);
+	  }
+	  	  
 	  
 	  
 //	ELIMINAR
