@@ -95,6 +95,36 @@ public class PanelEconomia extends JPanel
 				sp.setTopComponent(dibujaBalance());
 			}					
 		}
+		else if (panel==3)
+		{	String tipo=(String)datos.get(0);
+			if (tipo.equals("facturacion"))
+			{	facturacion=(int[])datos.get(1);
+				int mes=Integer.valueOf((String)datos.get(2)).intValue();
+				mesFac=dameMeses(mes);
+				JSplitPane sp=((JSplitPane)getComponent(0));
+				sp.setTopComponent(dibujaBalance());
+				sp.setBottomComponent(dibujaGrafico(facturacion,"Histórico de Facturación",mesFac));
+				actualizadoFacturacion=true;
+			}
+			else if (tipo.equals("gastos"))
+			{	gastos=(int[])datos.get(1);
+				int mes=Integer.valueOf((String)datos.get(2)).intValue();
+				mesGas=dameMeses(mes);
+				JSplitPane sp=((JSplitPane)getComponent(0));
+				sp.setTopComponent(dibujaBalance());
+				sp.setBottomComponent(dibujaGrafico(gastos,"Histórico de Gastos",mesGas));
+				actualizadoGasto=true;
+			}
+			else if (tipo.equals("balance"))
+			{		balance=(int[])datos.get(1);
+				int mes=Integer.valueOf((String)datos.get(2)).intValue();
+				mesBal=dameMeses(mes);
+				JSplitPane sp=((JSplitPane)getComponent(0));
+				sp.setTopComponent(dibujaBalance());
+				sp.setBottomComponent(dibujaGrafico(balance,"Histórico de Balance",mesBal));
+				actualizadoBalance=true;
+			}
+		}
 	}
 		
 	public String [] dameMeses(int mes)
@@ -237,21 +267,21 @@ public class PanelEconomia extends JPanel
 		{	public void actionPerformed(ActionEvent e)
 			{
 				actualizadoFacturacion=true;
-				controlador.calculaFacturacion();
+				controlador.calculaFacturacion(0);
 			}
 		});
 		bgastos.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
 				actualizadoGasto=true;
-				controlador.calculaGastos();			
+				controlador.calculaGastos(0);			
 			}
 		});
 		bbalance.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
 				actualizadoBalance=true;	
-				controlador.calculaBalance();
+				controlador.calculaBalance(0);
 			}
 		});
 		return pbal;

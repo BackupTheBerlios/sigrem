@@ -429,22 +429,22 @@ public class InterfazGrafica
 		fac.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				panelVistas.remove(2);
-				controlador.calculaFacturacion();
+				panelVistas.setSelectedIndex(2);
+				controlador.calculaFacturacion(1);
 			}
 		});
 		gas.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				panelVistas.remove(2);
-				controlador.calculaGastos();
+				panelVistas.setSelectedIndex(2);
+				controlador.calculaGastos(1);
 			}
 		});
 		bal.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				panelVistas.remove(2);
-				controlador.calculaBalance();
+				panelVistas.setSelectedIndex(2);
+				controlador.calculaBalance(1);
 			}
 		});
 		guardar.addActionListener(new ActionListener()

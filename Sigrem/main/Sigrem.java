@@ -297,27 +297,27 @@ public class Sigrem
 		vista.actualizarVistaConsultaAbogado(codigo);
 	}
 	
-	public void calculaFacturacion()
+	public void calculaFacturacion(int grafica)
 	{
 		int fac=geconomia.dameCuotaContrato()*gcontratos.dameListaContratos().dameTamaño();
-		geconomia.facturacion(fac);
+		geconomia.facturacion(fac,grafica);
 	}
 	
-	public void calculaGastos()
+	public void calculaGastos(int grafica)
 	{
 		int gas=0;
 		for(int i=0;i<gempleados.dameListaEmpleados().dameTamaño();i++)
 		{	gas=gas+Integer.valueOf(((Empleado)gempleados.dameListaEmpleados().dameIndice(0).dameElementos().get(i)).dameNomina()).intValue();}
-		geconomia.gastos(-gas);
+		geconomia.gastos(-gas,grafica);
 	}
 	
-	public void calculaBalance()
+	public void calculaBalance(int grafica)
 	{
 		int fac=geconomia.dameCuotaContrato()*gcontratos.dameListaContratos().dameTamaño();
 		int gas=0;
 		for(int i=0;i<gempleados.dameListaEmpleados().dameTamaño();i++)
 		{	gas=gas+Integer.valueOf(((Empleado)gempleados.dameListaEmpleados().dameIndice(0).dameElementos().get(i)).dameNomina()).intValue();}
 		int bal=fac-gas;
-		geconomia.balance(bal);				
+		geconomia.balance(bal,grafica);				
 	}
 }

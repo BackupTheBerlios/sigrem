@@ -67,7 +67,7 @@ public class GEconomiaImp implements GEconomia
 		return vect;
 	}
 	
-	public void facturacion(int valor)
+	public void facturacion(int valor,int grafica)
 	{
 		Calendar hoy=Calendar.getInstance();
 		int mesActual=hoy.get(Calendar.MONTH);
@@ -92,10 +92,11 @@ public class GEconomiaImp implements GEconomia
 		datos.add(facturacion);
 		String nuevoUltimoMes=""+ultimoMesFac;
 		datos.add(nuevoUltimoMes);
-		vista.actualizaVista(3,1,datos);
+		if (grafica==0)	vista.actualizaVista(3,1,datos);
+		else if (grafica==1)	vista.actualizaVista(3,3,datos);;
 	}
 	
-	public void gastos(int valor)
+	public void gastos(int valor,int grafica)
 	{
 		Calendar hoy=Calendar.getInstance();
 		int mesActual=hoy.get(Calendar.MONTH);
@@ -121,10 +122,11 @@ public class GEconomiaImp implements GEconomia
 		datos.add(gastos);
 		String nuevoUltimoMes=""+ultimoMesGas;
 		datos.add(nuevoUltimoMes);
-		vista.actualizaVista(3,1,datos);
+		if (grafica==0)	vista.actualizaVista(3,1,datos);
+		else if (grafica==1)	vista.actualizaVista(3,3,datos);;
 	}
 
-	public void balance(int valor)
+	public void balance(int valor,int grafica)
 	{
 		Calendar hoy=Calendar.getInstance();
 		int mesActual=hoy.get(Calendar.MONTH);
@@ -150,7 +152,8 @@ public class GEconomiaImp implements GEconomia
 		datos.add(balance);
 		String nuevoUltimoMes=""+ultimoMesBal;
 		datos.add(nuevoUltimoMes);
-		vista.actualizaVista(3,1,datos);			
+		if (grafica==0)	vista.actualizaVista(3,1,datos);
+		else if (grafica==1)	vista.actualizaVista(3,3,datos);;
 	}
 	
 	public int dameCuotaContrato()
