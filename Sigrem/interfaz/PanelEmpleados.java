@@ -9,8 +9,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.*;
 
-
-
 public class PanelEmpleados extends JPanel 
 {
 	private JFrame formulario; 
@@ -221,26 +219,40 @@ public class PanelEmpleados extends JPanel
 	public JPanel dibujaRecursos()
 	{
 		int f=8;
-		int c=4;
+		int c=5;
 		JPanel tabla=new JPanel(new GridLayout(f,c));
+		tabla.add(new JLabel("",SwingConstants.CENTER));
 		tabla.add(new JLabel("Código",SwingConstants.CENTER));
 		tabla.add(new JLabel("Multa",SwingConstants.CENTER));
 		tabla.add(new JLabel("Estado",SwingConstants.CENTER));
 		tabla.add(new JLabel("Descripción",SwingConstants.CENTER));
+		
+
+		
 		for (int i=1;i<f;i++)
 			for (int j=0;j<c;j++)
-			{	if (j<3)
-				{	JTextField texto=new JTextField();
-					texto.setEnabled(false);
-					texto.setPreferredSize(new Dimension(70,20));
-					tabla.add(texto);
+			{	if (j==0)
+				{	Checkbox sel = new Checkbox("Seleccionar");
+					tabla.add(sel);
+					
+					
 				}
 				else
-				{	JButton boton=new JButton("Ver");
-					boton.setPreferredSize(new Dimension(30,20));
-					tabla.add(boton);					
+				{
+					if ((j>0)&&(j<4))
+					{	JTextField texto=new JTextField();
+						texto.setEnabled(false);
+						texto.setPreferredSize(new Dimension(70,20));
+						tabla.add(texto);
+					}
+					else
+					{	JButton boton=new JButton("Ver");
+						boton.setPreferredSize(new Dimension(30,20));
+						tabla.add(boton);					
+					}
 				}
 			}
+		
 		JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		ptabla.setPreferredSize(new Dimension(600,200));
 		JButton bcrea=new JButton("Añadir");
