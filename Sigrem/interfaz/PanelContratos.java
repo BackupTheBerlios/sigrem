@@ -464,7 +464,7 @@ public class PanelContratos extends JPanel
 		else if (tipo=='m') 
 		{	formulario.setTitle("Modificar contrato "+codigo);}
 		formulario.setLocation(350,100);
-		JLabel lc1=new JLabel("*Matrícula del vehículo");
+		JLabel lc1=new JLabel("* Matrícula del vehículo");
 		JLabel lc2=new JLabel("Fecha de alta");
 		lc1.setPreferredSize(new Dimension(150,20));
 		lc2.setPreferredSize(new Dimension(150,20));
@@ -492,8 +492,8 @@ public class PanelContratos extends JPanel
 		caja1.add(p2);
 		JPanel pcl=new JPanel();
 		pcl.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos del cliente",TitledBorder.LEFT,TitledBorder.TOP));
-		JLabel l1=new JLabel("*Nombre ",SwingConstants.RIGHT);
-		JLabel l2=new JLabel("*DNI/CIF ",SwingConstants.RIGHT);
+		JLabel l1=new JLabel("* Nombre ",SwingConstants.RIGHT);
+		JLabel l2=new JLabel("* DNI/CIF ",SwingConstants.RIGHT);
 		JLabel l3=new JLabel("Dirección ",SwingConstants.RIGHT);
 		JLabel l4=new JLabel("Código postal ",SwingConstants.RIGHT);
 		JLabel l5=new JLabel("Población ",SwingConstants.RIGHT);
@@ -864,9 +864,11 @@ public class PanelContratos extends JPanel
 		JPanel p4=new JPanel();
 		JPanel p5=new JPanel();
 		JPanel p6=new JPanel();
-		p1.add(l1);
-		p1.add(cod);
-		p1.add(r1);
+		if (tipo=='m')
+		{	p1.add(l1);
+			p1.add(cod);
+			p1.add(r1);
+		}
 		p2.add(l2);
 		p2.add(exp);
 		p2.add(r2);
@@ -988,14 +990,13 @@ public class PanelContratos extends JPanel
 	public JPanel panelRecurso(String codigo)
 	{
 		formulario.setTitle("Recursos de la multa "+codigo);
-		formulario.setLocation(100,100);
+		formulario.setLocation(25,100);
 		JPanel prec=new JPanel();
 		prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Recursos de la multa "+codigo,TitledBorder.LEFT,TitledBorder.TOP));
 		Box tabla=Box.createVerticalBox();
 		JPanel p=new JPanel();
 		JLabel l1=new JLabel("Código",SwingConstants.CENTER);
-		JLabel l2=new JLabel("Fecha Cliente",SwingConstants.CENTER);
-		JLabel l3=new JLabel("Fecha Sigrem",SwingConstants.CENTER);
+		JLabel l2=new JLabel("Fecha de emisión",SwingConstants.CENTER);
 		JLabel l4=new JLabel("Escrito recibido",SwingConstants.CENTER);
 		JLabel l5=new JLabel("Escrito presentado",SwingConstants.CENTER);
 		JLabel l6=new JLabel("Estado",SwingConstants.CENTER);
@@ -1003,19 +1004,17 @@ public class PanelContratos extends JPanel
 		JLabel l8=new JLabel("Descripción",SwingConstants.CENTER);
 		JLabel l9=new JLabel("",SwingConstants.CENTER);
 		JLabel l10=new JLabel("",SwingConstants.CENTER);
-		l1.setPreferredSize(new Dimension(80,25));
-		l2.setPreferredSize(new Dimension(75,25));
-		l3.setPreferredSize(new Dimension(75,25));
-		l4.setPreferredSize(new Dimension(190,25));
-		l5.setPreferredSize(new Dimension(190,25));
-		l6.setPreferredSize(new Dimension(90,25));
-		l7.setPreferredSize(new Dimension(90,25));
-		l8.setPreferredSize(new Dimension(80,25));
-		l9.setPreferredSize(new Dimension(25,25));
-		l10.setPreferredSize(new Dimension(25,25));
+		l1.setPreferredSize(new Dimension(80,20));
+		l2.setPreferredSize(new Dimension(90,20));
+		l4.setPreferredSize(new Dimension(190,20));
+		l5.setPreferredSize(new Dimension(190,20));
+		l6.setPreferredSize(new Dimension(90,20));
+		l7.setPreferredSize(new Dimension(90,20));
+		l8.setPreferredSize(new Dimension(80,20));
+		l9.setPreferredSize(new Dimension(25,20));
+		l10.setPreferredSize(new Dimension(25,20));
 		p.add(l1);
 		p.add(l2);
-		p.add(l3);
 		p.add(l4);
 		p.add(l5);
 		p.add(l6);
@@ -1029,7 +1028,7 @@ public class PanelContratos extends JPanel
 			tabla.add(linea);		
 		}
 		JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		ptabla.setPreferredSize(new Dimension(995,300));
+		ptabla.setPreferredSize(new Dimension(940,300));
 		JButton bcrea=new JButton("Añadir recurso");
 		JButton baceptar=new JButton("Aceptar");
 		JPanel botonera=new JPanel();
@@ -1065,10 +1064,9 @@ public class PanelContratos extends JPanel
 	{
 		if (tipo=='c') formRecurso.setTitle("Crear recurso");
 		else if (tipo=='m') formRecurso.setTitle("Modificar recurso "+codigo);
-		formRecurso.setLocation(350,100);
+		formRecurso.setLocation(300,100);
 		JLabel l1=new JLabel("Código ",SwingConstants.RIGHT);
-		JLabel l2=new JLabel("Fecha Cliente ",SwingConstants.RIGHT);
-		JLabel l3=new JLabel("Fecha Sigrem ",SwingConstants.RIGHT);
+		JLabel l2=new JLabel("Fecha de emisión ",SwingConstants.RIGHT);
 		JLabel l4=new JLabel("Escrito recibido ",SwingConstants.RIGHT);
 		JLabel l5=new JLabel("Escrito presentado ",SwingConstants.RIGHT);
 		JLabel l6=new JLabel("Estado ",SwingConstants.RIGHT);
@@ -1078,21 +1076,23 @@ public class PanelContratos extends JPanel
 		JLabel r3=new JLabel(" ",SwingConstants.RIGHT);
 		JLabel r6=new JLabel(" ",SwingConstants.RIGHT);
 		JLabel r7=new JLabel(" ",SwingConstants.RIGHT);
-		l1.setPreferredSize(new Dimension(100,25));
-		l2.setPreferredSize(new Dimension(100,25));
-		l3.setPreferredSize(new Dimension(100,25));
-		l4.setPreferredSize(new Dimension(100,25));
-		l5.setPreferredSize(new Dimension(100,25));
-		l6.setPreferredSize(new Dimension(100,25));
-		l7.setPreferredSize(new Dimension(100,25));
-		r1.setPreferredSize(new Dimension(150,25));
-		r2.setPreferredSize(new Dimension(175,25));
-		r3.setPreferredSize(new Dimension(175,25));
-		r6.setPreferredSize(new Dimension(150,25));
-		r7.setPreferredSize(new Dimension(150,25));
+		l1.setPreferredSize(new Dimension(100,20));
+		l2.setPreferredSize(new Dimension(100,20));
+		l4.setPreferredSize(new Dimension(100,20));
+		l5.setPreferredSize(new Dimension(100,20));
+		l6.setPreferredSize(new Dimension(100,20));
+		l7.setPreferredSize(new Dimension(100,20));
+		r1.setPreferredSize(new Dimension(150,20));
+		r2.setPreferredSize(new Dimension(175,20));
+		r3.setPreferredSize(new Dimension(175,20));
+		r6.setPreferredSize(new Dimension(150,20));
+		r7.setPreferredSize(new Dimension(150,20));
 		JTextField cod=new JTextField();
-		JTextField fcl=new JTextField();
-		JTextField fsi=new JTextField();
+		JTextField femi=new JTextField();
+		Date hoy = new Date();
+		SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
+		femi.setText(formato.format(hoy));
+		femi.setEditable(false);
 		JComboBox ere=new JComboBox();
 		JComboBox epr=new JComboBox();
 		JComboBox est=new JComboBox();
@@ -1101,16 +1101,14 @@ public class PanelContratos extends JPanel
 		escritoPresentado(epr);
 		estadosRecursos(est);
 		cod.setEditable(false);
-		cod.setPreferredSize(new Dimension(100,25));
-		fcl.setPreferredSize(new Dimension(75,25));
-		fsi.setPreferredSize(new Dimension(75,25));
-		ere.setPreferredSize(new Dimension(250,25));
-		epr.setPreferredSize(new Dimension(250,25));
-		est.setPreferredSize(new Dimension(100,25));
-		abo.setPreferredSize(new Dimension(100,25));
+		cod.setPreferredSize(new Dimension(100,20));
+		femi.setPreferredSize(new Dimension(75,20));
+		ere.setPreferredSize(new Dimension(250,20));
+		epr.setPreferredSize(new Dimension(250,20));
+		est.setPreferredSize(new Dimension(100,20));
+		abo.setPreferredSize(new Dimension(100,20));
 		JPanel p1=new JPanel();
 		JPanel p2=new JPanel();
-		JPanel p3=new JPanel();
 		JPanel p4=new JPanel();
 		JPanel p5=new JPanel();
 		JPanel p6=new JPanel();
@@ -1123,11 +1121,8 @@ public class PanelContratos extends JPanel
 			
 		}
 		p2.add(l2);
-		p2.add(fcl);
+		p2.add(femi);
 		p2.add(r2);
-		p3.add(l3);
-		p3.add(fsi);
-		p3.add(r3);
 		p4.add(l4);
 		p4.add(ere);
 		p5.add(l5);
@@ -1141,7 +1136,6 @@ public class PanelContratos extends JPanel
 		Box caja1=Box.createVerticalBox();
 		caja1.add(p1);
 		caja1.add(p2);
-		caja1.add(p3);
 		caja1.add(p4);
 		caja1.add(p5);
 		caja1.add(p6);
@@ -1190,9 +1184,8 @@ public class PanelContratos extends JPanel
 	public JPanel dibujaLineaRecurso()
 	{		
 		JPanel panel=new JPanel();
-		final JTextField cod=new JTextField("R001");
-		JTextField fcl=new JTextField();
-		JTextField fsi=new JTextField();
+		final JTextField cod=new JTextField();
+		JTextField femi=new JTextField();
 		JTextField ere=new JTextField();
 		JTextField epr=new JTextField();
 		JTextField est=new JTextField();
@@ -1201,22 +1194,19 @@ public class PanelContratos extends JPanel
 		JButton modi=new JButton(new ImageIcon("interfaz/tick.gif"));
 		JButton elim=new JButton(new ImageIcon("interfaz/del.gif"));
 		cod.setEditable(false);
-		fcl.setEditable(false);
-		fsi.setEditable(false);
+		femi.setEditable(false);
 		ere.setEditable(false);
 		epr.setEditable(false);
 		est.setEditable(false);
 		abo.setEditable(false);
 		cod.setBackground(Color.WHITE);
-		fcl.setBackground(Color.WHITE);
-		fsi.setBackground(Color.WHITE);
+		femi.setBackground(Color.WHITE);
 		ere.setBackground(Color.WHITE);
 		epr.setBackground(Color.WHITE);
 		est.setBackground(Color.WHITE);
 		abo.setBackground(Color.WHITE);
 		cod.setPreferredSize(new Dimension(80,25));
-		fcl.setPreferredSize(new Dimension(75,25));
-		fsi.setPreferredSize(new Dimension(75,25));
+		femi.setPreferredSize(new Dimension(90,25));
 		ere.setPreferredSize(new Dimension(190,25));
 		epr.setPreferredSize(new Dimension(190,25));
 		est.setPreferredSize(new Dimension(90,25));
@@ -1225,8 +1215,7 @@ public class PanelContratos extends JPanel
 		modi.setPreferredSize(new Dimension (25,25));		
 		elim.setPreferredSize(new Dimension (25,25));
 		panel.add(cod);
-		panel.add(fcl);
-		panel.add(fsi);
+		panel.add(femi);
 		panel.add(ere);
 		panel.add(epr);
 		panel.add(est);

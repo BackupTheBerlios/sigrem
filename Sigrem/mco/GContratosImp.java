@@ -2,7 +2,7 @@ package mco;
 
 import med.*;
 import interfaz.*;
-
+import java.util.Vector;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -67,69 +67,54 @@ public class GContratosImp implements GContratos
 	
 	public String modificarFechaBaja(String codigo)
 	{
-		Object[] busqueda=listacontratos.buscar(codigo,0);
-		if (busqueda.length==0)
+		Vector busqueda=listacontratos.buscar(codigo,0);
+		if (busqueda.size()==0)
 		{	vista.actualizaVistaMensaje("Error al buscar el contrato "+codigo+". No se ha encontrado");
 			return null;			
 		}
 		else 
-			if (busqueda[0]!=null)
-			{	Contrato contrato=(Contrato)busqueda[0];
-				Date hoy=new Date();
-				SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
-				contrato.ponFechaBaja(formato.format(hoy));
-				return contrato.dameCodigoCliente();
-			}
-			else
-			{	vista.actualizaVistaMensaje("Error al buscar el contrato "+codigo+". No se ha encontrado");
-				return null;
-			}		
+		{	Contrato contrato=(Contrato)busqueda.get(0);
+			Date hoy=new Date();
+			SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
+			contrato.ponFechaBaja(formato.format(hoy));
+			return contrato.dameCodigoCliente();
+		}
 	}
 	
 	public String consultarContratoCodigo(boolean modificar,String codigo)
 	{
-		Object[] busqueda=listacontratos.buscar(codigo,0);
-		if (busqueda.length==0)
+		Vector busqueda=listacontratos.buscar(codigo,0);
+		if (busqueda.size()==0)
 		{	vista.actualizaVistaMensaje("Error al buscar el contrato "+codigo+". No se ha encontrado");
 			return null;			
 		}
 		else 
-			if (busqueda[0]!=null)
-			{	Contrato contrato=(Contrato)busqueda[0];
-				if (modificar)
-				{	LinkedList datos=new LinkedList();
-					datos.add(contrato.dameCodigoContrato());
-					datos.add(contrato.dameCodigoCliente());
-					datos.add(contrato.dameMatricula());
-					datos.add(contrato.dameFechaAlta());
-					vista.actualizaVistaDatos(1,datos,false);
-				}
-				else
-				{	vista.actualizaVista(1,1,contrato.dameListaDatos());}
-				return contrato.dameCodigoCliente();
+		{	Contrato contrato=(Contrato)busqueda.get(0);
+			if (modificar)
+			{	LinkedList datos=new LinkedList();
+				datos.add(contrato.dameCodigoContrato());
+				datos.add(contrato.dameCodigoCliente());
+				datos.add(contrato.dameMatricula());
+				datos.add(contrato.dameFechaAlta());
+				vista.actualizaVistaDatos(1,datos,false);
 			}
 			else
-			{	vista.actualizaVistaMensaje("Error al buscar el contrato "+codigo+". No se ha encontrado");
-				return null;
-			}		
+			{	vista.actualizaVista(1,1,contrato.dameListaDatos());}
+				return contrato.dameCodigoCliente();
+			}
 	}
 	
 	public String consultarContratoMatricula(String matricula)
 	{
-		Object[] busqueda=listacontratos.buscar(matricula,1);
-		if (busqueda.length==0)
+		Vector busqueda=listacontratos.buscar(matricula,1);
+		if (busqueda.size()==0)
 		{	vista.actualizaVistaMensaje("Error al buscar el contrato "+matricula+". No se ha encontrado");
 			return null;			
 		}
 		else 
-			if (busqueda[0]!=null)
-			{	Contrato contrato=(Contrato)busqueda[0];
-				vista.actualizaVista(1,1,contrato.dameListaDatos());
-				return contrato.dameCodigoCliente();
-			}
-			else
-			{	vista.actualizaVistaMensaje("Error al buscar el contrato "+matricula+". No se ha encontrado");
-				return null;
-			}
+		{	Contrato contrato=(Contrato)busqueda.get(0);
+			vista.actualizaVista(1,1,contrato.dameListaDatos());
+			return contrato.dameCodigoCliente();
+		}
 	}
 }
