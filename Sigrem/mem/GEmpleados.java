@@ -1,10 +1,22 @@
+/*
+ * Created on 22-mar-2005
+ *
+ * TODO To change the template for this generated file go to
+ * Window - Preferences - Java - Code Style - Code Templates
+ */
 package mem;
 
 import java.util.LinkedList;
 
-public interface GEmpleados 
-{
-	// De momento es copia de clientes. Voy a probar y a adaptarlo a empleados
+/**
+ * @author sergio
+ *
+ * TODO To change the template for this generated type comment go to
+ * Window - Preferences - Java - Code Style - Code Templates
+ */
+public interface GEmpleados {
+
+//	 De momento es copia de clientes. Voy a probar y a adaptarlo a empleados
 	
 	// Método para añadir un empleado al sistema
 	public String añadirEmpleado(LinkedList listaEmpleados);
