@@ -1,18 +1,28 @@
 package mco;
 
-/**
- * <p>Title: </p>
- * <p>Description: </p>
- * <p>Copyright: Copyright (c) 2005</p>
- * <p>Company: </p>
- * @author unascribed
- * @version 1.0
- */
-import mcl.*;
+import mcl.Cliente;
 
-public interface Contrato {
-	public Integer dameCodigo();
-	public String dameMatricula();
-	public Cliente dameCliente();
+public class Contrato
+{
+	Integer codigo;
+	String matricula;
+	Cliente cliente;
 	
+  public Contrato(Cliente cli, Integer cod,String mat) {
+  	codigo=cod;
+  	matricula=mat;
+  	cliente=cli;
+  }
+  
+  public Integer dameCodigo(){
+  	return codigo;
+  }
+  
+  public String dameMatricula(){
+  	return matricula;
+  }
+  
+  public Cliente dameCliente(){
+  	return cliente;
+  }
 }

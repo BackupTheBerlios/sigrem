@@ -1,17 +1,9 @@
 package mco;
 
-/**
- * <p>Title: </p>
- * <p>Description: </p>
- * <p>Copyright: Copyright (c) 2005</p>
- * <p>Company: </p>
- * @author unascribed
- * @version 1.0
- */
-import mcl.Cliente;
+//import mcl.Cliente;
 
 public interface GContratos {
-  //Requisito 2.1
+ /* //Requisito 2.1
   public void añadirContrato(Cliente cliente, Integer codigo,String matricula);
   //Requisito 2.2
   public void eliminarContrato(Integer codigo);
@@ -20,5 +12,5 @@ public interface GContratos {
   //Requisito 2.4
   public void consultarContratoCodigo(Integer codigo);
   //Requisito 2.5
-  public void consultarContratoMatrícula(String matricula);
+  public void consultarContratoMatrícula(String matricula);*/
 }

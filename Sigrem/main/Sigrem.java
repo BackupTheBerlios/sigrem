@@ -1,25 +1,28 @@
 package main;
 
 import interfaz.InterfazGrafica;
-//import mcl.GClientesImp;
-//import mco.GContratosImp;
-//import mmu.GMultasImp;
-//import mre.GRecursosImp;
-//import mec.GEconomicaImp;
+import mcl.*;
+import mco.*;
+import mmu.*;
+import mre.*;
+import mec.*;
+import mem.*;
 
 public class Sigrem 
 {
 	private InterfazGrafica vista;
 	
-	private ModuloGestion gclientes;
+	private GClientes gclientes;
 	
-	private ModuloGestion gcontratos;
+	private GContratos gcontratos;
 	
-	private ModuloGestion gmultas;
+	private GMultas gmultas;
 	
-	private ModuloGestion gempleados;
+	private GEmpleados gempleados;
 	
-	private ModuloGestion grecursos;
+	private GRecursos grecursos;
+	
+	private GEconomia geconomia;
 	
 	public Sigrem()
 	{
@@ -44,6 +47,6 @@ public class Sigrem
 	
 	public void añadirCliente(String[] datos)
 	{
-		gclientes.añadir(datos);
+	//	gclientes.añadir(datos);
 	}
 }

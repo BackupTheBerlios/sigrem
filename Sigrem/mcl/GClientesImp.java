@@ -1,11 +1,9 @@
 package mcl;
 
 import interfaz.InterfazGrafica;
-import med.EstructuraDatos;
-import med.ListaConIndices;
-import main.ModuloGestion;
+import med.*;
 
-public class GClientesImp implements ModuloGestion
+public class GClientesImp implements GClientes
 {
 	private EstructuraDatos clientes;
 	  
@@ -13,7 +11,7 @@ public class GClientesImp implements ModuloGestion
 	 
 	public GClientesImp(InterfazGrafica vista) 
 	{
-		clientes=new ListaConIndices(3);
+		clientes=new EstructuraConIndices(3);
 	    this.vista=vista;
 	}
 	public void añadir(String[] datos)
@@ -101,7 +99,7 @@ public class GClientesImp implements ModuloGestion
 	  	return false;
 	}
 	  
-*/	
+
 	public Cliente consultarClienteCodigo(Integer codigo)
 	{
 	  return (Cliente) this.clientes.buscar(codigo,0);
@@ -115,5 +113,5 @@ public class GClientesImp implements ModuloGestion
 	public Cliente consultarClienteDni(String dni)
 	{
 	  return (Cliente) this.clientes.buscar(dni,2);
-	}
+	}*/
 }

@@ -1,32 +1,22 @@
 package mco;
-
-/**
- * <p>Title: </p>
- * <p>Description: </p>
- * <p>Copyright: Copyright (c) 2005</p>
- * <p>Company: </p>
- * @author unascribed
- * @version 1.0
- */
 import med.*;
 import interfaz.*;
-import mcl.*;
-import main.ModuloGestion;
+//import mcl.*;
 
-public class GContratosImp 
+public class GContratosImp implements GContratos
 {
 	private EstructuraDatos contratos;
 	private InterfazGrafica vista; 
   
 	public GContratosImp(InterfazGrafica vista) 
 	{
-		contratos=new ListaConIndices(2);
+		contratos=new EstructuraConIndices(2);
 		this.vista=vista;
 	}
-
+/*
 	public boolean añadirContrato(Cliente cliente, Integer codigo,String matricula)
 	{	//falta añadir todos los parametros de contrato
-		Contrato nuevo=new ContratoImp(cliente,codigo,matricula);
+		Contrato nuevo=new Contrato(cliente,codigo,matricula);
 		Comparable[] claves=null;
 		claves[0]= nuevo.dameCodigo();
 		claves[1]= nuevo.dameMatricula();
@@ -52,7 +42,7 @@ public class GContratosImp
 
 	public boolean modificarContrato(Integer codigoAntiguo,Cliente cliente, Integer codigoNuevo,String matriculaNuevo)
 	{ 	//falta añadir todos los parametros de contrato
-		Contrato nuevo=new ContratoImp(cliente,codigoNuevo,matriculaNuevo);
+		Contrato nuevo=new Contrato(cliente,codigoNuevo,matriculaNuevo);
 		Contrato antiguo=this.consultarContratoCodigo(codigoAntiguo);
 		if (antiguo!=null)
 		{	String matriculaAntiguo=antiguo.dameMatricula(); 
@@ -90,5 +80,5 @@ public class GContratosImp
   	public Contrato consultarContratoMatricula(String matricula)
   	{
   		return (Contrato) this.contratos.buscar(matricula,1);
-  	}
+  	}*/
   }

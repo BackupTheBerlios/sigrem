@@ -1,38 +1,23 @@
-/*
- * Created on 14-mar-2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
 package mmu;
 
 import interfaz.InterfazGrafica;
-import mco.Contrato;
+//import mco.Contrato;
 import med.*;
-import main.ModuloGestion;
 
-/**
- * @author frank
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
-
-public class GMultasImp 
+public class GMultasImp implements GMultas 
 {
 	private EstructuraDatos multas;
 	private InterfazGrafica vista; 
 	  
 	public GMultasImp(InterfazGrafica vista) 
 	{
-		multas=new ListaConIndices(3);
+		multas=new EstructuraConIndices(3);
 	    this.vista=vista;
 	}
-
-	public boolean añadirMulta(Contrato contrato, Integer codigo,String expediente, String boletin)
+/*	public boolean añadirMulta(Contrato contrato, Integer codigo,String expediente, String boletin)
 	{
 		//falta añadir todos los parametros de contrato
-		Multa nuevo=new MultaImp(contrato,codigo,expediente,boletin);
+		Multa nuevo=new Multa(contrato,codigo,expediente,boletin);
 		Comparable[] claves=null;
 		claves[0]= nuevo.dameCodigo();
 		claves[1]= nuevo.dameExpediente();
@@ -60,7 +45,7 @@ public class GMultasImp
 	public boolean modificarMulta(Integer codigoAntiguo,Contrato contrato, Integer codigoNuevo,String expedienteNuevo,String boletinNuevo)
 	{
 	  	//falta añadir todos los parametros de contrato
-	  	Multa nuevo=new MultaImp(contrato,codigoNuevo,expedienteNuevo,boletinNuevo);
+	  	Multa nuevo=new Multa(contrato,codigoNuevo,expedienteNuevo,boletinNuevo);
 	  	Multa antiguo=this.consultarMultaCodigo(codigoAntiguo);
 	  	if (antiguo!=null){
 	  		String expedienteAntiguo=antiguo.dameExpediente();
@@ -108,5 +93,5 @@ public class GMultasImp
 	{
 	    return (Multa) this.multas.buscar(boletin,2);
 
-	}
+	}*/
 }
