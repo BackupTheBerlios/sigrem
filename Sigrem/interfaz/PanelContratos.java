@@ -19,6 +19,10 @@ public class PanelContratos extends JPanel
 	
 	private LinkedList datosmodificables;
 	
+	private JTextField tcodcliente;
+	
+	private JComboBox selector;
+	
 	public PanelContratos(Sigrem controlador,JFrame v)
 	{
 		super();
@@ -91,25 +95,25 @@ public class PanelContratos extends JPanel
 		l3.setPreferredSize(new Dimension(150,20));
 		l4.setPreferredSize(new Dimension(150,20));
 		final JTextField tcontrato=new JTextField();
-		JTextField tcliente=new JTextField();
+		tcodcliente=new JTextField();
 		JTextField tfechaalta=new JTextField();
 		JTextField tmatricula=new JTextField();
 		if (datos!=null)
 		{	tcontrato.setText((String)datos.get(0));
-			tcliente.setText((String)datos.get(1));
+			tcodcliente.setText((String)datos.get(1));
 			tmatricula.setText((String)datos.get(2));
 			tfechaalta.setText((String)datos.get(3));
 		}
 		tcontrato.setPreferredSize(new Dimension(100,20));
-		tcliente.setPreferredSize(new Dimension(100,20));
+		tcodcliente.setPreferredSize(new Dimension(100,20));
 		tmatricula.setPreferredSize(new Dimension(100,20));
 		tfechaalta.setPreferredSize(new Dimension(100,20));
 		tcontrato.setEditable(false);
-		tcliente.setEditable(false);
+		tcodcliente.setEditable(false);
 		tfechaalta.setEditable(false);
 		tmatricula.setEditable(false);
 		tcontrato.setBackground(Color.WHITE);
-		tcliente.setBackground(Color.WHITE);
+		tcodcliente.setBackground(Color.WHITE);
 		tfechaalta.setBackground(Color.WHITE);
 		tmatricula.setBackground(Color.WHITE);
 		JButton bcrea=new JButton ("Crear");
@@ -126,7 +130,7 @@ public class PanelContratos extends JPanel
 		p1.add(l1);
 		p1.add(tcontrato);
 		p2.add(l2);
-		p2.add(tcliente);
+		p2.add(tcodcliente);
 		p3.add(l3);
 		p3.add(tmatricula);
 		p4.add(l4);
@@ -323,17 +327,17 @@ public class PanelContratos extends JPanel
 		caja.add(c10);
 		caja.add(c11);
 		JLabel l12=new JLabel("Contratos ",SwingConstants.RIGHT);
-		l12.setPreferredSize(new Dimension(80,40));
-		JTextArea conts=new JTextArea();
-		conts.setEditable(false);
-		conts.append("C001\n");
-		conts.append("C002\n");
-		conts.append("C003\n");
-		conts.append("C004\n");
-		JScrollPane spanel=new JScrollPane(conts,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		spanel.setPreferredSize(new Dimension(20,40));
+		l12.setPreferredSize(new Dimension(50,20));
+		selector=new JComboBox();
+		selector.setEditable(false);
+		selector.setPreferredSize(new Dimension(80,20));
+		if (datos!=null)
+		{	LinkedList contratos=(LinkedList)datos.get(11);
+			for (int i=0;i<contratos.size();i++)
+				selector.addItem((String)contratos.get(i));		
+		}
 		JLabel relleno9=new JLabel("");
-		relleno9.setPreferredSize(new Dimension(15,40));
+		relleno9.setPreferredSize(new Dimension(15,20));
 		JLabel relleno10=new JLabel("");
 		relleno10.setPreferredSize(new Dimension(0,10));
 		JLabel relleno11=new JLabel("");
@@ -341,7 +345,7 @@ public class PanelContratos extends JPanel
 		JButton nuevoContrato=new JButton("Nuevo Contrato");
 		Box c12=Box.createHorizontalBox();
 		c12.add(l12);
-		c12.add(spanel);
+		c12.add(selector);
 		c12.add(relleno9);
 		c12.add(nuevoContrato);
 		caja.add(relleno10);
@@ -362,6 +366,12 @@ public class PanelContratos extends JPanel
 					formulario.pack();	
 					formulario.setVisible(true);
 				}
+			}
+		});
+		selector.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				controlador.consultarContratoCodigo(false,false,(String)selector.getSelectedItem());
 			}
 		});
 		return panel;
@@ -433,7 +443,7 @@ public class PanelContratos extends JPanel
 		final JTextField tfechaalta=new JTextField();
 		if ((tipo=='c') || (tipo=='n'))
 		{	Date hoy = new Date();
-			SimpleDateFormat formato=new SimpleDateFormat("dd/mm/yyyy");
+			SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
 			tfechaalta.setText(formato.format(hoy));
 		}
 		else if (tipo=='m')
@@ -656,7 +666,7 @@ public class PanelContratos extends JPanel
 				else if(tipo=='n')
 				{	datoscontrato.add(tmatricula.getText());
 					datoscontrato.add(tfechaalta.getText());
-					controlador.añadirContratoACliente(datoscontrato,tdni.getText());
+					controlador.añadirContratoACliente(datoscontrato,tcodcliente.getText());
 				}
 				formulario.setVisible(false);
 				formulario.getContentPane().removeAll();
@@ -701,10 +711,16 @@ public class PanelContratos extends JPanel
 				formulario.setVisible(false);
 				int seleccion=JOptionPane.showConfirmDialog(null,"           ¿Desea eliminar el contrato "+tcodigo.getText()+"?","Eliminar contrato",JOptionPane.YES_NO_CANCEL_OPTION,-1);
 				if (seleccion==JOptionPane.YES_OPTION)
-				{	if (codigo.equals(tcodigo.getText()))
-					{	controlador.eliminarContrato(true,tcodigo.getText());}
-					else
-					{	controlador.eliminarContrato(false,tcodigo.getText());}
+				{	boolean borrar;
+					if (codigo.equals(tcodigo.getText())) borrar=true;
+					else borrar=false;
+					boolean actualizar=false;
+					int i=0;
+					while ((i<selector.getItemCount()) && (!actualizar)) 
+					{	actualizar=codigo.equals(selector.getItemAt(i));
+						i++;
+					}
+					controlador.eliminarContrato(borrar,actualizar,tcodigo.getText());
 				}
 				formulario.getContentPane().removeAll();
 			}
@@ -747,7 +763,7 @@ public class PanelContratos extends JPanel
 			{
 				formulario.setVisible(false);
 				formulario.getContentPane().removeAll();
-				controlador.consultarContratoCodigo(true,tcodigo.getText());
+				controlador.consultarContratoCodigo(true,true,tcodigo.getText());
 			}
 		});
 		bcancela.addActionListener(new ActionListener()

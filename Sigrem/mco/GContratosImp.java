@@ -76,7 +76,7 @@ public class GContratosImp implements GContratos
 			if (busqueda[0]!=null)
 			{	Contrato contrato=(Contrato)busqueda[0];
 				Date hoy=new Date();
-				SimpleDateFormat formato=new SimpleDateFormat("dd/mm/yyyy");
+				SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
 				contrato.setFechaBaja(formato.format(hoy));
 				return contrato.getCodigoCliente();
 			}

@@ -64,36 +64,42 @@ public class Sigrem
 		String clientenuevo=gclientes.añadirCliente(datoscliente);
 		datoscontrato.addFirst(clientenuevo);
 		String contratonuevo=gcontratos.añadirContrato(datoscontrato);
-		gclientes.asociaClienteContrato(0,clientenuevo,contratonuevo);
+		gclientes.asociaClienteContrato(clientenuevo,contratonuevo);
 	}
 	
-	public void añadirContratoACliente(LinkedList datoscontrato,String dnicliente)
+	public void añadirContratoACliente(LinkedList datoscontrato,String codcliente)
 	{
-		datoscontrato.addFirst(dnicliente);
+		datoscontrato.addFirst(codcliente);
 		String contratonuevo=gcontratos.añadirContrato(datoscontrato);
-		gclientes.asociaClienteContrato(2,dnicliente,contratonuevo);
+		gclientes.asociaClienteContrato(codcliente,contratonuevo);
 	}
 	
-	public void eliminarContrato(boolean borrar,String codcontrato)
+	public void eliminarContrato(boolean borrar,boolean actualizar,String codcontrato)
 	{
 		String codcliente=gcontratos.modificarFechaBaja(codcontrato);
 		if (codcliente!=null) 
 		{	gcontratos.eliminarContrato(borrar,codcontrato);
-			gclientes.eliminarCliente(codcliente,codcontrato);		
+			gclientes.eliminarCliente(actualizar,codcliente,codcontrato);		
 		}
 	}
 	
-	public void consultarContratoCodigo(boolean modificar,String codigo)
+	public void consultarContratoCodigo(boolean modificar,boolean actualizar,String codigo)
 	{
 		String codcliente=gcontratos.consultarContratoCodigo(modificar,codigo);
-		if (codcliente!=null) gclientes.consultarClienteCodigo(modificar,codcliente);
+		if (codcliente!=null) gclientes.consultarClienteCodigo(modificar,actualizar,codcliente);
 	}	
 	
 	public void consultarContratoMatricula(String matricula)
 	{
 		String codcliente=gcontratos.consultarContratoMatricula(matricula);
-		if (codcliente!=null) gclientes.consultarClienteCodigo(false,codcliente);
+		if (codcliente!=null) gclientes.consultarClienteCodigo(false,true,codcliente);
 	}	
+	
+	public void consultarClienteCodigo(boolean modificar,boolean actualizar,String codigo)
+	{
+		String codcontrato=gclientes.consultarClienteCodigo(modificar,actualizar,codigo);
+		if (codcontrato!=null) gcontratos.consultarContratoCodigo(modificar,codcontrato); 
+	}
 	
 	public void modificarCliente(String codcliente,LinkedList datos)
 	{

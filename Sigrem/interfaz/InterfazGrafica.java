@@ -249,7 +249,7 @@ public class InterfazGrafica
 				String valor=JOptionPane.showInputDialog(null,"Introduce el código del contrato","Consultar contrato",-1);
 				if (valor!=null)
 				{	panelVistas.setSelectedIndex(0);
-					controlador.consultarContratoCodigo(false,valor);			
+					controlador.consultarContratoCodigo(false,true,valor);			
 				}
 			}
 		});
@@ -268,8 +268,8 @@ public class InterfazGrafica
 			{
 				String valor=JOptionPane.showInputDialog(null,"Introduce el código del cliente","Consultar cliente",-1);
 				if (valor!=null)
-				{	
-					panelVistas.setSelectedIndex(0);
+				{	panelVistas.setSelectedIndex(0);
+					controlador.consultarClienteCodigo(false,true,valor);
 				}
 			}
 		});

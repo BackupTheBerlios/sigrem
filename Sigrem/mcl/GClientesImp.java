@@ -42,18 +42,18 @@ public class GClientesImp implements GClientes
 		listaclientes.insertar(claves,nuevocliente);
 		String codigoantiguo=codcliente;
 		incrementaCodigo();
-		vista.actualizaVista(1,2,datos);
 		return codigoantiguo;
 	}
 	
-	public void asociaClienteContrato(int clave,String codcliente,String codcontrato)
+	public void asociaClienteContrato(String codcliente,String codcontrato)
 	{
-		Object[] busqueda=listaclientes.buscar(codcliente,clave);
+		Object[] busqueda=listaclientes.buscar(codcliente,0);
 		Cliente cliente=(Cliente)busqueda[0];
 		cliente.añadeContrato(codcontrato);
+		vista.actualizaVista(1,2,cliente.getListaDatos());
 	}
 	
-	public void eliminarCliente(String codcliente,String codcontrato)
+	public void eliminarCliente(boolean actualizar,String codcliente,String codcontrato)
 	{
 		Object[] busqueda=listaclientes.buscar(codcliente,0);
 		if (busqueda.length==0)
@@ -68,6 +68,8 @@ public class GClientesImp implements GClientes
 					{	vista.actualizaVistaMensaje("El cliente "+codcliente+" ha sido eliminado al no tener contratos asociados");}
 					else vista.actualizaVistaMensaje("Error al eliminar el cliente "+codcliente+". No se ha encontrado");
 				}
+				else
+					if (actualizar) vista.actualizaVista(1,2,cliente.getListaDatos());
 			}
 			else
 			{	vista.actualizaVistaMensaje("Error al buscar el cliente "+codcliente+". No se ha encontrado");}
@@ -96,11 +98,13 @@ public class GClientesImp implements GClientes
 			{	vista.actualizaVistaMensaje("Error al buscar el cliente "+codigo+". No se ha encontrado");}
 	}
 	
-	public void consultarClienteCodigo(boolean modificar,String codigo)
+	public String consultarClienteCodigo(boolean modificar,boolean actualizar,String codigo)
 	{
 		Object[] busqueda=listaclientes.buscar(codigo,0);
 		if (busqueda.length==0)
-		{	vista.actualizaVistaMensaje("Error al buscar el cliente "+codigo+". No se ha encontrado");}
+		{	vista.actualizaVistaMensaje("Error al buscar el cliente "+codigo+". No se ha encontrado");
+			return null;
+		}
 		else 
 			if (busqueda[0]!=null)
 			{	Cliente cliente=(Cliente)busqueda[0];
@@ -120,10 +124,13 @@ public class GClientesImp implements GClientes
 					vista.actualizaVistaDatos(1,datos,true);
 				}
 				else
-				{	vista.actualizaVista(1,2,cliente.getListaDatos());}
+				{	if (actualizar)	vista.actualizaVista(1,2,cliente.getListaDatos());}
+				return (String)cliente.getListaContratos().getFirst();
 			}
 			else
-			{	vista.actualizaVistaMensaje("Error al buscar el cliente "+codigo+". No se ha encontrado");}
+			{	vista.actualizaVistaMensaje("Error al buscar el cliente "+codigo+". No se ha encontrado");
+				return null;
+			}
 	}
 	
 	public void consultarClienteNombre(String nombre)

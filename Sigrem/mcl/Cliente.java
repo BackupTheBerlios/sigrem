@@ -105,8 +105,8 @@ public class Cliente
 	public LinkedList getListaDatos()
 	{
 		LinkedList datos=new LinkedList();
-		datos.add(dni);
 		datos.add(nombre);
+		datos.add(dni);
 		datos.add(direccion);
 		datos.add(cp);
 		datos.add(poblacion);
@@ -116,6 +116,7 @@ public class Cliente
 		datos.add(movil);
 		datos.add(email);
 		datos.add(fax);
+		datos.add(listacontratos);
 		return datos;
 	}
 	
