@@ -147,7 +147,7 @@ public class PanelContratos extends JPanel
 		JLabel l7=new JLabel("Teléfono 1 ",SwingConstants.RIGHT);
 		JLabel l8=new JLabel("Teléfono 2 ",SwingConstants.RIGHT);
 		JLabel l9=new JLabel("Móvil ",SwingConstants.RIGHT);
-		JLabel l10=new JLabel("Email ",SwingConstants.RIGHT);
+		JLabel l10=new JLabel("em@il ",SwingConstants.RIGHT);
 		JLabel l11=new JLabel("Fax ",SwingConstants.RIGHT);
 		l1.setPreferredSize(new Dimension(80,20));
 		l2.setPreferredSize(new Dimension(80,20));
