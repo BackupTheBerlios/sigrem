@@ -86,8 +86,7 @@ public class Persistencia
 	public void almacenarClientesXML(){
 		try {
 			PrintWriter escritor=new PrintWriter(new BufferedWriter(new FileWriter("clientes.xml")));
-			escritor.println("<xml version=\"1.0\" encoding=\"UTF-8 standalone=\"yes\">");
-			System.out.println("Primera linea del archivo XML creada");
+			escritor.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
 			escritor.println("<!DOCTYPE listaClientes>");
 			EstructuraDatos clientes=gclientes.dameListaClientes();
 			escritor.println("<listaClientes>");
@@ -130,13 +129,13 @@ public class Persistencia
 		escritor.println(tab+"<dni>"+actual.dameDni()+"</dni>");
 		escritor.println(tab+"<direccion>"+actual.dameDireccion()+"</direccion>");
 		escritor.println(tab+"<cp>"+actual.dameCp()+"</cp>");
-		escritor.println(tab+"<poblacion"+actual.damePoblacion()+"</poblacion>");
+		escritor.println(tab+"<poblacion>"+actual.damePoblacion()+"</poblacion>");
 		escritor.println(tab+"<provincia>"+actual.dameProvincia()+"</provincia>");
-		escritor.println(tab+"<telefono1>"+actual.dameCodigo()+"</telefono1>");
-		escritor.println(tab+"<telefono2>"+actual.dameNombre()+"</telefono2>");
-		escritor.println(tab+"<movil>"+actual.dameDni()+"</movil>");
-		escritor.println(tab+"<email>"+actual.dameDireccion()+"</email>");
-		escritor.println(tab+"<fax>"+actual.dameCp()+"</fax>");
+		escritor.println(tab+"<telefono1>"+actual.dameTelefono1()+"</telefono1>");
+		escritor.println(tab+"<telefono2>"+actual.dameTelefono2()+"</telefono2>");
+		escritor.println(tab+"<movil>"+actual.dameMovil()+"</movil>");
+		escritor.println(tab+"<email>"+actual.dameEmail()+"</email>");
+		escritor.println(tab+"<fax>"+actual.dameFax()+"</fax>");
 		escritor.println(tab+"<listacodigoscontratos>");
 		LinkedList codigoscontratos=actual.dameListaContratos();
 		tab=tab.concat("\t");
