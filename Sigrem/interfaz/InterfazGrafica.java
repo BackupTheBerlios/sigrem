@@ -183,6 +183,11 @@ public class InterfazGrafica
 		else if (caja=='r') pcontratos.actualizaCajaRecursos(tipo,datos);
 	}
 	
+	public void actualizaVistaAbogados(Vector listaAbogados)
+	{
+		pcontratos.actualizaListaAbogados(listaAbogados);
+	}
+	
 	public void muestraPanelRecursos(String codmulta)
 	{
 		pcontratos.muestraPanelRecursos(codmulta);

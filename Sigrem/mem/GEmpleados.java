@@ -6,18 +6,20 @@ import med.EstructuraDatos;
 
 public interface GEmpleados
 {
-	// Método para añadir un empleado al sistema
+	//Requisito 6.1
 	public String añadirEmpleado(String perfil,LinkedList datosEmpleado);
-	// Método para eliminar un empleado del sistema
+	//Requisito 6.2
 	public void eliminarEmpleado(boolean borrar,String codigoEmpleado);
-	// Método para modificar un empleado en el sistema
+	//Requisito 6.3
 	public void modificarEmpleado(String codigoEmpleado, LinkedList datosEmpleado);
-	// Método para consultar un empleado dado su Código de Empleado
+	//Requisito 6.4
 	public void consultarEmpleadoCodigo(boolean modificar,String codigo);
-	// Método para consultar un empleado dado su Nombre
+	//Requisito 6.5
 	public void consultarEmpleadoNombre(String nombre);
-	// Método para consultar un empleado dado su DNI
+	//Requisito 6.6
 	public void consultarEmpleadoDni(String dni);
-	// Método para obtener la lista de empleados
+	
 	public EstructuraDatos dameListaEmpleados();
+	
+	public void consultarListaAbogados();
 }

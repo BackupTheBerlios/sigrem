@@ -1,7 +1,6 @@
 package interfaz;
 
 import javax.swing.*;
-
 import main.Sigrem;
 import java.util.LinkedList;
 import java.awt.Color;
@@ -18,6 +17,8 @@ public class PanelEmpleados extends JPanel
 	
 	private JDialog formulario;
 	
+	private Box cajaRecursos;
+	
 	public PanelEmpleados(Sigrem controlador,JFrame v)
 	{
 		super();
@@ -33,7 +34,7 @@ public class PanelEmpleados extends JPanel
 		});	
 		JPanel pempleado=dibujaEmpleado(null);
 		JPanel pdatos=dibujaDatos(null);
-		JPanel precursos=dibujaRecursos(null);
+		JPanel precursos=dibujaRecursos(false);
 		JSplitPane sp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,pempleado,pdatos);
 		sp1.setDividerSize(4);
 		sp1.setEnabled(false);
@@ -55,7 +56,8 @@ public class PanelEmpleados extends JPanel
 		}
 		else if (panel==3)
 		{	JSplitPane sp=((JSplitPane)getComponent(0));
-			sp.setBottomComponent(dibujaRecursos(null));
+			if (datos!=null) sp.setBottomComponent(dibujaRecursos(true));
+			else sp.setBottomComponent(dibujaRecursos(false));
 		}
 	}
 	
@@ -305,11 +307,12 @@ public class PanelEmpleados extends JPanel
 		return pdat;
 	}
 	
-	public JPanel dibujaRecursos(String codigo)
+	public JPanel dibujaRecursos(boolean activo)
 	{	
 		JPanel prec=new JPanel();
-		prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),("Recursos asignados al empleado"),TitledBorder.LEFT,TitledBorder.TOP));
-		prec.setPreferredSize(new Dimension(950,280));	
+		prec.setPreferredSize(new Dimension(950,280));
+		if (activo) 
+		{	prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),("Recursos asignados al empleado"),TitledBorder.LEFT,TitledBorder.TOP));
 			Box tabla=Box.createVerticalBox();
 			JPanel p=new JPanel();
 			JLabel l1=new JLabel("Código",SwingConstants.CENTER);
@@ -336,37 +339,13 @@ public class PanelEmpleados extends JPanel
 			p.add(l6);
 			p.add(l7);
 			p.add(l8);
-			tabla.add(p);
-			for (int i=0;i<9;i++)
-			{	JPanel linea=dibujaLineaRecurso();
-				tabla.add(linea);		
-			}
-			JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+			JScrollPane ptabla=new JScrollPane(cajaRecursos,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 			ptabla.setPreferredSize(new Dimension(930,236));
-			
 			JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,ptabla,null);
 			sp.setEnabled(false);
 			sp.setDividerSize(4);
-						
-			prec.add(sp);		
-		
-		/*else
-		{
-			if (pmostrado==1)
-			{
-				JLabel ll1=new JLabel("No hay información adicional sobre Administrativos...",SwingConstants.CENTER);
-				prec.removeAll();
-				prec.setPreferredSize(new Dimension(950,280));
-				prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Información adicional de Administrativo",TitledBorder.LEFT,TitledBorder.TOP));
-				prec.add(ll1);
-			}
-			else
-			{
-				prec.removeAll();
-				prec.setPreferredSize(new Dimension(950,280));
-				prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"",TitledBorder.LEFT,TitledBorder.TOP));
-			}
-		}*/
+			prec.add(sp);
+		}
 		return prec;		
 	}
 	

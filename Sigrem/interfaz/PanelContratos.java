@@ -39,6 +39,8 @@ public class PanelContratos extends JPanel
 	
 	private JComboBox selector;
 	
+	private Vector listaAbogados;
+	
 	public PanelContratos(Sigrem controlador,JFrame v)
 	{
 		super();
@@ -78,7 +80,7 @@ public class PanelContratos extends JPanel
 		});
 		JPanel pcontrato=dibujaContrato(null);
 		JPanel pcliente=dibujaCliente(null);
-		JPanel pmultas=dibujaMultas(false,null);
+		JPanel pmultas=dibujaMultas(false);
 		JSplitPane sp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,pcontrato,pcliente);
 		sp1.setDividerSize(4);
 		sp1.setEnabled(false);
@@ -101,7 +103,7 @@ public class PanelContratos extends JPanel
 		}
 		else if (panel==3)
 		{	JSplitPane sp=((JSplitPane)getComponent(0));
-			sp.setBottomComponent(dibujaMultas(true,datos));
+			sp.setBottomComponent(dibujaMultas(true));
 		}
 		else if (panel==4)
 		{	panelRecursos.getContentPane().removeAll();
@@ -203,6 +205,12 @@ public class PanelContratos extends JPanel
 		panelRecursos.getContentPane().add(dibujaRecursos(codmulta));
 		panelRecursos.pack();
 		panelRecursos.setVisible(true);
+	}
+	
+	public void actualizaListaAbogados(Vector lista)
+	{
+		listaAbogados=new Vector();
+		listaAbogados=lista;
 	}
 	
 	public void inicializaCajaMultas()
@@ -519,7 +527,7 @@ public class PanelContratos extends JPanel
 		return pcl;
 	}
 
-	public JPanel dibujaMultas(boolean activo,LinkedList datos)
+	public JPanel dibujaMultas(boolean activo)
 	{
 		JPanel pmul=new JPanel();
 		pmul.setPreferredSize(new Dimension(950,280));
@@ -633,6 +641,7 @@ public class PanelContratos extends JPanel
 		bcrea.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
+				controlador.consultarListaAbogados();				
 				formRecurso.getContentPane().add(panelAltaRecurso('c',codigo,null));
 				formRecurso.pack();
 				formRecurso.setVisible(true);				
@@ -1170,7 +1179,7 @@ public class PanelContratos extends JPanel
 		JLabel l4=new JLabel("Escrito recibido ",SwingConstants.RIGHT);
 		JLabel l5=new JLabel("Escrito presentado ",SwingConstants.RIGHT);
 		JLabel l6=new JLabel("Estado ",SwingConstants.RIGHT);
-		JLabel l7=new JLabel("* Abogado ",SwingConstants.RIGHT);
+		JLabel l7=new JLabel("Abogado ",SwingConstants.RIGHT);
 		JLabel r1=new JLabel(" ",SwingConstants.RIGHT);
 		JLabel r2=new JLabel(" ",SwingConstants.RIGHT);
 		JLabel r3=new JLabel(" ",SwingConstants.RIGHT);
@@ -1191,7 +1200,7 @@ public class PanelContratos extends JPanel
 		final JComboBox ere=new JComboBox();
 		final JComboBox epr=new JComboBox();
 		final JComboBox est=new JComboBox();
-		final JTextField abo=new JTextField();
+		final JComboBox abo=new JComboBox(listaAbogados);
 		escritoRecibido(ere);
 		escritoPresentado(epr);
 		estadosRecursos(est);
@@ -1258,29 +1267,23 @@ public class PanelContratos extends JPanel
 		aceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				if (abo.getText().equals(""))
-				{
-					JOptionPane.showMessageDialog(null,"El campo marcado con * es obligatorio");
+				LinkedList datos=new LinkedList();
+				datos.add(femi.getText());
+				datos.add((String)ere.getSelectedItem());
+				datos.add((String)epr.getSelectedItem());
+				datos.add((String)est.getSelectedItem());
+				datos.add((String)abo.getSelectedItem());
+				datos.add(descrip.getText());
+				if (tipo=='c') 
+				{	datos.add(codigo);
+					controlador.añadirRecurso(codigo,datos);					
 				}
-				else
-				{	LinkedList datos=new LinkedList();
-					datos.add(femi.getText());
-					datos.add((String)ere.getSelectedItem());
-					datos.add((String)epr.getSelectedItem());
-					datos.add((String)est.getSelectedItem());
-					datos.add(abo.getText());
-					datos.add(descrip.getText());
-					if (tipo=='c') 
-					{	datos.add(codigo);
-						controlador.añadirRecurso(codigo,datos);					
-					}
-					else if (tipo=='m') 
-					{	datos.addFirst(codigo);
-						controlador.modificarRecurso(codigo,datos);
-					}
-					formRecurso.setVisible(false);
-					formRecurso.getContentPane().removeAll();
+				else if (tipo=='m') 
+				{	datos.addFirst(codigo);
+					controlador.modificarRecurso(codigo,datos);
 				}
+				formRecurso.setVisible(false);
+				formRecurso.getContentPane().removeAll();
 			}
 		});
 		cancelar.addActionListener(new ActionListener()
@@ -1423,6 +1426,7 @@ public class PanelContratos extends JPanel
 		modi.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
+				controlador.consultarListaAbogados();
 				formRecurso.getContentPane().add(panelAltaRecurso('m',cod.getText(),femi.getText()));
 				formRecurso.pack();
 				formRecurso.setVisible(true);				

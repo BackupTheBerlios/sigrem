@@ -164,5 +164,17 @@ public class GEmpleadosImp implements GEmpleados
 	{
 		return listaEmpleados;
 	}
+	
+	public void consultarListaAbogados()
+	{
+		Vector listaAbogados=new Vector();
+		listaAbogados.add("Sin asignar");
+		for (int i=0;i<listaEmpleados.dameTamaño();i++)
+		{	Empleado empleado=(Empleado)listaEmpleados.dameIndice(0).dameElementos().get(i);
+			if (empleado.damePerfil().equals("Abogado"))
+			{	listaAbogados.add(empleado.dameCodigo());}
+			vista.actualizaVistaAbogados(listaAbogados);
+		}
+	}
 
 }
