@@ -8,27 +8,26 @@ import java.awt.event.*;
 
 public class PanelEconomia extends JPanel 
 {
-	public JFrame formulario;
-	
-	//valores entre 0-300
-	public int [] facturacion={130,300,127,300,300,234,253,220,276,156,179,270};
-	public int [] gastos=     {130,300,127,300,300,234,253,220,276,156,179,270};
-	public int [] balance=    { 20,180,  7,290,  0,100,100,160, 46,100, 79,155};
+	private JFrame formulario;
+
+	//valores entre 0-170
+	public int [] facturacion={170,130,125, 27,150, 90,134,170,120,106, 60,169};
+	public int [] gastos=     {  0, 20,100, 10, 30, 34,134,  0, 36,  6, 10,150};
+	public int [] balance=    {170,110, 25, 17,120, 56,  0,170, 84,100, 50, 19};
 		
 	public PanelEconomia()
 	{
 		super();
 		formulario=new JFrame();
 		formulario.setResizable(false);
-		formulario.setLocation(350,100);
-		JPanel pbalance=dibujaBalance();
+		formulario.setLocation(210,320);
+	    JPanel pbalance=dibujaBalance();
 		JPanel pgrafico=dibujaGrafico(Color.BLUE, balance, "Histórico del Balance");
 		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,pbalance,pgrafico);
 		sp.setEnabled(false);		
 		sp.setDividerSize(4);
 		add(sp);
-		Dimension d=new Dimension(625,200);
-		pbalance.setPreferredSize(d);				
+		pbalance.setPreferredSize(new Dimension(625,200));				
 	}
 	
 	public JPanel dibujaBalance()
@@ -60,19 +59,47 @@ public class PanelEconomia extends JPanel
 		bhbal.addActionListener(new ActionListener()
 				{	public void actionPerformed(ActionEvent e)
 					{
-						dibujaBal();
+						if (!formulario.isVisible())
+						{
+							dibujaBal();
+						}
+						else
+						{
+							formulario.setVisible(false);
+							formulario.getContentPane().removeAll();
+							dibujaBal();
+						}					
+					
 					}
 				});
 		bhfac.addActionListener(new ActionListener()
 				{	public void actionPerformed(ActionEvent e)
 					{
-						dibujaFac();
+						if (!formulario.isVisible())
+						{
+							dibujaFac();
+						}
+						else
+						{
+							formulario.setVisible(false);
+							formulario.getContentPane().removeAll();
+							dibujaFac();
+						}		
 					}
 				});
 		bhgas.addActionListener(new ActionListener()
 				{	public void actionPerformed(ActionEvent e)
 					{
-						dibujaGas();
+						if (!formulario.isVisible())
+						{
+							dibujaGas();
+						}
+						else
+						{
+							formulario.setVisible(false);
+							formulario.getContentPane().removeAll();
+							dibujaGas();
+						}
 					}
 				});
 		JPanel p1=new JPanel();
@@ -96,40 +123,61 @@ public class PanelEconomia extends JPanel
 		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja,p4);
 		sp.setDividerSize(4);
 		sp.setEnabled(false);
-		pbal.add(sp);				
+		pbal.add(sp);	
 		return pbal;
 	}
 	
 	public JPanel dibujaGrafico(Color c, int [] num, String s)
 	{
 		JPanel pgra=new JPanel();
-		pgra.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),s,TitledBorder.LEFT,TitledBorder.TOP));		
-		JLabel l1=new JLabel("ENERO ",SwingConstants.RIGHT);
-		JLabel l2=new JLabel("FEBRERO ",SwingConstants.RIGHT);
-		JLabel l3=new JLabel("MARZO ",SwingConstants.RIGHT);
-		JLabel l4=new JLabel("ABRIL ",SwingConstants.RIGHT);
-		JLabel l5=new JLabel("MAYO ",SwingConstants.RIGHT);
-		JLabel l6=new JLabel("JUNIO ",SwingConstants.RIGHT);
-		JLabel l7=new JLabel("JULIO ",SwingConstants.RIGHT);
-		JLabel l8=new JLabel("AGOSTO ",SwingConstants.RIGHT);
-		JLabel l9=new JLabel("SEPTIEMBRE ",SwingConstants.RIGHT);
-		JLabel l10=new JLabel("OCTUBRE ",SwingConstants.RIGHT);
-		JLabel l11=new JLabel("NOVIEMBRE ",SwingConstants.RIGHT);
-		JLabel l12=new JLabel("DICIEMBRE ",SwingConstants.RIGHT);
-		JLabel l13=new JLabel("0     10     20     30     40     50     60     70     80     90     100");
-		l1.setPreferredSize(new Dimension(80,20));
-		l2.setPreferredSize(new Dimension(80,20));
-		l3.setPreferredSize(new Dimension(80,20));
-		l4.setPreferredSize(new Dimension(80,20));
-		l5.setPreferredSize(new Dimension(80,20));
-		l6.setPreferredSize(new Dimension(80,20));
-		l7.setPreferredSize(new Dimension(80,20));
-		l8.setPreferredSize(new Dimension(80,20));
-		l9.setPreferredSize(new Dimension(80,20));
-		l10.setPreferredSize(new Dimension(80,20));
-		l11.setPreferredSize(new Dimension(80,20));
-		l12.setPreferredSize(new Dimension(80,20));
-		l13.setPreferredSize(new Dimension(300,20));
+		pgra.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),s,TitledBorder.LEFT,TitledBorder.TOP));
+		pgra.setPreferredSize(new Dimension(625,280));
+		JLabel l1=new JLabel("  0 ",SwingConstants.RIGHT);
+		JLabel l2=new JLabel(" 10 ",SwingConstants.RIGHT);
+		JLabel l3=new JLabel(" 20 ",SwingConstants.RIGHT);
+		JLabel l4=new JLabel(" 30 ",SwingConstants.RIGHT);
+		JLabel l5=new JLabel(" 40 ",SwingConstants.RIGHT);
+		JLabel l6=new JLabel(" 50 ",SwingConstants.RIGHT);
+		JLabel l7=new JLabel(" 60 ",SwingConstants.RIGHT);
+		JLabel l8=new JLabel(" 70 ",SwingConstants.RIGHT);
+		JLabel l9=new JLabel(" 80 ",SwingConstants.RIGHT);
+		JLabel l10=new JLabel(" 90 ",SwingConstants.RIGHT);
+		JLabel l11=new JLabel("100 ",SwingConstants.RIGHT);
+		JLabel ll1=new JLabel(" ENE");
+		JLabel ll2=new JLabel(" FEB");
+		JLabel ll3=new JLabel(" MAR");
+		JLabel ll4=new JLabel(" ABR");
+		JLabel ll5=new JLabel(" MAY");
+		JLabel ll6=new JLabel(" JUN");
+		JLabel ll7=new JLabel(" JUL");
+		JLabel ll8=new JLabel(" AGO");
+		JLabel ll9=new JLabel(" SEP");
+		JLabel ll10=new JLabel(" OCT");
+		JLabel ll11=new JLabel(" NOV");
+		JLabel ll12=new JLabel(" DIC");
+		l1.setPreferredSize(new Dimension(30,10));
+		l2.setPreferredSize(new Dimension(30,10));
+		l3.setPreferredSize(new Dimension(30,10));
+		l4.setPreferredSize(new Dimension(30,10));
+		l5.setPreferredSize(new Dimension(30,10));
+		l6.setPreferredSize(new Dimension(30,10));
+		l7.setPreferredSize(new Dimension(30,10));
+		l8.setPreferredSize(new Dimension(30,10));
+		l9.setPreferredSize(new Dimension(30,10));
+		l10.setPreferredSize(new Dimension(30,10));
+		l11.setPreferredSize(new Dimension(30,10));
+		ll1.setPreferredSize(new Dimension(30,10));
+		ll2.setPreferredSize(new Dimension(30,10));
+		ll3.setPreferredSize(new Dimension(30,10));
+		ll4.setPreferredSize(new Dimension(30,10));
+		ll5.setPreferredSize(new Dimension(30,10));
+		ll6.setPreferredSize(new Dimension(30,10));
+		ll7.setPreferredSize(new Dimension(30,10));
+		ll8.setPreferredSize(new Dimension(30,10));
+		ll9.setPreferredSize(new Dimension(30,10));
+		ll10.setPreferredSize(new Dimension(30,10));
+		ll11.setPreferredSize(new Dimension(30,10));
+		ll12.setPreferredSize(new Dimension(30,10));
 		JLabel relleno1=new JLabel("");
 		JLabel relleno2=new JLabel("");
 		JLabel relleno3=new JLabel("");
@@ -142,20 +190,18 @@ public class PanelEconomia extends JPanel
 		JLabel relleno10=new JLabel("");
 		JLabel relleno11=new JLabel("");
 		JLabel relleno12=new JLabel("");
-		JLabel relleno13=new JLabel("                         ",SwingConstants.RIGHT);
-		relleno1.setPreferredSize(new Dimension(300-num[0],20));
-		relleno2.setPreferredSize(new Dimension(300-num[1],20));
-		relleno3.setPreferredSize(new Dimension(300-num[2],20));
-		relleno4.setPreferredSize(new Dimension(300-num[3],20));
-		relleno5.setPreferredSize(new Dimension(300-num[4],20));
-		relleno6.setPreferredSize(new Dimension(300-num[5],20));
-		relleno7.setPreferredSize(new Dimension(300-num[6],20));
-		relleno8.setPreferredSize(new Dimension(300-num[7],20));
-		relleno9.setPreferredSize(new Dimension(300-num[8],20));
-		relleno10.setPreferredSize(new Dimension(300-num[9],20));
-		relleno11.setPreferredSize(new Dimension(300-num[10],20));
-		relleno12.setPreferredSize(new Dimension(300-num[11],20));
-		relleno13.setPreferredSize(new Dimension(80,20));						
+		relleno1.setPreferredSize(new Dimension(20, 180-num[0]));
+		relleno2.setPreferredSize(new Dimension(20, 180-num[1]));
+		relleno3.setPreferredSize(new Dimension(20, 180-num[2]));
+		relleno4.setPreferredSize(new Dimension(20, 180-num[3]));
+		relleno5.setPreferredSize(new Dimension(20, 180-num[4]));
+		relleno6.setPreferredSize(new Dimension(20, 180-num[5]));
+		relleno7.setPreferredSize(new Dimension(20, 180-num[6]));
+		relleno8.setPreferredSize(new Dimension(20, 180-num[7]));
+		relleno9.setPreferredSize(new Dimension(20, 180-num[8]));
+		relleno10.setPreferredSize(new Dimension(20, 180-num[9]));
+		relleno11.setPreferredSize(new Dimension(20, 180-num[10]));
+		relleno12.setPreferredSize(new Dimension(20, 180-num[11]));
 		JTextField t1=new JTextField();
 		JTextField t2=new JTextField();
 		JTextField t3=new JTextField();
@@ -168,18 +214,18 @@ public class PanelEconomia extends JPanel
 		JTextField t10=new JTextField();
 		JTextField t11=new JTextField();
 		JTextField t12=new JTextField();
-		t1.setPreferredSize(new Dimension(balance[0],20));
-		t2.setPreferredSize(new Dimension(balance[1],20));
-		t3.setPreferredSize(new Dimension(balance[2],20));
-		t4.setPreferredSize(new Dimension(balance[3],20));
-		t5.setPreferredSize(new Dimension(balance[4],20));
-		t6.setPreferredSize(new Dimension(balance[5],20));
-		t7.setPreferredSize(new Dimension(balance[6],20));
-		t8.setPreferredSize(new Dimension(balance[7],20));
-		t9.setPreferredSize(new Dimension(balance[8],20));
-		t10.setPreferredSize(new Dimension(balance[9],20));
-		t11.setPreferredSize(new Dimension(balance[10],20));
-		t12.setPreferredSize(new Dimension(balance[11],20));
+		t1.setPreferredSize(new Dimension(20, num[0]));
+		t2.setPreferredSize(new Dimension(20, num[1]));
+		t3.setPreferredSize(new Dimension(20, num[2]));
+		t4.setPreferredSize(new Dimension(20, num[3]));
+		t5.setPreferredSize(new Dimension(20, num[4]));
+		t6.setPreferredSize(new Dimension(20, num[5]));
+		t7.setPreferredSize(new Dimension(20, num[6]));
+		t8.setPreferredSize(new Dimension(20, num[7]));
+		t9.setPreferredSize(new Dimension(20, num[8]));
+		t10.setPreferredSize(new Dimension(20, num[9]));
+		t11.setPreferredSize(new Dimension(20, num[10]));
+		t12.setPreferredSize(new Dimension(20, num[11]));
 		t1.setEditable(false);
 		t2.setEditable(false);
 		t3.setEditable(false);
@@ -204,58 +250,68 @@ public class PanelEconomia extends JPanel
 		t10.setBackground(c);
 		t11.setBackground(c);
 		t12.setBackground(c);		
-		Box c1=Box.createHorizontalBox();
-		Box c2=Box.createHorizontalBox();
-		Box c3=Box.createHorizontalBox();
-		Box c4=Box.createHorizontalBox();
-		Box c5=Box.createHorizontalBox();
-		Box c6=Box.createHorizontalBox();
-		Box c7=Box.createHorizontalBox();
-		Box c8=Box.createHorizontalBox();
-		Box c9=Box.createHorizontalBox();
-		Box c10=Box.createHorizontalBox();
-		Box c11=Box.createHorizontalBox();
-		Box c12=Box.createHorizontalBox();
-		Box c13=Box.createHorizontalBox();		
-		c1.add(l1);
-		c1.add(t1);
+		Box c1=Box.createVerticalBox();
+		Box c2=Box.createVerticalBox();
+		Box c3=Box.createVerticalBox();
+		Box c4=Box.createVerticalBox();
+		Box c5=Box.createVerticalBox();
+		Box c6=Box.createVerticalBox();
+		Box c7=Box.createVerticalBox();
+		Box c8=Box.createVerticalBox();
+		Box c9=Box.createVerticalBox();
+		Box c10=Box.createVerticalBox();
+		Box c11=Box.createVerticalBox();
+		Box c12=Box.createVerticalBox();
+		Box c13=Box.createVerticalBox();		
 		c1.add(relleno1);
-		c2.add(l2);
-		c2.add(t2);
+		c1.add(t1);
+		c1.add(ll1);
 		c2.add(relleno2);
-		c3.add(l3);
-		c3.add(t3);
+		c2.add(t2);
+		c2.add(ll2);
 		c3.add(relleno3);
-		c4.add(l4);
-		c4.add(t4);
+		c3.add(t3);
+		c3.add(ll3);
 		c4.add(relleno4);
-		c5.add(l5);
-		c5.add(t5);
+		c4.add(t4);
+		c4.add(ll4);
 		c5.add(relleno5);
-		c6.add(l6);
-		c6.add(t6);
+		c5.add(t5);
+		c5.add(ll5);
 		c6.add(relleno6);
-		c7.add(l7);
-		c7.add(t7);
+		c6.add(t6);
+		c6.add(ll6);
 		c7.add(relleno7);
-		c8.add(l8);
-		c8.add(t8);
+		c7.add(t7);
+		c7.add(ll7);
 		c8.add(relleno8);
-		c9.add(l9);	
-		c9.add(t9);
+		c8.add(t8);
+		c8.add(ll8);
 		c9.add(relleno9);
-		c10.add(l10);
-		c10.add(t10);
+		c9.add(t9);
+		c9.add(ll9);
 		c10.add(relleno10);
-		c11.add(l11);
-		c11.add(t11);
+		c10.add(t10);
+		c10.add(ll10);
 		c11.add(relleno11);
-		c12.add(l12);
-		c12.add(t12);
+		c11.add(t11);
+		c11.add(ll11);
 		c12.add(relleno12);
-		c13.add(relleno13);
-		c13.add(l13);		
-		Box caja=Box.createVerticalBox();					
+		c12.add(t12);
+		c12.add(ll12);
+		c13.add(l11);
+		c13.add(l10);
+		c13.add(l9);
+		c13.add(l8);
+		c13.add(l7);
+		c13.add(l6);
+		c13.add(l5);
+		c13.add(l4);
+		c13.add(l3);
+		c13.add(l2);
+		c13.add(l1);
+		Box caja=Box.createHorizontalBox();					
+		caja.add(c13);
 		caja.add(c1);
 		caja.add(c2);
 		caja.add(c3);
@@ -268,7 +324,6 @@ public class PanelEconomia extends JPanel
 		caja.add(c10);
 		caja.add(c11);
 		caja.add(c12);
-		caja.add(c13);		
 		pgra.add(caja);		
 		return pgra;
 	}
