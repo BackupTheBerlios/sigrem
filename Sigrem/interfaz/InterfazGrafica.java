@@ -178,7 +178,7 @@ public class InterfazGrafica
 	
 	public void actualizarVistaConsultaAbogado(String codigo)
 	{
-	pempleados.consultarAbogadoRemotamente(codigo);
+		pempleados.consultarAbogadoRemotamente(codigo);
 	}
 	
 	public void actualizaVistaCaja(int panel,char caja,char tipo,LinkedList datos)
