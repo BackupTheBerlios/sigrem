@@ -459,7 +459,8 @@ public class InterfazGrafica
 		else if (npanel==1)	panel1();
 			else if (npanel==2) panel2();
 				else if (npanel==3) panel3();
-					else panel0();
+					else if (npanel==4) panel4();
+						else panel0();
 				
 				
 	}
@@ -822,7 +823,7 @@ public class InterfazGrafica
 		psalida=new JScrollPane(salida);
 		psalida.setEnabled(false);
 		psalida.setPreferredSize(new Dimension(500,400));
-		String[] opciones = {"Sigrem"," + Menú"," + Gestión Contratos"," + Gestión Empleados"," -  Gestión Económica","    +"};
+		String[] opciones = {"Sigrem"," + Menú"," + Gestión Contratos"," + Gestión Empleados"," -  Gestión Económica","    + Datos económicos","    + Históricos"};
 		lista=new JList(opciones);
 		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		lista.setPreferredSize(new Dimension(150,400));
@@ -869,7 +870,7 @@ public class InterfazGrafica
 						}
 						else if(lista.getSelectedIndex()==3)	
 							{
-								dibujaAyuda(0);
+								dibujaAyuda(3);
 								try
 								{
 									fd = new BufferedReader (new FileReader ("interfaz/ayuda_empleados.txt"));
@@ -877,9 +878,9 @@ public class InterfazGrafica
 								catch(FileNotFoundException e)
 								{}					
 							}
-							else if(lista.getSelectedIndex()==7)	
+							else if(lista.getSelectedIndex()==4)	
 								{
-									dibujaAyuda(4);
+									dibujaAyuda(0);
 									try
 									{
 										fd = new BufferedReader (new FileReader ("interfaz/ayuda_economia.txt"));
