@@ -40,10 +40,48 @@ public class Persistencia
 		gmultas=mul;
 		grecursos=rec;
 		gempleados=emp;
-		geconomia=eco;		
+		geconomia=eco;
+		this.cargarXML();
 	}
 	
-	public void almacenaClientesXML(){
+	public void almacenarXML(){
+		almacenarClientesXML();
+		almacenarContratosXML();
+		almacenarMultasXML();
+		almacenarRecursosXML();
+	}
+	
+	public void cargarXML(){
+		try {
+			cargarClientesXML();
+			System.out.println("La carga de clientes se ha realizado correctamente");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			cargarContratosXML();	
+			System.out.println("La carga de contratos se ha realizado correctamente");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			cargarMultasXML();
+			System.out.println("La carga de multas se ha realizado correctamente");
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		try {	
+			cargarRecursosXML();
+			System.out.println("La carga de recursos se ha realizado correctamente");
+		} catch (IOException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		}
+	}
+	public void almacenarClientesXML(){
 		try {
 			PrintWriter escritor=new PrintWriter(new BufferedWriter(new FileWriter("clientes.txt")));
 			escritor.println("<xml version=\"1.0\" encoding=\"UTF-8 standalone=\"yes\">");
@@ -260,7 +298,7 @@ public class Persistencia
 		
 	}
 	
-	public void almacenaContratosXML(){}
+	public void almacenarContratosXML(){}
 	void escribirContrato(PrintWriter escritor, Cliente actual){}
 	public boolean cargarContratosXML() throws IOException{
 		return true;
@@ -269,7 +307,7 @@ public class Persistencia
 		return null;
 	}
 		
-	public void almacenaMultasXML(){}
+	public void almacenarMultasXML(){}
 	void escribirMulta(PrintWriter escritor, Multa actual){}
 	public boolean cargarMultasXML() throws IOException{	
 		return true;
@@ -278,7 +316,7 @@ public class Persistencia
 		return null;
 	}
 		
-	public void almacenaRecursosXML(){}
+	public void almacenarRecursosXML(){}
 	void escribirRecurso(PrintWriter escritor, Recurso actual){}
 	public boolean cargarRecursosXML() throws IOException{
 		return true;
