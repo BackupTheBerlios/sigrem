@@ -19,10 +19,10 @@ public class Contrato
 	public Contrato(String codcontrato,LinkedList datos) 
 	{
 		codigocontrato=codcontrato;
-		matricula=(String)datos.get(0);
-		fechaalta=(String)datos.get(1);
+		codigocliente=(String)datos.get(0);
+		matricula=(String)datos.get(1);
+		fechaalta=(String)datos.get(2);
 		fechabaja="";
-		codigocliente=(String)datos.get(2);
 		listamultas=new LinkedList();
 	}
 	public String getCodigoContrato()

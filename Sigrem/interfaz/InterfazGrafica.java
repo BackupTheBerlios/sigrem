@@ -1,7 +1,7 @@
 package interfaz;
 
 import javax.swing.*;
-
+import java.util.LinkedList;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -36,11 +36,11 @@ public class InterfazGrafica
 	
 	private JTabbedPane panelVistas;
 	
-	private JPanel pcontratos;
+	private PanelContratos pcontratos;
 	
-	private JPanel pempleados;
+	private PanelEmpleados pempleados;
 	
-	private JPanel peconomia;
+	private PanelEconomia peconomia;
 	
 	private JFileChooser selec;
 	
@@ -103,7 +103,7 @@ public class InterfazGrafica
 		formayuda.setResizable(false);
 		formayuda.setLocation(150,50);
 //		formayuda.setPreferredSize(new Dimension(500,400));
-				
+		
 		panelVistas=new JTabbedPane(JTabbedPane.BOTTOM);
 		pcontratos=new PanelContratos(this.controlador,ventana);
 		pempleados=new PanelEmpleados(this.controlador,ventana);
@@ -148,16 +148,44 @@ public class InterfazGrafica
 		ventana.setVisible(true);
 	}
 	
-	public void actualizaVista(int panel,String[] datos)
+	public void actualizaVista(int pestaña,int panel,LinkedList datos)
 	{
-		if (panel==1)
-		{	pcontratos=new PanelContratos(controlador,ventana);
+		if (pestaña==1)
+		{	if (panel==1)
+			{	pcontratos.actualiza(panel,datos);
+			}
+			else if (panel==2)
+			{
+				
+			}
+			else if (panel==3)
+			{
+				
+			}			
 		}
-		else if (panel==2)
-		{	pempleados=new PanelEmpleados(controlador,ventana);			
+		else if (pestaña==2)
+		{	if (panel==1)
+			{
+			
+			}
+			else if (panel==2)
+			{
+				
+			}
+			else if (panel==3)
+			{
+				
+			}
 		}
-		else if (panel==3)
-		{	peconomia=new PanelEconomia(0,controlador,ventana);			
+		else if (pestaña==3)
+		{	if (panel==1)
+			{
+			
+			}
+			else if (panel==2)
+			{
+				
+			}
 		}	
 	}
 	

@@ -29,7 +29,8 @@ public class GContratosImp implements GContratos
 		claves[0]=codcontrato;
 		claves[1]=(String)datos.get(1);
 		listacontratos.insertar(claves,nuevocontrato);
-		//vista.actualizaVista(1,datos);
+		datos.addFirst(codcontrato);
+		vista.actualizaVista(1,1,datos);
 		return codcontrato;
 	}
 	

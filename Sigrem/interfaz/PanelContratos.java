@@ -16,6 +16,8 @@ public class PanelContratos extends JPanel
 	private Sigrem controlador;
 	
 	private JDialog formulario;
+	
+	private JPanel pcontrato;
 		
 	public PanelContratos(Sigrem controlador,JFrame v)
 	{
@@ -28,7 +30,7 @@ public class PanelContratos extends JPanel
 	
 	public void dibujaPaneles(boolean multas)
 	{
-		JPanel pcontrato=dibujaContrato();
+		pcontrato=dibujaContrato(null);
 		pcontrato.setPreferredSize(new Dimension(314,0));
 		JPanel pcliente=dibujaCliente();
 		pcliente.setPreferredSize(new Dimension(0,320));
@@ -48,14 +50,37 @@ public class PanelContratos extends JPanel
 		add(sp2);		
 	}
 	
-	public JPanel dibujaContrato()
+	public void actualiza(int panel,LinkedList datos)
+	{
+		if (panel==1)
+		{	
+			System.out.println((String)datos.get(0));
+			System.out.println((String)datos.get(1));
+			System.out.println((String)datos.get(2));
+			System.out.println((String)datos.get(3));
+			pcontrato=new JPanel();
+			pcontrato=dibujaContrato(datos);
+			
+			
+		}
+		else if (panel==1)
+		{
+			
+		}
+		else if (panel==2)
+		{
+			
+		}
+	}
+	
+	public JPanel dibujaContrato(LinkedList datos)
 	{
 		JPanel pco=new JPanel();
 		pco.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos del contrato",TitledBorder.LEFT,TitledBorder.TOP));
 		JLabel l1=new JLabel("Código del contrato");
-		JLabel l2=new JLabel("Matrícula del vehículo");
-		JLabel l3=new JLabel("Fecha de alta");
-		JLabel l4=new JLabel("Código del cliente");
+		JLabel l2=new JLabel("Código del cliente");
+		JLabel l3=new JLabel("Matrícula del vehículo");
+		JLabel l4=new JLabel("Fecha de alta");		
 		l1.setPreferredSize(new Dimension(150,20));
 		l2.setPreferredSize(new Dimension(150,20));
 		l3.setPreferredSize(new Dimension(150,20));
@@ -64,6 +89,11 @@ public class PanelContratos extends JPanel
 		JTextField tcliente=new JTextField();
 		JTextField tfechaalta=new JTextField();
 		JTextField tmatricula=new JTextField();
+		if (datos!=null)
+		{	tcontrato.setText((String)datos.get(0));
+			tcliente.setText((String)datos.get(1));
+			tmatricula.setText((String)datos.get(2));
+		}
 		tcontrato.setPreferredSize(new Dimension(100,20));
 		tcliente.setPreferredSize(new Dimension(100,20));
 		tmatricula.setPreferredSize(new Dimension(100,20));
@@ -90,11 +120,11 @@ public class PanelContratos extends JPanel
 		p1.add(l1);
 		p1.add(tcontrato);
 		p2.add(l2);
-		p2.add(tmatricula);
+		p2.add(tcliente);
 		p3.add(l3);
 		p3.add(tfechaalta);
 		p4.add(l4);
-		p4.add(tcliente);
+		p4.add(tmatricula);
 		botonera.add(bcrea);
 		botonera.add(belimcont);
 		botonera.add(bmodcont);
@@ -550,8 +580,8 @@ public class PanelContratos extends JPanel
 				controlador.añadirContrato(datoscontrato,datoscliente);
 				formulario.setVisible(false);
 				formulario.getContentPane().removeAll();
-				removeAll();
-				dibujaPaneles(true);
+			//	removeAll();
+			//	dibujaPaneles(true);
 			}
 		});
 		cancelar.addActionListener(new ActionListener()

@@ -62,7 +62,7 @@ public class Sigrem
 	public void añadirContrato(LinkedList datoscontrato,LinkedList datoscliente)
 	{
 		String clientenuevo=gclientes.añadirCliente(datoscliente);
-		datoscontrato.add(clientenuevo);
+		datoscontrato.addFirst(clientenuevo);
 		String contratonuevo=gcontratos.añadirContrato(datoscontrato);
 		gclientes.asociaClienteContrato(clientenuevo,clientenuevo);
 	}
