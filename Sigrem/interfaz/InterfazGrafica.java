@@ -898,7 +898,7 @@ public class InterfazGrafica
 									}
 									else if(lista.getSelectedIndex()==6)	
 										{
-											dibujaAyuda(0);
+											dibujaAyuda(3);
 											try
 											{
 												fd = new BufferedReader (new FileReader ("interfaz/ayuda_empleados3.txt"));

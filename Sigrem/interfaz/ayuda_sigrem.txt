@@ -4,4 +4,14 @@
 
 Sistema Integral de Gestión de REcursos de Multas
 
+Autores:
+-------
+	- Félix Martos Trenado
+	- Javier Rodríguez Horcajo
+	- Miguel Ángel Ruiz Ortega
+	- Francisco José Sánchez Hernando
+	- Sergio Tarancón Faus
+	
+	
 - ¡¡¡ UNDER CONSTRUCTION !!! -
+	
