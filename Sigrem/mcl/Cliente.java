@@ -1,5 +1,7 @@
 package mcl;
 
+import java.util.LinkedList;
+
 public class Cliente
 {
 	private String codigo;
@@ -25,55 +27,169 @@ public class Cliente
 	private String email;
 	
 	private String fax;
-/*	  
-	public Cliente(String cod, String d, String nom) 
+	
+	private LinkedList listacontratos;
+
+	public Cliente(LinkedList datos) 
 	{
-		codigo=cod;
-	    dni=d;
-	    nombre=nom;
+		codigo=(String)datos.get(0);
+		dni=(String)datos.get(1);
+		nombre=(String)datos.get(2);
+		direccion=(String)datos.get(3);
+		cp=(String)datos.get(4);
+		poblacion=(String)datos.get(5);
+		provincia=(String)datos.get(6);
+		telefono1=(String)datos.get(7);
+		telefono2=(String)datos.get(8);
+		movil=(String)datos.get(9);
+		email=(String)datos.get(10);
+		fax=(String)datos.get(11);
+		listacontratos=new LinkedList();
 	}
-/*
-	public Integer dameCodigo(){
+
+	public String getCodigo()
+	{
 		return codigo;
 	}
 
-	
-	public String dameNombre(){
+	public String getNombre()
+	{
 		return nombre;
 	}
-
-	public String dameDni(){
+	
+	public String getDni()
+	{
 		return dni;
 	}
-	  
-	//LO DE ABAJO NO ES NECESARIO PORQUE PARA CUALQUIER 
-	//CAMBIO SE CREA UN NUEVO CLIENTE
 	
-	  /*
-	  public boolean cambiaCodigo(Integer cod){
-	    if (lista.tieneCodigo(cod)){
-	      System.out.println("La lista ya tiene un cliente con ese codigo");
-	      return false;
-	    }else{
-	      codigo=cod;
-	      return true;
-	    }
-	  }
+	public String getDireccion()
+	{
+		return direccion;
+	}
+	public String getCp()
+	{
+		return cp;
+	}
+	public String getPoblacion()
+	{
+		return poblacion;
+	}
+	public String getProvincia()
+	{
+		return provincia;
+	}
+	public String getTelefono1()
+	{
+		return telefono1;
+	}
+	public String getTelefono2()
+	{
+		return telefono2;
+	}
+	public String getMovil()
+	{
+		return movil;
+	}
+	public String getEmail()
+	{
+		return email;
+	}
+	public String getFax()
+	{
+		return fax;
+	}
+	public LinkedList getListaContratos()
+	{
+		return listacontratos;
+	}
+	public LinkedList getListaDatos()
+	{
+		LinkedList datos=new LinkedList();
+		datos.add(codigo);
+		datos.add(dni);
+		datos.add(nombre);
+		datos.add(direccion);
+		datos.add(cp);
+		datos.add(poblacion);
+		datos.add(provincia);
+		datos.add(telefono1);
+		datos.add(telefono2);
+		datos.add(movil);
+		datos.add(email);
+		datos.add(fax);
+		datos.add(listacontratos);
+		return datos;
+	}
+	
+	public void setCodigo(String cod)
+	{
+		this.codigo=cod;
+	}
 
-	  public boolean cambiaDni(Integer d){
-	    if (lista.tieneDni(d)){
-	      System.out.println("La lista ya tiene un cliente con ese codigo");
-	      return false;
-	    }else{
-	      dni=d;
-	      return true;
-	    }
-	  }
-
-	  public boolean cambiaNombre(String nom){
-	    nombre=nom;
-	    return true;
-	  }
-	*/
-
+	public void setNombre(String nom)
+	{
+		this.nombre=nom;
+	}
+	
+	public void setDni(String dni)
+	{
+		this.dni=dni;
+	}
+	
+	public void setDireccion(String dir)
+	{
+		this.direccion=dir;
+	}
+	public void getCp(String cp)
+	{
+		this.cp=cp;
+	}
+	public void setPoblacion(String pob)
+	{
+		this.poblacion=pob;
+	}
+	public void setProvincia(String pro)
+	{
+		this.provincia=pro;
+	}
+	public void setTelefono1(String tel)
+	{
+		this.telefono1=tel;
+	}
+	public void setTelefono2(String tel)
+	{
+		this.telefono2=tel;
+	}
+	public void setMovil(String mov)
+	{
+		this.movil=mov;
+	}
+	public void getEmail(String email)
+	{
+		this.email=email;
+	}
+	public void getFax(String fax)
+	{
+		this.fax=fax;
+	}
+	public void setListaContratos(LinkedList lista)
+	{
+		this.listacontratos=lista;
+	}
+	public void setListaDatos(LinkedList datos)
+	{
+		codigo=(String)datos.get(0);
+		dni=(String)datos.get(1);
+		nombre=(String)datos.get(2);
+		direccion=(String)datos.get(3);
+		cp=(String)datos.get(4);
+		poblacion=(String)datos.get(5);
+		provincia=(String)datos.get(6);
+		telefono1=(String)datos.get(7);
+		telefono2=(String)datos.get(8);
+		movil=(String)datos.get(9);
+		email=(String)datos.get(10);
+		fax=(String)datos.get(11);
+		listacontratos=(LinkedList)datos.get(12);
+	}
 }
