@@ -12,8 +12,6 @@ public class Multa
 	
 	private String fechaDenuncia;
 	
-	private String fechaResolucion;
-	
 	private String infraccion;
 	
 	private String descripcion;
@@ -28,7 +26,6 @@ public class Multa
 		expediente=(String)datos.get(0);
 		boletin=(String)datos.get(1);
 		fechaDenuncia=(String)datos.get(2);
-		fechaResolucion="";
 		infraccion=(String)datos.get(3);
 		descripcion=(String)datos.get(4);
 		codigoContrato=(String)datos.get(5);
@@ -59,10 +56,6 @@ public class Multa
 	{
 		return fechaDenuncia;
 	}
-	public String dameFechaResolucion()
-	{
-		return fechaResolucion;
-	}
 	public LinkedList dameListaRecursos()
 	{
 		return listaRecursos;
@@ -74,7 +67,6 @@ public class Multa
 		datos.add(expediente);
 		datos.add(boletin);
 		datos.add(fechaDenuncia);
-	//	datos.add(fechaResolucion);
 		datos.add(infraccion);
 		datos.add(descripcion);
 		datos.add(codigoContrato);
@@ -92,10 +84,6 @@ public class Multa
 	public void ponFechaDenuncia(String fecha)
 	{
 		fechaDenuncia=fecha;
-	}
-	public void ponFechaResolucion(String fecha)
-	{
-		fechaResolucion=fecha;
 	}
 	public void ponInfraccion(String infrac)
 	{
