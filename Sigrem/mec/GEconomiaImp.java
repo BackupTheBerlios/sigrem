@@ -164,11 +164,23 @@ public class GEconomiaImp implements GEconomia
 	public void gastos()
 	{
 		int nEmp=gempleados.dameListaEmpleados().dameTamaño();
-		int gas=nEmp*cuotaContrato;
+		for(int i=0;i<nEmp;i++)
+		{
+			
+		}
+		//gempleados.dameListaEmpleados();
+		//para cada empleado mirar su nomina
+		//sumar todas las nominas		
+	}
+
+	public void facturacion()
+	{
+		int nCon=gcontratos.dameListaContratos().dameTamaño();
+		int fac=nCon*cuotaContrato;
 		/*try
 		{
 			PrintWriter ficheroSal=new PrintWriter(new BufferedWriter(new FileWriter("configsig.ini")));
-			ficheroSal.println("-"+gas);
+			ficheroSal.println("-"+fac);
 			ficheroSal.close();
 		}
 		catch (Exception ex)
@@ -176,12 +188,6 @@ public class GEconomiaImp implements GEconomia
 			System.out.println(ex);
 		}
 		*/
-		//para cada empleado mirar su nomina
-		//sumar todas las nominas		
-	}
-
-	public void facturacion()
-	{
 		//gcontratos.dameListaContratos();
 		//en funcion de las mulras y los recursos de cada contrato se cancula su valor
 		//sumar todos los valores de los contratos
