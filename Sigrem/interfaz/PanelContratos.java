@@ -15,50 +15,14 @@ public class PanelContratos extends JPanel
 {
 	private Sigrem controlador;
 	
-	private JDialog formAlta;
-	
-	private JDialog formMulta;
-	
-	private JDialog formDescripM;
-	
-	private JDialog formDescripR;
-	
-	private JDialog formRecurso;
-	
-	private JDialog formAltaRec;
-	
-	private JDialog formBaja;
-	
-	private JDialog formMod;
-	
+	private JDialog formulario;
+		
 	public PanelContratos(Sigrem controlador,JFrame v)
 	{
 		super();
 		this.controlador=controlador;
-		formAlta=new JDialog(v,true);
-		formAlta.setResizable(false);
-		formAlta.setLocation(350,100);
-		formBaja=new JDialog(v,true);
-		formBaja.setResizable(false);
-		formBaja.setLocation(350,100);
-		formMod=new JDialog(v,true);
-		formMod.setResizable(false);
-		formMod.setLocation(350,100);
-		formMulta=new JDialog(v,true);
-		formMulta.setResizable(false);
-		formMulta.setLocation(350,150);
-		formDescripM=new JDialog(v,true);
-		formDescripM.setResizable(false);
-		formDescripM.setLocation(350,200);
-		formDescripR=new JDialog(v,true);
-		formDescripR.setResizable(false);
-		formDescripR.setLocation(350,100);
-		formRecurso=new JDialog(v,true);
-		formRecurso.setResizable(false);
-		formRecurso.setLocation(200,100);
-		formAltaRec=new JDialog(v,true);
-		formAltaRec.setResizable(false);
-		formAltaRec.setLocation(350,100);
+		formulario=new JDialog(v,true);
+		formulario.setResizable(false);
 		dibujaPaneles(false);
 	}
 	
@@ -146,31 +110,25 @@ public class PanelContratos extends JPanel
 		bcrea.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				if (!formAlta.isVisible())
-				{	formAlta.getContentPane().add(panelAlta('c',null));
-					formAlta.pack();	
-					formAlta.setVisible(true);
-				}
+				formulario.getContentPane().add(panelAlta('c',null));
+				formulario.pack();	
+				formulario.setVisible(true);
 			}
 		});
 		bmodcont.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				if (!formMod.isVisible())
-				{	formMod.getContentPane().add(panelMod(tcontrato.getText()));
-					formMod.pack();	
-					formMod.setVisible(true);
-				}
+				formulario.getContentPane().add(panelMod(tcontrato.getText()));
+				formulario.pack();	
+				formulario.setVisible(true);
 			}
 		});
 		belimcont.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				if (!formBaja.isVisible())
-				{	formBaja.getContentPane().add(panelBaja(tcontrato.getText()));
-					formBaja.pack();	
-					formBaja.setVisible(true);
-				}
+				formulario.getContentPane().add(panelBaja(tcontrato.getText()));
+				formulario.pack();	
+				formulario.setVisible(true);				
 			}
 		});
 		return pco;
@@ -345,11 +303,9 @@ public class PanelContratos extends JPanel
 		nuevoContrato.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				if (!formAlta.isVisible())
-				{	formAlta.getContentPane().add(panelAlta('n',null));
-					formAlta.pack();	
-					formAlta.setVisible(true);
-				}
+				formulario.getContentPane().add(panelAlta('n',null));
+				formulario.pack();	
+				formulario.setVisible(true);
 			}
 		});
 		return panel;
@@ -399,11 +355,9 @@ public class PanelContratos extends JPanel
 		bcrea.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				if (!formMulta.isVisible())
-				{	formMulta.getContentPane().add(panelMulta('c',null));
-					formMulta.pack();
-					formMulta.setVisible(true);
-				}
+				formulario.getContentPane().add(panelMulta('c',null));
+				formulario.pack();
+				formulario.setVisible(true);				
 			}
 		});
 		return pmul;
@@ -411,8 +365,16 @@ public class PanelContratos extends JPanel
 	
 	public JPanel panelAlta(char tipo,String codigo)
 	{
-		if (tipo=='c') formAlta.setTitle("Crear contrato");
-		else if (tipo=='m') formAlta.setTitle("Modificar contrato "+codigo);
+		if (tipo=='c') 
+		{
+			formulario.setTitle("Crear contrato");
+			formulario.setLocation(350,100);
+		}
+		else if (tipo=='m') 
+			 {
+				formulario.setTitle("Modificar contrato "+codigo);
+				formulario.setLocation(350,100);
+			 }
 		JLabel lc1=new JLabel("Matrícula del vehículo");
 		JLabel lc2=new JLabel("Fecha de alta");
 		lc1.setPreferredSize(new Dimension(150,20));
@@ -586,8 +548,8 @@ public class PanelContratos extends JPanel
 				datoscliente.add(temail.getText());
 				datoscliente.add(tfax.getText());
 				controlador.añadirContrato(datoscontrato,datoscliente);
-				formAlta.setVisible(false);
-				formAlta.getContentPane().removeAll();
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
 				removeAll();
 				dibujaPaneles(true);
 			}
@@ -595,8 +557,8 @@ public class PanelContratos extends JPanel
 		cancelar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formAlta.setVisible(false);
-				formAlta.getContentPane().removeAll();
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
 			}
 		});
 		return panel;
@@ -604,7 +566,8 @@ public class PanelContratos extends JPanel
 	
 	public JPanel panelBaja(String codigo)
 	{
-		formBaja.setTitle("Eliminar contrato");		
+		formulario.setTitle("Eliminar contrato");
+		formulario.setLocation(350,100);
 		JLabel l=new JLabel("Introduce el código del contrato");
 		final JTextField tcodigo=new JTextField(codigo);		
 		tcodigo.setPreferredSize(new Dimension(100,20));		
@@ -627,20 +590,20 @@ public class PanelContratos extends JPanel
 		bacepta.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formBaja.setVisible(false);
+				formulario.setVisible(false);
 				int seleccion=JOptionPane.showConfirmDialog(null,"           ¿Desea eliminar el contrato "+tcodigo.getText()+"?","Eliminar contrato",JOptionPane.YES_NO_CANCEL_OPTION,-1);
 				if (seleccion==JOptionPane.YES_OPTION)
 				{	
 					
 				}
-				formBaja.getContentPane().removeAll();
+				formulario.getContentPane().removeAll();
 			}
 		});
 		bcancela.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formBaja.setVisible(false);
-				formBaja.getContentPane().removeAll();
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
 			}
 		});
 		return pbaja;
@@ -648,7 +611,8 @@ public class PanelContratos extends JPanel
 	
 	public JPanel panelMod(final String codigo)
 	{
-		formMod.setTitle("Modificar contrato");		
+		formulario.setTitle("Modificar contrato");		
+		formulario.setLocation(350,100);
 		JLabel l=new JLabel("Introduce el código del contrato");
 		final JTextField tcodigo=new JTextField(codigo);		
 		tcodigo.setPreferredSize(new Dimension(100,20));		
@@ -671,20 +635,18 @@ public class PanelContratos extends JPanel
 		bacepta.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formMod.setVisible(false);
-				formMod.getContentPane().removeAll();
-				if (!formAlta.isVisible())
-				{	formAlta.getContentPane().add(panelAlta('m',codigo));
-					formAlta.pack();	
-					formAlta.setVisible(true);
-				}
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
+				formulario.getContentPane().add(panelAlta('m',codigo));
+				formulario.pack();	
+				formulario.setVisible(true);				
 			}
 		});
 		bcancela.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formMod.setVisible(false);
-				formMod.getContentPane().removeAll();
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
 			}
 		});
 		return pmod;
@@ -692,8 +654,16 @@ public class PanelContratos extends JPanel
 			
 	public JPanel panelMulta(char tipo,String codigo)
 	{
-		if (tipo=='c') formMulta.setTitle("Crear multa");
-		else if (tipo=='m') formMulta.setTitle("Modificar multa "+codigo);
+		if (tipo=='c') 
+		{
+			formulario.setTitle("Crear multa");
+			formulario.setLocation(350,100);
+		}
+		else if (tipo=='m')
+			{
+				formulario.setTitle("Modificar multa "+codigo);
+				formulario.setLocation(350,100);
+			}
 		JLabel l1=new JLabel("Código");
 		JLabel l2=new JLabel("Expediente");
 		JLabel l3=new JLabel("Boletín");
@@ -745,8 +715,8 @@ public class PanelContratos extends JPanel
 		aceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formMulta.setVisible(false);
-				formMulta.getContentPane().removeAll();
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
 				//validar datos
 				//enviar datos a Sigrem para almacenarlos en la estructura de datos
 			}
@@ -754,8 +724,8 @@ public class PanelContratos extends JPanel
 		cancelar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formMulta.setVisible(false);
-				formMulta.getContentPane().removeAll();
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
 			}
 		});
 		return panel;
@@ -763,14 +733,16 @@ public class PanelContratos extends JPanel
 	
 	public JPanel panelDescripM(String codigo)
 	{
-		formDescripM.setTitle("Descripción de la multa "+codigo);
+		formulario.setTitle("Descripción de la multa "+codigo);
+		formulario.setLocation(350,200);
 		JPanel panel=panelDescrip('m');
 		return panel;
 	}
 	
 	public JPanel panelDescripR(String codigo)
 	{
-		formDescripR.setTitle("Descripción del recurso "+codigo);
+		formulario.setTitle("Descripción del recurso "+codigo);
+		formulario.setLocation(350,100);
 		JPanel panel=panelDescrip('r');
 		return panel;
 	}
@@ -798,12 +770,12 @@ public class PanelContratos extends JPanel
 		{	public void actionPerformed(ActionEvent e)
 			{
 				if (tipo=='m')
-				{	formDescripM.setVisible(false);
-					formDescripM.getContentPane().removeAll();
+				{	formulario.setVisible(false);
+					formulario.getContentPane().removeAll();
 				}
 				else if (tipo=='r')
-				{	formDescripR.setVisible(false);
-					formDescripR.getContentPane().removeAll();
+				{	formulario.setVisible(false);
+					formulario.getContentPane().removeAll();
 				}
 			}
 		});
@@ -812,7 +784,8 @@ public class PanelContratos extends JPanel
 	
 	public JPanel panelRecurso(String codigo)
 	{
-		formRecurso.setTitle("Recursos de la multa "+codigo);
+		formulario.setTitle("Recursos de la multa "+codigo);
+		formulario.setLocation(200,100);
 		JPanel prec=new JPanel();
 		prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Recursos de la multa "+codigo,TitledBorder.LEFT,TitledBorder.TOP));
 		Box tabla=Box.createVerticalBox();
@@ -858,18 +831,16 @@ public class PanelContratos extends JPanel
 		bcrea.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				if (!formAltaRec.isVisible())
-				{	formAltaRec.getContentPane().add(panelAltaRec('c',null));
-					formAltaRec.pack();
-					formAltaRec.setVisible(true);
-				}
+				formulario.getContentPane().add(panelAltaRec('c',null));
+				formulario.pack();
+				formulario.setVisible(true);				
 			}
 		});
 		baceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formRecurso.setVisible(false);
-				formRecurso.getContentPane().removeAll();			
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();			
 			}
 		});
 		return prec;
@@ -877,8 +848,16 @@ public class PanelContratos extends JPanel
 	
 	public JPanel panelAltaRec(char tipo, String codigo)
 	{
-		if (tipo=='c') formAltaRec.setTitle("Crear recurso");
-		else if (tipo=='m') formAltaRec.setTitle("Modificar recurso "+codigo);
+		if (tipo=='c') 
+		{
+			formulario.setTitle("Crear recurso");
+			formulario.setLocation(350,100);
+		}
+		else if (tipo=='m')
+			{
+				formulario.setTitle("Modificar recurso "+codigo);
+				formulario.setLocation(350,100);
+			}
 		JLabel l1=new JLabel("Código");
 		JLabel l2=new JLabel("Estado");
 		JLabel l3=new JLabel("Abogado");
@@ -930,8 +909,8 @@ public class PanelContratos extends JPanel
 		aceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formAltaRec.setVisible(false);
-				formAltaRec.getContentPane().removeAll();
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
 				//validar datos
 				//enviar datos a Sigrem para almacenarlos en la estructura de datos
 			}
@@ -939,8 +918,8 @@ public class PanelContratos extends JPanel
 		cancelar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formAltaRec.setVisible(false);
-				formAltaRec.getContentPane().removeAll();
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
 			}
 		});
 		return panel;
@@ -976,21 +955,17 @@ public class PanelContratos extends JPanel
 		descrip.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				if (!formDescripR.isVisible())
-				{	formDescripR.getContentPane().add(panelDescripR(cod.getText()));
-					formDescripR.pack();
-					formDescripR.setVisible(true);
-				}
+				formulario.getContentPane().add(panelDescripR(cod.getText()));
+				formulario.pack();
+				formulario.setVisible(true);				
 			}
 		});
 		mod.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				if (!formAltaRec.isVisible())
-				{	formAltaRec.getContentPane().add(panelAltaRec('m',cod.getText()));
-					formAltaRec.pack();
-					formAltaRec.setVisible(true);
-				}
+				formulario.getContentPane().add(panelAltaRec('m',cod.getText()));
+				formulario.pack();
+				formulario.setVisible(true);				
 			}
 		});
 		elim.addActionListener(new ActionListener()
@@ -1040,31 +1015,25 @@ public class PanelContratos extends JPanel
 		descrip.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				if (!formDescripM.isVisible())
-				{	formDescripM.getContentPane().add(panelDescripM(cod.getText()));
-					formDescripM.pack();
-					formDescripM.setVisible(true);
-				}
+				formulario.getContentPane().add(panelDescripM(cod.getText()));
+				formulario.pack();
+				formulario.setVisible(true);				
 			}
 		});
 		recur.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				if (!formRecurso.isVisible())
-				{	formRecurso.getContentPane().add(panelRecurso(cod.getText()));
-					formRecurso.pack();
-					formRecurso.setVisible(true);
-				}
+				formulario.getContentPane().add(panelRecurso(cod.getText()));
+				formulario.pack();
+				formulario.setVisible(true);				
 			}
 		});
 		mod.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				if (!formMulta.isVisible())
-				{	formMulta.getContentPane().add(panelMulta('m',cod.getText()));
-					formMulta.pack();
-					formMulta.setVisible(true);
-				}
+				formulario.getContentPane().add(panelMulta('m',cod.getText()));
+				formulario.pack();
+				formulario.setVisible(true);				
 			}
 		});
 		elim.addActionListener(new ActionListener()
