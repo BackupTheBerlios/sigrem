@@ -156,7 +156,7 @@ public class InterfazGrafica
 	{
 		if (pestaña==1) pcontratos.actualiza(panel,datos);
 		else if (pestaña==2){pempleados.actualiza(panel,datos);}
-		else if (pestaña==3) {}//peconomia.actualiza(panel,datos);
+		else if (pestaña==3) {peconomia.actualiza(panel,datos);}
 	}
 	
 	public void actualizaVistaMensaje(String mensaje)
@@ -176,6 +176,10 @@ public class InterfazGrafica
 		else if (pestaña==2){}//pempleados.actualizaPanelConsulta(nombre,dnis);
 	}
 	
+	public void actualizarVistaConsultaAbogado(String codigo)
+	{
+	pempleados.consultarAbogadoRemotamente(codigo);
+	}
 	
 	public void actualizaVistaCaja(int panel,char caja,char tipo,LinkedList datos)
 	{
