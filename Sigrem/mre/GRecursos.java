@@ -21,7 +21,9 @@ public interface GRecursos
 	
 	public String consultarAbogadoRecurso(String codrecurso);
 	
-	public EstructuraDatos dameListaRecursos(); 
+	public void meteRecurso(Recurso recurso);
+	
+	public EstructuraDatos dameEstructuraRecursos(); 
 	
 	public String dameCodigo();
 }

@@ -30,16 +30,20 @@ public class GRecursosImp implements GRecursos
 		
 	public String añadirRecurso(LinkedList datos)
 	{
-		Recurso nuevorecurso=new Recurso(codigoRecurso,datos);
-		String[] claves=new String[1];
-		claves[0]=codigoRecurso;
-		listaRecursos.insertar(claves,nuevorecurso);
-		String codigoantiguo=codigoRecurso;
+		String codigo=dameCodigo();
+		Recurso nuevorecurso=new Recurso(codigo,datos);
+		meteRecurso(nuevorecurso);
 		incrementaCodigo();
-		datos.addFirst(codigoantiguo);
+		datos.addFirst(codigo);
 		vista.actualizaVistaCaja(1,'r','a',datos);
 		vista.actualizaVista(1,4,datos);
-		return codigoantiguo;
+		return codigo;
+	}
+	
+	public void meteRecurso(Recurso recurso){
+		String[] claves=new String[1];
+		claves[0]=codigoRecurso;
+		this.dameEstructuraRecursos().insertar(claves,recurso);
 	}
 	
 	public void eliminarRecurso(String codrecurso,String codmulta)
@@ -126,7 +130,7 @@ public class GRecursosImp implements GRecursos
 		}
 	}
 	
-	public EstructuraDatos dameListaRecursos()
+	public EstructuraDatos dameEstructuraRecursos()
 	{
 		return this.listaRecursos;
 	}
