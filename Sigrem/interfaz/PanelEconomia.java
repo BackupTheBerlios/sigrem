@@ -29,7 +29,7 @@ public class PanelEconomia extends JPanel
 	public void dibujaPaneles(Color c, int [] num, String s,int boton)
 	{
 		JPanel pbalance=dibujaBalance(boton);
-		pbalance.setPreferredSize(new Dimension(724,262));
+		pbalance.setPreferredSize(new Dimension(724,322));
 		JPanel pgrafico=dibujaGrafico(c,num,s);
 		pgrafico.setPreferredSize(new Dimension(724,280));
 		JSplitPane spx=new JSplitPane(JSplitPane.VERTICAL_SPLIT,pbalance,pgrafico);
@@ -42,9 +42,11 @@ public class PanelEconomia extends JPanel
 	{
 		JPanel pbal=new JPanel();
 		pbal.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos económicos",TitledBorder.LEFT,TitledBorder.TOP));
+		JLabel l0=new JLabel("");
 		JLabel l1=new JLabel("Facturación ",SwingConstants.RIGHT);
 		JLabel l2=new JLabel("Gastos ",SwingConstants.RIGHT);
 		JLabel l3=new JLabel("Balance ",SwingConstants.RIGHT);
+		l0.setPreferredSize(new Dimension(100,10));
 		l1.setPreferredSize(new Dimension(100,20));
 		l2.setPreferredSize(new Dimension(100,20));
 		l3.setPreferredSize(new Dimension(100,20));
@@ -70,10 +72,12 @@ public class PanelEconomia extends JPanel
 		if (boton==1) bhfac.setEnabled(false);
 		else if (boton==2) bhgas.setEnabled(false);
 		else if (boton==3) bhbal.setEnabled(false);
+		JPanel p0=new JPanel();
 		JPanel p1=new JPanel();
 		JPanel p2=new JPanel();
 		JPanel p3=new JPanel();
 		JPanel p4=new JPanel();
+		p0.add(l0);
 		p1.add(l1);
 		p1.add(t1);
 		p1.add(bhfac);
@@ -85,10 +89,11 @@ public class PanelEconomia extends JPanel
 		p3.add(bhbal);
 		p4.add(bactualiza);
 		Box caja=Box.createVerticalBox();
+		caja.add(p0);
 		caja.add(p1);
 		caja.add(p2);
 		caja.add(p3);
-		caja.setPreferredSize(new Dimension(700,180));
+		caja.setPreferredSize(new Dimension(700,250));
 		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja,p4);
 		sp.setDividerSize(4);
 		sp.setEnabled(false);

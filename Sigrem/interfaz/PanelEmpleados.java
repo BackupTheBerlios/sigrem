@@ -56,7 +56,7 @@ public class PanelEmpleados extends JPanel
 		JPanel pempleado=dibujaEmpleado();
 		pempleado.setPreferredSize(new Dimension(314,0));
 		JPanel pdatos=dibujaDatos(false, ' ');
-		pdatos.setPreferredSize(new Dimension(0,260));
+		pdatos.setPreferredSize(new Dimension(0,320));
 		JPanel precursos=dibujaRecursos();
 		JSplitPane sp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,pempleado,pdatos);
 		sp1.setDividerSize(4);
@@ -158,8 +158,10 @@ public class PanelEmpleados extends JPanel
 		JLabel l4=new JLabel("Código postal ",SwingConstants.RIGHT);
 		JLabel l5=new JLabel("Población ",SwingConstants.RIGHT);
 		JLabel l6=new JLabel("Provincia ",SwingConstants.RIGHT);		
-		JLabel l7=new JLabel("Teléfono ",SwingConstants.RIGHT);
-		JLabel l8=new JLabel("email ",SwingConstants.RIGHT);
+		JLabel l7=new JLabel("Teléfono 1 ",SwingConstants.RIGHT);
+		JLabel l8=new JLabel("Teléfono 2 ",SwingConstants.RIGHT);
+		JLabel l9=new JLabel("Móvil ",SwingConstants.RIGHT);
+		JLabel l10=new JLabel("em@il ",SwingConstants.RIGHT);
 		l1.setPreferredSize(new Dimension(80,20));
 		l2.setPreferredSize(new Dimension(80,20));
 		l3.setPreferredSize(new Dimension(80,20));
@@ -168,23 +170,31 @@ public class PanelEmpleados extends JPanel
 		l6.setPreferredSize(new Dimension(80,20));
 		l7.setPreferredSize(new Dimension(80,20));
 		l8.setPreferredSize(new Dimension(80,20));
+		l9.setPreferredSize(new Dimension(80,20));
+		l10.setPreferredSize(new Dimension(80,20));
 		JLabel relleno1=new JLabel("");
 		JLabel relleno2=new JLabel("");
 		JLabel relleno3=new JLabel("");
 		JLabel relleno4=new JLabel("");
 		JLabel relleno5=new JLabel("");
+		JLabel relleno6=new JLabel("");
+		JLabel relleno7=new JLabel("");
 		relleno1.setPreferredSize(new Dimension(100,20));
 		relleno2.setPreferredSize(new Dimension(150,20));
 		relleno3.setPreferredSize(new Dimension(50,20));
 		relleno4.setPreferredSize(new Dimension(100,20));
-		relleno5.setPreferredSize(new Dimension(20,20));
+		relleno5.setPreferredSize(new Dimension(100,20));
+		relleno6.setPreferredSize(new Dimension(100,20));
+		relleno7.setPreferredSize(new Dimension(20,20));
 		JTextField tnom=new JTextField();
 		JTextField tdni=new JTextField();
 		JTextField tdir=new JTextField();
 		JTextField tcp=new JTextField();
 		JTextField tloc=new JTextField();
 		JTextField tpro=new JTextField();
-		JTextField ttel=new JTextField();
+		JTextField ttel1=new JTextField();
+		JTextField ttel2=new JTextField();
+		JTextField tmov=new JTextField();
 		JTextField temail=new JTextField();		
 		tnom.setPreferredSize(new Dimension(200,20));
 		tdni.setPreferredSize(new Dimension(100,20));
@@ -192,7 +202,9 @@ public class PanelEmpleados extends JPanel
 		tcp.setPreferredSize(new Dimension(60,20));
 		tloc.setPreferredSize(new Dimension(180,20));
 		tpro.setPreferredSize(new Dimension(160,20));
-		ttel.setPreferredSize(new Dimension(80,20));
+		ttel1.setPreferredSize(new Dimension(80,20));
+		ttel2.setPreferredSize(new Dimension(80,20));
+		tmov.setPreferredSize(new Dimension(80,20));
 		temail.setPreferredSize(new Dimension(80,20));
 		if (!editable)
 		{
@@ -202,7 +214,9 @@ public class PanelEmpleados extends JPanel
 			tcp.setEditable(false);
 			tloc.setEditable(false);
 			tpro.setEditable(false);
-			ttel.setEditable(false);
+			ttel1.setEditable(false);
+			ttel2.setEditable(false);
+			tmov.setEditable(false);
 			temail.setEditable(false);
 			tnom.setBackground(Color.WHITE);
 			tdni.setBackground(Color.WHITE);
@@ -210,7 +224,9 @@ public class PanelEmpleados extends JPanel
 			tcp.setBackground(Color.WHITE);
 			tloc.setBackground(Color.WHITE);
 			tpro.setBackground(Color.WHITE);
-			ttel.setBackground(Color.WHITE);
+			ttel1.setBackground(Color.WHITE);
+			ttel2.setBackground(Color.WHITE);
+			tmov.setBackground(Color.WHITE);
 			temail.setBackground(Color.WHITE);
 		}
 		Box c1=Box.createHorizontalBox();
@@ -221,6 +237,8 @@ public class PanelEmpleados extends JPanel
 		Box c6=Box.createHorizontalBox();
 		Box c7=Box.createHorizontalBox();
 		Box c8=Box.createHorizontalBox();
+		Box c9=Box.createHorizontalBox();
+		Box c10=Box.createHorizontalBox();
 		c1.add(l1);
 		c1.add(tnom);
 		c2.add(l2);
@@ -237,11 +255,17 @@ public class PanelEmpleados extends JPanel
 		c6.add(tpro);
 		c6.add(relleno3);
 		c7.add(l7);
-		c7.add(ttel);
+		c7.add(ttel1);
 		c7.add(relleno4);
 		c8.add(l8);
-		c8.add(temail);
+		c8.add(ttel2);
 		c8.add(relleno5);
+		c9.add(l9);
+		c9.add(tmov);
+		c9.add(relleno6);
+		c10.add(l10);
+		c10.add(temail);
+		c10.add(relleno7);
 		Box caja=Box.createVerticalBox();
 		caja.add(c1);
 		caja.add(c2);
@@ -251,6 +275,8 @@ public class PanelEmpleados extends JPanel
 		caja.add(c6);
 		caja.add(c7);
 		caja.add(c8);
+		caja.add(c9);
+		caja.add(c10);
 		pdat.add(caja);
 		return pdat;
 	}
