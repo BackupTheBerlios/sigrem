@@ -48,7 +48,7 @@ public class InterfazGrafica
 		formacercade=new JFrame();
 		formacercade.setResizable(false);
 		formacercade.setUndecorated(true);		
-		formacercade.setAlwaysOnTop(true);
+//		formacercade.setAlwaysOnTop(true);
 		formacercade.setLocation(350,250);
 		panelVistas=new JTabbedPane(JTabbedPane.BOTTOM);
 		panelVistas.addTab("Gestión Contratos",new PanelContratos());
