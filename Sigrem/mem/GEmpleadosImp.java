@@ -176,5 +176,26 @@ public class GEmpleadosImp implements GEmpleados
 			vista.actualizaVistaAbogados(listaAbogados);
 		}
 	}
-
+	
+	public void asociaAbogadoRecurso(String codrecurso,String codempleado)
+	{
+		Vector busqueda=listaEmpleados.buscar(codempleado,0);
+		if (busqueda.size()==0)
+		{	vista.actualizaVistaMensaje("Error al buscar el empleado "+codempleado+". No se ha encontrado");}
+		else 
+		{	Abogado empleado=(Abogado)busqueda.get(0);
+			empleado.añadirRecurso(codrecurso);			
+		}
+	}
+	
+	public void eliminarRecursoAbogado(String codrecurso,String codempleado)
+	{
+		Vector busqueda=listaEmpleados.buscar(codempleado,0);
+		if (busqueda.size()==0)
+		{	vista.actualizaVistaMensaje("Error al buscar el empleado "+codempleado+". No se ha encontrado");}
+		else 
+		{	Abogado empleado=(Abogado)busqueda.get(0);
+			empleado.eliminarRecurso(codrecurso);			
+		}
+	}
 }

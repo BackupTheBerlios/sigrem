@@ -212,12 +212,15 @@ public class Sigrem
 	{
 		String codrecurso=grecursos.añadirRecurso(datos);
 		gmultas.asociaMultaRecurso(codmulta,codrecurso);
+		gempleados.asociaAbogadoRecurso(codrecurso,(String)datos.get(5));
 	}
 	
-	public void eliminarRecurso(String codrecurso,String codmulta)
+	public void eliminarRecurso(String codrecurso,String codmulta,String codempleado)
 	{
 		grecursos.eliminarRecurso(codrecurso,codmulta);
 		gmultas.eliminarRecurso(codmulta,codrecurso);
+		if (!codempleado.equals("Sin asignar"))
+			gempleados.eliminarRecursoAbogado(codrecurso,codempleado);
 	}
 	
 	public void modificarRecurso(String codigo,LinkedList datos)
@@ -267,6 +270,6 @@ public class Sigrem
 	
 	public void consultarListaAbogados()
 	{
-//		gempleados.consultarListaAbogados();
+		gempleados.consultarListaAbogados();
 	}
 }

@@ -12,7 +12,7 @@ public class Abogado extends Empleado
 		super(codigoEmpleado, perfilEmpleado, datosEmpleado);
 		listaRecursos = new LinkedList();
 	}
-	public void añadirRecurso(Recurso nuevoRecurso)
+	public void añadirRecurso(String nuevoRecurso)
 	{
 		listaRecursos.add(nuevoRecurso);
 	}

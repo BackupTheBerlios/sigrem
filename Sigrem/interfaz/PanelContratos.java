@@ -1381,7 +1381,7 @@ public class PanelContratos extends JPanel
 		JTextField ere=new JTextField((String)datos.get(2));
 		JTextField epr=new JTextField((String)datos.get(3));
 		JTextField est=new JTextField((String)datos.get(4));
-		JTextField abo=new JTextField((String)datos.get(5));
+		final JTextField abo=new JTextField((String)datos.get(5));
 		JButton descrip=new JButton(new ImageIcon("interfaz/find.gif"));
 		JButton modi=new JButton(new ImageIcon("interfaz/tick.gif"));
 		JButton elim=new JButton(new ImageIcon("interfaz/del.gif"));
@@ -1437,7 +1437,7 @@ public class PanelContratos extends JPanel
 			{
 				int seleccion=JOptionPane.showConfirmDialog(null,"         ¿Desea eliminar el recurso "+cod.getText()+"?","Eliminar recurso",JOptionPane.YES_NO_CANCEL_OPTION,-1);
 				if (seleccion==JOptionPane.YES_OPTION)
-				{	controlador.eliminarRecurso(cod.getText(),(String)datos.get(7));}		
+				{	controlador.eliminarRecurso(cod.getText(),(String)datos.get(7),abo.getText());}		
 			}
 		});
 		return panel;
