@@ -28,7 +28,7 @@ public class Cliente
 	
 	private String fax;
 	
-	private LinkedList listacontratos;
+	private LinkedList listaContratos;
 
 	public Cliente(String codcliente,LinkedList datos) 
 	{
@@ -44,7 +44,7 @@ public class Cliente
 		movil=(String)datos.get(8);
 		email=(String)datos.get(9);
 		fax=(String)datos.get(10);
-		listacontratos=new LinkedList();
+		listaContratos=new LinkedList();
 	}
 
 	public String dameCodigo()
@@ -100,7 +100,7 @@ public class Cliente
 	}
 	public LinkedList dameListaContratos()
 	{
-		return listacontratos;
+		return listaContratos;
 	}
 	public LinkedList dameListaDatos()
 	{
@@ -116,29 +116,29 @@ public class Cliente
 		datos.add(movil);
 		datos.add(email);
 		datos.add(fax);
-		datos.add(listacontratos);
+		datos.add(listaContratos);
 		return datos;
 	}
 	
 	public void añadeContrato(String codigo)
 	{
-		listacontratos.add(codigo);		
+		listaContratos.add(codigo);		
 	}
 	
 	public void eliminaContrato(String codigo)
 	{
 		int i=0;
 		boolean esta=false;
-		while ((!esta) && (i<listacontratos.size()))
-		{	esta=codigo.equals((String)listacontratos.get(i));
+		while ((!esta) && (i<listaContratos.size()))
+		{	esta=codigo.equals((String)listaContratos.get(i));
 			i++;			
 		}
-		if (esta)listacontratos.remove(i-1);		
+		if (esta)listaContratos.remove(i-1);		
 	}
 	
 	public int dameNumeroContratos()
 	{
-		return listacontratos.size();
+		return listaContratos.size();
 	}
 	
 	public void ponDireccion(String dir)
@@ -179,7 +179,7 @@ public class Cliente
 	}
 	public void ponListaContratos(LinkedList lista)
 	{
-		this.listacontratos=lista;
+		this.listaContratos=lista;
 	}
 	public void ponListaDatos(LinkedList datos)
 	{
@@ -194,6 +194,6 @@ public class Cliente
 		movil=(String)datos.get(8);
 		email=(String)datos.get(9);
 		fax=(String)datos.get(10);
-		listacontratos=(LinkedList)datos.get(11);
+		listaContratos=(LinkedList)datos.get(11);
 	}
 }

@@ -4,30 +4,30 @@ import java.util.LinkedList;
 
 public class Contrato
 {
-	private String codigocontrato;
+	private String codigoContrato;
 	
 	private String matricula;
 	
-	private String fechaalta;
+	private String fechaAlta;
 	
-	private String fechabaja;
+	private String fechaBaja;
 	
-	private String codigocliente;
+	private String codigoCliente;
 	
-	private LinkedList listamultas; 
+	private LinkedList listaMultas; 
 	
 	public Contrato(String codcontrato,LinkedList datos) 
 	{
-		codigocontrato=codcontrato;
-		codigocliente=(String)datos.get(0);
+		codigoContrato=codcontrato;
+		codigoCliente=(String)datos.get(0);
 		matricula=(String)datos.get(1);
-		fechaalta=(String)datos.get(2);
-		fechabaja="";
-		listamultas=new LinkedList();
+		fechaAlta=(String)datos.get(2);
+		fechaBaja="";
+		listaMultas=new LinkedList();
 	}
 	public String dameCodigoContrato()
 	{
-		return codigocontrato;
+		return codigoContrato;
 	}
 	public String dameMatricula()
 	{
@@ -35,55 +35,55 @@ public class Contrato
 	}
 	public String dameFechaAlta()
 	{
-		return fechaalta;
+		return fechaAlta;
 	}
 	public String dameFechaBaja()
 	{
-		return fechabaja;
+		return fechaBaja;
 	}
 	public String dameCodigoCliente()
 	{
-		return codigocliente;
+		return codigoCliente;
 	}
 	public LinkedList dameListamultas()
 	{
-		return listamultas;
+		return listaMultas;
 	}
 	public LinkedList dameListaDatos()
 	{
 		LinkedList datos=new LinkedList();
-		datos.add(codigocontrato);
-		datos.add(codigocliente);
+		datos.add(codigoContrato);
+		datos.add(codigoCliente);
 		datos.add(matricula);
-		datos.add(fechaalta);
-		datos.add(fechabaja);
+		datos.add(fechaAlta);
+		datos.add(fechaBaja);
 		return datos;
 	}
 	
 	public void ponFechaAlta(String fecha)
 	{
-		this.fechaalta=fecha;
+		this.fechaAlta=fecha;
 	}
 	
 	public void ponFechaBaja(String fecha)
 	{
-		this.fechabaja=fecha;
+		this.fechaBaja=fecha;
 	}
 	public void ponCodigoCliente(String cod)
 	{
-		this.codigocliente=cod;
+		this.codigoCliente=cod;
 	}
 	public void ponListaMultas(LinkedList lista)
 	{
-		this.listamultas=lista;
+		this.listaMultas=lista;
 	}
 	public void ponListaDatos(LinkedList datos)
 	{
-		codigocontrato=(String)datos.get(0);
-		codigocliente=(String)datos.get(1);
+		codigoContrato=(String)datos.get(0);
+		codigoCliente=(String)datos.get(1);
 		matricula=(String)datos.get(2);
-		fechaalta=(String)datos.get(3);
-		fechabaja=(String)datos.get(4);		
-		listamultas=(LinkedList)datos.get(5);
+		fechaAlta=(String)datos.get(3);
+		fechaBaja=(String)datos.get(4);		
+		listaMultas=(LinkedList)datos.get(5);
 	}
 }
