@@ -35,7 +35,15 @@ public class Sigrem
 	
 	private String codrecurso;
 	
-	private String codempleado;	
+	private String codempleado;
+	
+	private String ultimomes;
+	
+	private String facturacion;
+	
+	private String gastos;
+	
+	private String balance;
 	
 	public Sigrem(String[] codigos)
 	{
@@ -46,6 +54,10 @@ public class Sigrem
 		codmulta=codigos[2];
 		codrecurso=codigos[3];
 		codempleado=codigos[4];
+		ultimomes=codigos[5];
+		facturacion=codigos[6];
+		gastos=codigos[7];
+		balance=codigos[8];
 		gclientes=factoria.generaGCliente(vista,codcliente);
 		gcontratos=factoria.generaGContratos(vista,codcontrato);
 		gmultas=factoria.generaGMultas(vista,codmulta);
@@ -255,6 +267,6 @@ public class Sigrem
 	
 	public void consultarListaAbogados()
 	{
-		gempleados.consultarListaAbogados();
+//		gempleados.consultarListaAbogados();
 	}
 }
