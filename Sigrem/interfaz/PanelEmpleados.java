@@ -18,16 +18,6 @@ public class PanelEmpleados extends JPanel
 	
 	private JDialog formulario;
 	
-//	private int pmostrado;
-	
-//	private String cmostrado;
-	
-//	private String nmostrado;
-	
-//	private int ucod;
-	
-//	private int urec; 
-	
 	public PanelEmpleados(Sigrem controlador,JFrame v)
 	{
 		super();
@@ -614,8 +604,10 @@ public class PanelEmpleados extends JPanel
 				formulario.setVisible(false);
 				int seleccion=JOptionPane.showConfirmDialog(null,"         ¿Desea despedir al empleado "+tcodigo.getText()+"?","Despedir empleado",JOptionPane.YES_NO_CANCEL_OPTION,-1);
 				if (seleccion==JOptionPane.YES_OPTION)
-				{	
-					controlador.despedirEmpleado(codigo);
+				{	boolean borrar;
+					if (codigo.equals(tcodigo.getText())) borrar=true;
+					else borrar=false;
+					controlador.despedirEmpleado(borrar,tcodigo.getText());
 				}
 				formulario.getContentPane().removeAll();				
 			}
@@ -657,7 +649,7 @@ public class PanelEmpleados extends JPanel
 			{	
 				formulario.setVisible(false);
 				formulario.getContentPane().removeAll();
-				controlador.consultarEmpleadoCodigo(true,codigo);			
+				controlador.consultarEmpleadoCodigo(true,tcodigo.getText());			
 			}
 		});
 		bcancela.addActionListener(new ActionListener()

@@ -65,17 +65,18 @@ public class GEmpleadosImp implements GEmpleados
 		return codigoAntiguo;
 	}
 	// Método para eliminar un empleado del sistema
-	public void eliminarEmpleado(String codigoEmpleado)
+	public void eliminarEmpleado(boolean borrar,String codigoEmpleado)
 	{
 		boolean eliminado=listaEmpleados.eliminar(codigoEmpleado,0);
 		if (eliminado) 
 		{	vista.actualizaVistaMensaje("       Empleado "+codigoEmpleado+" despedido correctamente");
-			vista.actualizaVista(2,1,null);
-			vista.actualizaVista(2,2,null);
-			vista.actualizaVista(2,3,null);
+			if (borrar)
+			{	vista.actualizaVista(2,1,null);
+				vista.actualizaVista(2,2,null);
+				vista.actualizaVista(2,3,null);
+			}
 		}
 		else vista.actualizaVistaMensaje("Error al eliminar el empleado "+codigoEmpleado+". No se ha encontrado");
-	
 	}
 	// Método para modificar un empleado en el sistema
 	public void modificarEmpleado(String codigoEmpleado, LinkedList datosEmpleado) 
@@ -100,10 +101,8 @@ public class GEmpleadosImp implements GEmpleados
 			String nombre=(empleado.getClass()).getName();
 			datosPanel1.add(nombre.substring(4));
 			datosPanel1.add(datosEmpleado.get(11));
-			LinkedList datosPanel2=empleado.dameListaDatos();
-			datosPanel2.remove(0);
 			vista.actualizaVista(2,1,datosPanel1);
-			vista.actualizaVista(2,2,datosPanel2);
+			vista.actualizaVista(2,2,datosEmpleado);
 		}
 	}
 	// Método para consultar un empleado dado su Código de Empleado

@@ -167,13 +167,13 @@ public class InterfazGrafica
 	public void actualizaVistaDatos(int pestaña,LinkedList datos,boolean dibujar)
 	{
 		if (pestaña==1) pcontratos.actualizaDatosModificables(datos,dibujar);
-		else if (pestaña==2){} //pempleados.actualizaDatosModificables(panel,datos);
+		else if (pestaña==2){pempleados.actualizaDatosModificables(datos);}
 	}
 	
 	public void actualizaVistaConsulta(int pestaña,String nombre,Vector dnis)
 	{
 		if (pestaña==1) pcontratos.actualizaPanelConsulta(nombre,dnis);
-		else if (pestaña==2){} //pempleados.actualizaPanelConsulta(nombre,dnis);
+		else if (pestaña==2){}//pempleados.actualizaPanelConsulta(nombre,dnis);
 	}
 	
 	

@@ -221,9 +221,9 @@ public class Sigrem
 		gempleados.añadirEmpleado(perfil,datos);
 	}
 	
-	public void despedirEmpleado(String codigo)
+	public void despedirEmpleado(boolean borrar,String codigo)
 	{
-		gempleados.eliminarEmpleado(codigo);
+		gempleados.eliminarEmpleado(borrar,codigo);
 	}
 	
 	public void consultarEmpleadoCodigo(boolean modificar,String codigo)
