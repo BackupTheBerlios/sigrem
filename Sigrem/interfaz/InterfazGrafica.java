@@ -425,28 +425,21 @@ public class InterfazGrafica
 		{	public void actionPerformed(ActionEvent e)
 			{
 				panelVistas.remove(2);
-				peconomia=new PanelEconomia(1,controlador,ventana);
-				panelVistas.addTab("Gestión Económica",peconomia);
-				panelVistas.setSelectedIndex(2);
-				
+				controlador.calculaFacturacion();
 			}
 		});
 		gas.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
 				panelVistas.remove(2);
-				peconomia=new PanelEconomia(2,controlador,ventana);
-				panelVistas.addTab("Gestión Económica",peconomia);
-				panelVistas.setSelectedIndex(2);
+				controlador.calculaGastos();
 			}
 		});
 		bal.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
 				panelVistas.remove(2);
-				peconomia=new PanelEconomia(3,controlador,ventana);
-				panelVistas.addTab("Gestión Económica",peconomia);
-				panelVistas.setSelectedIndex(2);
+				controlador.calculaBalance();
 			}
 		});
 		guardar.addActionListener(new ActionListener()

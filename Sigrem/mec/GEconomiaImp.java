@@ -39,73 +39,7 @@ public class GEconomiaImp implements GEconomia
 		this.facturacion=stringAVector(fac);
 		this.gastos=stringAVector(gas);
 		this.balance=stringAVector(bal);
-		for (int i=0;i<12;i++)
-			System.out.print(facturacion[i]+",");
-		for (int i=0;i<12;i++)
-			System.out.print(gastos[i]+",");
-		for (int i=0;i<12;i++)
-			System.out.print(balance[i]+",");
 		this.cuotaContrato=33;
-	}
-	
-	public void facturacion(int fact)
-	{
-	/*	Calendar hoy=Calendar.getInstance();
-		int mesActual=hoy.get(Calendar.MONTH);
-		if (mesActual>ultimoMesFac)
-		
-		desplazarVectorFacturacion();
-		calculaVector(facturacion,ultMesFac,nFacturacion);
-		for (int i=0;i<12;i++)
-			System.out.println(facturacion[i]);
-		String tipo="facturacion";
-		String sUltMesFac=""+ultMesFac;
-		LinkedList datos=new LinkedList();
-		datos.add(tipo);
-		datos.add(facturacion);
-		datos.add(sUltMesFac);
-		vista.actualizaVista(3,1,datos);*/
-	}
-	
-	public void gastos(int valor)
-	{
-		Calendar hoy=Calendar.getInstance();
-		int mesActual=hoy.get(Calendar.MONTH);
-		int desplazamiento=0;
-		if (mesActual>ultimoMesGas)
-		{	desplazamiento=mesActual-ultimoMesGas;}
-		else if (mesActual<ultimoMesGas)
-		{	desplazamiento=12-ultimoMesGas+mesActual;}
-		for (int i=0;i<=desplazamiento;i++)
-		{	for (int j=0;j<11;j++)
-			{	gastos[i]=gastos[i+1];}
-			gastos[11]=0;			
-		}
-		gastos[11]=valor;
-		ultimoMesGas=mesActual;
-		LinkedList datos=new LinkedList();
-		datos.add(new String("gastos"));
-		datos.add(gastos);
-		String nuevoUltimoMes=""+ultimoMesGas;
-		datos.add(nuevoUltimoMes);
-		vista.actualizaVista(3,1,datos);
-	}
-
-	public void balance(int nBalance)
-	{
-/*		calculaVector(balance,ultMesBal,nBalance);
-		String tipo="balance";
-		String sUltMesBal=""+ultMesBal;
-		LinkedList datos=new LinkedList();
-		datos.add(tipo);
-		datos.add(balance);
-		datos.add(sUltMesBal);
-		vista.actualizaVista(3,1,datos);				
-*/	}
-	
-	public int dameCuotaContrato()
-	{
-		return cuotaContrato;
 	}
 	
 	public int [] stringAVector (String s) 
@@ -133,26 +67,80 @@ public class GEconomiaImp implements GEconomia
 		return vect;
 	}
 	
-	public void calculaVector(int [] vect,int uMes,int uVal)
+	public void facturacion(int valor)
 	{
 		Calendar hoy=Calendar.getInstance();
 		int mesActual=hoy.get(Calendar.MONTH);
-		if (mesActual!=uMes)
-		{
-			int dif;
-			if(uMes<mesActual)	dif=mesActual-uMes;
-			else	dif=uMes-mesActual;
-			int i=0;
-			int j=0;
-			while (i<12)
-			{	vect[j]=vect[j+dif];
-				i=i+dif;
-				j=j+1;										   
-			}
-			for(int k=j;k<11;k++)
-			{	vect[k]=0;}
-			uMes=mesActual;
+		int desplazamiento=0;
+		if (mesActual>ultimoMesFac)
+		{	desplazamiento=mesActual-ultimoMesFac;}
+		else if (mesActual<ultimoMesGas)
+		{	desplazamiento=12-ultimoMesFac+mesActual;}
+		for (int i=0;i<=desplazamiento;i++)
+		{	for (int j=0;j<11;j++)
+			{	facturacion[i]=facturacion[i+1];}
+			facturacion[11]=0;			
 		}
-		vect[11]=uVal;	
+		facturacion[11]=valor;
+		ultimoMesFac=mesActual;
+		LinkedList datos=new LinkedList();
+		datos.add(new String("facturacion"));
+		datos.add(facturacion);
+		String nuevoUltimoMes=""+ultimoMesFac;
+		datos.add(nuevoUltimoMes);
+		vista.actualizaVista(3,1,datos);
+	}
+	
+	public void gastos(int valor)
+	{
+		Calendar hoy=Calendar.getInstance();
+		int mesActual=hoy.get(Calendar.MONTH);
+		int desplazamiento=0;
+		if (mesActual>ultimoMesGas)
+		{	desplazamiento=mesActual-ultimoMesGas;}
+		else if (mesActual<ultimoMesGas)
+		{	desplazamiento=12-ultimoMesGas+mesActual;}
+		for (int i=0;i<=desplazamiento;i++)
+		{	for (int j=0;j<11;j++)
+			{	gastos[i]=gastos[i+1];}
+			gastos[11]=0;			
+		}
+		gastos[11]=valor;
+		ultimoMesGas=mesActual;
+		LinkedList datos=new LinkedList();
+		datos.add(new String("gastos"));
+		datos.add(gastos);
+		String nuevoUltimoMes=""+ultimoMesGas;
+		datos.add(nuevoUltimoMes);
+		vista.actualizaVista(3,1,datos);
+	}
+
+	public void balance(int valor)
+	{
+		Calendar hoy=Calendar.getInstance();
+		int mesActual=hoy.get(Calendar.MONTH);
+		int desplazamiento=0;
+		if (mesActual>ultimoMesBal)
+		{	desplazamiento=mesActual-ultimoMesBal;}
+		else if (mesActual<ultimoMesBal)
+		{	desplazamiento=12-ultimoMesBal+mesActual;}
+		for (int i=0;i<=desplazamiento;i++)
+		{	for (int j=0;j<11;j++)
+			{	balance[i]=balance[i+1];}
+			balance[11]=0;			
+		}
+		balance[11]=valor;
+		ultimoMesFac=mesActual;
+		LinkedList datos=new LinkedList();
+		datos.add(new String("balance"));
+		datos.add(balance);
+		String nuevoUltimoMes=""+ultimoMesBal;
+		datos.add(nuevoUltimoMes);
+		vista.actualizaVista(3,1,datos);			
+	}
+	
+	public int dameCuotaContrato()
+	{
+		return cuotaContrato;
 	}
 }

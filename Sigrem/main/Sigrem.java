@@ -297,7 +297,7 @@ public class Sigrem
 	
 	public void calculaFacturacion()
 	{
-		int fac=geconomia.dameCuotaContrato() * gcontratos.dameListaContratos().dameTamaño();
+		int fac=geconomia.dameCuotaContrato()*gcontratos.dameListaContratos().dameTamaño();
 		geconomia.facturacion(fac);
 	}
 	
@@ -305,20 +305,16 @@ public class Sigrem
 	{
 		int gas=0;
 		for(int i=0;i<gempleados.dameListaEmpleados().dameTamaño();i++)
-		{
-			gas=gas + Integer.valueOf(((Empleado)gempleados.dameListaEmpleados().dameIndice(0).dameElementos().get(i)).dameNomina()).intValue();
-		}
-		geconomia.gastos(gas);
+		{	gas=gas+Integer.valueOf(((Empleado)gempleados.dameListaEmpleados().dameIndice(0).dameElementos().get(i)).dameNomina()).intValue();}
+		geconomia.gastos(-gas);
 	}
 	
 	public void calculaBalance()
 	{
-		int fac=geconomia.dameCuotaContrato() * gcontratos.dameListaContratos().dameTamaño();
+		int fac=geconomia.dameCuotaContrato()*gcontratos.dameListaContratos().dameTamaño();
 		int gas=0;
 		for(int i=0;i<gempleados.dameListaEmpleados().dameTamaño();i++)
-		{
-			gas=gas + Integer.valueOf(((Empleado)gempleados.dameListaEmpleados().dameIndice(0).dameElementos().get(i)).dameNomina()).intValue();
-		}
+		{	gas=gas+Integer.valueOf(((Empleado)gempleados.dameListaEmpleados().dameIndice(0).dameElementos().get(i)).dameNomina()).intValue();}
 		int bal=fac-gas;
 		geconomia.balance(bal);				
 	}
