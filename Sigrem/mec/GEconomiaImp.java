@@ -104,9 +104,11 @@ public class GEconomiaImp implements GEconomia
 			i=i+1;
 			if (signo=='-')	num=num*(-1);
 			vect[n]=num;
+			System.out.println("n "+n+" "+vect[n]);
 			numero="";
 			n=n+1;
 		}
+		System.out.println("Vector "+s+" creado.");
 		return vect;
 	}
 	
@@ -124,15 +126,18 @@ public class GEconomiaImp implements GEconomia
 			while (i<12)
 			{
 				vect[j]=vect[j+dif];
+				System.out.println("Vector "+j+" "+vect[j]);
 				i=i+dif;
 				j=j+1;										   
 			}
 			for(int k=j;k<11;k++)
 			{
 				vect[k]=0;
+				System.out.println("Vector "+k+" "+vect[k]);
 			}
 			uMes=mesActual;
 		}
 		vect[11]=uVal;		
+		System.out.println("Vector "+11+" "+vect[11]);
 	}
 }

@@ -37,6 +37,8 @@ public class PanelEconomia extends JPanel
 	private String [] mesGas;
 	
 	private String [] mesBal;
+	
+	private int maxValorGrafico;
 		
 	public PanelEconomia(int grafico,Sigrem controlador,JFrame v)
 	{
@@ -48,6 +50,7 @@ public class PanelEconomia extends JPanel
 		this.mesFac=new String [12];
 		this.mesGas=new String [12];
 		this.mesBal=new String [12];
+		this.maxValorGrafico=1;
 		dibujaPaneles(null,null,0,null);		
 	}
 	
@@ -60,6 +63,7 @@ public class PanelEconomia extends JPanel
 			facturacion=fact;
 			int mes=Integer.valueOf((String)datos.get(2)).intValue();
 			mesFac=dameMeses(mes);
+			if (fact[11]>maxValorGrafico) maxValorGrafico=fact[11];
 			dibujaPaneles(fact,"Histórico de Facturación",1,mesFac);
 		}
 		else if (tipo.equals("gastos"))
@@ -68,6 +72,7 @@ public class PanelEconomia extends JPanel
 			gastos=gas;
 			int mes=Integer.valueOf((String)datos.get(2)).intValue();
 			mesGas=dameMeses(mes);
+			if (gas[11]>maxValorGrafico) maxValorGrafico=gas[11];
 			dibujaPaneles(gas,"Histórico de Gastos",2,mesGas);
 		}
 		else if (tipo.equals("balance"))
@@ -76,6 +81,7 @@ public class PanelEconomia extends JPanel
 			balance=bal;
 			int mes=Integer.valueOf((String)datos.get(2)).intValue();
 			mesBal=dameMeses(mes);
+			if (bal[11]>maxValorGrafico) maxValorGrafico=bal[11];
 			dibujaPaneles(bal,"Histórico de Balance",3,mesBal);
 		}		
 	}
@@ -120,9 +126,9 @@ public class PanelEconomia extends JPanel
 		l1.setPreferredSize(new Dimension(100,20));
 		l2.setPreferredSize(new Dimension(100,20));
 		l3.setPreferredSize(new Dimension(100,20));
-		bFacturacion=new JTextField();
-		bGastos=new JTextField();
-		bBalance=new JTextField();
+		bFacturacion=new JTextField(facturacion[11]);
+		bGastos=new JTextField(gastos[11]);
+		bBalance=new JTextField(balance[11]);
 		bFacturacion.setPreferredSize(new Dimension(100,20));
 		bGastos.setPreferredSize(new Dimension(100,20));
 		bBalance.setPreferredSize(new Dimension(100,20));
@@ -195,19 +201,22 @@ public class PanelEconomia extends JPanel
 		bfacturacion.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				controlador.calculaFacturacion();				
+				controlador.calculaFacturacion();
+				bFacturacion.setText(""+facturacion[11]);
 			}
 		});
 		bgastos.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				controlador.calculaGastos();				
+				controlador.calculaGastos();			
+				bGastos.setText(""+gastos[11]);
 			}
 		});
 		bbalance.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				controlador.calculaBalance();				
+				controlador.calculaBalance();
+				bBalance.setText(""+balance[11]);
 			}
 		});
 		return pbal;
@@ -257,8 +266,8 @@ public class PanelEconomia extends JPanel
 			caja.add(c1);	
 			Color c;
 			for(int i=0;i<12;i++)
-				if (num[i]<0)	caja.add(dibujaBarra(-num[i],vMeses[i],Color.RED));
-				else	caja.add(dibujaBarra(num[i],vMeses[i],Color.GREEN));
+				if (num[i]<0)	caja.add(dibujaBarra(-((170*num[i])/maxValorGrafico),vMeses[i],Color.RED));
+				else	caja.add(dibujaBarra(((170*num[i])/maxValorGrafico),vMeses[i],Color.GREEN));
 			pgra.add(caja);
 
 		}
