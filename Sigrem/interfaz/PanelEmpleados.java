@@ -25,7 +25,7 @@ public class PanelEmpleados extends JPanel
 	private JButton bdespedir;	
 	
 	private JComboBox estado;
-	
+		
 	private JComboBox perfil;
 	
 	public PanelEmpleados()
@@ -34,7 +34,9 @@ public class PanelEmpleados extends JPanel
 		bmodificar=new JButton("Modificar");
 		bdespedir=new JButton("Despedir");
 		JPanel pempleado=dibujaEmpleado();
+		pempleado.setPreferredSize(new Dimension(314,0));
 		JPanel pdatos=dibujaDatos(false);
+		pdatos.setPreferredSize(new Dimension(0,260));
 		JPanel precursos=dibujaRecursos();
 		JSplitPane sp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,pempleado,pdatos);
 		sp1.setDividerSize(4);
@@ -82,6 +84,9 @@ public class PanelEmpleados extends JPanel
 		JButton bcontratar=new JButton ("Contratar");
 		bdespedir.setEnabled(false);
 		bmodificar.setEnabled(false);
+		bcontratar.setPreferredSize(new Dimension(90,25));
+		bmodificar.setPreferredSize(new Dimension(90,25));
+		bdespedir.setPreferredSize(new Dimension(90,25));
 		JPanel p1=new JPanel();
 		JPanel p2=new JPanel();
 		JPanel p3=new JPanel();
@@ -423,6 +428,7 @@ public class PanelEmpleados extends JPanel
 	
 	public JPanel modificaRecurso(String codigo)
 	{
+		formRecurso.setTitle("Modificar estado del recurso "+codigo);		
 		formRecurso.setTitle("Modificar estado de recurso "+codigo);		
 		JLabel l1=new JLabel("Código");
 		JLabel l2=new JLabel("Estado");
@@ -457,7 +463,7 @@ public class PanelEmpleados extends JPanel
 		sp.setDividerSize(4);
 		JPanel panel=new JPanel();
 		panel.add(sp);
-		panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Modificar estado de recurso",TitledBorder.LEFT,TitledBorder.TOP));
+		panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Modificar estado del recurso",TitledBorder.LEFT,TitledBorder.TOP));
 		aceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
@@ -595,16 +601,13 @@ public class PanelEmpleados extends JPanel
 		});
 		elim.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
-			{	int seleccion=JOptionPane.showConfirmDialog(null,"         ¿Desea eliminar la asignación de este recurso "+cod.getText()+"?","Eliminar asignación",JOptionPane.YES_NO_CANCEL_OPTION,-1);
+			{	int seleccion=JOptionPane.showConfirmDialog(null,"        ¿Desea eliminar la asignación del recurso "+cod.getText()+"?","Eliminar asignación",JOptionPane.YES_NO_CANCEL_OPTION,-1);
 				if (seleccion==JOptionPane.YES_OPTION)
 				{	
 				
 				}
-				
-		
 			}
 		});
 		return panel;
 	}
 }
-
