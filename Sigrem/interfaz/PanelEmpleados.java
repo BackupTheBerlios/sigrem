@@ -155,7 +155,7 @@ public class PanelEmpleados extends JPanel
 				{	
 					formAlta.getContentPane().add(panelAltaEmpleado());
 					formAlta.pack();	
-					formAlta.setVisible(true);					
+					formAlta.setVisible(true);	
 				}
 			}
 		});
