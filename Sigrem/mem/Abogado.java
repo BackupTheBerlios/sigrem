@@ -1,7 +1,7 @@
 package mem;
 
 import java.util.LinkedList;
-import mre.*;
+//import mre.*;
 
 public class Abogado extends Empleado 
 {

@@ -25,11 +25,12 @@ public class GEmpleadosImp implements GEmpleados
 	private void incrementaCodigo()
 	{
 		String numero = codigoEmpleado.substring(0,3);
-		Character car = null;
+		/*Character car = null;
 		int num = car.digit(codigoEmpleado.charAt(3), 10);
 		for (int i=4;i<codigoEmpleado.length(); i++){
 			num = (num*10)+car.digit(codigoEmpleado.charAt(i), 10);
-		}
+		}*/
+		int num=Integer.valueOf(codigoEmpleado.substring(3)).intValue();
 		numero = numero + (num+1);
 		codigoEmpleado = numero;
 	}

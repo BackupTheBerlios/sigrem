@@ -23,10 +23,11 @@ public class GMultasImp implements GMultas
 	private void incrementaCodigo()
 	{
 		String numero=codigoMulta.substring(0,3);
-		Character car=null;
+		/*Character car=null;
 		int num=car.digit(codigoMulta.charAt(3),10);
 		for (int i=4;i<codigoMulta.length();i++)
-		{	num=(num*10)+car.digit(codigoMulta.charAt(i),10);}
+		{	num=(num*10)+car.digit(codigoMulta.charAt(i),10);}*/
+		int num=Integer.valueOf(codigoMulta.substring(3)).intValue();
 		numero=numero+(num+1);
 		codigoMulta=numero;
 	}

@@ -25,10 +25,11 @@ public class GContratosImp implements GContratos
 	private void incrementaCodigo()
 	{
 		String numero=codigoContrato.substring(0,4);
-		Character car=null;
+		/*Character car=null;
 		int num=car.digit(codigoContrato.charAt(4),10);
 		for (int i=5;i<codigoContrato.length();i++)
-		{	num=(num*10)+car.digit(codigoContrato.charAt(i),10);}
+		{	num=(num*10)+car.digit(codigoContrato.charAt(i),10);}*/
+		int num=Integer.valueOf(codigoContrato.substring(4)).intValue();
 		numero=numero+(num+1);
 		codigoContrato=numero;
 	}

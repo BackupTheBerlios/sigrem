@@ -23,10 +23,11 @@ public class GRecursosImp implements GRecursos
 	private void incrementaCodigo()
 	{
 		String numero=codigoRecurso.substring(0,3);
-		Character car=null;
+		/*Character car=null;
 		int num=car.digit(codigoRecurso.charAt(3),10);
 		for (int i=4;i<codigoRecurso.length();i++)
-		{	num=(num*10)+car.digit(codigoRecurso.charAt(i),10);}
+		{	num=(num*10)+car.digit(codigoRecurso.charAt(i),10);}*/
+		int num=Integer.valueOf(codigoRecurso.substring(3)).intValue();
 		numero=numero+(num+1);
 		codigoRecurso=numero;
 	}
