@@ -105,7 +105,7 @@ public class PanelContratos extends JPanel
 		}
 		else if (panel==4)
 		{	panelRecursos.getContentPane().removeAll();
-			panelRecursos.getContentPane().add(dibujaRecursos((String)datos.get(7)));
+			panelRecursos.getContentPane().add(dibujaRecursos((String)datos.getLast()));
 			panelRecursos.pack();
 		}
 	}
@@ -1404,10 +1404,7 @@ public class PanelContratos extends JPanel
 			{
 				int seleccion=JOptionPane.showConfirmDialog(null,"         ¿Desea eliminar el recurso "+cod.getText()+"?","Eliminar recurso",JOptionPane.YES_NO_CANCEL_OPTION,-1);
 				if (seleccion==JOptionPane.YES_OPTION)
-				{	//eliminar multa
-					//borrar el panel de multas
-					//llamar a dibujaMulta()
-				}				
+				{	controlador.eliminarRecurso(cod.getText(),(String)datos.get(7));}		
 			}
 		});
 		return panel;

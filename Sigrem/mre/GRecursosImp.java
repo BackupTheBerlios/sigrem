@@ -33,34 +33,28 @@ public class GRecursosImp implements GRecursos
 	public String añadirRecurso(LinkedList datos)
 	{
 		Recurso nuevorecurso=new Recurso(codigoRecurso,datos);
-		System.out.println(datos.get(0));
-		System.out.println(datos.get(1));
-		System.out.println(datos.get(2));
-		System.out.println(datos.get(3));
-		System.out.println(datos.get(4));
-		System.out.println(datos.get(5));
 		String[] claves=new String[1];
 		claves[0]=codigoRecurso;
 		listaRecursos.insertar(claves,nuevorecurso);
 		String codigoantiguo=codigoRecurso;
 		incrementaCodigo();
 		datos.addFirst(codigoantiguo);
-		System.out.println(datos.get(0));
-		System.out.println(datos.get(1));
-		System.out.println(datos.get(2));
-		System.out.println(datos.get(3));
-		System.out.println(datos.get(4));
-		System.out.println(datos.get(5));
-		System.out.println(datos.get(6));
-		System.out.println(datos.get(7));
 		vista.actualizaVistaCaja('r','a',datos);
 		vista.actualizaVista(1,4,datos);
 		return codigoantiguo;
 	}
 	
-	public void eliminarRecurso(String codigo)
+	public void eliminarRecurso(String codrecurso,String codmulta)
 	{
-		
+		boolean eliminado=listaRecursos.eliminar(codrecurso,0);
+		if (eliminado) 
+		{	LinkedList datos=new LinkedList();
+			datos.add(codrecurso);
+			datos.add(codmulta);
+			vista.actualizaVistaCaja('r','e',datos);
+			vista.actualizaVista(1,4,datos);
+		}
+		else vista.actualizaVistaMensaje("Error al eliminar el recurso "+codrecurso+". No se ha encontrado");
 	}
 
 	public void modificarRecurso(String codigo)

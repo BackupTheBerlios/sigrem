@@ -22,4 +22,6 @@ public interface GMultas
 	public void eliminaListaMultas(LinkedList lista);
 	
 	public void asociaMultaRecurso(String codmulta,String codrecurso);
+	
+	public void eliminarRecurso(String codmulta,String codrecurso);
 }

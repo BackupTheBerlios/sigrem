@@ -189,4 +189,10 @@ public class Sigrem
 		String codrecurso=grecursos.añadirRecurso(datos);
 		gmultas.asociaMultaRecurso(codmulta,codrecurso);
 	}
+	
+	public void eliminarRecurso(String codrecurso,String codmulta)
+	{
+		grecursos.eliminarRecurso(codrecurso,codmulta);
+		gmultas.eliminarRecurso(codmulta,codrecurso);
+	}
 }

@@ -60,7 +60,6 @@ public class GMultasImp implements GMultas
 			vista.actualizaVista(1,3,null);
 		}
 		else vista.actualizaVistaMensaje("Error al eliminar la multa "+codigo+". No se ha encontrado");
-	
 	}
 
 	public void modificarMulta(String codigo,LinkedList datos)
@@ -148,5 +147,16 @@ public class GMultasImp implements GMultas
 		Vector busqueda=listaMultas.buscar(codmulta,0);
 		Multa multa=(Multa)busqueda.get(0);
 		multa.añadeRecurso(codrecurso);
+	}
+	
+	public void eliminarRecurso(String codmulta,String codrecurso)
+	{
+		Vector busqueda=listaMultas.buscar(codmulta,0);
+		if (busqueda.size()==0)
+		{	vista.actualizaVistaMensaje("Error al buscar la multa "+codmulta+". No se ha encontrado");}
+		else 
+		{	Multa multa=(Multa)busqueda.get(0);
+			multa.eliminaRecurso(codrecurso);
+		}
 	}
 }

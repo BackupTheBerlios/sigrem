@@ -77,6 +77,16 @@ public class Multa
 	{
 		listaRecursos.add(codigo);
 	}
+	public void eliminaRecurso(String codigo)
+	{
+		int i=0;
+		boolean esta=false;
+		while ((!esta) && (i<listaRecursos.size()))
+		{	esta=codigo.equals((String)listaRecursos.get(i));
+			i++;			
+		}
+		if (esta)listaRecursos.remove(i-1);
+	}
 	public void ponExpediente(String exp)
 	{
 		expediente=exp;
