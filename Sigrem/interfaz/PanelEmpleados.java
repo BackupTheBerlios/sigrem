@@ -10,6 +10,7 @@ import javax.swing.*;
 
 import main.Sigrem;
 import java.util.LinkedList;
+import java.util.Vector;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.border.TitledBorder;
@@ -23,6 +24,8 @@ public class PanelEmpleados extends JPanel
 	private Sigrem controlador;
 	
 	private JDialog formulario;
+	
+	private JDialog formConsulta;
 	
 	private Box cajaRecursos;
 	
@@ -42,6 +45,14 @@ public class PanelEmpleados extends JPanel
 				formulario.getContentPane().removeAll();
 			}
 		});	
+		formConsulta=new JDialog(v,true);
+		formConsulta.setResizable(false);
+		formConsulta.addWindowListener(new WindowAdapter()
+		{	public void windowClosing(WindowEvent e)
+			{
+				formConsulta.getContentPane().removeAll();
+			}
+		});
 		JPanel pempleado=dibujaEmpleado(null);
 		JPanel pdatos=dibujaDatos(null);
 		JPanel precursos=dibujaRecursos(false);
@@ -83,6 +94,36 @@ public class PanelEmpleados extends JPanel
 		int lineas=cajaRecursos.getComponentCount();
 		cajaRecursos.add(dibujaLineaRecurso(datos),lineas-1);
 	}
+	
+	public void actualizaPanelConsulta(String nombre,Vector dnis)
+	{
+		formConsulta.setTitle("Resultados de la consulta");
+		formConsulta.setLocation(350,200);
+		JLabel l1=new JLabel("Se han encontrado los siguientes empleados con nombre "+nombre);
+		JLabel l2=new JLabel("Selecciona el DNI/CIF del empleado:");
+		final JComboBox dni=new JComboBox(dnis);
+		dni.setPreferredSize(new Dimension(100,20));
+		JPanel p1=new JPanel();
+		JPanel p2=new JPanel();
+		p1.add(l1);
+		p2.add(l2);
+		p2.add(dni);
+		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,p1,p2);
+		sp.setEnabled(false);
+		sp.setDividerSize(4);
+		dni.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				controlador.consultarEmpleadoDni((String)dni.getSelectedItem());
+				formConsulta.setVisible(false);
+				formConsulta.getContentPane().removeAll();				
+			}
+		});
+		formConsulta.getContentPane().add(sp);
+		formConsulta.pack();
+		formConsulta.setVisible(true);
+	}
+	
 	
 	public void inicializaCajaRecursos()
 	{

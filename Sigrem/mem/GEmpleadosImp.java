@@ -2,6 +2,8 @@ package mem;
 
 import java.util.LinkedList;
 import java.util.Vector;
+
+import mcl.Cliente;
 import med.*;
 import interfaz.*;
 
@@ -13,7 +15,6 @@ public class GEmpleadosImp implements GEmpleados
 	
 	private String codigoEmpleado;
 	
-	// Constructor de la clase	
 	public GEmpleadosImp(InterfazGrafica vista, String codigoEmpleado)
 	{
 		this.listaEmpleados = new EstructuraDatosImp(3);
@@ -21,7 +22,6 @@ public class GEmpleadosImp implements GEmpleados
 		this.codigoEmpleado = codigoEmpleado;
 	}
 	
-	// Método para calcular automáticamente el código del empleado
 	private void incrementaCodigo()
 	{
 		String numero = codigoEmpleado.substring(0,3);
@@ -35,7 +35,6 @@ public class GEmpleadosImp implements GEmpleados
 		codigoEmpleado = numero;
 	}
 	
-	// Método para añadir un empleado al sistema 
 	// (clave0=codigo, clave1=nombre, clave2=dni)
 	public String añadirEmpleado(String perfil,LinkedList datosEmpleado)
 	{
@@ -62,7 +61,7 @@ public class GEmpleadosImp implements GEmpleados
 		vista.actualizaVista(2,3,null);
 		return codigoAntiguo;
 	}
-	// Método para eliminar un empleado del sistema
+
 	public void eliminarEmpleado(boolean borrar,String codigoEmpleado)
 	{
 		boolean eliminado=listaEmpleados.eliminar(codigoEmpleado,0);
@@ -76,7 +75,7 @@ public class GEmpleadosImp implements GEmpleados
 		}
 		else vista.actualizaVistaMensaje("Error al eliminar el empleado "+codigoEmpleado+". No se ha encontrado");
 	}
-	// Método para modificar un empleado en el sistema
+
 	public void modificarEmpleado(String codigoEmpleado, LinkedList datosEmpleado) 
 	{
 		Vector busqueda=listaEmpleados.buscar(codigoEmpleado,0);
@@ -100,10 +99,9 @@ public class GEmpleadosImp implements GEmpleados
 			datosPanel1.add(empleado.dameNomina());
 			vista.actualizaVista(2,1,datosPanel1);
 			vista.actualizaVista(2,2,datosEmpleado);
-			vista.actualizaVista(2,3,null);
 		}
 	}
-	// Método para consultar un empleado dado su Código de Empleado
+
 	public void consultarEmpleadoCodigo(boolean modificar,String codigo)
 	{
 		Vector busqueda=listaEmpleados.buscar(codigo,0);
@@ -126,26 +124,36 @@ public class GEmpleadosImp implements GEmpleados
 			}
 		}
 	}
-	// Método para consultar un empleado dado su Nombre
+
 	public void consultarEmpleadoNombre(String nombre)
 	{
 		Vector busqueda=listaEmpleados.buscar(nombre,1);
 		if (busqueda.size()==0)
 		{	vista.actualizaVistaMensaje("Error al buscar el empleado "+nombre+". No se ha encontrado");}
 		else 
-		{	Empleado empleado=(Empleado)busqueda.get(0);		
-			LinkedList datosPanel2=empleado.dameListaDatos();
-			datosPanel2.remove(0);
-			LinkedList datosPanel1=new LinkedList();
-			datosPanel1.add(empleado.dameCodigo());
-			datosPanel1.add(empleado.damePerfil());
-			datosPanel1.add(empleado.dameNomina());
-			vista.actualizaVista(2,1,datosPanel1);
-			vista.actualizaVista(2,2,datosPanel2);	
-			vista.actualizaVista(2,3,null);
+		{	if (busqueda.size()==1)
+			{	Empleado empleado=(Empleado)busqueda.get(0);		
+				LinkedList datosPanel2=empleado.dameListaDatos();
+				datosPanel2.remove(0);
+				LinkedList datosPanel1=new LinkedList();
+				datosPanel1.add(empleado.dameCodigo());
+				datosPanel1.add(empleado.damePerfil());
+				datosPanel1.add(empleado.dameNomina());
+				vista.actualizaVista(2,1,datosPanel1);
+				vista.actualizaVista(2,2,datosPanel2);	
+				vista.actualizaVista(2,3,null);		
+			}
+			else
+			{	Vector dnis=new Vector();
+				for (int i=0;i<busqueda.size();i++)
+				{	Empleado empleado=(Empleado)busqueda.get(i);
+					dnis.add(empleado.dameDni());
+				}
+				vista.actualizaVistaConsulta(2,nombre,dnis);
+			}
 		}
 	}
-	// Método para consultar un empleado dado su DNI
+
 	public void consultarEmpleadoDni(String dni)
 	{
 		Vector busqueda=listaEmpleados.buscar(dni,2);
@@ -160,11 +168,11 @@ public class GEmpleadosImp implements GEmpleados
 			datosPanel1.add(empleado.damePerfil());
 			datosPanel1.add(empleado.dameNomina());
 			vista.actualizaVista(2,1,datosPanel1);
-			vista.actualizaVista(2,2,datosPanel2);				
+			vista.actualizaVista(2,2,datosPanel2);	
+			vista.actualizaVista(2,3,null);	
 		}
 	}
 	
-	// Método para obtener la lista de empleados
 	public EstructuraDatos dameListaEmpleados()
 	{
 		return listaEmpleados;

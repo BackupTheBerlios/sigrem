@@ -173,7 +173,7 @@ public class InterfazGrafica
 	public void actualizaVistaConsulta(int pestaña,String nombre,Vector dnis)
 	{
 		if (pestaña==1) pcontratos.actualizaPanelConsulta(nombre,dnis);
-		else if (pestaña==2){}//pempleados.actualizaPanelConsulta(nombre,dnis);
+		else if (pestaña==2){pempleados.actualizaPanelConsulta(nombre,dnis);}
 	}
 	
 	public void actualizarVistaConsultaAbogado(String codigo)
