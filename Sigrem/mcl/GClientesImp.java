@@ -28,6 +28,8 @@ public class GClientesImp implements GClientes
 		siguienteCodigoCliente=numero;
 	}
 	
+	
+	
 	//clave0=codigo	clave1=nombre clave2=dni
 	public String añadirCliente(LinkedList datos)
 	{	String[] claves=new String[3];
@@ -167,5 +169,9 @@ public class GClientesImp implements GClientes
 			vista.actualizaVista(1,2,cliente.dameListaDatos());
 			return (String)cliente.dameListaContratos().getFirst();
 		}
+	}
+	
+	public EstructuraDatos dameListaClientes(){
+		return this.listaClientes;
 	}
 }

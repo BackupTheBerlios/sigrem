@@ -2,6 +2,8 @@ package mcl;
 
 import java.util.LinkedList;
 
+import med.EstructuraDatos;
+
 public interface GClientes 
 {
 	//Requisito 1.1
@@ -18,4 +20,6 @@ public interface GClientes
 	public String consultarClienteDni(String dni);	
 	
 	public void asociaClienteContrato(String codcliente,String codcontrato);
+	
+	public EstructuraDatos dameListaClientes();
 }

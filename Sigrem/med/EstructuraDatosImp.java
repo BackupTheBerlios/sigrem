@@ -32,6 +32,10 @@ public class EstructuraDatosImp implements EstructuraDatos{
 	  	return arrayIndices[indice];
 	  }
 	  
+	  public Vector dameEliminados(){
+	  	return this.vectorEliminados;
+	  }
+	  
 //	BUSCAR
 	  public boolean esta(Comparable clave, int indice){
 	    return buscar(clave,indice).size()!=0;

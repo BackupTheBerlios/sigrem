@@ -8,6 +8,8 @@ public interface EstructuraDatos {
   public int dameTamaño();
   public int dameNumeroIndices();
   Indice dameIndice(int indice);
+  public Vector dameEliminados();
+  
   public boolean esta(Comparable clave, int indice);
   public Vector buscar(Comparable clave, int indice);
   //Si no esta esa clave devuelve null
