@@ -456,11 +456,10 @@ public class InterfazGrafica
 	{		
 		formayuda.getContentPane().removeAll();
 		if (npanel==0)	panel0();		
-		else
-			if (npanel==1)	panel1();
-			else 
-				if (npanel==2) panel2();
-				else panel0();
+		else if (npanel==1)	panel1();
+			else if (npanel==2) panel2();
+				else if (npanel==3) panel3();
+					else panel0();
 				
 				
 	}
@@ -603,7 +602,27 @@ public class InterfazGrafica
 							}
 							catch(FileNotFoundException e)
 							{}						
-						}				
+						}
+						else if(lista.getSelectedIndex()==6)	
+						{
+							dibujaAyuda(3);
+							try
+							{
+								fd = new BufferedReader (new FileReader ("interfaz/ayuda_empleados.txt"));
+							}
+							catch(FileNotFoundException e)
+							{}					
+						}
+							else if(lista.getSelectedIndex()==7)	
+							{
+								dibujaAyuda(4);
+								try
+								{
+									fd = new BufferedReader (new FileReader ("interfaz/ayuda_economia.txt"));
+								}
+								catch(FileNotFoundException e)
+								{}					
+							}
 				try
 				{
 					if (fd!=null)
@@ -642,27 +661,56 @@ public class InterfazGrafica
 			{
 				psalida.removeAll();
 				salida.removeAll();
-				if(lista.getSelectedIndex()==1) 
+				if (lista.getSelectedIndex()==0)
 				{
-					dibujaAyuda(1);
+					dibujaAyuda(0);
 					try
 					{
-						fd = new BufferedReader (new FileReader ("interfaz/ayuda_menu.txt"));
+						fd = new BufferedReader (new FileReader ("interfaz/ayuda_sigrem.txt"));
 					}
 					catch(FileNotFoundException e)
-					{}					
+					{}
 				}
-				else
-					if(lista.getSelectedIndex()==2)	
+				else if(lista.getSelectedIndex()==1) 
 					{
-						dibujaAyuda(0);
+						dibujaAyuda(1);
 						try
 						{
-							fd = new BufferedReader (new FileReader ("interfaz/ayuda_contratos.txt"));
+							fd = new BufferedReader (new FileReader ("interfaz/ayuda_menu.txt"));
 						}
 						catch(FileNotFoundException e)
 						{}					
 					}
+					else if(lista.getSelectedIndex()==2)	
+						{
+							dibujaAyuda(0);
+							try
+							{
+								fd = new BufferedReader (new FileReader ("interfaz/ayuda_contratos.txt"));
+							}
+							catch(FileNotFoundException e)
+							{}					
+						}
+						else if(lista.getSelectedIndex()==6)	
+							{
+								dibujaAyuda(3);
+								try
+								{
+									fd = new BufferedReader (new FileReader ("interfaz/ayuda_empleados.txt"));
+								}
+								catch(FileNotFoundException e)
+								{}					
+							}
+							else if(lista.getSelectedIndex()==7)	
+								{
+									dibujaAyuda(4);
+									try
+									{
+										fd = new BufferedReader (new FileReader ("interfaz/ayuda_economia.txt"));
+									}
+									catch(FileNotFoundException e)
+									{}					
+								}
 				try
 				{
 					if (fd!=null)
@@ -679,4 +727,180 @@ public class InterfazGrafica
 			}
 		});		
 	}	
+	
+	public void panel3()
+	{		
+		salida=new JTextArea();
+		psalida=new JScrollPane(salida);
+		psalida.setEnabled(false);
+		psalida.setPreferredSize(new Dimension(500,400));
+		String[] opciones = {"Sigrem"," + Menú"," + Gestión Contratos"," -  Gestión Empleados","    + Datos del empleado","    + Datos personales","    + Recursos asignados"," + Gestión Económica"};
+		lista=new JList(opciones);
+		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		lista.setPreferredSize(new Dimension(150,400));
+		JSplitPane sp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,lista,psalida);
+		sp1.setEnabled(false);
+		formayuda.getContentPane().add(sp1);
+		formayuda.setTitle("Ayuda - Sigrem");
+		formayuda.pack();
+		lista.addListSelectionListener(new ListSelectionListener()
+		{
+			public void valueChanged(ListSelectionEvent ev)
+			{
+				psalida.removeAll();
+				salida.removeAll();
+				if (lista.getSelectedIndex()==0)
+				{
+					dibujaAyuda(0);
+					try
+					{
+						fd = new BufferedReader (new FileReader ("interfaz/ayuda_sigrem.txt"));
+					}
+					catch(FileNotFoundException e)
+					{}
+				}
+				else if(lista.getSelectedIndex()==1) 
+					{
+						dibujaAyuda(1);
+						try
+						{
+							fd = new BufferedReader (new FileReader ("interfaz/ayuda_menu.txt"));
+						}
+						catch(FileNotFoundException e)
+						{}					
+					}
+					else if(lista.getSelectedIndex()==2)	
+						{
+							dibujaAyuda(2);
+							try
+							{
+								fd = new BufferedReader (new FileReader ("interfaz/ayuda_contratos.txt"));
+							}
+							catch(FileNotFoundException e)
+							{}					
+						}
+						else if(lista.getSelectedIndex()==3)	
+							{
+								dibujaAyuda(0);
+								try
+								{
+									fd = new BufferedReader (new FileReader ("interfaz/ayuda_empleados.txt"));
+								}
+								catch(FileNotFoundException e)
+								{}					
+							}
+							else if(lista.getSelectedIndex()==7)	
+								{
+									dibujaAyuda(4);
+									try
+									{
+										fd = new BufferedReader (new FileReader ("interfaz/ayuda_economia.txt"));
+									}
+									catch(FileNotFoundException e)
+									{}					
+								}
+				try
+				{
+					if (fd!=null)
+					{
+						while((linea=fd.readLine())!=null)
+						{
+							salida.append(linea+"\n");						
+						}
+						fd.close();
+					}
+				}
+				catch(IOException e)
+				{}
+			}
+		});		
+	}
+	
+	public void panel4()
+	{		
+		salida=new JTextArea();
+		psalida=new JScrollPane(salida);
+		psalida.setEnabled(false);
+		psalida.setPreferredSize(new Dimension(500,400));
+		String[] opciones = {"Sigrem"," + Menú"," + Gestión Contratos"," + Gestión Empleados"," -  Gestión Económica","    +"};
+		lista=new JList(opciones);
+		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		lista.setPreferredSize(new Dimension(150,400));
+		JSplitPane sp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,lista,psalida);
+		sp1.setEnabled(false);
+		formayuda.getContentPane().add(sp1);
+		formayuda.setTitle("Ayuda - Sigrem");
+		formayuda.pack();
+		lista.addListSelectionListener(new ListSelectionListener()
+		{
+			public void valueChanged(ListSelectionEvent ev)
+			{
+				psalida.removeAll();
+				salida.removeAll();
+				if (lista.getSelectedIndex()==0)
+				{
+					dibujaAyuda(0);
+					try
+					{
+						fd = new BufferedReader (new FileReader ("interfaz/ayuda_sigrem.txt"));
+					}
+					catch(FileNotFoundException e)
+					{}
+				}
+				else if(lista.getSelectedIndex()==1) 
+					{
+						dibujaAyuda(1);
+						try
+						{
+							fd = new BufferedReader (new FileReader ("interfaz/ayuda_menu.txt"));
+						}
+						catch(FileNotFoundException e)
+						{}					
+					}
+					else if(lista.getSelectedIndex()==2)	
+						{
+							dibujaAyuda(2);
+							try
+							{
+								fd = new BufferedReader (new FileReader ("interfaz/ayuda_contratos.txt"));
+							}
+							catch(FileNotFoundException e)
+							{}					
+						}
+						else if(lista.getSelectedIndex()==3)	
+							{
+								dibujaAyuda(0);
+								try
+								{
+									fd = new BufferedReader (new FileReader ("interfaz/ayuda_empleados.txt"));
+								}
+								catch(FileNotFoundException e)
+								{}					
+							}
+							else if(lista.getSelectedIndex()==7)	
+								{
+									dibujaAyuda(4);
+									try
+									{
+										fd = new BufferedReader (new FileReader ("interfaz/ayuda_economia.txt"));
+									}
+									catch(FileNotFoundException e)
+									{}					
+								}
+				try
+				{
+					if (fd!=null)
+					{
+						while((linea=fd.readLine())!=null)
+						{
+							salida.append(linea+"\n");						
+						}
+						fd.close();
+					}
+				}
+				catch(IOException e)
+				{}
+			}
+		});		
+	}
 }
