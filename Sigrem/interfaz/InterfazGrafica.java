@@ -45,11 +45,11 @@ public class InterfazGrafica
 	
 	private JFileChooser selec;
 	
-	private JFrame formSigrem;
+	private JDialog formSigrem;
 	
-	private JFrame formacercade;
+	private JDialog formacercade;
 	
-	private JFrame formayuda;
+	private JDialog formayuda;
 	
 	private static JTextArea salida;
 	
@@ -61,17 +61,19 @@ public class InterfazGrafica
 	{		
 		ventana=new JFrame("Sigrem");
 		this.controlador=controlador;
-		formSigrem=new JFrame();
+		formSigrem=new JDialog(ventana,true);
 		formSigrem.setResizable(false);
 		formSigrem.setUndecorated(true);		
 		formSigrem.setLocation(250,150);
-//		pantallaInicio();
-		formacercade=new JFrame();
+//		pantallaInicio(false);
+//		pantallaInicio(true);
+		formacercade=new JDialog(ventana,true);
 		formacercade.setResizable(false);
 		formacercade.setUndecorated(true);		
 //		formacercade.setAlwaysOnTop(true);
 		formacercade.setLocation(350,250);
-		formayuda=new JFrame();
+		acercade(false);
+		formayuda=new JDialog(ventana,true);
 		formayuda.setResizable(false);
 //		formayuda.setAlwaysOnTop(true);
 		formayuda.setLocation(150,50);
@@ -221,7 +223,7 @@ public class InterfazGrafica
 		acercade.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				acercade();
+				acercade(true);
 			}
 		});			
 		ccod.addActionListener(new ActionListener()
@@ -390,14 +392,14 @@ public class InterfazGrafica
 		return menu;	
 	}
 	
-	public void pantallaInicio()
+	public void pantallaInicio(boolean vis)
 	{	
 		formSigrem.setTitle("SIGREM");
 		JButton b=new JButton(new ImageIcon("interfaz/sigrem.jpg"));
 		b.setPreferredSize(new Dimension(570,350));
 		formSigrem.getContentPane().add(b);
 		formSigrem.pack();
-		formSigrem.setVisible(true);
+		formSigrem.setVisible(vis);
 		try
 		{
 	    	Thread.sleep(2000);
@@ -409,14 +411,14 @@ public class InterfazGrafica
 		formSigrem.setVisible(false);
 	}
 	
-	public void acercade()
+	public void acercade(boolean vis)
 	{		
 		formacercade.setTitle("Acerca de... SIGREM");
 		JButton b=new JButton(new ImageIcon("interfaz/sigrem.gif"));
 		b.setPreferredSize(new Dimension(290,180));
 		formacercade.getContentPane().add(b);
 		formacercade.pack();	
-		formacercade.setVisible(true);
+		formacercade.setVisible(vis);
 		b.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
