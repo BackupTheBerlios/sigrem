@@ -176,6 +176,7 @@ public class InterfazGrafica
 		else if (pestaña==2){} //pempleados.actualizaPanelConsulta(nombre,dnis);
 	}
 	
+	
 	public void actualizaVistaCajaMultas(LinkedList datos)
 	{
 		pcontratos.actualizaCajaMultas(datos);

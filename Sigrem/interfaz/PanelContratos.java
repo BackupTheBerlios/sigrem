@@ -1,6 +1,7 @@
 package interfaz;
 
 import java.awt.Color;
+import java.util.Calendar;
 import java.awt.Dimension;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -73,7 +74,7 @@ public class PanelContratos extends JPanel
 		sp2.setEnabled(false);		
 		sp2.setDividerSize(4);
 		add(sp2);
-		cajaMultas=inicializaCajaMultas();
+		inicializaCajaMultas();
 	}
 	
 	public void actualiza(int panel,LinkedList datos)
@@ -138,7 +139,7 @@ public class PanelContratos extends JPanel
 		});
 	}
 	
-	public Box inicializaCajaMultas()
+	public void inicializaCajaMultas()
 	{
 		JPanel p=new JPanel();
 		JLabel l1=new JLabel("Código",SwingConstants.CENTER);
@@ -150,15 +151,15 @@ public class PanelContratos extends JPanel
 		JLabel l7=new JLabel("Recursos",SwingConstants.CENTER);
 		JLabel l8=new JLabel("");
 		JLabel l9=new JLabel("");
-		l1.setPreferredSize(new Dimension(100,25));
-		l2.setPreferredSize(new Dimension(100,25));
-		l3.setPreferredSize(new Dimension(100,25));
-		l4.setPreferredSize(new Dimension(100,25));
-		l5.setPreferredSize(new Dimension(250,25));
-		l6.setPreferredSize(new Dimension(80,25));
-		l7.setPreferredSize(new Dimension(80,25));
-		l8.setPreferredSize(new Dimension(25,25));
-		l9.setPreferredSize(new Dimension(25,25));
+		l1.setPreferredSize(new Dimension(100,20));
+		l2.setPreferredSize(new Dimension(100,20));
+		l3.setPreferredSize(new Dimension(100,20));
+		l4.setPreferredSize(new Dimension(100,20));
+		l5.setPreferredSize(new Dimension(250,20));
+		l6.setPreferredSize(new Dimension(80,20));
+		l7.setPreferredSize(new Dimension(80,20));
+		l8.setPreferredSize(new Dimension(25,20));
+		l9.setPreferredSize(new Dimension(25,20));
 		p.add(l1);
 		p.add(l2);
 		p.add(l3);
@@ -168,12 +169,11 @@ public class PanelContratos extends JPanel
 		p.add(l7);
 		p.add(l8);
 		p.add(l9);
-		Box caja=Box.createVerticalBox();
-		caja.add(p);
+		cajaMultas=Box.createVerticalBox();
+		cajaMultas.add(p);
 		JLabel relleno=new JLabel("");
-		relleno.setPreferredSize(new Dimension(20,130));
-		caja.add(relleno);
-		return caja;
+		relleno.setPreferredSize(new Dimension(20,135));
+		cajaMultas.add(relleno);
 	}
 	
 	public JPanel dibujaContrato(LinkedList datos)
@@ -791,6 +791,7 @@ public class PanelContratos extends JPanel
 						datoscliente.add(tmov.getText());
 						datoscliente.add(temail.getText());
 						datoscliente.add(tfax.getText());
+						inicializaCajaMultas();
 						controlador.añadirContrato(datoscontrato,datoscliente);
 					}
 					else if (tipo=='m')
@@ -815,6 +816,7 @@ public class PanelContratos extends JPanel
 					else if(tipo=='n')
 					{	datoscontrato.add(tmatricula.getText());
 						datoscontrato.add(tfechaalta.getText());
+						inicializaCajaMultas();
 						controlador.añadirContratoACliente(datoscontrato,codigoCliente.getText());
 					}
 					formulario.setVisible(false);
@@ -926,7 +928,7 @@ public class PanelContratos extends JPanel
 		return pmod;
 	}
 	
-	public JPanel panelAltaMulta(char tipo,String codigo)
+	public JPanel panelAltaMulta(final char tipo,String codigo)
 	{
 		if (tipo=='c') formulario.setTitle("Crear multa");
 		else if (tipo=='m') formulario.setTitle("Modificar multa "+codigo);
@@ -944,11 +946,10 @@ public class PanelContratos extends JPanel
 		l3.setPreferredSize(new Dimension(100,20));
 		l4.setPreferredSize(new Dimension(100,20));
 		l5.setPreferredSize(new Dimension(100,20));
-		r1.setPreferredSize(new Dimension(150,20));
-		r2.setPreferredSize(new Dimension(150,20));
-		r3.setPreferredSize(new Dimension(150,20));
-		r4.setPreferredSize(new Dimension(150,20));
-		r5.setPreferredSize(new Dimension(150,20));
+		r2.setPreferredSize(new Dimension(80,20));
+		r3.setPreferredSize(new Dimension(80,20));
+		r4.setPreferredSize(new Dimension(100,20));
+		r5.setPreferredSize(new Dimension(100,20));
 		final JTextField exp=new JTextField();
 		exp.setPreferredSize(new Dimension(100,20));
 		final JTextField bol=new JTextField();
@@ -959,6 +960,22 @@ public class PanelContratos extends JPanel
 		{	exp.setEditable(false);
 			bol.setEditable(false);			
 		}
+		String [] dias={"1","2","3","4","5","6","7","8","9","10","11","12","13","14",
+						"15","16","17","18","19","20","21","22","23","24","25","26",
+						"27","28","29","30","31"};
+		String [] meses={"1","2","3","4","5","6","7","8","9","10","11","12"};
+		Calendar hoy=Calendar.getInstance();
+		int i=hoy.get(Calendar.YEAR);
+		Integer añoactual=new Integer(i);
+		Integer [] años={new Integer(i-4),new Integer(i-3),new Integer(i-2),new Integer(i-1),
+						añoactual,new Integer(i+1),new Integer(i+2),new Integer(i+3),
+						new Integer(i+4),new Integer(i+5),new Integer(i+6)};
+		final JComboBox dia=new JComboBox(dias);
+		final JComboBox mes=new JComboBox(meses);
+		final JComboBox año=new JComboBox(años);
+		año.setEditable(true);
+		año.setPreferredSize(new Dimension(60,20));
+		año.setSelectedItem(añoactual);
 		ButtonGroup grupo=new ButtonGroup();
 		JRadioButton rtrafico=new JRadioButton("Tráfico",true);
 		JRadioButton rtransporte=new JRadioButton("Transporte");
@@ -980,7 +997,9 @@ public class PanelContratos extends JPanel
 		p3.add(bol);
 		p3.add(r3);
 		p4.add(l4);
-		p4.add(fecha);
+		p4.add(dia);
+		p4.add(mes);
+		p4.add(año);
 		p4.add(r4);
 		p5.add(l5);
 		p5.add(infraccion);
@@ -1018,13 +1037,19 @@ public class PanelContratos extends JPanel
 		{	public void actionPerformed(ActionEvent e)
 			{
 				LinkedList datos=new LinkedList();
-				datos.add(exp.getText());
-				datos.add(bol.getText());
-				datos.add(fecha.getText());
-				datos.add((String)infraccion.getSelectedItem());
-				datos.add(descrip.getText());
-				datos.add(codigoContrato.getText());
-				controlador.añadirMulta(datos);
+				if (tipo=='c')
+				{	datos.add(exp.getText());
+					datos.add(bol.getText());
+					datos.add(dia.getSelectedItem()+"/"+mes.getSelectedItem()+"/"+año.getSelectedItem());
+					datos.add((String)infraccion.getSelectedItem());
+					datos.add(descrip.getText());
+					datos.add(codigoContrato.getText());
+					controlador.añadirMulta(codigoContrato.getText(),datos);
+				}
+				else if (tipo=='m')
+				{
+					
+				}
 				formulario.setVisible(false);
 				formulario.getContentPane().removeAll();				
 			}
