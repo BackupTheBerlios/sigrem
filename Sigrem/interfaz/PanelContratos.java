@@ -132,7 +132,7 @@ public class PanelContratos extends JPanel
 		bcrea.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formulario.getContentPane().add(panelAlta('c',null));
+				formulario.getContentPane().add(panelAlta('c',null,null));
 				formulario.pack();	
 				formulario.setVisible(true);
 			}
@@ -156,7 +156,7 @@ public class PanelContratos extends JPanel
 		return pco;
 	}
 	
-	public JPanel dibujaCliente(LinkedList datos)
+	public JPanel dibujaCliente(final LinkedList datos)
 	{
 		JPanel panel=new JPanel();
 		panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos del cliente",TitledBorder.LEFT,TitledBorder.TOP));
@@ -338,7 +338,7 @@ public class PanelContratos extends JPanel
 		nuevoContrato.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formulario.getContentPane().add(panelAlta('c',null));
+				formulario.getContentPane().add(panelAlta('c',null,datos));
 				formulario.pack();	
 				formulario.setVisible(true);
 			}
@@ -398,16 +398,14 @@ public class PanelContratos extends JPanel
 		return pmul;
 	}
 	
-	public JPanel panelAlta(char tipo,String codigo)
+	public JPanel panelAlta(char tipo,String codigo,LinkedList datos)
 	{
-		if (tipo=='c') 
-		{
-			formulario.setTitle("Crear contrato");
+		if (tipo=='c')
+		{	formulario.setTitle("Crear contrato");
 			formulario.setLocation(350,100);
 		}
 		else if (tipo=='m') 
-		{
-			formulario.setTitle("Modificar contrato "+codigo);
+		{	formulario.setTitle("Modificar contrato "+codigo);
 			formulario.setLocation(350,100);
 		}
 		JLabel lc1=new JLabel("Matrícula del vehículo");
@@ -416,8 +414,7 @@ public class PanelContratos extends JPanel
 		lc2.setPreferredSize(new Dimension(150,20));
 		final JTextField tfechaalta=new JTextField();
 		if (tipo=='c')
-		{
-			Date hoy = new Date();
+		{	Date hoy = new Date();
 			SimpleDateFormat formato=new SimpleDateFormat("dd.MM.yyyy");
 			tfechaalta.setText(formato.format(hoy));
 		}
@@ -497,6 +494,30 @@ public class PanelContratos extends JPanel
 		tmov.setPreferredSize(new Dimension(80,20));
 		temail.setPreferredSize(new Dimension(80,20));
 		tfax.setPreferredSize(new Dimension(60,20));
+		if (datos!=null)
+		{	tnom.setEnabled(false);
+			tdni.setEnabled(false);
+			tdir.setEnabled(false);
+			tcp.setEnabled(false);
+			tpob.setEnabled(false);
+			tpro.setEnabled(false);
+			ttel1.setEnabled(false);
+			ttel2.setEnabled(false);
+			tmov.setEnabled(false);
+			temail.setEnabled(false);
+			tfax.setEnabled(false);
+			tnom.setText((String)datos.get(0));
+			tdni.setText((String)datos.get(1));
+			tdir.setText((String)datos.get(2));
+			tcp.setText((String)datos.get(3));
+			tpob.setText((String)datos.get(4));
+			tpro.setText((String)datos.get(5));
+			ttel1.setText((String)datos.get(6));
+			ttel2.setText((String)datos.get(7));
+			tmov.setText((String)datos.get(8));
+			temail.setText((String)datos.get(9));
+			tfax.setText((String)datos.get(10));
+		}
 		Box c1=Box.createHorizontalBox();
 		Box c2=Box.createHorizontalBox();
 		Box c3=Box.createHorizontalBox();
@@ -585,8 +606,6 @@ public class PanelContratos extends JPanel
 				controlador.añadirContrato(datoscontrato,datoscliente);
 				formulario.setVisible(false);
 				formulario.getContentPane().removeAll();
-			//	removeAll();
-			//	dibujaPaneles(true);
 			}
 		});
 		cancelar.addActionListener(new ActionListener()
@@ -599,7 +618,7 @@ public class PanelContratos extends JPanel
 		return panel;
 	}
 	
-	public JPanel panelBaja(String codigo)
+	public JPanel panelBaja(final String codigo)
 	{
 		formulario.setTitle("Eliminar contrato");
 		formulario.setLocation(350,100);
@@ -628,8 +647,10 @@ public class PanelContratos extends JPanel
 				formulario.setVisible(false);
 				int seleccion=JOptionPane.showConfirmDialog(null,"           ¿Desea eliminar el contrato "+tcodigo.getText()+"?","Eliminar contrato",JOptionPane.YES_NO_CANCEL_OPTION,-1);
 				if (seleccion==JOptionPane.YES_OPTION)
-				{	
-					
+				{	if (codigo.equals(tcodigo.getText()))
+					{	controlador.eliminarContrato(true,tcodigo.getText());}
+					else
+					{	controlador.eliminarContrato(false,tcodigo.getText());}
 				}
 				formulario.getContentPane().removeAll();
 			}
@@ -672,7 +693,7 @@ public class PanelContratos extends JPanel
 			{
 				formulario.setVisible(false);
 				formulario.getContentPane().removeAll();
-				formulario.getContentPane().add(panelAlta('m',codigo));
+				formulario.getContentPane().add(panelAlta('m',codigo,null));
 				formulario.pack();	
 				formulario.setVisible(true);				
 			}

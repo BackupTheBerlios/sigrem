@@ -66,4 +66,20 @@ public class Sigrem
 		String contratonuevo=gcontratos.añadirContrato(datoscontrato);
 		gclientes.asociaClienteContrato(clientenuevo,clientenuevo);
 	}
+	
+	public void eliminarContrato(boolean borrar,String codigo)
+	{
+		gcontratos.eliminarContrato(borrar,codigo);
+	}
+	
+	public void modificarContrato(String codigo)
+	{
+		
+	}
+	
+	public void consultarContratoCodigo(String codigo)
+	{
+		String codcliente=gcontratos.consultarContratoCodigo(codigo);
+		if (codcliente!=null) gclientes.consultarClienteCodigo(codcliente);
+	}	
 }

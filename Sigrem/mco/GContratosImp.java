@@ -4,8 +4,6 @@ import med.*;
 import interfaz.*;
 import java.util.LinkedList;
 
-//import mcl.*;
-
 public class GContratosImp implements GContratos
 {
 	private EstructuraDatos listacontratos;
@@ -13,6 +11,17 @@ public class GContratosImp implements GContratos
 	private InterfazGrafica vista;
 	
 	private String codcontrato;
+	
+	private void incrementaCodigo()
+	{
+		String numero=codcontrato.substring(0,4);
+		Character car=null;
+		int num=car.digit(codcontrato.charAt(4),10);
+		for (int i=5;i<codcontrato.length();i++)
+		{	num=(num*10)+car.digit(codcontrato.charAt(i),10);}
+		numero=numero+(num+1);
+		codcontrato=numero;
+	}
   
 	public GContratosImp(InterfazGrafica vista,String codigo) 
 	{
@@ -24,32 +33,52 @@ public class GContratosImp implements GContratos
 	public String añadirContrato(LinkedList datos)
 	{
 		Contrato nuevocontrato=new Contrato(codcontrato,datos);
-		//incfrementar codigo en 1
 		String[] claves=new String[2];
 		claves[0]=codcontrato;
 		claves[1]=(String)datos.get(1);
 		listacontratos.insertar(claves,nuevocontrato);
-		datos.addFirst(codcontrato);
+		String codigoantiguo=codcontrato;
+		incrementaCodigo();
+		datos.addFirst(codigoantiguo);
 		vista.actualizaVista(1,1,datos);
-		return codcontrato;
+		return codigoantiguo;
 	}
 	
-	public void eliminarContrato(Integer codigo)
+	public void eliminarContrato(boolean borrar, String codigo)
 	{
+		boolean eliminado=listacontratos.eliminar(codigo,0);
+		if (eliminado) 
+		{	vista.actualizaMensaje("       Contrato "+codigo+" eliminado correctamente");
+			if (borrar)
+			{	vista.actualizaVista(1,1,null);
+				vista.actualizaVista(1,2,null);				
+			}
 		
+		}
+		else vista.actualizaMensaje("Error al eliminar el contrato "+codigo+". No se ha encontrado");
 	}
 
-	public void modificarContrato(Integer codigo)
+	public void modificarContrato(String codigo)
 	{
 		
 	}
 	
-	public void consultarContratoCodigo(Integer codigo)
+	public String consultarContratoCodigo(String codigo)
 	{
+		Object[] busqueda=listacontratos.buscar(codigo,0);
 		
+		if (busqueda[0]!=null)
+		{	Contrato contrato=(Contrato)busqueda[0];
+			vista.actualizaVista(1,1,contrato.getListaDatos());
+			return contrato.getCodigoCliente();
+		}
+		else
+		{	vista.actualizaMensaje("Error al buscar el contrato "+codigo+". No se ha encontrado");
+			return null;
+		}		
 	}
 	
-	public void consultarContratoMatrícula(String matricula)
+	public void consultarContratoMatricula(String matricula)
 	{
 		
 	}

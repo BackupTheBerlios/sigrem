@@ -12,6 +12,17 @@ public class GClientesImp implements GClientes
 	
 	private String codcliente;
 	 
+	private void incrementaCodigo()
+	{
+		String numero=codcliente.substring(0,4);
+		Character car=null;
+		int num=car.digit(codcliente.charAt(4),10);
+		for (int i=5;i<codcliente.length();i++)
+		{	num=(num*10)+car.digit(codcliente.charAt(i),10);}
+		numero=numero+(num+1);
+		codcliente=numero;
+	}
+	
 	public GClientesImp(InterfazGrafica vista,String codigo) 
 	{
 		this.listaclientes=new EstructuraDatosImp(3);
@@ -23,14 +34,15 @@ public class GClientesImp implements GClientes
 	public String añadirCliente(LinkedList datos)
 	{
 		Cliente nuevocliente=new Cliente(codcliente,datos);
-		//incrementar codigo en 1
 		String[] claves=new String[3];
 		claves[0]=codcliente;
 		claves[1]=(String)datos.get(1);
 		claves[2]=(String)datos.get(2);
 		listaclientes.insertar(claves,nuevocliente);
+		String codigoantiguo=codcliente;
+		incrementaCodigo();
 		vista.actualizaVista(1,2,datos);
-		return codcliente;
+		return codigoantiguo;
 	}
 	
 	public void asociaClienteContrato(String codcliente,String codcontrato)
@@ -52,7 +64,13 @@ public class GClientesImp implements GClientes
 	
 	public void consultarClienteCodigo(String codigo)
 	{
-
+		Object[] busqueda=listaclientes.buscar(codigo,0);
+		if (busqueda[0]!=null)
+		{	Cliente cliente=(Cliente)busqueda[0];
+			vista.actualizaVista(1,2,cliente.getListaDatos());
+		}
+		else
+		{	vista.actualizaMensaje("Error al buscar el cliente "+codigo+". No se ha encontrado");}
 	}
 	
 	public void consultarClienteNombre(String nombre)

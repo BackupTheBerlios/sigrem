@@ -53,11 +53,10 @@ public class Contrato
 	{
 		LinkedList datos=new LinkedList();
 		datos.add(codigocontrato);
+		datos.add(codigocliente);
 		datos.add(matricula);
 		datos.add(fechaalta);
 		datos.add(fechabaja);
-		datos.add(codigocliente);
-		datos.add(listamultas);
 		return datos;
 	}
 	
@@ -91,10 +90,10 @@ public class Contrato
 	public void setListaDatos(LinkedList datos)
 	{
 		codigocontrato=(String)datos.get(0);
-		matricula=(String)datos.get(1);
-		fechaalta=(String)datos.get(2);
-		fechabaja=(String)datos.get(3);
-		codigocliente=(String)datos.get(4);
+		codigocliente=(String)datos.get(1);
+		matricula=(String)datos.get(2);
+		fechaalta=(String)datos.get(3);
+		fechabaja=(String)datos.get(4);		
 		listamultas=(LinkedList)datos.get(5);
 	}
 }

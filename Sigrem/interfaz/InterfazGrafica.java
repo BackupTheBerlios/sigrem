@@ -155,6 +155,11 @@ public class InterfazGrafica
 		else if (pestaña==3) {}//peconomia.actualiza(panel,datos);
 	}
 	
+	public void actualizaMensaje(String mensaje)
+	{
+		JOptionPane.showMessageDialog(null,mensaje,"Sigrem",-1);
+	}
+	
 	public JMenuBar setMenu()
 	{
 		JMenuBar menu=new JMenuBar();
@@ -237,8 +242,8 @@ public class InterfazGrafica
 			{
 				String valor=JOptionPane.showInputDialog(null,"Introduce el código del contrato","Consultar contrato",-1);
 				if (valor!=null)
-				{	
-					panelVistas.setSelectedIndex(0);
+				{	panelVistas.setSelectedIndex(0);
+					controlador.consultarContratoCodigo(valor);				
 				}
 			}
 		});

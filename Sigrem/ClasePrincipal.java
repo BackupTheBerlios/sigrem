@@ -18,7 +18,7 @@ public class ClasePrincipal
 	
 	private static String codempleado;	
 	
-	private static void leerFicheroConfig()
+		private static void leerFicheroConfig()
 	{
 		try
 		{	BufferedReader entrada=new BufferedReader(new FileReader("configsig.ini"));

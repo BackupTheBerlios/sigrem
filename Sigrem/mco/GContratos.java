@@ -8,11 +8,11 @@ public interface GContratos
 	//Requisito 2.1
 	public String añadirContrato(LinkedList datos);
 	//Requisito 2.2
-	public void eliminarContrato(Integer codigo);
+	public void eliminarContrato(boolean borrar,String codigo);
 	//Requisito 2.3
-	public void modificarContrato(Integer codigo);
+	public void modificarContrato(String codigo);
 	//Requisito 2.4
-	public void consultarContratoCodigo(Integer codigo);
+	public String consultarContratoCodigo(String codigo);
 	//Requisito 2.5
-	public void consultarContratoMatrícula(String matricula);
+	public void consultarContratoMatricula(String matricula);
 }
