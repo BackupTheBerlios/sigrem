@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelEmpleados extends JPanel 
 {
@@ -24,20 +26,61 @@ public class PanelEmpleados extends JPanel
 	
 	private JButton bdespedir;	
 	
+	private JMenuItem imodificar;
+	
+	private JMenuItem idespedir;
+	
 	private JComboBox estado;
 		
 	private JComboBox perfil;
 	
+	private int ucod;
+	
+	private int urec; 
+	
+	private static JPopupMenu menu;
+	
+	private static class PopupListener extends MouseAdapter
+	{
+		public void mousePressed(MouseEvent e)
+		{
+			maybeShowPopup(e);
+		}
+		
+		public void mouseReleased(MouseEvent e)
+		{
+			maybeShowPopup(e);
+		}
+		
+		private void maybeShowPopup(MouseEvent e)
+		{
+			if (e.isPopupTrigger())
+			{
+				menu.show(e.getComponent(),e.getX(),e.getY());
+			}
+		}
+	}
+	
 	public PanelEmpleados()
 	{
 		super();
+		ucod=0;
+		urec=0;
+		dibujaPaneles(null,null,null);
+		
+	}
+	
+	public void dibujaPaneles(String codigo, String perfil, String nomina)
+	{
 		bmodificar=new JButton("Modificar");
 		bdespedir=new JButton("Despedir");
-		JPanel pempleado=dibujaEmpleado();
+		imodificar=new JMenuItem("Modificar");
+		idespedir=new JMenuItem("Despedir");
+		JPanel pempleado=dibujaEmpleado(codigo,perfil,nomina);
 		pempleado.setPreferredSize(new Dimension(314,0));
-		JPanel pdatos=dibujaDatos(false, 'n');
+		JPanel pdatos=dibujaDatos(false, ' ');
 		pdatos.setPreferredSize(new Dimension(0,260));
-		JPanel precursos=dibujaRecursos();
+		JPanel precursos=dibujaRecursos(perfil);
 		JSplitPane sp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,pempleado,pdatos);
 		sp1.setDividerSize(4);
 		sp1.setEnabled(false);
@@ -56,14 +99,20 @@ public class PanelEmpleados extends JPanel
 		formRecurso.setLocation(350,100);
 		formDescrip=new JFrame();
 		formDescrip.setResizable(false);
-		formDescrip.setLocation(350,100);
+		formDescrip.setLocation(350,100);		
 	}
 		
-	public JPanel dibujaEmpleado()
-	{
-		
-		
+	public JPanel dibujaEmpleado(String codigo, final String perfil, String nomina)
+	{		
+		menu=new JPopupMenu();
+		JMenuItem icontratar=new JMenuItem("Contratar");
+		idespedir.setEnabled(false);
+		imodificar.setEnabled(false);
+		menu.add(icontratar);
+		menu.add(idespedir);
+		menu.add(imodificar);
 		JPanel pemp=new JPanel();
+		pemp.addMouseListener(new PopupListener());
 		pemp.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos del empleado",TitledBorder.LEFT,TitledBorder.TOP));
 		JLabel l1=new JLabel("Código del empleado");
 		JLabel l2=new JLabel("Perfil del empleado");
@@ -71,21 +120,27 @@ public class PanelEmpleados extends JPanel
 		l1.setPreferredSize(new Dimension(150,20));
 		l2.setPreferredSize(new Dimension(150,20));
 		l3.setPreferredSize(new Dimension(150,20));
-		final JTextField t1=new JTextField("E001");
-		final JTextField t2=new JTextField();
-		JTextField t3=new JTextField();
+		l1.addMouseListener(new PopupListener());
+		l2.addMouseListener(new PopupListener());
+		l3.addMouseListener(new PopupListener());
+		final JTextField t1=new JTextField(codigo);
+		final JTextField t2=new JTextField(perfil);
+		JTextField t3=new JTextField(nomina);
 		t1.setPreferredSize(new Dimension(100,20));
 		t2.setPreferredSize(new Dimension(100,20));
 		t3.setPreferredSize(new Dimension(100,20));
-		t1.setEditable(false);
-		t2.setEditable(false);
-		t3.setEditable(false);
-		t1.setBackground(Color.WHITE);
-		t2.setBackground(Color.WHITE);
-		t3.setBackground(Color.WHITE);
+		t1.setEnabled(false);
+		t2.setEnabled(false);
+		t3.setEnabled(false);
+		t1.addMouseListener(new PopupListener());
+		t2.addMouseListener(new PopupListener());
+		t3.addMouseListener(new PopupListener());
 		JButton bcontratar=new JButton ("Contratar");
 		bdespedir.setEnabled(false);
 		bmodificar.setEnabled(false);
+		bcontratar.addMouseListener(new PopupListener());
+		bmodificar.addMouseListener(new PopupListener());
+		bdespedir.addMouseListener(new PopupListener());
 		bcontratar.setPreferredSize(new Dimension(90,25));
 		bmodificar.setPreferredSize(new Dimension(90,25));
 		bdespedir.setPreferredSize(new Dimension(90,25));
@@ -105,17 +160,49 @@ public class PanelEmpleados extends JPanel
 		Box caja=Box.createVerticalBox();
 		caja.add(p1);
 		caja.add(p2);
-		caja.add(p3);		
+		caja.add(p3);
+		caja.addMouseListener(new PopupListener());
 		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja,p4);
 		sp.setDividerSize(4);
 		sp.setEnabled(false);
 		pemp.add(sp);
+		icontratar.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				if (!formAlta.isVisible())
+				{	
+					formAlta.getContentPane().add(panelAltaEmpleado('c',t1.getText(),perfil));
+					formAlta.pack();	
+					formAlta.setVisible(true);
+				}
+			}
+		});
+		idespedir.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				if (!formAlta.isVisible())
+				{	
+					eliminaEmpleado(t1.getText());
+				}
+			}
+		});
+		imodificar.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				if (!formAlta.isVisible())
+				{	
+					formAlta.getContentPane().add(panelAltaEmpleado('m',t1.getText(),perfil));
+					formAlta.pack();	
+					formAlta.setVisible(true);
+				}
+			}
+		});
 		bcontratar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
 				if (!formAlta.isVisible())
 				{	
-					formAlta.getContentPane().add(panelAltaEmpleado('c',t1.getText()));
+					formAlta.getContentPane().add(panelAltaEmpleado('c',t1.getText(),perfil));
 					formAlta.pack();	
 					formAlta.setVisible(true);					
 				}
@@ -132,7 +219,7 @@ public class PanelEmpleados extends JPanel
 			{
 				if (!formAlta.isVisible())
 				{	
-					formAlta.getContentPane().add(panelAltaEmpleado('m',t1.getText()));
+					formAlta.getContentPane().add(panelAltaEmpleado('m',t1.getText(),perfil));
 					formAlta.pack();	
 					formAlta.setVisible(true);
 				}
@@ -145,6 +232,7 @@ public class PanelEmpleados extends JPanel
 	{		
 		JPanel pdat=new JPanel();
 		pdat.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos personales",TitledBorder.LEFT,TitledBorder.TOP));
+		pdat.addMouseListener(new PopupListener());
 		JLabel l1=new JLabel("Nombre ",SwingConstants.RIGHT);
 		JLabel l2=new JLabel("DNI/CIF ",SwingConstants.RIGHT);
 		JLabel l3=new JLabel("Dirección ",SwingConstants.RIGHT);
@@ -161,6 +249,14 @@ public class PanelEmpleados extends JPanel
 		l6.setPreferredSize(new Dimension(80,20));
 		l7.setPreferredSize(new Dimension(80,20));
 		l8.setPreferredSize(new Dimension(80,20));
+		l1.addMouseListener(new PopupListener());
+		l2.addMouseListener(new PopupListener());
+		l3.addMouseListener(new PopupListener());
+		l4.addMouseListener(new PopupListener());
+		l5.addMouseListener(new PopupListener());
+		l6.addMouseListener(new PopupListener());
+		l7.addMouseListener(new PopupListener());
+		l8.addMouseListener(new PopupListener());
 		JLabel relleno1=new JLabel("");
 		JLabel relleno2=new JLabel("");
 		JLabel relleno3=new JLabel("");
@@ -170,7 +266,12 @@ public class PanelEmpleados extends JPanel
 		relleno2.setPreferredSize(new Dimension(150,20));
 		relleno3.setPreferredSize(new Dimension(50,20));
 		relleno4.setPreferredSize(new Dimension(100,20));
-		relleno5.setPreferredSize(new Dimension(20,20));		
+		relleno5.setPreferredSize(new Dimension(20,20));
+		relleno1.addMouseListener(new PopupListener());
+		relleno2.addMouseListener(new PopupListener());
+		relleno3.addMouseListener(new PopupListener());
+		relleno4.addMouseListener(new PopupListener());
+		relleno5.addMouseListener(new PopupListener());
 		JTextField tnom=new JTextField();
 		JTextField tdni=new JTextField();
 		JTextField tdir=new JTextField();
@@ -187,6 +288,14 @@ public class PanelEmpleados extends JPanel
 		tpro.setPreferredSize(new Dimension(160,20));
 		ttel.setPreferredSize(new Dimension(80,20));
 		temail.setPreferredSize(new Dimension(80,20));
+		tnom.addMouseListener(new PopupListener());
+		tdni.addMouseListener(new PopupListener());
+		tdir.addMouseListener(new PopupListener());
+		tcp.addMouseListener(new PopupListener());
+		tloc.addMouseListener(new PopupListener());
+		tpro.addMouseListener(new PopupListener());
+		ttel.addMouseListener(new PopupListener());
+		temail.addMouseListener(new PopupListener());
 		if (tipo=='m') 	tdni.setEditable(false);
 		if (!editable)
 		{
@@ -249,58 +358,79 @@ public class PanelEmpleados extends JPanel
 		return pdat;
 	}
 	
-	public JPanel dibujaRecursos()
+	public JPanel dibujaRecursos(String perfil)
 	{	
-		Box tabla=Box.createVerticalBox();
-		JPanel p=new JPanel();
-		JLabel l1=new JLabel("Código",SwingConstants.CENTER);
-		JLabel l2=new JLabel("Multa",SwingConstants.CENTER);
-		JLabel l3=new JLabel("Estado",SwingConstants.CENTER);
-		JLabel l4=new JLabel("Descripción",SwingConstants.CENTER);
-		JLabel l5=new JLabel("",SwingConstants.CENTER);
-		JLabel l6=new JLabel("",SwingConstants.CENTER);
-		l1.setPreferredSize(new Dimension(130,25));
-		l2.setPreferredSize(new Dimension(130,25));
-		l3.setPreferredSize(new Dimension(130,25));
-		l4.setPreferredSize(new Dimension(80,25));
-		l5.setPreferredSize(new Dimension(25,25));
-		l6.setPreferredSize(new Dimension(25,25));
-		p.add(l1);
-		p.add(l2);
-		p.add(l3);
-		p.add(l4);
-		p.add(l5);
-		p.add(l6);
-		tabla.add(p);
-		for (int i=0;i<9;i++)
-		{	JPanel linea=dibujaLinea();
-			tabla.add(linea);		
-		}
-		JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		ptabla.setPreferredSize(new Dimension(700,200));
-		JButton bcrea=new JButton("Añadir recurso");
-		JPanel botonera=new JPanel();
-		botonera.add(bcrea);
-		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,ptabla,botonera);
-		sp.setEnabled(false);
-		sp.setDividerSize(4);
-		JPanel prec=new JPanel();
-		prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Recursos asignados",TitledBorder.LEFT,TitledBorder.TOP));
-		prec.add(sp);						
-		bcrea.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-				if (!formRecurso.isVisible())
-				{	formRecurso.getContentPane().add(anadeRecurso());
-					formRecurso.pack();
-					formRecurso.setVisible(true);
-				}
+		JPanel prec;
+		if (perfil=="Abogado")
+		{
+			Box tabla=Box.createVerticalBox();
+			JPanel p=new JPanel();
+			JLabel l1=new JLabel("Código",SwingConstants.CENTER);
+			JLabel l2=new JLabel("Multa",SwingConstants.CENTER);
+			JLabel l3=new JLabel("Estado",SwingConstants.CENTER);
+			JLabel l4=new JLabel("Descripción",SwingConstants.CENTER);
+			JLabel l5=new JLabel("",SwingConstants.CENTER);
+			JLabel l6=new JLabel("",SwingConstants.CENTER);
+			l1.setPreferredSize(new Dimension(130,25));
+			l2.setPreferredSize(new Dimension(130,25));
+			l3.setPreferredSize(new Dimension(130,25));
+			l4.setPreferredSize(new Dimension(80,25));
+			l5.setPreferredSize(new Dimension(25,25));
+			l6.setPreferredSize(new Dimension(25,25));
+			p.add(l1);
+			p.add(l2);
+			p.add(l3);
+			p.add(l4);
+			p.add(l5);
+			p.add(l6);
+			tabla.add(p);
+			for (int i=0;i<9;i++)
+			{	JPanel linea=dibujaLinea();
+				tabla.add(linea);		
 			}
-		});
+			JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+			ptabla.setPreferredSize(new Dimension(700,200));
+			JButton bcrea=new JButton("Añadir recurso");
+			JPanel botonera=new JPanel();
+			botonera.add(bcrea);
+			JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,ptabla,botonera);
+			sp.setEnabled(false);
+			sp.setDividerSize(4);
+			prec=new JPanel();
+			prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Recursos asignados",TitledBorder.LEFT,TitledBorder.TOP));
+			prec.add(sp);						
+			bcrea.addActionListener(new ActionListener()
+			{	public void actionPerformed(ActionEvent e)
+				{	
+					if (!formRecurso.isVisible())
+					{	formRecurso.getContentPane().add(anadeRecurso());
+						formRecurso.pack();
+						formRecurso.setVisible(true);
+					}
+				}
+			});
+		}
+		else
+		{
+			if (perfil=="Administrativo")
+			{
+				JLabel ll1=new JLabel("No hay información adicional sobre Administrativos...",SwingConstants.CENTER);
+				prec=new JPanel();
+				prec.setPreferredSize(new Dimension(724,280));
+				prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Información adicional de Administrativo",TitledBorder.LEFT,TitledBorder.TOP));
+				prec.add(ll1);
+			}
+			else
+			{
+				prec=new JPanel();
+				prec.setPreferredSize(new Dimension(724,280));
+				prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"",TitledBorder.LEFT,TitledBorder.TOP));
+			}
+		}
 		return prec;		
 	}
 	
-	public JPanel panelAltaEmpleado(char tipo,String codigo) 
+	public JPanel panelAltaEmpleado(char tipo,String codigo,String per) 
 	{		
 		if (tipo=='c') formAlta.setTitle("Contratar empleado");
 		else if (tipo=='m') formAlta.setTitle("Modificar empleado "+codigo);
@@ -308,16 +438,16 @@ public class PanelEmpleados extends JPanel
 		JLabel lperfil=new JLabel("Perfil del empleado");
 		JLabel lnomina=new JLabel("Nómina del empleado");
 		String [] opciones={"Abogado","Administrativo"};
+		lcodigo.setPreferredSize(new Dimension(150,20));
+		lperfil.setPreferredSize(new Dimension(150,20));
+		lnomina.setPreferredSize(new Dimension(150,20));
+		final JTextField tcodigo=new JTextField(codigo);
 		perfil=new JComboBox(opciones);
 		perfil.setPreferredSize(new Dimension(100,20));
 		perfil.setEditable(false);
 		perfil.setBackground(Color.WHITE);
-		lcodigo.setPreferredSize(new Dimension(150,20));
-		lperfil.setPreferredSize(new Dimension(150,20));
-		lnomina.setPreferredSize(new Dimension(150,20));
-		JTextField tcodigo=new JTextField(codigo);
-		JTextField tperfil=new JTextField();
-		JTextField tnomina=new JTextField();
+		if ((per=="Administrativo")&&(tipo=='m'))	perfil.setSelectedIndex(1);
+		final JTextField tnomina=new JTextField();
 		tcodigo.setPreferredSize(new Dimension(100,20));
 		tnomina.setPreferredSize(new Dimension(100,20));
 		tcodigo.setEditable(false);
@@ -338,7 +468,11 @@ public class PanelEmpleados extends JPanel
 		JPanel pdat;
 		if (tipo=='m')
 			pdat=dibujaDatos(true,'m');
-		else pdat=dibujaDatos(true,'c');
+		else 
+			{	pdat=dibujaDatos(true,'c');
+				ucod=ucod+1;
+				tcodigo.setText("E00"+ucod);
+			}
 		JPanel pbotones=new JPanel();
 		JButton bacepta=new JButton ("Aceptar");
 		JButton bcancela=new JButton ("Cancelar");
@@ -357,8 +491,15 @@ public class PanelEmpleados extends JPanel
 			{
 				formAlta.setVisible(false);
 				formAlta.getContentPane().removeAll();
+				removeAll();
+				String per="";
+				if (perfil.getSelectedIndex()==0)	per="Abogado";					
+				else per="Administrativo";
+				dibujaPaneles(tcodigo.getText(),per,tnomina.getText());
 				bdespedir.setEnabled(true);
-				bmodificar.setEnabled(true);
+				bmodificar.setEnabled(true);								
+				idespedir.setEnabled(true);
+				imodificar.setEnabled(true);
 			}
 		});
 		bcancela.addActionListener(new ActionListener()
@@ -562,7 +703,8 @@ public class PanelEmpleados extends JPanel
 	public JPanel dibujaLinea()
 	{		
 		JPanel panel=new JPanel();
-		final JTextField cod=new JTextField("R001");
+		urec=urec+1;
+		final JTextField cod=new JTextField("R00"+urec);
 		final JTextField exp=new JTextField();
 		final JTextField bol=new JTextField();
 		final JButton descrip=new JButton(new ImageIcon("interfaz/find.gif"));
@@ -613,5 +755,5 @@ public class PanelEmpleados extends JPanel
 			}
 		});
 		return panel;
-	}
+	}	
 }
