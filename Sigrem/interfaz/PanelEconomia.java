@@ -16,7 +16,7 @@ public class PanelEconomia extends JPanel
 	
 	private Sigrem controlador;
 		
-	public PanelEconomia(int grafico,Sigrem controlador)
+	public PanelEconomia(int grafico,Sigrem controlador,JFrame v)
 	{
 		super();
 		this.controlador=controlador;

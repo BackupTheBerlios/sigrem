@@ -29,35 +29,35 @@ public class PanelContratos extends JPanel
 	
 	private JDialog formMod;
 	
-	public PanelContratos(Sigrem controlador)
+	public PanelContratos(Sigrem controlador,JFrame v)
 	{
 		super();
 		this.controlador=controlador;
-		dibujaPaneles(false);
-		formAlta=new JDialog();
+		formAlta=new JDialog(v,true);
 		formAlta.setResizable(false);
 		formAlta.setLocation(350,100);
-		formBaja=new JDialog();
+		formBaja=new JDialog(v,true);
 		formBaja.setResizable(false);
 		formBaja.setLocation(350,100);
-		formMod=new JDialog();
+		formMod=new JDialog(v,true);
 		formMod.setResizable(false);
 		formMod.setLocation(350,100);
-		formMulta=new JDialog();
+		formMulta=new JDialog(v,true);
 		formMulta.setResizable(false);
 		formMulta.setLocation(350,150);
-		formDescripM=new JDialog();
+		formDescripM=new JDialog(v,true);
 		formDescripM.setResizable(false);
 		formDescripM.setLocation(350,200);
-		formDescripR=new JDialog();
+		formDescripR=new JDialog(v,true);
 		formDescripR.setResizable(false);
 		formDescripR.setLocation(350,100);
-		formRecurso=new JDialog();
+		formRecurso=new JDialog(v,true);
 		formRecurso.setResizable(false);
 		formRecurso.setLocation(200,100);
-		formAltaRec=new JDialog();
+		formAltaRec=new JDialog(v,true);
 		formAltaRec.setResizable(false);
 		formAltaRec.setLocation(350,100);
+		dibujaPaneles(false);
 	}
 	
 	public void dibujaPaneles(boolean multas)

@@ -77,9 +77,9 @@ public class InterfazGrafica
 		formayuda.setLocation(150,50);
 		formayuda.setPreferredSize(new Dimension(500,400));
 		panelVistas=new JTabbedPane(JTabbedPane.BOTTOM);
-		pcontratos=new PanelContratos(this.controlador);
-		pempleados=new PanelEmpleados(this.controlador);
-		peconomia=new PanelEconomia(0,this.controlador);
+		pcontratos=new PanelContratos(this.controlador,ventana);
+		pempleados=new PanelEmpleados(this.controlador,ventana);
+		peconomia=new PanelEconomia(0,this.controlador,ventana);
 		panelVistas.addTab("Gestión Contratos",pcontratos);
 		panelVistas.addTab("Gestión Empleados",pempleados);
 		panelVistas.addTab("Gestión Económica",peconomia);
@@ -139,13 +139,13 @@ public class InterfazGrafica
 	public void actualizaVista(int panel,String[] datos)
 	{
 		if (panel==1)
-		{	pcontratos=new PanelContratos(controlador);
+		{	pcontratos=new PanelContratos(controlador,ventana);
 		}
 		else if (panel==2)
-		{	pempleados=new PanelEmpleados(controlador);			
+		{	pempleados=new PanelEmpleados(controlador,ventana);			
 		}
 		else if (panel==3)
-		{	peconomia=new PanelEconomia(0,controlador);			
+		{	peconomia=new PanelEconomia(0,controlador,ventana);			
 		}	
 	}
 	
@@ -348,7 +348,7 @@ public class InterfazGrafica
 		{	public void actionPerformed(ActionEvent e)
 			{
 				panelVistas.remove(2);
-				peconomia=new PanelEconomia(1,controlador);
+				peconomia=new PanelEconomia(1,controlador,ventana);
 				panelVistas.addTab("Gestión Económica",peconomia);
 				panelVistas.setSelectedIndex(2);
 				
@@ -358,7 +358,7 @@ public class InterfazGrafica
 		{	public void actionPerformed(ActionEvent e)
 			{
 				panelVistas.remove(2);
-				peconomia=new PanelEconomia(2,controlador);
+				peconomia=new PanelEconomia(2,controlador,ventana);
 				panelVistas.addTab("Gestión Económica",peconomia);
 				panelVistas.setSelectedIndex(2);
 			}
@@ -367,7 +367,7 @@ public class InterfazGrafica
 		{	public void actionPerformed(ActionEvent e)
 			{
 				panelVistas.remove(2);
-				peconomia=new PanelEconomia(3,controlador);
+				peconomia=new PanelEconomia(3,controlador,ventana);
 				panelVistas.addTab("Gestión Económica",peconomia);
 				panelVistas.setSelectedIndex(2);
 			}

@@ -44,7 +44,7 @@ public class PanelEmpleados extends JPanel
 	
 	private int urec; 
 	
-	public PanelEmpleados(Sigrem controlador)
+	public PanelEmpleados(Sigrem controlador,JFrame v)
 	{
 		super();
 		this.controlador=controlador;
@@ -53,8 +53,27 @@ public class PanelEmpleados extends JPanel
 		pmostrado=-1;
 		cmostrado="";
 		nmostrado="";
-		
+		formAlta=new JDialog(v,true);
+		formAlta.setResizable(false);
+		formAlta.setLocation(350,100);
+		formBaja=new JDialog(v,true);
+		formBaja.setResizable(false);
+		formBaja.setLocation(350,100);
+		formMod1=new JDialog(v,true);
+		formMod1.setResizable(false);
+		formMod1.setLocation(350,100);
+		formMod2=new JDialog(v,true);
+		formMod2.setResizable(false);
+		formMod2.setLocation(350,100);
+		formRecurso=new JDialog(v,true);		
+		formRecurso.setResizable(false);
+		formRecurso.setLocation(350,100);
+		formDescrip=new JDialog(v,true);
+		formDescrip.setResizable(false);
+		formDescrip.setLocation(350,100);
 		dibujaPaneles();
+		
+		
 		
 	}
 	
@@ -73,25 +92,7 @@ public class PanelEmpleados extends JPanel
 		JSplitPane sp2=new JSplitPane(JSplitPane.VERTICAL_SPLIT,sp1,precursos);
 		sp2.setEnabled(false);		
 		sp2.setDividerSize(4);
-		add(sp2);
-		formAlta=new JDialog();
-		formAlta.setResizable(false);
-		formAlta.setLocation(350,100);
-		formBaja=new JDialog();
-		formBaja.setResizable(false);
-		formBaja.setLocation(350,100);
-		formMod1=new JDialog();
-		formMod1.setResizable(false);
-		formMod1.setLocation(350,100);
-		formMod2=new JDialog();
-		formMod2.setResizable(false);
-		formMod2.setLocation(350,100);
-		formRecurso=new JDialog();		
-		formRecurso.setResizable(false);
-		formRecurso.setLocation(350,100);
-		formDescrip=new JDialog();
-		formDescrip.setResizable(false);
-		formDescrip.setLocation(350,100);		
+		add(sp2);				
 	}
 		
 	public JPanel dibujaEmpleado()
