@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.GridLayout;
 
 public class PanelContratos extends JPanel
 {
@@ -48,10 +49,8 @@ public class PanelContratos extends JPanel
 		tcliente.setEnabled(false);
 		tmatricula.setEnabled(false);
 		JButton bcrea=new JButton ("Crear");
-		JButton belim=new JButton ("Eliminar");
 		JButton bmod=new JButton ("Modificar");
-		belim.setEnabled(false);
-		bmod.setEnabled(false);
+		JButton belim=new JButton ("Eliminar");
 		JPanel p1=new JPanel();
 		JPanel p2=new JPanel();
 		JPanel p3=new JPanel();
@@ -63,8 +62,8 @@ public class PanelContratos extends JPanel
 		p3.add(l3);
 		p3.add(tcliente);
 		botonera.add(bcrea);
-		botonera.add(belim);
 		botonera.add(bmod);
+		botonera.add(belim);
 		Box caja=Box.createVerticalBox();
 		caja.add(p1);
 		caja.add(p2);
@@ -185,14 +184,41 @@ public class PanelContratos extends JPanel
 
 	public JScrollPane dibujaMultas()
 	{
-		String[] vec2={"Código","Expediente","Boletín","Descripción","Recursos"};
-		String[][] vec1=new String[10][5];
-		JTable multas=new JTable(vec1,vec2);
-		multas.setRowHeight(20);
-		multas.setEnabled(false);
-		JScrollPane pmul=new JScrollPane(multas,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		int f=8;
+		int c=5;
+		JPanel panel=new JPanel(new GridLayout(f,c));
+		for (int i=0;i<f;i++)
+			for (int j=0;j<c;j++)
+			{	if (j<3)
+				{	JTextField texto=new JTextField();
+					texto.setEnabled(false);
+					texto.setPreferredSize(new Dimension(50,20));
+					panel.add(texto);
+				}
+				else
+				{	JButton boton=new JButton("Ver");
+					boton.setPreferredSize(new Dimension(30,20));
+					panel.add(boton);					
+				}
+			}
+		JButton bcrea=new JButton("Añadir");
+		JButton bmod=new JButton("Modifica");
+		JButton belim=new JButton("Eliminar");
+		bcrea.setPreferredSize(new Dimension(90,20));
+		bmod.setPreferredSize(new Dimension(90,20));
+		belim.setPreferredSize(new Dimension(90,20));
+		Box botonera=Box.createVerticalBox();
+		botonera.add(bcrea);
+		botonera.add(new JLabel(" "));
+		botonera.add(bmod);
+		botonera.add(new JLabel(" "));
+		botonera.add(belim);
+		JSplitPane sp=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,botonera,panel);
+		sp.setEnabled(false);
+		sp.setDividerSize(4);
+		JScrollPane pmul=new JScrollPane(sp,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		pmul.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Multas del contrato",TitledBorder.LEFT,TitledBorder.TOP));
-		pmul.setPreferredSize(new Dimension(250,200));
+		pmul.setPreferredSize(new Dimension(0,200));
 		return pmul;
 	}
 	
