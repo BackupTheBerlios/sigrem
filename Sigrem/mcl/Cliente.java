@@ -98,6 +98,8 @@ public class Cliente
 	{
 		return fax;
 	}
+	
+	
 	public LinkedList dameListaContratos()
 	{
 		return listaContratos;

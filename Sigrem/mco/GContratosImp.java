@@ -35,16 +35,23 @@ public class GContratosImp implements GContratos
   
 	public String añadirContrato(LinkedList datos)
 	{
-		Contrato nuevocontrato=new Contrato(codigoContrato,datos);
 		String[] claves=new String[2];
-		claves[0]=codigoContrato;
+		claves[0]=null;
 		claves[1]=(String)datos.get(1);
-		listaContratos.insertar(claves,nuevocontrato);
-		String codigoantiguo=codigoContrato;
-		incrementaCodigo();
-		datos.addFirst(codigoantiguo);
-		vista.actualizaVista(1,1,datos);
-		return codigoantiguo;
+		
+		if (!listaContratos.esta(claves[1],1)){
+			Contrato nuevoContrato=new Contrato(codigoContrato,datos);
+			claves[0]=new String(nuevoContrato.dameCodigoContrato());
+			listaContratos.insertar(claves,nuevoContrato);
+			incrementaCodigo();
+			datos.addFirst(claves[0]);
+			vista.actualizaVistaMensaje("El contrato ha sido creado correctamente");
+			vista.actualizaVista(1,1,datos);
+		
+		}else{
+			vista.actualizaVistaMensaje("La matricula del contrato que se quiere crear ya existe-Imposible crear contrato");
+		}
+		return claves[0];
 	}
 	
 	public void eliminarContrato(boolean borrar, String codigo)

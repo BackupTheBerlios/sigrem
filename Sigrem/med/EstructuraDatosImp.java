@@ -34,7 +34,7 @@ public class EstructuraDatosImp implements EstructuraDatos{
 	  
 //	BUSCAR
 	  public boolean esta(Comparable clave, int indice){
-	    return buscar(clave,indice).size()==0;
+	    return buscar(clave,indice).size()!=0;
 	  }
 
 	  	  

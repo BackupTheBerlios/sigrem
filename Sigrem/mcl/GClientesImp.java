@@ -11,24 +11,24 @@ public class GClientesImp implements GClientes
 	  
 	private InterfazGrafica vista; 
 	
-	private String codigoCliente;
+	private String siguienteCodigoCliente;
 	 
 	public GClientesImp(InterfazGrafica vista,String codigo) 
 	{
 		this.listaClientes=new EstructuraDatosImp(3);
 	    this.vista=vista;
-	    this.codigoCliente=codigo;
+	    this.siguienteCodigoCliente=codigo;
 	}
 	
 	private void incrementaCodigo()
 	{
-		String numero=codigoCliente.substring(0,4);
+		String numero=siguienteCodigoCliente.substring(0,4);
 		Character car=null;
-		int num=car.digit(codigoCliente.charAt(4),10);
-		for (int i=5;i<codigoCliente.length();i++)
-		{	num=(num*10)+car.digit(codigoCliente.charAt(i),10);}
+		int num=car.digit(siguienteCodigoCliente.charAt(4),10);
+		for (int i=5;i<siguienteCodigoCliente.length();i++)
+		{	num=(num*10)+car.digit(siguienteCodigoCliente.charAt(i),10);}
 		numero=numero+(num+1);
-		codigoCliente=numero;
+		siguienteCodigoCliente=numero;
 	}
 	
 	//clave0=codigo	clave1=nombre clave2=dni
@@ -38,7 +38,7 @@ public class GClientesImp implements GClientes
 		claves[1]=(String)datos.get(0);
 		claves[2]=(String)datos.get(1);
 		if (!listaClientes.esta(claves[2],2)){
-			claves[0]=new String(codigoCliente);
+			claves[0]=new String(siguienteCodigoCliente);
 			Cliente nuevocliente=new Cliente(claves[0],datos);
 			listaClientes.insertar(claves,nuevocliente);
 			incrementaCodigo();
@@ -47,7 +47,7 @@ public class GClientesImp implements GClientes
 			//como el dni es clave solo habra uno en la posicion 0
 			Cliente clienteExistente=(Cliente)listaClientes.buscar(claves[2],2).get(0);
 			if (clienteExistente.dameNombre().equals(claves[1])){
-				claves[0]=clienteExistente.dameCodigo();
+				claves[0]=new String(clienteExistente.dameCodigo());
 				vista.actualizaVistaMensaje("El cliente ya existia y se le asociara el contrato");
 			}else{
 				vista.actualizaVistaMensaje("El cliente ya existe pero no coinciden los datos-Inserción de cliente y contrato imposible");

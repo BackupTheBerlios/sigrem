@@ -52,6 +52,7 @@ public class Sigrem
 		grecursos=factoria.generaGRecursos(vista,codrecurso);
 		gempleados=factoria.generaGEmpleados(vista,codempleado);
 		geconomia=factoria.generaGEconomia(vista,gempleados,gcontratos);		
+		System.out.println("Sigrem ha comenzado");
 	}
 	
 	public void activa()
@@ -59,20 +60,28 @@ public class Sigrem
 		vista.activa();		
 	}
 	
-	public void añadirContrato(LinkedList datoscontrato,LinkedList datoscliente)
+	public void añadirContrato(LinkedList datosContrato,LinkedList datosCliente)
 	{
-		String clientenuevo=gclientes.añadirCliente(datoscliente);
-		datoscontrato.addFirst(clientenuevo);
-		String contratonuevo=gcontratos.añadirContrato(datoscontrato);
-		gclientes.asociaClienteContrato(clientenuevo,contratonuevo);
+		//if (gcontratos.consultarContratoMatricula((String)datosContrato.get(0))!=null){
+			String codigoClienteNuevo=gclientes.añadirCliente(datosCliente);
+			if (codigoClienteNuevo!=null){
+				añadirContratoACliente(datosContrato,codigoClienteNuevo);		
+			}				
+		/*
+		}else{
+			vista.actualizaVistaMensaje("La matricula ya existe- Imposible crear contrato");
+		
+		}*/
 		vista.actualizaVista(1,3,null);
 	}
 	
-	public void añadirContratoACliente(LinkedList datoscontrato,String codcliente)
+	public void añadirContratoACliente(LinkedList datosContrato,String codigoCliente)
 	{
-		datoscontrato.addFirst(codcliente);
-		String contratonuevo=gcontratos.añadirContrato(datoscontrato);
-		gclientes.asociaClienteContrato(codcliente,contratonuevo);
+		datosContrato.addFirst(codigoCliente);
+		String codigoContratoNuevo=gcontratos.añadirContrato(datosContrato);
+		if (codigoContratoNuevo!=null){
+			gclientes.asociaClienteContrato(codigoCliente,codigoContratoNuevo);
+		}
 		vista.actualizaVista(1,3,null);
 	}
 	
