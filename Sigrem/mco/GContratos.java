@@ -8,10 +8,11 @@ package mco;
  * @author unascribed
  * @version 1.0
  */
+import mcl.Cliente;
 
 public interface GContratos {
   //Requisito 2.1
-  public void añadirContrato(Integer codigo,String matricula);
+  public void añadirContrato(Cliente cliente, Integer codigo,String matricula);
   //Requisito 2.2
   public void eliminarContrato(Integer codigo);
   //Requisito 2.3

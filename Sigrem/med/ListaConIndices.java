@@ -33,8 +33,18 @@ public class ListaConIndices implements EstructuraDatos{
   }
   
 //BUSCAR
+  public boolean esta(Comparable cla, int ind){
+    return buscar(cla,ind)!=null;
+  }
+
+  
   public Object buscar(Comparable cla, int ind){
-    return listaIndices[ind].buscar(cla).elemento;
+    NodoLista buscado=listaIndices[ind].buscar(cla);
+    if (buscado!=null){
+    	return buscado.elemento;
+    }else{
+    	return null;
+    }
   }
 
   
@@ -82,8 +92,8 @@ public class ListaConIndices implements EstructuraDatos{
 
  
 //CAMBIO
-  public void cambiarClaveDeIndice(Comparable cla, Comparable nuevaCla, int ind){
+  public boolean cambiarClaveDeIndice(Comparable cla, Comparable nuevaCla, int ind){
     //Este metodo no cambia la clave dentro del objeto, solo lo cambia en el indice
-    this.listaIndices[ind].cambiar(cla,nuevaCla);
+    return this.listaIndices[ind].cambiar(cla,nuevaCla);
   }
 }

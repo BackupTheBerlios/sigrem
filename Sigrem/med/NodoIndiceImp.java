@@ -19,5 +19,5 @@ public class NodoIndiceImp {
     nodo=nod;
     indices=inds;
     posicion=pos;
-  }
+  } 
 }

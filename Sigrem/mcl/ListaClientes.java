@@ -23,15 +23,15 @@ public class ListaClientes  {
 
 
   public boolean tieneCodigo(Integer cod){
-    return clientes.estaEnIndice(cod,1);
+    return clientes.buscar(cod,0)!=null;
   }
 
   public boolean tieneDni(Integer d){
-    return clientes.estaEnIndice(d,2);
+    return clientes.buscar(d,1)!=null;
   }
 
   public boolean tieneNombre(String nom){
-    return clientes.estaEnIndice(nom,3);
+    return clientes.buscar(nom,2)!=null;
   }
 
 

@@ -16,7 +16,7 @@ public class ContratoImp implements Contrato{
 	String matricula;
 	Cliente cliente;
 	
-  public ContratoImp(Integer cod,String mat,Cliente cli) {
+  public ContratoImp(Cliente cli, Integer cod,String mat) {
   	codigo=cod;
   	matricula=mat;
   	cliente=cli;
