@@ -35,8 +35,8 @@ public class FactoriaImp implements Factoria
 		return new GEmpleadosImp(vista,codigo);
 	}
 	
-	public GEconomia generaGEconomia(InterfazGrafica vista)
+	public GEconomia generaGEconomia(InterfazGrafica vista,GEmpleados gempleados,GContratos gcontratos)
 	{
-		return new GEconomiaImp(vista);		
+		return new GEconomiaImp(vista,gempleados,gcontratos);		
 	}
 }
