@@ -478,6 +478,16 @@ public class InterfazGrafica
 					}
 					catch(FileNotFoundException e)
 					{}
+					try
+					{
+						while((linea=fd.readLine())!=null)
+						{
+							salida.append(linea+"\n");						
+						}
+						fd.close();
+					}
+					catch(IOException e)
+					{}
 				}
 				else
 					if(lista.getSelectedIndex()==2)
@@ -489,18 +499,19 @@ public class InterfazGrafica
 						}
 						catch(FileNotFoundException e)
 						{}
+						try
+						{
+							while((linea=fd.readLine())!=null)
+							{
+								salida.append(linea+"\n");						
+							}
+							fd.close();
+						}
+						catch(IOException e)
+						{}
 					}
 				
-				try
-				{
-					while((linea=fd.readLine())!=null)
-					{
-						salida.append(linea+"\n");						
-					}
-					fd.close();
-				}
-				catch(IOException e)
-				{}			
+							
 			}
 		});
 		
@@ -536,6 +547,16 @@ public class InterfazGrafica
 					}
 					catch(FileNotFoundException e)
 					{}
+					try
+					{
+						while((linea=fd.readLine())!=null)
+						{
+							salida.append(linea+"\n");						
+						}
+						fd.close();
+					}
+					catch(IOException e)
+					{}
 				}
 				else
 					if(lista.getSelectedIndex()==5)
@@ -547,18 +568,17 @@ public class InterfazGrafica
 						}
 						catch(FileNotFoundException e)
 						{}
-					}
-				
-				try
-				{
-					while((linea=fd.readLine())!=null)
-					{
-						salida.append(linea+"\n");						
-					}
-					fd.close();
-				}
-				catch(IOException e)
-				{}									
+						try
+						{
+							while((linea=fd.readLine())!=null)
+							{
+								salida.append(linea+"\n");						
+							}
+							fd.close();
+						}
+						catch(IOException e)
+						{}
+					}													
 			}
 		});		
 	}
@@ -593,6 +613,16 @@ public class InterfazGrafica
 					}
 					catch(FileNotFoundException e)
 					{}
+					try
+					{
+						while((linea=fd.readLine())!=null)
+						{
+							salida.append(linea+"\n");						
+						}
+						fd.close();
+					}
+					catch(IOException e)
+					{}
 				}
 				else
 					if(lista.getSelectedIndex()==2)	
@@ -604,18 +634,17 @@ public class InterfazGrafica
 						}
 						catch(FileNotFoundException e)
 						{}
-					}
-				
-				try
-				{
-					while((linea=fd.readLine())!=null)
-					{
-						salida.append(linea+"\n");						
-					}
-					fd.close();
-				}
-				catch(IOException e)
-				{}			
+						try
+						{
+							while((linea=fd.readLine())!=null)
+							{
+								salida.append(linea+"\n");						
+							}
+							fd.close();
+						}
+						catch(IOException e)
+						{}
+					}							
 			}
 		});
 		
