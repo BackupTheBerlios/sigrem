@@ -2,16 +2,13 @@ package main;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
+//import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.Vector;
-
-import javax.swing.JOptionPane;
-
 import mec.*;
 import med.EstructuraDatos;
 import mem.*;
@@ -43,7 +40,7 @@ public class Persistencia
 		grecursos=rec;
 		gempleados=emp;
 		geconomia=eco;
-		//this.cargarXML();				
+		//cargarXML() es llamado desde controlador.activa();
 	}
 	
 	public void almacenarXML(){
@@ -51,6 +48,7 @@ public class Persistencia
 		almacenarContratosXML();
 		almacenarMultasXML();
 		almacenarRecursosXML();
+		almacenarEmpleadosXML();
 	}
 	
 	public void cargarXML(){
@@ -58,29 +56,31 @@ public class Persistencia
 			cargarClientesXML();
 			System.out.println("La carga de clientes se ha realizado correctamente");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			cargarContratosXML();	
 			System.out.println("La carga de contratos se ha realizado correctamente");
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		try {
 			cargarMultasXML();
 			System.out.println("La carga de multas se ha realizado correctamente");
 		} catch (IOException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		try {	
 			cargarRecursosXML();
 			System.out.println("La carga de recursos se ha realizado correctamente");
 		} catch (IOException e3) {
-			// TODO Auto-generated catch block
 			e3.printStackTrace();
+		}
+		try {	
+			cargarEmpleadosXML();
+			System.out.println("La carga de empleados se ha realizado correctamente");
+		} catch (IOException e4) {
+			e4.printStackTrace();
 		}
 	}
 	public void almacenarClientesXML(){
@@ -113,12 +113,8 @@ public class Persistencia
 			escritor.close();
 						
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-	
-		
-		
+		}		
 	}
 
 	void escribirCliente(PrintWriter escritor, Cliente actual, String tab){
@@ -214,7 +210,7 @@ public class Persistencia
 		
 	}
  
-	LinkedList leerCliente(String linea, BufferedReader lector) throws IOException{
+	public LinkedList leerCliente(String linea, BufferedReader lector) throws IOException{
 		if (!linea.equals("/t/t<cliente>")){
 			System.out.println("No se ha encontado un cliente");
 		}else{
@@ -313,7 +309,7 @@ public class Persistencia
 	public boolean cargarContratosXML() throws IOException{
 		return true;
 	}
-	LinkedList leerContrato(String linea, BufferedReader lector) throws IOException{
+	public LinkedList leerContrato(String linea, BufferedReader lector) throws IOException{
 		return null;
 	}
 		
@@ -322,7 +318,7 @@ public class Persistencia
 	public boolean cargarMultasXML() throws IOException{	
 		return true;
 	}
-	LinkedList leerMulta(String linea, BufferedReader lector) throws IOException{
+	public LinkedList leerMulta(String linea, BufferedReader lector) throws IOException{
 		return null;
 	}
 		
@@ -331,13 +327,21 @@ public class Persistencia
 	public boolean cargarRecursosXML() throws IOException{
 		return true;
 	}
-	LinkedList leerRecurso(String linea, BufferedReader lector) throws IOException{
+	public LinkedList leerRecurso(String linea, BufferedReader lector) throws IOException{
 		return null;
 	}
 	
+	public void almacenarEmpleadosXML(){}
+	void escribirEmpleado(PrintWriter escritor, Empleado actual){}
+	public boolean cargarEmpleadosXML() throws IOException{
+		return true;
+	}
+	public LinkedList leerEmpleado(String linea, BufferedReader lector) throws IOException{
+		return null;
+	}
 	
 	// Persistencia del Historial Económico
-	public LinkedList dameHistorial()
+/*	public LinkedList dameHistorial()
 	{
 		return cargarHistorial();
 	}
@@ -384,13 +388,47 @@ public class Persistencia
 	{
 		return cargarConfigIni();
 	}
-	
+*/	
 	public void almacenarConfigIni()
 	{
-		
+		try 
+		{	PrintWriter escritor=new PrintWriter(new BufferedWriter(new FileWriter("configsig.ini")));
+			escritor.println("codcontrato="+gcontratos.dameCodigo());
+			escritor.println("codcliente="+gclientes.dameCodigo());
+			escritor.println("codmulta="+gmultas.dameCodigo());
+			escritor.println("codrecurso="+grecursos.dameCodigo());
+			escritor.println("codempleado="+gempleados.dameCodigo());
+			escritor.println("ultimomesfac="+geconomia.dameUltimaMesFac());
+			escritor.println("ultimomesgas="+geconomia.dameUltimaMesGas());
+			escritor.println("ultimomesbal="+geconomia.dameUltimaMesBal());
+			int[] fac=geconomia.dameVectorFacturacion();
+			int[] gas=geconomia.dameVectorGastos();
+			int[] bal=geconomia.dameVectorBalance();
+			String linea="facturacion=";
+			for (int i=0;i<12;i++)
+			{	linea=linea+"+"+fac[i]+",";}
+			escritor.println(linea);
+			linea="gastos=";
+			for (int i=0;i<12;i++)
+			{	if (gas[i]==0) linea=linea+"-"+gas[i]+",";
+				else linea=linea+gas[i]+",";
+			}
+			escritor.println(linea);
+			linea="balance=";
+			for (int i=0;i<12;i++)
+			{	if (bal[i]<0) linea=linea+bal[i]+",";
+				else linea=linea+"+"+bal[i]+",";
+			}
+			escritor.println(linea);
+			escritor.close();
+		}
+		catch(IOException e) 
+		{
+			System.out.println("Error al crear el fichero configsig.ini"+e);
+		}
 	}
 	
-	public LinkedList cargarConfigIni()
+/*	public LinkedList cargarConfigIni()
 	{
 		LinkedList configIni=new LinkedList();
 		try
@@ -418,6 +456,6 @@ public class Persistencia
 		}
 		return configIni;
 	}
-
+*/
 		
 }

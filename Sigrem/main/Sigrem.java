@@ -56,12 +56,14 @@ public class Sigrem
 	
 	public void activa()
 	{
-		vista.activa();		
+		vista.activa();
+		//persistencia.cargarXML();
 	}
 	
 	public void desactiva()
 	{
 		persistencia.almacenarXML();
+		persistencia.almacenarConfigIni();
 	}
 	
 	public void añadirContrato(LinkedList datosContrato,LinkedList datosCliente)

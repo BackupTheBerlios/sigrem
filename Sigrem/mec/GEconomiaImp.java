@@ -39,7 +39,7 @@ public class GEconomiaImp implements GEconomia
 		this.facturacion=stringAVector(fac);
 		this.gastos=stringAVector(gas);
 		this.balance=stringAVector(bal);
-		this.cuotaContrato=33;	
+		this.cuotaContrato=150;	
 	}
 	
 	public int [] stringAVector (String s) 
@@ -72,8 +72,7 @@ public class GEconomiaImp implements GEconomia
 		Calendar hoy=Calendar.getInstance();
 		int mesActual=hoy.get(Calendar.MONTH);
 		if (mesActual!=ultimoMesFac)
-		{			
-			int desplazamiento=0;
+		{	int desplazamiento=0;
 			if (mesActual>ultimoMesFac)
 			{	desplazamiento=mesActual-ultimoMesFac;}
 			else if (mesActual<ultimoMesFac)
@@ -157,5 +156,35 @@ public class GEconomiaImp implements GEconomia
 	public int dameCuotaContrato()
 	{
 		return cuotaContrato;
+	}
+	
+	public int dameUltimaMesFac()
+	{
+		return this.ultimoMesFac;
+	}
+	
+	public int dameUltimaMesGas()
+	{
+		return this.ultimoMesGas;
+	}
+	
+	public int dameUltimaMesBal()
+	{
+		return this.ultimoMesBal;
+	}
+	
+	public int[] dameVectorFacturacion()
+	{
+		return this.facturacion;
+	}
+	
+	public int[] dameVectorGastos()
+	{
+		return this.gastos;
+	}
+	
+	public int[] dameVectorBalance()
+	{
+		return this.balance;
 	}
 }

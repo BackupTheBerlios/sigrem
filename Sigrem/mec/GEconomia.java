@@ -11,5 +11,17 @@ public interface GEconomia
 	//Requisito 5.3
 	public void balance(int nBalance);
 	
-	public int dameCuotaContrato();		
+	public int dameCuotaContrato();
+	
+	public int dameUltimaMesFac();
+	
+	public int dameUltimaMesGas();
+	
+	public int dameUltimaMesBal();
+	
+	public int[] dameVectorFacturacion();
+	
+	public int[] dameVectorGastos();
+	
+	public int[] dameVectorBalance();
 }
