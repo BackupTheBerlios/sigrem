@@ -643,48 +643,6 @@ public class PanelEmpleados extends JPanel
 		return panel;
 	}
 	
-	public JPanel anadeRecurso()
-	{
-		formulario.setTitle("Añadir recurso");
-		JLabel l1=new JLabel("Código");
-		l1.setPreferredSize(new Dimension(80,20));
-		JTextField cod=new JTextField();
-		cod.setPreferredSize(new Dimension(100,20));
-		JPanel p1=new JPanel();
-		p1.add(l1);
-		p1.add(cod);
-		Box caja=Box.createVerticalBox();
-		caja.add(p1);
-		JButton aceptar=new JButton("Aceptar");
-		JButton cancelar=new JButton("Cancelar");
-		JPanel botonera=new JPanel();
-		botonera.add(aceptar);
-		botonera.add(cancelar);
-		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja,botonera);
-		sp.setEnabled(false);		
-		sp.setDividerSize(4);
-		JPanel panel=new JPanel();
-		panel.add(sp);
-		panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Añadir recurso al empleado",TitledBorder.LEFT,TitledBorder.TOP));
-		aceptar.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-				formulario.setVisible(false);
-				formulario.getContentPane().removeAll();
-				//validar datos
-				//enviar datos a Sigrem para almacenarlos en la estructura de datos
-			}
-		});
-		cancelar.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-				formulario.setVisible(false);
-				formulario.getContentPane().removeAll();
-			}
-		});
-		return panel;
-	}
-	
 	public JPanel pintaDescrip(String cod)
 	{
 		formulario.setTitle("Descripción del recurso "+cod);
