@@ -1,8 +1,8 @@
 package interfaz;
 
 import javax.swing.*;
-
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import javax.swing.border.TitledBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +24,7 @@ public class PanelEmpleados extends JPanel
 		formulario.setLocation(350,100);
 		JPanel pempleado=dibujaEmpleado();
 		JPanel pdatos=dibujaDatos(false);
-		JScrollPane precursos=dibujaRecursos();
+		JPanel precursos=dibujaRecursos();
 		JSplitPane sp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,pempleado,pdatos);
 		sp1.setDividerSize(4);
 		sp1.setEnabled(false);
@@ -212,17 +212,48 @@ public class PanelEmpleados extends JPanel
 		return pdat;
 	}
 	
-	public JScrollPane dibujaRecursos()
+	public JPanel dibujaRecursos()
 	{
-		String[] vec2={"Código","Multa","Estado","Descripción"};
-		String[][] vec1=new String[10][4];
-		JTable recursos=new JTable(vec1,vec2);
-		recursos.setRowHeight(20);
-		recursos.setEnabled(false);
-		JScrollPane prec=new JScrollPane(recursos,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		int f=8;
+		int c=4;
+		JPanel tabla=new JPanel(new GridLayout(f,c));
+		tabla.add(new JLabel("Código",SwingConstants.CENTER));
+		tabla.add(new JLabel("Multa",SwingConstants.CENTER));
+		tabla.add(new JLabel("Estado",SwingConstants.CENTER));
+		tabla.add(new JLabel("Descripción",SwingConstants.CENTER));
+		for (int i=1;i<f;i++)
+			for (int j=0;j<c;j++)
+			{	if (j<3)
+				{	JTextField texto=new JTextField();
+					texto.setEnabled(false);
+					texto.setPreferredSize(new Dimension(70,20));
+					tabla.add(texto);
+				}
+				else
+				{	JButton boton=new JButton("Ver");
+					boton.setPreferredSize(new Dimension(30,20));
+					tabla.add(boton);					
+				}
+			}
+		JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		ptabla.setPreferredSize(new Dimension(600,200));
+		JButton bcrea=new JButton("Añadir");
+		JButton bmod=new JButton("Modificar");
+		JButton belim=new JButton("Eliminar");
+		bcrea.setPreferredSize(new Dimension(90,25));
+		bmod.setPreferredSize(new Dimension(90,25));
+		belim.setPreferredSize(new Dimension(90,25));
+		JPanel botonera=new JPanel();
+		botonera.add(bcrea);
+		botonera.add(bmod);
+		botonera.add(belim);
+		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,ptabla,botonera);
+		sp.setEnabled(false);
+		sp.setDividerSize(4);
+		JPanel prec=new JPanel();
 		prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Recursos asignados",TitledBorder.LEFT,TitledBorder.TOP));
-		prec.setPreferredSize(new Dimension(250,200));
-		return prec;
+		prec.add(sp);		
+		return prec;		
 	}
 	
 	public void creaEmpleado()
