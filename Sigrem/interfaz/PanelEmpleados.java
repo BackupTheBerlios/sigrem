@@ -87,8 +87,6 @@ public class PanelEmpleados extends JPanel
 		JButton bcontratar=new JButton ("Contratar");
 		JButton bmodificar=new JButton("Modificar");
 		JButton bdespedir=new JButton("Despedir");
-		bdespedir.setEnabled(false);
-		bmodificar.setEnabled(false);
 		bcontratar.setPreferredSize(new Dimension(90,25));
 		bmodificar.setPreferredSize(new Dimension(90,25));
 		bdespedir.setPreferredSize(new Dimension(90,25));
