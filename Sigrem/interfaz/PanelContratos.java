@@ -9,11 +9,19 @@ import java.awt.GridLayout;
 
 public class PanelContratos extends JPanel
 {
-	public JFrame formulario;
+	private JFrame formulario;
+	
+	private JButton elimcont;
+	
+	private JButton modcont;
 	
 	public PanelContratos()
 	{
 		super();
+		modcont=new JButton ("Modificar");
+		elimcont=new JButton ("Eliminar");
+		modcont.setEnabled(false);
+		elimcont.setEnabled(false);
 		JPanel pcontrato=dibujaContrato();
 		JPanel pcliente=dibujaCliente(false);
 		JPanel pmultas=dibujaMultas();
@@ -49,8 +57,6 @@ public class PanelContratos extends JPanel
 		tcliente.setEnabled(false);
 		tmatricula.setEnabled(false);
 		JButton bcrea=new JButton ("Crear");
-		JButton bmod=new JButton ("Modificar");
-		JButton belim=new JButton ("Eliminar");
 		JPanel p1=new JPanel();
 		JPanel p2=new JPanel();
 		JPanel p3=new JPanel();
@@ -62,8 +68,8 @@ public class PanelContratos extends JPanel
 		p3.add(l3);
 		p3.add(tcliente);
 		botonera.add(bcrea);
-		botonera.add(bmod);
-		botonera.add(belim);
+		botonera.add(modcont);
+		botonera.add(elimcont);
 		Box caja=Box.createVerticalBox();
 		caja.add(p1);
 		caja.add(p2);
@@ -75,10 +81,12 @@ public class PanelContratos extends JPanel
 		bcrea.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				JPanel panel=panelAlta();
-				formulario.getContentPane().add(panel);
-				formulario.pack();	
-				formulario.setVisible(true);		
+				if (!formulario.isVisible())
+				{	JPanel panel=panelAlta();
+					formulario.getContentPane().add(panel);
+					formulario.pack();	
+					formulario.setVisible(true);
+				}
 			}
 		});
 		return pco;
@@ -197,7 +205,7 @@ public class PanelContratos extends JPanel
 			{	if (j<3)
 				{	JTextField texto=new JTextField();
 					texto.setEnabled(false);
-					texto.setPreferredSize(new Dimension(50,20));
+					texto.setPreferredSize(new Dimension(70,20));
 					tabla.add(texto);
 				}
 				else
@@ -211,11 +219,10 @@ public class PanelContratos extends JPanel
 		JButton bcrea=new JButton("Añadir");
 		JButton bmod=new JButton("Modifica");
 		JButton belim=new JButton("Eliminar");
-		bcrea.setPreferredSize(new Dimension(90,20));
-		bmod.setPreferredSize(new Dimension(90,20));
-		belim.setPreferredSize(new Dimension(100,20));
+		bcrea.setPreferredSize(new Dimension(85,25));
+		bmod.setPreferredSize(new Dimension(85,25));
+		belim.setPreferredSize(new Dimension(85,25));
 		JPanel botonera=new JPanel();
-		//botonera.setPreferredSize(new Dimension(0,20));
 		botonera.add(bcrea);
 		botonera.add(bmod);
 		botonera.add(belim);
@@ -276,10 +283,11 @@ public class PanelContratos extends JPanel
 			{
 				formulario.setVisible(false);
 				formulario.getContentPane().removeAll();
+				modcont.setEnabled(true);
+				elimcont.setEnabled(true);
 				//validar datos
 				//enviar datos a Sigrem para almacenarlos en la estructura de datos
 				//cargar contrato en el panel
-				//activar modificar y eliminar
 			}
 		});
 		cancelar.addActionListener(new ActionListener()
