@@ -246,4 +246,9 @@ public class GEmpleadosImp implements GEmpleados
 				return null;			
 		}
 	}
+	
+	public String dameCodigo()
+	{
+		return this.codigoEmpleado;
+	}
 }

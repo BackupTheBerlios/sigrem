@@ -21,6 +21,8 @@ public interface GEmpleados
 	
 	public EstructuraDatos dameListaEmpleados();
 	
+	public String dameCodigo();
+	
 	public void asociaAbogadoRecurso(String codrecurso,String codempleado);
 	
 	public void eliminarRecursoAbogado(String codrecurso,String codempleado);

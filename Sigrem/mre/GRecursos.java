@@ -2,6 +2,8 @@ package mre;
 
 import java.util.LinkedList;
 
+import med.EstructuraDatos;
+
 public interface GRecursos 
 {
 	//Requisito 4.1
@@ -18,4 +20,8 @@ public interface GRecursos
 	public void eliminarListaRecursos(LinkedList listaRecursos);
 	
 	public String consultarAbogadoRecurso(String codrecurso);
+	
+	public EstructuraDatos dameListaRecursos(); 
+	
+	public String dameCodigo();
 }

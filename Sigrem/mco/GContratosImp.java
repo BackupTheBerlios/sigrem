@@ -147,6 +147,11 @@ public class GContratosImp implements GContratos
 	
 	public EstructuraDatos dameListaContratos()
 	{
-		return listaContratos;
+		return this.listaContratos;
+	}
+	
+	public String dameCodigo()
+	{
+		return this.codigoContrato;
 	}
 }

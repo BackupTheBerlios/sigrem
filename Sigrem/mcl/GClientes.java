@@ -23,5 +23,7 @@ public interface GClientes
 	
 	public void asociaClienteContrato(String codcliente,String codcontrato);
 	
-	public EstructuraDatos dameEstructuraClientes();
+	public EstructuraDatos dameListaClientes();
+	
+	public String dameCodigo();
 }

@@ -125,4 +125,14 @@ public class GRecursosImp implements GRecursos
 			return recurso.dameAbogado();
 		}
 	}
+	
+	public EstructuraDatos dameListaRecursos()
+	{
+		return this.listaRecursos;
+	}
+	
+	public String dameCodigo()
+	{
+		return this.codigoRecurso;
+	}
 }

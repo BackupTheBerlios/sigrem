@@ -171,4 +171,14 @@ public class GMultasImp implements GMultas
 		Multa multa=(Multa)busqueda.get(0);
 		return multa.dameListaRecursos();
 	}
+	
+	public EstructuraDatos dameListaMultas()
+	{
+		return this.listaMultas;
+	}
+	
+	public String dameCodigo()
+	{
+		return this.codigoMulta;
+	}
 }

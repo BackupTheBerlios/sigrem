@@ -1,8 +1,6 @@
 package mco;
 
-//import mcl.Cliente;
 import java.util.LinkedList;
-
 import med.EstructuraDatos;
 
 public interface GContratos 
@@ -27,4 +25,6 @@ public interface GContratos
 	public LinkedList dameListaMultasContrato(int clave,String codigo);
 	
 	public EstructuraDatos dameListaContratos();
+	
+	public String dameCodigo();
 }

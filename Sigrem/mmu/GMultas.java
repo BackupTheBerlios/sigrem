@@ -1,6 +1,7 @@
 package mmu;
 
 import java.util.LinkedList;
+import med.EstructuraDatos;
 
 public interface GMultas 
 {
@@ -26,4 +27,8 @@ public interface GMultas
 	public void eliminarRecurso(String codmulta,String codrecurso);
 	
 	public LinkedList dameListaRecursosMulta(String codigo);
+	
+	public EstructuraDatos dameListaMultas(); 
+	
+	public String dameCodigo();
 }

@@ -11,47 +11,47 @@ public class GClientesImp implements GClientes
 	  
 	private InterfazGrafica vista; 
 	
-	private String siguienteCodigoCliente;
+	private String codigoCliente;
 	 
 	public GClientesImp(InterfazGrafica vista,String codigo) 
 	{
 		this.listaClientes=new EstructuraDatosImp(3);
 	    this.vista=vista;
-	    this.siguienteCodigoCliente=codigo;
+	    this.codigoCliente=codigo;
 	}
 	
 	private void incrementaCodigo()
 	{
-		String numero=siguienteCodigoCliente.substring(0,4);
-		int num=Integer.valueOf(siguienteCodigoCliente.substring(4)).intValue();
+		String numero=codigoCliente.substring(0,4);
+		int num=Integer.valueOf(codigoCliente.substring(4)).intValue();
 		numero=numero+(num+1);
-		siguienteCodigoCliente=numero;
+		codigoCliente=numero;
 	}
 	
 	
 	
 	//clave0=codigo	clave1=nombre clave2=dni
 	public String añadirCliente(LinkedList datos)
-	{	String codigoCliente=null;
+	{	String codCliente=null;
 		String dniCliente=(String)datos.get(1);
 	//comprueba si el dni esta repetido
 		if (!listaClientes.esta(dniCliente,2))
-		{	codigoCliente=new String(siguienteCodigoCliente);
-			Cliente nuevocliente=new Cliente(codigoCliente,datos);
+		{	codCliente=new String(codigoCliente);
+			Cliente nuevocliente=new Cliente(codCliente,datos);
 			meteCliente(nuevocliente);
 			incrementaCodigo();
 		}
 		else
 		{	Cliente clienteExistente=(Cliente)listaClientes.buscar(dniCliente,2).get(0);
 			if (clienteExistente.dameNombre().equals((String)datos.get(0)))
-			{	codigoCliente=new String(clienteExistente.dameCodigo());
+			{	codCliente=new String(clienteExistente.dameCodigo());
 				vista.actualizaVistaMensaje("El cliente ya existe y se le asociara el contrato");
 			}
 			else
 			{	vista.actualizaVistaMensaje("El cliente ya existe pero no coinciden los datos. Inserción de cliente y contrato imposible");}
 			
 		}
-		return codigoCliente;
+		return codCliente;
 	}
 	
 	public void meteCliente(Cliente cliente){
@@ -178,7 +178,12 @@ public class GClientesImp implements GClientes
 		}
 	}
 	
-	public EstructuraDatos dameEstructuraClientes(){
+	public EstructuraDatos dameListaClientes()
+	{
 		return this.listaClientes;
+	}
+	public String dameCodigo()
+	{
+		return this.codigoCliente;
 	}
 }
