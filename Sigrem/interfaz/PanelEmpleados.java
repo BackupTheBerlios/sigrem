@@ -153,10 +153,10 @@ public class PanelEmpleados extends JPanel
 		JPanel pdat=new JPanel();
 		pdat.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos personales",TitledBorder.LEFT,TitledBorder.TOP));
 		JLabel l1=new JLabel("Nombre ",SwingConstants.RIGHT);
-		JLabel l2=new JLabel("DNI/CIF ",SwingConstants.RIGHT);
+		JLabel l2=new JLabel("NIF/CIF ",SwingConstants.RIGHT);
 		JLabel l3=new JLabel("Dirección ",SwingConstants.RIGHT);
 		JLabel l4=new JLabel("Código postal ",SwingConstants.RIGHT);
-		JLabel l5=new JLabel("Localidad ",SwingConstants.RIGHT);
+		JLabel l5=new JLabel("Población ",SwingConstants.RIGHT);
 		JLabel l6=new JLabel("Provincia ",SwingConstants.RIGHT);		
 		JLabel l7=new JLabel("Teléfono ",SwingConstants.RIGHT);
 		JLabel l8=new JLabel("email ",SwingConstants.RIGHT);
