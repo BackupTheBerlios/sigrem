@@ -1,6 +1,9 @@
 package mco;
+
 import med.*;
 import interfaz.*;
+import java.util.LinkedList;
+
 //import mcl.*;
 
 public class GContratosImp implements GContratos
@@ -12,6 +15,11 @@ public class GContratosImp implements GContratos
 	{
 		contratos=new EstructuraConIndices(2);
 		this.vista=vista;
+	}
+	
+	public String añadirContrato(LinkedList datos)
+	{
+		return null;
 	}
 /*
 	public boolean añadirContrato(Cliente cliente, Integer codigo,String matricula)

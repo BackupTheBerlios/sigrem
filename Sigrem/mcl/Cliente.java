@@ -2,16 +2,37 @@ package mcl;
 
 public class Cliente
 {
-	Integer codigo;
-	String dni;
-	String nombre;
-	  
-	public Cliente(Integer cod, String d, String nom) {
+	private String codigo;
+	
+	private String dni;
+	
+	private String nombre;
+	
+	private String direccion;
+	
+	private String cp;
+	
+	private String poblacion;
+	
+	private String provincia;
+	
+	private String telefono1;
+	
+	private String telefono2;
+	
+	private String movil;
+	
+	private String email;
+	
+	private String fax;
+/*	  
+	public Cliente(String cod, String d, String nom) 
+	{
 		codigo=cod;
 	    dni=d;
 	    nombre=nom;
 	}
-
+/*
 	public Integer dameCodigo(){
 		return codigo;
 	}

@@ -7,10 +7,13 @@ import mmu.*;
 import mre.*;
 import mec.*;
 import mem.*;
+import java.util.LinkedList;
 
 public class Sigrem 
 {
 	private InterfazGrafica vista;
+	
+	private Factoria factoria;
 	
 	private GClientes gclientes;
 	
@@ -27,11 +30,13 @@ public class Sigrem
 	public Sigrem()
 	{
 		vista=new InterfazGrafica(this);
-//		gclientes=new GClientesImp(vista);
-//		gcontratos=new GContratosImp(vista);
-//		gmultas=new GMultasImp(vista);
-//		gempleados=new GEmpleadosImp(vista);
-//		grecursos=new GRecursosImp(vista);		
+		factoria=new FactoriaImp();
+		gclientes=factoria.generaGCliente(vista);
+		gcontratos=factoria.generaGContratos(vista);
+		gmultas=factoria.generaGMultas(vista);
+		grecursos=factoria.generaGRecursos(vista);
+		gempleados=factoria.generaGEmpleados(vista);
+		geconomia=factoria.generaGEconomia(vista);		
 	}
 	
 	public void activa()
@@ -39,10 +44,11 @@ public class Sigrem
 		vista.activa();		
 	}
 	
-	public void añadirContrato(String[] datoscontrato,String[] datoscliente)
+	public void añadirContrato(LinkedList datoscontrato,LinkedList datoscliente)
 	{
-		//añadir cliene
-		//añadir contrato
+		String clientenuevo=gclientes.añadirCliente(datoscliente);
+		datoscontrato.add(clientenuevo);
+		String contratonuevo=gcontratos.añadirContrato(datoscontrato);
 	}
 	
 	public void añadirCliente(String[] datos)

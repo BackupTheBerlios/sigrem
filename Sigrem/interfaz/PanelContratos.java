@@ -7,6 +7,7 @@ import javax.swing.border.TitledBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import main.Sigrem;
+import java.util.LinkedList;
 
 public class PanelContratos extends JPanel
 {
@@ -477,26 +478,22 @@ public class PanelContratos extends JPanel
 			{
 				formAlta.setVisible(false);
 				formAlta.getContentPane().removeAll();
-				String[] datoscontrato=new String[3]; 
-				String[] datoscliente=new String[8];
-				datoscontrato[0]=tcontrato.getText();
-				datoscontrato[1]=tcliente.getText();
-				datoscontrato[2]=tmatricula.getText();
-				datoscliente[0]=tnom.getText();
-				datoscliente[1]=tdni.getText();
-				datoscliente[2]=tdir.getText();
-				datoscliente[3]=tcp.getText();
-				datoscliente[4]=tloc.getText();
-				datoscliente[5]=tpro.getText();
-				datoscliente[6]=ttel.getText();
-				datoscliente[7]=temail.getText();
+				LinkedList datoscontrato=new LinkedList();
+				LinkedList datoscliente=new LinkedList();
+				datoscontrato.add(tcontrato.getText());
+				datoscontrato.add(tcliente.getText());
+				datoscontrato.add(tmatricula.getText());
+				datoscliente.add(tnom.getText());
+				datoscliente.add(tdni.getText());
+				datoscliente.add(tdir.getText());
+				datoscliente.add(tcp.getText());
+				datoscliente.add(tloc.getText());
+				datoscliente.add(tpro.getText());
+				datoscliente.add(ttel.getText());
+				datoscliente.add(temail.getText());
 				controlador.añadirContrato(datoscontrato,datoscliente);
 				removeAll();
 				dibujaPaneles(true);
-				
-				//validar datos
-				//enviar datos a Sigrem para almacenarlos en la estructura de datos
-				//cargar contrato en el panel
 			}
 		});
 		cancelar.addActionListener(new ActionListener()

@@ -1,5 +1,6 @@
 package mcl;
 
+import java.util.LinkedList;
 import interfaz.InterfazGrafica;
 import med.*;
 
@@ -14,28 +15,42 @@ public class GClientesImp implements GClientes
 		clientes=new EstructuraConIndices(3);
 	    this.vista=vista;
 	}
-	public void añadir(String[] datos)
+	public String añadirCliente(LinkedList datos)
 	{
 		//recuperar los datos en el orden adecuado y crear el cliente
 		//insertar el cliente en la lista
-		vista.actualizaVista(1,datos);
+		//vista.actualizaVista(1,datos);
+		return null;
 	}
 	
-	public void eliminar(Integer codigo)
+	public void eliminarCliente(String codigo)
 	{
 		
 	}
 	
-	public void modificar(String[] datos)
+	public void modificarCliente(String codigo)
 	{
 		//recuperar los datos en el orden adecuado y crear el cliente
 		//insertar el cliente en la lista
-		vista.actualizaVista(1,datos);
+		//vista.actualizaVista(1,datos);
 	}
-	public void consultarCodigo(Integer codigo)
+	
+	public void consultarClienteCodigo(String codigo)
 	{
 
 	}
+	
+	public void consultarClienteNombre(String nombre)
+	{
+		
+	}
+	
+	public void consultarClienteDni(String dni)
+	{
+		
+	}
+		
+	
 /*	public boolean añadir(Integer codigo,String nombre, String dni)
 	{
 		//falta añadir todos los parametros de contrato
