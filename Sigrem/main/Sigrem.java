@@ -268,24 +268,30 @@ public class Sigrem
 	
 	public void consultarEmpleadoCodigo(boolean modificar,String codigo)
 	{
-		gempleados.consultarEmpleadoCodigo(modificar,codigo);
-		LinkedList listaRecursos=gempleados.dameListaRecursosEmpleado(0,codigo);
-		if (listaRecursos!=null)
-		{	grecursos.consultarListaRecursos(2,listaRecursos);}
+		String codempleado=gempleados.consultarEmpleadoCodigo(modificar,codigo);
+		if (codempleado!=null)
+		{	LinkedList listaRecursos=gempleados.dameListaRecursosEmpleado(0,codigo);
+			if (listaRecursos!=null)
+			{	grecursos.consultarListaRecursos(2,listaRecursos);}
+		}
 	}
 	public void consultarEmpleadoNombre(String nombre)
 	{
-		gempleados.consultarEmpleadoNombre(nombre);
-		LinkedList listaRecursos=gempleados.dameListaRecursosEmpleado(1,nombre);
-		if (listaRecursos!=null)
-		{	grecursos.consultarListaRecursos(2,listaRecursos);}
+		String codempleado=gempleados.consultarEmpleadoNombre(nombre);
+		if (codempleado!=null)
+		{	LinkedList listaRecursos=gempleados.dameListaRecursosEmpleado(1,nombre);
+			if (listaRecursos!=null)
+			{	grecursos.consultarListaRecursos(2,listaRecursos);}
+		}
 	}
 	public void consultarEmpleadoDni(String dni)
 	{
-		gempleados.consultarEmpleadoDni(dni);
-		LinkedList listaRecursos=gempleados.dameListaRecursosEmpleado(2,dni);
-		if (listaRecursos!=null)
-		{	grecursos.consultarListaRecursos(2,listaRecursos);}
+		String codempleado=gempleados.consultarEmpleadoDni(dni);
+		if (codempleado!=null)
+		{	LinkedList listaRecursos=gempleados.dameListaRecursosEmpleado(2,dni);
+			if (listaRecursos!=null)
+			{	grecursos.consultarListaRecursos(2,listaRecursos);}
+		}
 	}	
 	public void modificarEmpleado(String codigo,LinkedList datos)
 	{

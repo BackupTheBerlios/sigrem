@@ -125,15 +125,19 @@ public class GEmpleadosImp implements GEmpleados
 		}
 	}
 
-	public void consultarEmpleadoCodigo(boolean modificar,String codigo)
+	public String consultarEmpleadoCodigo(boolean modificar,String codigo)
 	{
 		Vector busqueda=listaEmpleados.buscar(codigo,0);
 		if (busqueda.size()==0)
-		{	vista.actualizaVistaMensaje("Error al buscar el empleado "+codigo+". No se ha encontrado");}
+		{	vista.actualizaVistaMensaje("Error al buscar el empleado "+codigo+". No se ha encontrado");
+			return null;
+		}
 		else 
 		{	Empleado empleado=(Empleado)busqueda.get(0);		
 			if (modificar)
-			{	vista.actualizaVistaDatos(2,empleado.dameListaDatos(),true);}
+			{	vista.actualizaVistaDatos(2,empleado.dameListaDatos(),true);
+				return empleado.dameCodigo();
+			}
 			else
 			{	LinkedList datosPanel2=empleado.dameListaDatos();
 				datosPanel2.remove(0);
@@ -144,15 +148,18 @@ public class GEmpleadosImp implements GEmpleados
 				vista.actualizaVista(2,1,datosPanel1);
 				vista.actualizaVista(2,2,datosPanel2);
 				vista.actualizaVista(2,3,null);
+				return empleado.dameCodigo();
 			}
 		}
 	}
 
-	public void consultarEmpleadoNombre(String nombre)
+	public String consultarEmpleadoNombre(String nombre)
 	{
 		Vector busqueda=listaEmpleados.buscar(nombre,1);
 		if (busqueda.size()==0)
-		{	vista.actualizaVistaMensaje("Error al buscar el empleado "+nombre+". No se ha encontrado");}
+		{	vista.actualizaVistaMensaje("Error al buscar el empleado "+nombre+". No se ha encontrado");
+			return null;
+		}
 		else 
 		{	if (busqueda.size()==1)
 			{	Empleado empleado=(Empleado)busqueda.get(0);		
@@ -164,24 +171,29 @@ public class GEmpleadosImp implements GEmpleados
 				datosPanel1.add(empleado.dameNomina());
 				vista.actualizaVista(2,1,datosPanel1);
 				vista.actualizaVista(2,2,datosPanel2);	
-				vista.actualizaVista(2,3,null);		
+				vista.actualizaVista(2,3,null);
+				return empleado.dameCodigo();
 			}
 			else
 			{	Vector dnis=new Vector();
+				Empleado empleado=null;
 				for (int i=0;i<busqueda.size();i++)
-				{	Empleado empleado=(Empleado)busqueda.get(i);
+				{	empleado=(Empleado)busqueda.get(i);
 					dnis.add(empleado.dameDni());
 				}
 				vista.actualizaVistaConsulta(2,nombre,dnis);
+				return empleado.dameCodigo();
 			}
 		}
 	}
 
-	public void consultarEmpleadoDni(String dni)
+	public String consultarEmpleadoDni(String dni)
 	{
 		Vector busqueda=listaEmpleados.buscar(dni,2);
 		if (busqueda.size()==0)
-		{	vista.actualizaVistaMensaje("Error al buscar el empleado con DNI "+dni+". No se ha encontrado");}
+		{	vista.actualizaVistaMensaje("Error al buscar el empleado con DNI "+dni+". No se ha encontrado");
+			return null;
+		}
 		else 
 		{	Empleado empleado=(Empleado)busqueda.get(0);		
 			LinkedList datosPanel2=empleado.dameListaDatos();
@@ -192,7 +204,8 @@ public class GEmpleadosImp implements GEmpleados
 			datosPanel1.add(empleado.dameNomina());
 			vista.actualizaVista(2,1,datosPanel1);
 			vista.actualizaVista(2,2,datosPanel2);	
-			vista.actualizaVista(2,3,null);	
+			vista.actualizaVista(2,3,null);
+			return empleado.dameCodigo();
 		}
 	}
 	

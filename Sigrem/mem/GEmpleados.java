@@ -13,11 +13,11 @@ public interface GEmpleados
 	//Requisito 6.3
 	public void modificarEmpleado(String codigoEmpleado, LinkedList datosEmpleado);
 	//Requisito 6.4
-	public void consultarEmpleadoCodigo(boolean modificar,String codigo);
+	public String consultarEmpleadoCodigo(boolean modificar,String codigo);
 	//Requisito 6.5
-	public void consultarEmpleadoNombre(String nombre);
+	public String consultarEmpleadoNombre(String nombre);
 	//Requisito 6.6
-	public void consultarEmpleadoDni(String dni);
+	public String consultarEmpleadoDni(String dni);
 	
 	public void meteEmpleado(Empleado empleado);
 	
