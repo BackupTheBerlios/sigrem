@@ -33,7 +33,6 @@ public class PanelEmpleados extends JPanel
 		JPanel pempleado=dibujaEmpleado();
 		JPanel pdatos=dibujaDatos(false);
 		JPanel precursos=dibujaRecursos();
-		precursos.setPreferredSize(new Dimension(775,280));
 		JSplitPane sp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,pempleado,pdatos);
 		sp1.setDividerSize(4);
 		sp1.setEnabled(false);
@@ -251,7 +250,7 @@ public class PanelEmpleados extends JPanel
 			tabla.add(linea);		
 		}
 		JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		ptabla.setPreferredSize(new Dimension(600,200));
+		ptabla.setPreferredSize(new Dimension(700,200));
 		JButton bcrea=new JButton("Añadir");
 		bcrea.addActionListener(new ActionListener()
 				{	public void actionPerformed(ActionEvent e)
@@ -282,8 +281,6 @@ public class PanelEmpleados extends JPanel
 		botonera.add(bcrea);
 		botonera.add(bmod);
 		botonera.add(belim);
-		ptabla.setPreferredSize(new Dimension(752,211));
-		botonera.setPreferredSize(new Dimension(752,25));
 		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,ptabla,botonera);
 		sp.setEnabled(false);
 		sp.setDividerSize(4);
