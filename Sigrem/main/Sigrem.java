@@ -69,12 +69,11 @@ public class Sigrem
 	
 	public void eliminarContrato(boolean borrar,String codcontrato)
 	{
-		String codcliente=gcontratos.modificarContrato(codcontrato);
+		String codcliente=gcontratos.modificarFechaBaja(codcontrato);
 		if (codcliente!=null) 
 		{	gcontratos.eliminarContrato(borrar,codcontrato);
 			gclientes.eliminarCliente(codcliente,codcontrato);		
 		}
-		
 	}
 	
 	public void consultarContratoCodigo(boolean modificar,String codigo)
@@ -82,4 +81,14 @@ public class Sigrem
 		String codcliente=gcontratos.consultarContratoCodigo(modificar,codigo);
 		if (codcliente!=null) gclientes.consultarClienteCodigo(modificar,codcliente);
 	}	
+	
+	public void modificarCliente(String codcliente,LinkedList datos)
+	{
+		gclientes.modificarCliente(codcliente,datos);
+	}
+	
+	public void modificarContrato(String codcontrato,LinkedList datos)
+	{
+		gcontratos.modificarContrato(codcontrato,datos);
+	}
 }

@@ -72,8 +72,27 @@ public class GClientesImp implements GClientes
 			{	vista.actualizaVistaMensaje("Error al buscar el cliente "+codcliente+". No se ha encontrado");}
 	}
 	
-	public void modificarCliente(String codigo)
+	public void modificarCliente(String codigo,LinkedList datos)
 	{
+		Object[] busqueda=listaclientes.buscar(codigo,0);
+		if (busqueda.length==0)
+		{	vista.actualizaVistaMensaje("Error al buscar el cliente "+codigo+". No se ha encontrado");}
+		else 
+			if (busqueda[0]!=null)
+			{	Cliente cliente=(Cliente)busqueda[0];
+				cliente.setDireccion((String)datos.get(2));
+				cliente.setCp((String)datos.get(3));
+				cliente.setPoblacion((String)datos.get(4));
+				cliente.setProvincia((String)datos.get(5));
+				cliente.setTelefono1((String)datos.get(6));
+				cliente.setTelefono2((String)datos.get(7));
+				cliente.setMovil((String)datos.get(8));
+				cliente.setEmail((String)datos.get(9));
+				cliente.setFax((String)datos.get(10));
+				vista.actualizaVista(1,2,cliente.getListaDatos());				
+			}
+			else
+			{	vista.actualizaVistaMensaje("Error al buscar el cliente "+codigo+". No se ha encontrado");}
 	}
 	
 	public void consultarClienteCodigo(boolean modificar,String codigo)

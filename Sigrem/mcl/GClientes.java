@@ -9,7 +9,7 @@ public interface GClientes
 	//Requisito 1.2
 	public void eliminarCliente(String codcliente,String codcontrato);
 	//Requisito 1.3
-	public void modificarCliente(String codigo);
+	public void modificarCliente(String codigo,LinkedList datos);
 	//Requisito 1.4
 	public void consultarClienteCodigo(boolean modificar,String codigo);
 	//Requisito 1.5

@@ -56,12 +56,16 @@ public class GContratosImp implements GContratos
 			{	vista.actualizaVista(1,1,null);
 				vista.actualizaVista(1,2,null);				
 			}
-		
 		}
 		else vista.actualizaVistaMensaje("Error al eliminar el contrato "+codigo+". No se ha encontrado");
 	}
-
-	public String modificarContrato(String codigo)
+	
+	public void modificarContrato(String codigo,LinkedList datos)
+	{
+		vista.actualizaVista(1,1,datos);				
+	}
+	
+	public String modificarFechaBaja(String codigo)
 	{
 		Object[] busqueda=listacontratos.buscar(codigo,0);
 		if (busqueda.length==0)
@@ -95,6 +99,7 @@ public class GContratosImp implements GContratos
 				if (modificar)
 				{	LinkedList datos=new LinkedList();
 					datos.add(contrato.getCodigoContrato());
+					datos.add(contrato.getCodigoCliente());
 					datos.add(contrato.getMatricula());
 					datos.add(contrato.getFechaAlta());
 					vista.actualizaVistaDatos(1,datos,false);

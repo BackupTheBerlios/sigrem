@@ -74,6 +74,7 @@ public class PanelContratos extends JPanel
 		{	formulario.getContentPane().add(panelAlta('m',(String)datosmodificables.get(0),datosmodificables));
 			formulario.pack();
 			formulario.setVisible(true);
+			datosmodificables=new LinkedList();
 		}
 	}
 	
@@ -411,7 +412,7 @@ public class PanelContratos extends JPanel
 		return pmul;
 	}
 	
-	public JPanel panelAlta(char tipo,String codigo,LinkedList datos)
+	public JPanel panelAlta(final char tipo,String codigo,final LinkedList datos)
 	{
 		if ((tipo=='c') || (tipo=='n'))
 		{	formulario.setTitle("Crear contrato");}
@@ -429,7 +430,7 @@ public class PanelContratos extends JPanel
 			tfechaalta.setText(formato.format(hoy));
 		}
 		else if (tipo=='m')
-		{	tfechaalta.setText((String)datos.get(2));}
+		{	tfechaalta.setText((String)datos.get(3));}
 		tfechaalta.setEditable(false);
 		final JTextField tmatricula=new JTextField();
 		tfechaalta.setPreferredSize(new Dimension(100,20));
@@ -511,9 +512,9 @@ public class PanelContratos extends JPanel
 			tdni.setEditable(false);
 			int i=0;
 			if (tipo=='m')
-			{	tmatricula.setText((String)datos.get(1));
+			{	tmatricula.setText((String)datos.get(2));
 				tmatricula.setEditable(false);
-				i=3;
+				i=4;
 			}
 			else if (tipo=='n')
 			{	tdir.setEditable(false);
@@ -525,7 +526,6 @@ public class PanelContratos extends JPanel
 				tmov.setEditable(false);
 				temail.setEditable(false);
 				tfax.setEditable(false);
-				
 			}
 			tnom.setText((String)datos.get(0+i));
 			tdni.setText((String)datos.get(1+i));
@@ -608,25 +608,48 @@ public class PanelContratos extends JPanel
 		panel.add(sp2);
 		aceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
-			{
+			{			
 				LinkedList datoscontrato=new LinkedList();
 				LinkedList datoscliente=new LinkedList();
-				datoscontrato.add(tmatricula.getText());
-				datoscontrato.add(tfechaalta.getText());
-				datoscliente.add(tnom.getText());
-				datoscliente.add(tdni.getText());
-				datoscliente.add(tdir.getText());
-				datoscliente.add(tcp.getText());
-				datoscliente.add(tpob.getText());
-				datoscliente.add(tpro.getText());
-				datoscliente.add(ttel1.getText());
-				datoscliente.add(ttel2.getText());
-				datoscliente.add(tmov.getText());
-				datoscliente.add(temail.getText());
-				datoscliente.add(tfax.getText());
-				controlador.añadirContrato(datoscontrato,datoscliente);
-				formulario.setVisible(false);
-				formulario.getContentPane().removeAll();
+				if (tipo=='c')
+				{	datoscontrato.add(tmatricula.getText());
+					datoscontrato.add(tfechaalta.getText());
+					datoscliente.add(tnom.getText());
+					datoscliente.add(tdni.getText());
+					datoscliente.add(tdir.getText());
+					datoscliente.add(tcp.getText());
+					datoscliente.add(tpob.getText());
+					datoscliente.add(tpro.getText());
+					datoscliente.add(ttel1.getText());
+					datoscliente.add(ttel2.getText());
+					datoscliente.add(tmov.getText());
+					datoscliente.add(temail.getText());
+					datoscliente.add(tfax.getText());
+					controlador.añadirContrato(datoscontrato,datoscliente);
+					formulario.setVisible(false);
+					formulario.getContentPane().removeAll();
+				}
+				else if (tipo=='m')
+				{	datoscontrato.add(datos.get(0));
+					datoscontrato.add(datos.get(1));
+					datoscontrato.add(datos.get(2));
+					datoscontrato.add(datos.get(3));
+					datoscliente.add(datos.get(4));
+					datoscliente.add(datos.get(5));
+					datoscliente.add(tdir.getText());
+					datoscliente.add(tcp.getText());
+					datoscliente.add(tpob.getText());
+					datoscliente.add(tpro.getText());
+					datoscliente.add(ttel1.getText());
+					datoscliente.add(ttel2.getText());
+					datoscliente.add(tmov.getText());
+					datoscliente.add(temail.getText());
+					datoscliente.add(tfax.getText());
+					controlador.modificarContrato((String)datos.get(0),datoscontrato);
+					controlador.modificarCliente((String)datos.get(1),datoscliente);
+					formulario.setVisible(false);
+					formulario.getContentPane().removeAll();					
+				}
 			}
 		});
 		cancelar.addActionListener(new ActionListener()
