@@ -38,19 +38,17 @@ public class GContratosImp implements GContratos
 		String[] claves=new String[2];
 		claves[0]=null;
 		claves[1]=(String)datos.get(1);
-		
-		if (!listaContratos.esta(claves[1],1)){
-			Contrato nuevoContrato=new Contrato(codigoContrato,datos);
+		if (!listaContratos.esta(claves[1],1))
+		{	Contrato nuevoContrato=new Contrato(codigoContrato,datos);
 			claves[0]=new String(nuevoContrato.dameCodigoContrato());
 			listaContratos.insertar(claves,nuevoContrato);
 			incrementaCodigo();
 			datos.addFirst(claves[0]);
 			vista.actualizaVistaMensaje("El contrato ha sido creado correctamente");
 			vista.actualizaVista(1,1,datos);
-		
-		}else{
-			vista.actualizaVistaMensaje("La matricula del contrato que se quiere crear ya existe-Imposible crear contrato");
 		}
+		else
+		{	vista.actualizaVistaMensaje("La matricula del contrato que se quiere crear ya existe-Imposible crear contrato");}
 		return claves[0];
 	}
 	
@@ -111,16 +109,17 @@ public class GContratosImp implements GContratos
 		}
 	}
 	
-	public String consultarContratoMatricula(String matricula)
+	public String consultarContratoMatricula(boolean actualizar,String matricula)
 	{
 		Vector busqueda=listaContratos.buscar(matricula,1);
 		if (busqueda.size()==0)
-		{	vista.actualizaVistaMensaje("Error al buscar el contrato con matrícula "+matricula+". No se ha encontrado");
+		{	if (actualizar) vista.actualizaVistaMensaje("Error al buscar el contrato con matrícula "+matricula+". No se ha encontrado");
 			return null;			
 		}
 		else 
 		{	Contrato contrato=(Contrato)busqueda.get(0);
-			vista.actualizaVista(1,1,contrato.dameListaDatos());
+			if (actualizar) vista.actualizaVista(1,1,contrato.dameListaDatos());
+			else vista.actualizaVistaMensaje("La matricula del contrato que se quiere crear ya existe- Imposible crear contrato");
 			return contrato.dameCodigoCliente();
 		}
 	}

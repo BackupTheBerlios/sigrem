@@ -284,7 +284,7 @@ public class InterfazGrafica
 				if (valor!=null)
 				{	panelVistas.setSelectedIndex(0);
 					pcontratos.inicializaCajaMultas();
-					controlador.consultarContratoMatricula(valor);
+					controlador.consultarContratoMatricula(true,valor);
 				}
 			}
 		});

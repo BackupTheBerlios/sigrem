@@ -52,7 +52,6 @@ public class Sigrem
 		grecursos=factoria.generaGRecursos(vista,codrecurso);
 		gempleados=factoria.generaGEmpleados(vista,codempleado);
 		geconomia=factoria.generaGEconomia(vista,gempleados,gcontratos);		
-		System.out.println("Sigrem ha comenzado");
 	}
 	
 	public void activa()
@@ -62,27 +61,23 @@ public class Sigrem
 	
 	public void añadirContrato(LinkedList datosContrato,LinkedList datosCliente)
 	{
-		//if (gcontratos.consultarContratoMatricula((String)datosContrato.get(0))!=null){
-			String codigoClienteNuevo=gclientes.añadirCliente(datosCliente);
-			if (codigoClienteNuevo!=null){
-				añadirContratoACliente(datosContrato,codigoClienteNuevo);		
-			}				
-		/*
-		}else{
-			vista.actualizaVistaMensaje("La matricula ya existe- Imposible crear contrato");
-		
-		}*/
-		vista.actualizaVista(1,3,null);
+		if (gcontratos.consultarContratoMatricula(false,(String)datosContrato.get(0))==null)
+		{	String codigoClienteNuevo=gclientes.añadirCliente(datosCliente);
+			if (codigoClienteNuevo!=null)
+			{	añadirContratoACliente(datosContrato,codigoClienteNuevo);
+				vista.actualizaVista(1,3,null);
+			}
+		}
 	}
 	
 	public void añadirContratoACliente(LinkedList datosContrato,String codigoCliente)
 	{
 		datosContrato.addFirst(codigoCliente);
 		String codigoContratoNuevo=gcontratos.añadirContrato(datosContrato);
-		if (codigoContratoNuevo!=null){
-			gclientes.asociaClienteContrato(codigoCliente,codigoContratoNuevo);
-		}
-		vista.actualizaVista(1,3,null);
+		if (codigoContratoNuevo!=null)
+		{	gclientes.asociaClienteContrato(codigoCliente,codigoContratoNuevo);
+			vista.actualizaVista(1,3,null);
+		}		
 	}
 	
 	public void eliminarContrato(boolean borrar,boolean actualizar,String codcontrato)
@@ -108,9 +103,9 @@ public class Sigrem
 		}
 	}	
 	
-	public void consultarContratoMatricula(String matricula)
+	public void consultarContratoMatricula(boolean actualizar,String matricula)
 	{
-		String codcliente=gcontratos.consultarContratoMatricula(matricula);
+		String codcliente=gcontratos.consultarContratoMatricula(actualizar,matricula);
 		if (codcliente!=null) 
 		{	gclientes.consultarClienteCodigo(false,true,codcliente);
 			LinkedList listamultas=gcontratos.dameListaMultasContrato(1,matricula);
