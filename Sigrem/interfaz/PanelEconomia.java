@@ -263,17 +263,21 @@ public class PanelEconomia extends JPanel
 		if (titulo!=null) pgra.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),titulo,TitledBorder.LEFT,TitledBorder.TOP));
 		pgra.setPreferredSize(new Dimension(950,280));
 		if (num!=null)
-		{	JLabel l1=new JLabel("  0 ",SwingConstants.RIGHT);
-			JLabel l2=new JLabel(" 10 ",SwingConstants.RIGHT);
-			JLabel l3=new JLabel(" 20 ",SwingConstants.RIGHT);
-			JLabel l4=new JLabel(" 30 ",SwingConstants.RIGHT);
-			JLabel l5=new JLabel(" 40 ",SwingConstants.RIGHT);
-			JLabel l6=new JLabel(" 50 ",SwingConstants.RIGHT);
-			JLabel l7=new JLabel(" 60 ",SwingConstants.RIGHT);
-			JLabel l8=new JLabel(" 70 ",SwingConstants.RIGHT);
-			JLabel l9=new JLabel(" 80 ",SwingConstants.RIGHT);
-			JLabel l10=new JLabel(" 90 ",SwingConstants.RIGHT);
-			JLabel l11=new JLabel("100 ",SwingConstants.RIGHT);
+		{	int maxValorGrafico=1;
+			for (int i=0;i<12;i++)
+			if (num[i]<-maxValorGrafico) maxValorGrafico=-num[i];
+			else if (num[i]>maxValorGrafico) maxValorGrafico=num[i];
+			JLabel l1=new JLabel(" 0 ",SwingConstants.RIGHT);
+			JLabel l2=new JLabel(" ",SwingConstants.RIGHT);
+			JLabel l3=new JLabel(" ",SwingConstants.RIGHT);
+			JLabel l4=new JLabel(" ",SwingConstants.RIGHT);
+			JLabel l5=new JLabel(" ",SwingConstants.RIGHT);
+			JLabel l6=new JLabel(""+maxValorGrafico/2,SwingConstants.RIGHT);
+			JLabel l7=new JLabel(" ",SwingConstants.RIGHT);
+			JLabel l8=new JLabel(" ",SwingConstants.RIGHT);
+			JLabel l9=new JLabel(" ",SwingConstants.RIGHT);
+			JLabel l10=new JLabel(" ",SwingConstants.RIGHT);
+			JLabel l11=new JLabel(""+maxValorGrafico,SwingConstants.RIGHT);
 			l1.setPreferredSize(new Dimension(30,10));
 			l2.setPreferredSize(new Dimension(30,10));
 			l3.setPreferredSize(new Dimension(30,10));
@@ -300,10 +304,6 @@ public class PanelEconomia extends JPanel
 			Box caja=Box.createHorizontalBox();				
 			caja.add(c1);	
 			Color c;
-			int maxValorGrafico=1;
-			for (int i=0;i<12;i++)
-				if (num[i]<-maxValorGrafico)	maxValorGrafico=-num[i];
-				else if (num[i]>maxValorGrafico)	maxValorGrafico=num[i];
 			for(int i=0;i<12;i++)
 			{
 				if (num[i]<0)	caja.add(dibujaBarra(-((150*num[i])/maxValorGrafico),vMeses[i],Color.RED));
