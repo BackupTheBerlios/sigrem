@@ -117,7 +117,7 @@ public class InterfazGrafica
 		ventana.getContentPane().add(panelVistas);
 		ventana.setJMenuBar(setMenu());
 		ventana.pack();
-		ventana.setLocation(150,50);
+		ventana.setLocation(150,30);
 		ventana.setResizable(false);
 		ventana.addWindowListener(new WindowAdapter()
 		{	public void windowClosing(WindowEvent e)
