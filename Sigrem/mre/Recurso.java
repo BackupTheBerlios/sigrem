@@ -110,4 +110,9 @@ public class Recurso {
 	{
 		this.descripcion=descrip;
 	}	
+	
+	public void ponAbogado(String abo)
+	{
+		this.abogado=abo;
+	}
 }

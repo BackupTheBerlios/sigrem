@@ -23,10 +23,6 @@ public class GRecursosImp implements GRecursos
 	private void incrementaCodigo()
 	{
 		String numero=codigoRecurso.substring(0,3);
-		/*Character car=null;
-		int num=car.digit(codigoRecurso.charAt(3),10);
-		for (int i=4;i<codigoRecurso.length();i++)
-		{	num=(num*10)+car.digit(codigoRecurso.charAt(i),10);}*/
 		int num=Integer.valueOf(codigoRecurso.substring(3)).intValue();
 		numero=numero+(num+1);
 		codigoRecurso=numero;
@@ -66,10 +62,11 @@ public class GRecursosImp implements GRecursos
 		{	vista.actualizaVistaMensaje("Error al buscar el recurso "+codigo+". No se ha encontrado");}
 		else 
 		{	Recurso recurso=(Recurso)busqueda.get(0);
-			recurso.ponEscritoRecibido((String)datos.get(1));
-			recurso.ponEscritoPresentado((String)datos.get(2));
-			recurso.ponEstado((String)datos.get(3));
-			recurso.ponDescripcion((String)datos.get(5));
+			recurso.ponEscritoRecibido((String)datos.get(2));
+			recurso.ponEscritoPresentado((String)datos.get(3));
+			recurso.ponEstado((String)datos.get(4));
+			recurso.ponAbogado((String)datos.get(5));
+			recurso.ponDescripcion((String)datos.get(6));
 			datos.add(recurso.dameCodigoMulta());
 			vista.actualizaVistaCaja(1,'r','m',datos);
 			vista.actualizaVista(1,4,datos);
