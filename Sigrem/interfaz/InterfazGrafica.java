@@ -155,7 +155,7 @@ public class InterfazGrafica
 	public void actualizaVista(int pestaña,int panel,LinkedList datos)
 	{
 		if (pestaña==1) pcontratos.actualiza(panel,datos);
-		else if (pestaña==2){} //pempleados.actualiza(panel,datos);
+		else if (pestaña==2){pempleados.actualiza(panel,datos);}
 		else if (pestaña==3) {}//peconomia.actualiza(panel,datos);
 	}
 	

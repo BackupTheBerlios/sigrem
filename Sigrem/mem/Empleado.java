@@ -27,6 +27,7 @@ public abstract class Empleado {
 	private String movil;
 	private String email;
 	private String fax;
+	private String nomina;
 	
 	// Constructor
 	public Empleado(String codigoEmpleado,LinkedList listaEmpleados) 
@@ -43,6 +44,7 @@ public abstract class Empleado {
 		movil = 	(String)listaEmpleados.get(8);
 		email = 	(String)listaEmpleados.get(9);
 		fax = 		(String)listaEmpleados.get(10);
+		nomina =	(String)listaEmpleados.get(11);
 	}
 	// métodos accesores
 	public String dameCodigo(){return codigo;}
@@ -57,6 +59,7 @@ public abstract class Empleado {
 	public String dameMovil(){return movil;}
 	public String dameEmail(){return email;}
 	public String dameFax(){return fax;}
+	public String dameNomina(){return nomina;}
 	
 	// Método que devuelve una LinkedList con todos los datos del objeto con un cierto orden
 	public LinkedList dameListaDatos()
@@ -73,6 +76,7 @@ public abstract class Empleado {
 		datos.add(movil);
 		datos.add(email);
 		datos.add(fax);
+		datos.add(nomina);
 		return datos;
 	}
 	

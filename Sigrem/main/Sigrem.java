@@ -215,4 +215,19 @@ public class Sigrem
 			
 		}
 	}
+	
+	public void contratarEmpleado(LinkedList datos)
+	{
+		gempleados.añadirEmpleado(datos);
+	}
+	
+	public void despedirEmpleado(String codigo)
+	{
+		gempleados.eliminarEmpleado(codigo);
+	}
+	
+	public void consultarEmpleadoCodigo(boolean modificar,String codigo)
+	{
+		gempleados.consultarEmpleadoCodigo(modificar,codigo);
+	}
 }

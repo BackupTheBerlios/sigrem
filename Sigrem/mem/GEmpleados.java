@@ -1,23 +1,9 @@
-/*
- * Created on 22-mar-2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
 package mem;
 
 import java.util.LinkedList;
 
-/**
- * @author sergio
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
-public interface GEmpleados {
-
-//	 De momento es copia de clientes. Voy a probar y a adaptarlo a empleados
-	
+public interface GEmpleados
+{
 	// Método para añadir un empleado al sistema
 	public String añadirEmpleado(LinkedList listaEmpleados);
 	// Método para eliminar un empleado del sistema
@@ -25,9 +11,9 @@ public interface GEmpleados {
 	// Método para modificar un empleado en el sistema
 	public void modificarEmpleado(String codigoEmpleado, LinkedList listaEmpleados);
 	// Método para consultar un empleado dado su Código de Empleado
-	public void consultarEmpleadoPorCodigo(String codigo);
+	public void consultarEmpleadoCodigo(boolean modificar,String codigo);
 	// Método para consultar un empleado dado su Nombre
-	public void consultarEmpleadoPorNombre(String nombre);
+	public void consultarEmpleadoNombre(String nombre);
 	// Método para consultar un empleado dado su DNI
-	public void consultarEmpleadoPorDni(String dni);
+	public void consultarEmpleadoDni(String dni);
 }
