@@ -1522,7 +1522,6 @@ public class PanelContratos extends JPanel
 		estado.addItem("Recurso 2º");
 		estado.addItem("Recurso 3º");
 		estado.addItem("Favorable");
-		estado.addItem("Desfavorable");
-		if(0==1){}
+		estado.addItem("Desfavorable");		
 	}
 }
