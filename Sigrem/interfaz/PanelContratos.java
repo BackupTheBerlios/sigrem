@@ -453,7 +453,7 @@ public class PanelContratos extends JPanel
 		else if (tipo=='m') 
 		{	formulario.setTitle("Modificar contrato "+codigo);}
 		formulario.setLocation(350,100);
-		JLabel lc1=new JLabel("Matrícula del vehículo");
+		JLabel lc1=new JLabel("*Matrícula del vehículo");
 		JLabel lc2=new JLabel("Fecha de alta");
 		lc1.setPreferredSize(new Dimension(150,20));
 		lc2.setPreferredSize(new Dimension(150,20));
@@ -481,8 +481,8 @@ public class PanelContratos extends JPanel
 		caja1.add(p2);
 		JPanel pcl=new JPanel();
 		pcl.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos del cliente",TitledBorder.LEFT,TitledBorder.TOP));
-		JLabel l1=new JLabel("Nombre ",SwingConstants.RIGHT);
-		JLabel l2=new JLabel("DNI/CIF ",SwingConstants.RIGHT);
+		JLabel l1=new JLabel("*Nombre ",SwingConstants.RIGHT);
+		JLabel l2=new JLabel("*DNI/CIF ",SwingConstants.RIGHT);
 		JLabel l3=new JLabel("Dirección ",SwingConstants.RIGHT);
 		JLabel l4=new JLabel("Código postal ",SwingConstants.RIGHT);
 		JLabel l5=new JLabel("Población ",SwingConstants.RIGHT);
@@ -643,50 +643,57 @@ public class PanelContratos extends JPanel
 		aceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{			
-				LinkedList datoscontrato=new LinkedList();
-				LinkedList datoscliente=new LinkedList();
-				if (tipo=='c')
-				{	datoscontrato.add(tmatricula.getText());
-					datoscontrato.add(tfechaalta.getText());
-					datoscliente.add(tnom.getText());
-					datoscliente.add(tdni.getText());
-					datoscliente.add(tdir.getText());
-					datoscliente.add(tcp.getText());
-					datoscliente.add(tpob.getText());
-					datoscliente.add(tpro.getText());
-					datoscliente.add(ttel1.getText());
-					datoscliente.add(ttel2.getText());
-					datoscliente.add(tmov.getText());
-					datoscliente.add(temail.getText());
-					datoscliente.add(tfax.getText());
-					controlador.añadirContrato(datoscontrato,datoscliente);
+				if ((tmatricula.getText().equals("")) && (tdni.getText().equals(""))
+						&& (tnom.getText().equals("")))
+				{
+					JOptionPane.showMessageDialog(null,"Lo campos marcados con * son obligatorios");
 				}
-				else if (tipo=='m')
-				{	datoscontrato.add(datos.get(0));
-					datoscontrato.add(datos.get(1));
-					datoscontrato.add(datos.get(2));
-					datoscontrato.add(datos.get(3));
-					datoscliente.add(datos.get(4));
-					datoscliente.add(datos.get(5));
-					datoscliente.add(tdir.getText());
-					datoscliente.add(tcp.getText());
-					datoscliente.add(tpob.getText());
-					datoscliente.add(tpro.getText());
-					datoscliente.add(ttel1.getText());
-					datoscliente.add(ttel2.getText());
-					datoscliente.add(tmov.getText());
-					datoscliente.add(temail.getText());
-					datoscliente.add(tfax.getText());
-					controlador.modificarContrato((String)datos.get(0),datoscontrato);
-					controlador.modificarCliente((String)datos.get(1),datoscliente);
+				else
+				{	LinkedList datoscontrato=new LinkedList();
+					LinkedList datoscliente=new LinkedList();
+					if (tipo=='c')
+					{	datoscontrato.add(tmatricula.getText());
+						datoscontrato.add(tfechaalta.getText());
+						datoscliente.add(tnom.getText());
+						datoscliente.add(tdni.getText());
+						datoscliente.add(tdir.getText());
+						datoscliente.add(tcp.getText());
+						datoscliente.add(tpob.getText());
+						datoscliente.add(tpro.getText());
+						datoscliente.add(ttel1.getText());
+						datoscliente.add(ttel2.getText());
+						datoscliente.add(tmov.getText());
+						datoscliente.add(temail.getText());
+						datoscliente.add(tfax.getText());
+						controlador.añadirContrato(datoscontrato,datoscliente);
+					}
+					else if (tipo=='m')
+					{	datoscontrato.add(datos.get(0));
+						datoscontrato.add(datos.get(1));
+						datoscontrato.add(datos.get(2));
+						datoscontrato.add(datos.get(3));
+						datoscliente.add(datos.get(4));
+						datoscliente.add(datos.get(5));
+						datoscliente.add(tdir.getText());
+						datoscliente.add(tcp.getText());
+						datoscliente.add(tpob.getText());
+						datoscliente.add(tpro.getText());
+						datoscliente.add(ttel1.getText());
+						datoscliente.add(ttel2.getText());
+						datoscliente.add(tmov.getText());
+						datoscliente.add(temail.getText());
+						datoscliente.add(tfax.getText());
+						controlador.modificarContrato((String)datos.get(0),datoscontrato);
+						controlador.modificarCliente((String)datos.get(1),datoscliente);
+					}
+					else if(tipo=='n')
+					{	datoscontrato.add(tmatricula.getText());
+						datoscontrato.add(tfechaalta.getText());
+						controlador.añadirContratoACliente(datoscontrato,tcodcliente.getText());
+					}
+					formulario.setVisible(false);
+					formulario.getContentPane().removeAll();
 				}
-				else if(tipo=='n')
-				{	datoscontrato.add(tmatricula.getText());
-					datoscontrato.add(tfechaalta.getText());
-					controlador.añadirContratoACliente(datoscontrato,tcodcliente.getText());
-				}
-				formulario.setVisible(false);
-				formulario.getContentPane().removeAll();
 			}
 		});
 		cancelar.addActionListener(new ActionListener()
