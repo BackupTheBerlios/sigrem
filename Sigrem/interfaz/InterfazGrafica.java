@@ -12,8 +12,6 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileFilter;
 import java.io.*;
 import javax.swing.JList;
-import java.awt.Font;
-import java.awt.Color;
 import main.Sigrem;
 
 class Filtro extends FileFilter
@@ -560,14 +558,7 @@ public class InterfazGrafica
 							System.out.println ("No se pude abrir el archivo ayuda2.txt");
 						}
 					}
-				try
-				{
-					fd = new BufferedReader (new FileReader ("interfaz/ayuda1.txt"));
-				}
-				catch(FileNotFoundException e)
-				{
-					System.out.println ("No se pude abrir el archivo ayuda1.txt");
-				}
+				
 				try
 				{
 					while((linea=fd.readLine())!=null)
@@ -630,14 +621,7 @@ public class InterfazGrafica
 							System.out.println ("No se pude abrir el archivo ayuda2.txt");
 						}
 					}
-				try
-				{
-					fd = new BufferedReader (new FileReader ("interfaz/ayuda2.txt"));
-				}
-				catch(FileNotFoundException e)
-				{
-					System.out.println ("No se pude abrir el archivo ayuda2.txt");
-				}
+				
 				try
 				{
 					while((linea=fd.readLine())!=null)
