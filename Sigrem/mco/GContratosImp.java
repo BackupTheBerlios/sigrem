@@ -13,7 +13,7 @@ public class GContratosImp implements GContratos
   
 	public GContratosImp(InterfazGrafica vista) 
 	{
-		contratos=new EstructuraConIndices(2);
+		contratos=new EstructuraDatosImp(2);
 		this.vista=vista;
 	}
 	

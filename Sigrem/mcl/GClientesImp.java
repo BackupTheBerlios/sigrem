@@ -12,7 +12,7 @@ public class GClientesImp implements GClientes
 	 
 	public GClientesImp(InterfazGrafica vista) 
 	{
-		this.clientes=new EstructuraConIndices(3);
+		this.clientes=new EstructuraDatosImp(3);
 	    this.vista=vista;
 	}
 	public String añadirCliente(LinkedList datos)

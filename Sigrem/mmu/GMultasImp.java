@@ -11,7 +11,7 @@ public class GMultasImp implements GMultas
 	  
 	public GMultasImp(InterfazGrafica vista) 
 	{
-		multas=new EstructuraConIndices(3);
+		multas=new EstructuraDatosImp(3);
 	    this.vista=vista;
 	}
 /*	public boolean añadirMulta(Contrato contrato, Integer codigo,String expediente, String boletin)
