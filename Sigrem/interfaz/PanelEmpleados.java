@@ -1,7 +1,6 @@
 package interfaz;
 
-import javax.swing.*;
-import java.awt.Dimension;
+import javax.swing.*;import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.border.TitledBorder;
 import java.awt.event.ActionEvent;
@@ -14,7 +13,9 @@ import java.awt.*;
 
 public class PanelEmpleados extends JPanel 
 {
-	public JFrame formulario; 
+	private JFrame formulario; 
+	private JButton bmodificar;
+	private JButton bdespedir;
 	
 	public PanelEmpleados()
 	{
@@ -56,24 +57,29 @@ public class PanelEmpleados extends JPanel
 		t1.setBackground(Color.WHITE);
 		t2.setBackground(Color.WHITE);
 		t3.setBackground(Color.WHITE);
-		JButton bcrea=new JButton ("Crear");
-		JButton belimina=new JButton ("Eliminar");
-		JButton bmodifica=new JButton ("Modificar");
-		belimina.setEnabled(false);
-		bmodifica.setEnabled(false);
-		bcrea.addActionListener(new ActionListener()
+		JButton bcontratar=new JButton ("Contratar");
+		bdespedir=new JButton ("Despedir");
+		bmodificar=new JButton ("Modificar");
+		bdespedir.setEnabled(false);
+		bmodificar.setEnabled(false);
+		bcontratar.addActionListener(new ActionListener()
 				{	public void actionPerformed(ActionEvent e)
 					{
-						creaEmpleado();
+						if (!formulario.isVisible())
+						{	JPanel panel=panelAltaEmpleado();
+							formulario.getContentPane().add(panel);
+							formulario.pack();	
+							formulario.setVisible(true);
+						}
 					}
 				});
-		belimina.addActionListener(new ActionListener()
+		bdespedir.addActionListener(new ActionListener()
 				{	public void actionPerformed(ActionEvent e)
 					{
 						eliminaEmpleado();
 					}
 				});
-		bmodifica.addActionListener(new ActionListener()
+		bmodificar.addActionListener(new ActionListener()
 				{	public void actionPerformed(ActionEvent e)
 					{
 						modificaEmpleado();
@@ -89,9 +95,9 @@ public class PanelEmpleados extends JPanel
 		p2.add(t2);
 		p3.add(l3);
 		p3.add(t3);
-		p4.add(bcrea);
-		p4.add(belimina);
-		p4.add(bmodifica);
+		p4.add(bcontratar);
+		p4.add(bdespedir);
+		p4.add(bmodificar);
 		Box caja=Box.createVerticalBox();
 		caja.add(p1);
 		caja.add(p2);
@@ -256,20 +262,6 @@ public class PanelEmpleados extends JPanel
 		return prec;		
 	}
 	
-	public void creaEmpleado()
-	{		
-		JPanel pd=panelAltaEmpleado();
-		formulario.getContentPane().add(pd);
-		formulario.pack();
-		formulario.setVisible(true);
-		formulario.addWindowListener(new WindowAdapter()
-		{	public void windowClosing(WindowEvent e)
-			{
-				formulario.setVisible(false);	
-			}
-		});	
-	}
-	
 	public JPanel panelAltaEmpleado() 
 	{		
 		formulario.setTitle("Nuevo empleado");
@@ -310,6 +302,8 @@ public class PanelEmpleados extends JPanel
 					{
 						formulario.setVisible(false);
 						formulario.getContentPane().removeAll();
+						bdespedir.setEnabled(true);
+						bmodificar.setEnabled(true);
 					}
 				});
 		bcancela.addActionListener(new ActionListener()
