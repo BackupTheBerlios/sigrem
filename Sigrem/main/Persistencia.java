@@ -82,7 +82,7 @@ public class Persistencia
 			iniciando=false;
 			System.out.println("La carga de clientes se ha realizado correctamente");
 		} catch (FileNotFoundException e1){
-			System.out.println("No existe el archivo clientes.txt");		
+			System.out.println("No existe el archivo clientes.xml");		
 		}catch (IOException e0) {
 			System.out.println("Algun dato de gclientes es erroneo IOException e0");	
 			bienCargado=false;
@@ -92,7 +92,7 @@ public class Persistencia
 			iniciando=false;
 			System.out.println("La carga de contratos se ha realizado correctamente");
 		} catch (FileNotFoundException e1){
-			System.out.println("No existe el archivo contratos.txt");
+			System.out.println("No existe el archivo contratos.xml");
 		} catch (IOException e1) {
 			System.out.println("Algun dato de gcontratos es erroneo");
 			bienCargado=false;
@@ -102,7 +102,7 @@ public class Persistencia
 			iniciando=false;
 			System.out.println("La carga de multas se ha realizado correctamente");
 		} catch (FileNotFoundException e1){
-			System.out.println("No existe el archivo multas.txt");
+			System.out.println("No existe el archivo multas.xml");
 		} catch (IOException e1) {
 			System.out.println("Algun dato de gmultas es erroneo");
 			bienCargado=false;
@@ -111,7 +111,7 @@ public class Persistencia
 			iniciando=false;
 			System.out.println("La carga de recursos se ha realizado correctamente");
 		} catch (FileNotFoundException e1){
-			System.out.println("No existe el archivo recursos.txt");
+			System.out.println("No existe el archivo recursos.xml");
 		} catch (IOException e1) {
 			System.out.println("Algun dato de grecursos es erroneo");
 			bienCargado=false;
@@ -120,7 +120,7 @@ public class Persistencia
 			iniciando=false;
 			System.out.println("La carga de empleados se ha realizado correctamente");
 		} catch (FileNotFoundException e1){
-			System.out.println("No existe el archivo empleados.txt");
+			System.out.println("No existe el archivo empleados.xml");
 		} catch (IOException e1) {
 			System.out.println("Algun dato de gempleados es erroneo");
 			bienCargado=false;
@@ -163,8 +163,7 @@ public class Persistencia
 			escritor.close();
 						
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error al crear el fichero clientes.xml");
 		}
 	
 		
@@ -414,7 +413,7 @@ public class Persistencia
 			escritor.close();
 						
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Error al crear el fichero contratos.xml");
 			e.printStackTrace();
 		}
 	
@@ -613,7 +612,7 @@ public class Persistencia
 			escritor.close();
 						
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Error al crear el fichero multas.xml");
 			e.printStackTrace();
 		}
 	
@@ -831,7 +830,7 @@ public class Persistencia
 			escritor.close();
 						
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Error al crear el fichero recursos.xml");
 			e.printStackTrace();
 		}
 	}
@@ -1021,7 +1020,7 @@ public class Persistencia
 			escritor.close();
 						
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Error al crear el fichero empleados.xml");
 			e.printStackTrace();
 		}
 	
