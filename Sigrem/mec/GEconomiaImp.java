@@ -93,7 +93,7 @@ public class GEconomiaImp implements GEconomia
 		String nuevoUltimoMes=""+ultimoMesFac;
 		datos.add(nuevoUltimoMes);
 		if (grafica==0)	vista.actualizaVista(3,1,datos);
-		else if (grafica==1)	vista.actualizaVista(3,3,datos);;
+		else if (grafica==1)	vista.actualizaVista(3,3,datos);
 	}
 	
 	public void gastos(int valor,int grafica)
@@ -123,7 +123,7 @@ public class GEconomiaImp implements GEconomia
 		String nuevoUltimoMes=""+ultimoMesGas;
 		datos.add(nuevoUltimoMes);
 		if (grafica==0)	vista.actualizaVista(3,1,datos);
-		else if (grafica==1)	vista.actualizaVista(3,3,datos);;
+		else if (grafica==1)	vista.actualizaVista(3,3,datos);
 	}
 
 	public void balance(int valor,int grafica)
