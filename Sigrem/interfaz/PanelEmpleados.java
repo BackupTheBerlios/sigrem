@@ -318,7 +318,7 @@ public class PanelEmpleados extends JPanel
 			p.add(l9);
 			tabla.add(p);
 			for (int i=0;i<9;i++)
-			{	JPanel linea=dibujaLineaRecursos();
+			{	JPanel linea=dibujaLineaRecurso();
 				tabla.add(linea);		
 			}
 			JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -673,19 +673,19 @@ public class PanelEmpleados extends JPanel
 		return panel;
 	}
 	
-	public JPanel dibujaLineaRecursos()
+	public JPanel dibujaLineaRecurso()
 	{	
 		JPanel panel=new JPanel();
 		urec++;
 		final JTextField cod=new JTextField("R00"+urec);
-		final JTextField fcl=new JTextField();
-		final JTextField fsi=new JTextField();
-		final JTextField ere=new JTextField();
-		final JTextField epr=new JTextField();
-		final JTextField est=new JTextField();
-		final JButton descrip=new JButton(new ImageIcon("interfaz/find.gif"));
-		final JButton modi=new JButton(new ImageIcon("interfaz/tick.gif"));
-		final JButton elim=new JButton(new ImageIcon("interfaz/del.gif"));
+		JTextField fcl=new JTextField();
+		JTextField fsi=new JTextField();
+		JTextField ere=new JTextField();
+		JTextField epr=new JTextField();
+		JTextField est=new JTextField();
+		JButton descrip=new JButton(new ImageIcon("interfaz/find.gif"));
+		JButton modi=new JButton(new ImageIcon("interfaz/tick.gif"));
+		JButton elim=new JButton(new ImageIcon("interfaz/del.gif"));
 		cod.setEditable(false);
 		fcl.setEditable(false);
 		fsi.setEditable(false);
