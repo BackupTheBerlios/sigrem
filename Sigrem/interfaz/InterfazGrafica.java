@@ -1,13 +1,18 @@
 package interfaz;
 
 import javax.swing.*;
+
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileFilter;
 import java.io.*;
+import javax.swing.JList;
+import java.awt.Font;
 import main.Sigrem;
 
 class Filtro extends FileFilter
@@ -44,10 +49,16 @@ public class InterfazGrafica
 	
 	private JFrame formacercade;
 	
+	private JFrame formayuda;
+	
+	private static JTextArea salida;
+	
+	private static JList lista;
+	
 	private Sigrem controlador;
 	
 	public InterfazGrafica(Sigrem controlador)
-	{
+	{		
 		ventana=new JFrame("Sigrem");
 		this.controlador=controlador;
 		formSigrem=new JFrame();
@@ -60,6 +71,11 @@ public class InterfazGrafica
 		formacercade.setUndecorated(true);		
 //		formacercade.setAlwaysOnTop(true);
 		formacercade.setLocation(350,250);
+		formayuda=new JFrame();
+		formayuda.setResizable(false);
+//		formayuda.setAlwaysOnTop(true);
+		formayuda.setLocation(150,50);
+		formayuda.setPreferredSize(new Dimension(500,400));
 		panelVistas=new JTabbedPane(JTabbedPane.BOTTOM);
 		pcontratos=new PanelContratos(this.controlador);
 		pempleados=new PanelEmpleados(this.controlador);
@@ -370,6 +386,15 @@ public class InterfazGrafica
 				guardar();
 			}
 		});
+		ayuda.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				formayuda.getContentPane().removeAll();
+				dibujaAyuda(0);
+				formayuda.setVisible(true);
+				
+			}
+		});
 		return menu;	
 	}
 	
@@ -407,4 +432,63 @@ public class InterfazGrafica
 			}
 		});
 	}
+	
+	public void dibujaAyuda(int npanel)
+	{
+		formayuda.getContentPane().removeAll();
+		if (npanel==0)
+			panel1();
+		else
+			if (npanel==1)
+				panel2();
+	}
+	
+	public void panel1()
+	{		
+		String[] opciones = {"Sigrem"," + Menú"," + Gestión Contratos"," + Gestión Empleados"," + Gestión Económica"};
+		lista=new JList(opciones);
+		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		salida=new JTextArea();
+		JScrollPane psalida=new JScrollPane(salida);
+		psalida.setPreferredSize(new Dimension(100,100));
+		formayuda.getContentPane().add(new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,lista,psalida));
+		formayuda.setTitle("Ayuda - Sigrem");
+		formayuda.pack();
+		lista.addListSelectionListener(new ListSelectionListener()
+		{
+			public void valueChanged(ListSelectionEvent e)
+			{
+				if(lista.getSelectedIndex()==1)
+					dibujaAyuda(1);
+				salida.append(" Descripción del Menú de la aplicación SIGREM\n");	
+			}
+		});		
+	}
+	
+	public void panel2()
+	{		
+		String[] opciones = {"Sigrem"," -  Menú","    + Archivo","    + Herramientas","    + Acerca de"," + Gestión Contratos"," + Gestión Empleados"," + Gestión Económica"};
+		lista=new JList(opciones);
+		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		salida=new JTextArea();
+		//lista.setFont(Font.ITALIC);
+		JScrollPane psalida=new JScrollPane(salida);
+		psalida.setPreferredSize(new Dimension(100,100));
+		formayuda.getContentPane().add(new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,lista,psalida));
+		formayuda.setTitle("Ayuda - Sigrem");
+		formayuda.pack();
+		lista.addListSelectionListener(new ListSelectionListener()
+		{
+			public void valueChanged(ListSelectionEvent e)
+			{
+				if(lista.getSelectedIndex()==1)
+					dibujaAyuda(0);
+				
+				
+					
+			}
+		});		
+	}
+	
+	
 }
