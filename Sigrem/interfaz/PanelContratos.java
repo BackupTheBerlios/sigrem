@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
+import java.util.Vector;
 import main.Sigrem;
 import java.util.LinkedList;
 import java.util.Date;
@@ -22,7 +22,9 @@ public class PanelContratos extends JPanel
 	
 	private JDialog formRecurso;
 	
-	private LinkedList datosmodificables;
+	private JDialog formConsulta;
+		
+	private LinkedList datosModificables;
 	
 	private JTextField tcodcliente;
 	
@@ -32,7 +34,7 @@ public class PanelContratos extends JPanel
 	{
 		super();
 		this.controlador=controlador;
-		datosmodificables=new LinkedList();
+		datosModificables=new LinkedList();
 		formulario=new JDialog(v,true);
 		formulario.setResizable(false);
 		formulario.addWindowListener(new WindowAdapter()
@@ -49,7 +51,14 @@ public class PanelContratos extends JPanel
 				formRecurso.getContentPane().removeAll();
 			}
 		});
-		
+		formConsulta=new JDialog();
+		formConsulta.setResizable(false);
+		formConsulta.addWindowListener(new WindowAdapter()
+		{	public void windowClosing(WindowEvent e)
+			{
+				formConsulta.getContentPane().removeAll();
+			}
+		});
 		dibujaPaneles(true);
 	}
 	
@@ -95,13 +104,42 @@ public class PanelContratos extends JPanel
 	
 	public void actualizaDatosModificables(LinkedList datos,boolean dibujar)
 	{
-		for (int i=0;i<datos.size();i++) datosmodificables.addLast(datos.get(i));
+		for (int i=0;i<datos.size();i++) datosModificables.addLast(datos.get(i));
 		if (dibujar)
-		{	formulario.getContentPane().add(panelAlta('m',(String)datosmodificables.get(0),datosmodificables));
+		{	formulario.getContentPane().add(panelAlta('m',(String)datosModificables.get(0),datosModificables));
 			formulario.pack();
 			formulario.setVisible(true);
-			datosmodificables=new LinkedList();
+			datosModificables=new LinkedList();
 		}
+	}
+	
+	public void actualizaPanelConsulta(String nombre,Vector dnis)
+	{
+		formConsulta.setTitle("Resultados de la consulta");
+		formConsulta.setLocation(350,200);
+		JLabel l1=new JLabel("Se han encontrado los siguientes clientes con nombre "+nombre);
+		JLabel l2=new JLabel("Selecciona el DNI/CIF del cliente:");
+		final JComboBox dni=new JComboBox(dnis);
+		dni.setPreferredSize(new Dimension(100,20));
+		JPanel p1=new JPanel();
+		JPanel p2=new JPanel();
+		p1.add(l1);
+		p2.add(l2);
+		p2.add(dni);
+		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,p1,p2);
+		sp.setEnabled(false);
+		sp.setDividerSize(4);
+		formConsulta.getContentPane().add(sp);
+		formConsulta.pack();
+		formConsulta.setVisible(true);
+		dni.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				controlador.consultarClienteDni((String)dni.getSelectedItem());
+				formConsulta.setVisible(false);
+				formConsulta.getContentPane().removeAll();				
+			}
+		});
 	}
 	
 	public JPanel dibujaContrato(LinkedList datos)

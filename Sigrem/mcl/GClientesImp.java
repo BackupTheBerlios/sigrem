@@ -130,9 +130,20 @@ public class GClientesImp implements GClientes
 			return null;			
 		}
 		else 
-		{	Cliente cliente=(Cliente)busqueda.get(0);
-			vista.actualizaVista(1,2,cliente.dameListaDatos());
-			return (String)cliente.dameListaContratos().getFirst();
+		{	if (busqueda.size()==1)
+			{	Cliente cliente=(Cliente)busqueda.get(0);
+				vista.actualizaVista(1,2,cliente.dameListaDatos());
+				return (String)cliente.dameListaContratos().getFirst();			
+			}
+			else
+			{	Vector dnis=new Vector();
+				for (int i=0;i<busqueda.size();i++)
+				{	Cliente cliente=(Cliente)busqueda.get(i);
+					dnis.add(cliente.dameDni());
+				}
+				vista.actualizaVistaConsulta(1,nombre,dnis);
+				return null;
+			}
 		}
 	}
 	

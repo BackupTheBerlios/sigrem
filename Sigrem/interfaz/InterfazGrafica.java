@@ -12,6 +12,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileFilter;
 import java.io.*;
 import javax.swing.JList;
+import java.util.Vector;
 import main.Sigrem;
 
 class Filtro extends FileFilter
@@ -165,6 +166,12 @@ public class InterfazGrafica
 	{
 		if (pestaña==1) pcontratos.actualizaDatosModificables(datos,dibujar);
 		else if (pestaña==2){} //pempleados.actualizaDatosModificables(panel,datos);
+	}
+	
+	public void actualizaVistaConsulta(int pestaña,String nombre,Vector dnis)
+	{
+		if (pestaña==1) pcontratos.actualizaPanelConsulta(nombre,dnis);
+		else if (pestaña==2){} //pempleados.actualizaPanelConsulta(nombre,dnis);
 	}
 	
 	public JMenuBar setMenu()
