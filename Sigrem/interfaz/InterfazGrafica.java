@@ -15,7 +15,7 @@ public class InterfazGrafica
 	public InterfazGrafica()
 	{
 		ventana=new JFrame("Sigrem");
-		panelVistas=new JTabbedPane();
+		panelVistas=new JTabbedPane(JTabbedPane.BOTTOM);
 		panelVistas.addTab("Gestión Contatos",new PanelContratos());
 		panelVistas.addTab("Gestión Empleados",new PanelEmpleados());
 		panelVistas.addTab("Gestión Económica",new PanelEconomia());
