@@ -1,7 +1,53 @@
-===================
-= Panel Contratos =
-===================
+????????????????????????????????????????????????????????????
+?                      PANEL CONTRATOS                     ?
+????????????????????????????????????????????????????????????
 
-Descripción de las utilidades del "Panel Contratos" de SIGREM.
+Descripción de utilidades del "Panel Contratos" de SIGREM.
 
-- ¡¡¡ UNDER CONSTRUCTION !!! -
+Disponemos de los siguientes Sectores:
+
+• "Datos del Contrato": 
+             Contiene los botones 
+                              -> "Crear" 
+                              -> "Modificar"
+                              -> "Eliminar"
+             Contiene las casillas
+                              -> "Código del Contrato"
+                              -> "Código del Cliente"
+                              -> "Matrícula del Vehículo"
+                              -> "Fecha de Alta"
+   (Ver "Ayuda > Menú > Panel Contratos")
+   
+• "Datos del Cliente": 
+             Contiene los botones 
+                              -> "Nuevo Contrato"
+             Contiene el desplegable
+                              -> "Contratos"
+             Contiene las casillas
+                              -> "Nombre"
+                              -> "DNI/CIF"
+                              -> "Dirección"
+                              -> "Código Postal"
+                              -> "Población"
+                              -> "Provincia"
+                              -> "Teléfono1"
+                              -> "Teléfono2"
+                              -> "Móvil"
+                              -> "em@il"
+                              -> "Fax"
+   (Ver "Ayuda > Menú > Herramientas")
+   
+• "Multas del Contrato":
+	     Contiene los botones
+                              -> "Añadir Multa"
+                              -> "Descripción"
+                              -> "Ver Recursos"
+                              -> "Modificar"
+                              -> "Eliminar"
+             Contiene las casillas
+                              -> "Código"
+                              -> "Expediente"
+                              -> "Boletín"
+                              -> "Fecha denuncia"
+                              -> "Infracción"                           
+   (Ver "Ayuda > Menú > Acerca de") 
