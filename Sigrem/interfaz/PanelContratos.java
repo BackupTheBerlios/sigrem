@@ -12,6 +12,8 @@ public class PanelContratos extends JPanel
 	
 	private JFrame formMulta;
 	
+	private JFrame formDescrip;
+	
 	private JButton elimcont;
 	
 	private JButton modcont;
@@ -38,7 +40,10 @@ public class PanelContratos extends JPanel
 		formAlta.setLocation(350,100);
 		formMulta=new JFrame();
 		formMulta.setResizable(false);
-		formMulta.setLocation(350,100);		
+		formMulta.setLocation(350,100);
+		formDescrip=new JFrame();
+		formDescrip.setResizable(false);
+		formDescrip.setLocation(350,100);
 	}
 		
 	public JPanel dibujaContrato()
@@ -229,7 +234,6 @@ public class PanelContratos extends JPanel
 		JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		ptabla.setPreferredSize(new Dimension(700,200));
 		JButton bcrea=new JButton("Añadir multa");
-		//bcrea.setPreferredSize(new Dimension(90,25));
 		JPanel botonera=new JPanel();
 		botonera.add(bcrea);
 		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,ptabla,botonera);
@@ -315,37 +319,7 @@ public class PanelContratos extends JPanel
 		});
 		return panel;
 	}
-	
-	public JPanel dibujaLinea()
-	{		
-		JPanel panel=new JPanel();
-		JTextField cod=new JTextField();
-		cod.setEnabled(false);
-		cod.setPreferredSize(new Dimension(130,25));
-		JTextField exp=new JTextField();
-		exp.setEnabled(false);
-		exp.setPreferredSize(new Dimension(130,25));
-		JTextField bol=new JTextField();
-		bol.setEnabled(false);
-		bol.setPreferredSize(new Dimension(130,25));
-		JButton descrip=new JButton("Ver");
-		descrip.setPreferredSize(new Dimension(80,25));
-		JButton recur=new JButton("Ver");
-		recur.setPreferredSize(new Dimension(80,25));
-		JButton mod=new JButton(new ImageIcon("interfaz/tick.gif"));
-		mod.setPreferredSize(new Dimension(25,25));
-		JButton elim=new JButton(new ImageIcon("interfaz/del.gif"));
-		elim.setPreferredSize(new Dimension(25,25));
-		panel.add(cod);
-		panel.add(exp);
-		panel.add(bol);
-		panel.add(descrip);
-		panel.add(recur);
-		panel.add(mod);
-		panel.add(elim);		
-		return panel;
-	}
-	
+		
 	public JPanel panelMulta()
 	{
 		formMulta.setTitle("Crear multa");
@@ -410,6 +384,76 @@ public class PanelContratos extends JPanel
 			{
 				formMulta.setVisible(false);
 				formMulta.getContentPane().removeAll();
+			}
+		});
+		return panel;
+	}
+	
+	public JPanel pintaDescrip()
+	{
+		formDescrip.setTitle("Descripción de la multa");
+		JPanel panel=new JPanel();
+		JPanel p1=new JPanel();
+		JPanel p2=new JPanel();
+		p1.add(new JLabel("Descripción"));
+		JTextPane texto=new JTextPane();
+		texto.setEditable(false);
+		JScrollPane ptexto=new JScrollPane(texto,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
+		ptexto.setPreferredSize(new Dimension(300,150));
+		JSplitPane sp1=new JSplitPane(JSplitPane.VERTICAL_SPLIT,p1,ptexto);
+		sp1.setEnabled(false);
+		sp1.setDividerSize(1);
+		JButton aceptar=new JButton("Aceptar");
+		p2.add(aceptar);
+		JSplitPane sp2=new JSplitPane(JSplitPane.VERTICAL_SPLIT,sp1,p2);
+		sp2.setEnabled(false);
+		sp2.setDividerSize(4);
+		panel.add(sp2);
+		aceptar.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				formDescrip.setVisible(false);
+				formDescrip.getContentPane().removeAll();								
+			}
+		});
+		return panel;
+	}
+	
+	public JPanel dibujaLinea()
+	{		
+		JPanel panel=new JPanel();
+		JTextField cod=new JTextField();
+		cod.setEnabled(false);
+		cod.setPreferredSize(new Dimension(130,25));
+		JTextField exp=new JTextField();
+		exp.setEnabled(false);
+		exp.setPreferredSize(new Dimension(130,25));
+		JTextField bol=new JTextField();
+		bol.setEnabled(false);
+		bol.setPreferredSize(new Dimension(130,25));
+		JButton descrip=new JButton(new ImageIcon("interfaz/find.gif"));
+		descrip.setPreferredSize(new Dimension(80,25));
+		JButton recur=new JButton("Ver");
+		recur.setPreferredSize(new Dimension(80,25));
+		JButton mod=new JButton(new ImageIcon("interfaz/tick.gif"));
+		mod.setPreferredSize(new Dimension(25,25));
+		JButton elim=new JButton(new ImageIcon("interfaz/del.gif"));
+		elim.setPreferredSize(new Dimension(25,25));
+		panel.add(cod);
+		panel.add(exp);
+		panel.add(bol);
+		panel.add(descrip);
+		panel.add(recur);
+		panel.add(mod);
+		panel.add(elim);
+		descrip.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				if (!formDescrip.isVisible())
+				{	formDescrip.getContentPane().add(pintaDescrip());
+					formDescrip.pack();
+					formDescrip.setVisible(true);
+				}
 			}
 		});
 		return panel;
