@@ -13,49 +13,49 @@ public class PanelContratos extends JPanel
 {
 	private Sigrem controlador;
 	
-	private JFrame formAlta;
+	private JDialog formAlta;
 	
-	private JFrame formMulta;
+	private JDialog formMulta;
 	
-	private JFrame formDescripM;
+	private JDialog formDescripM;
 	
-	private JFrame formDescripR;
+	private JDialog formDescripR;
 	
-	private JFrame formRecurso;
+	private JDialog formRecurso;
 	
-	private JFrame formAltaRec;
+	private JDialog formAltaRec;
 	
-	private JFrame formBaja;
+	private JDialog formBaja;
 	
-	private JFrame formMod;
+	private JDialog formMod;
 	
 	public PanelContratos(Sigrem controlador)
 	{
 		super();
 		this.controlador=controlador;
 		dibujaPaneles(false);
-		formAlta=new JFrame();
+		formAlta=new JDialog();
 		formAlta.setResizable(false);
 		formAlta.setLocation(350,100);
-		formBaja=new JFrame();
+		formBaja=new JDialog();
 		formBaja.setResizable(false);
 		formBaja.setLocation(350,100);
-		formMod=new JFrame();
+		formMod=new JDialog();
 		formMod.setResizable(false);
 		formMod.setLocation(350,100);
-		formMulta=new JFrame();
+		formMulta=new JDialog();
 		formMulta.setResizable(false);
 		formMulta.setLocation(350,150);
-		formDescripM=new JFrame();
+		formDescripM=new JDialog();
 		formDescripM.setResizable(false);
 		formDescripM.setLocation(350,200);
-		formDescripR=new JFrame();
+		formDescripR=new JDialog();
 		formDescripR.setResizable(false);
 		formDescripR.setLocation(350,100);
-		formRecurso=new JFrame();
+		formRecurso=new JDialog();
 		formRecurso.setResizable(false);
 		formRecurso.setLocation(200,100);
-		formAltaRec=new JFrame();
+		formAltaRec=new JDialog();
 		formAltaRec.setResizable(false);
 		formAltaRec.setLocation(350,100);
 	}
@@ -514,7 +514,7 @@ public class PanelContratos extends JPanel
 				datoscliente.add(tpro.getText());
 				datoscliente.add(ttel.getText());
 				datoscliente.add(temail.getText());
-				controlador.añadirContrato(datoscontrato,datoscliente);
+				//controlador.añadirContrato(datoscontrato,datoscliente);
 				removeAll();
 				dibujaPaneles(true);
 			}

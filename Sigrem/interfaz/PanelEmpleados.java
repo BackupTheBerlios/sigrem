@@ -14,17 +14,17 @@ public class PanelEmpleados extends JPanel
 {
 	private Sigrem controlador;
 	
-	private JFrame formAlta;	
+	private JDialog formAlta;	
 	
-	private JFrame formBaja;
+	private JDialog formBaja;
 	
-	private JFrame formMod1;
+	private JDialog formMod1;
 	
-	private JFrame formMod2;
+	private JDialog formMod2;
 	
-	private JFrame formRecurso;
+	private JDialog formRecurso;
 	
-	private JFrame formDescrip;
+	private JDialog formDescrip;
 	
 	private JButton bmodificar;
 	
@@ -74,22 +74,22 @@ public class PanelEmpleados extends JPanel
 		sp2.setEnabled(false);		
 		sp2.setDividerSize(4);
 		add(sp2);
-		formAlta=new JFrame();
+		formAlta=new JDialog();
 		formAlta.setResizable(false);
 		formAlta.setLocation(350,100);
-		formBaja=new JFrame();
+		formBaja=new JDialog();
 		formBaja.setResizable(false);
 		formBaja.setLocation(350,100);
-		formMod1=new JFrame();
+		formMod1=new JDialog();
 		formMod1.setResizable(false);
 		formMod1.setLocation(350,100);
-		formMod2=new JFrame();
+		formMod2=new JDialog();
 		formMod2.setResizable(false);
 		formMod2.setLocation(350,100);
-		formRecurso=new JFrame();		
+		formRecurso=new JDialog();		
 		formRecurso.setResizable(false);
 		formRecurso.setLocation(350,100);
-		formDescrip=new JFrame();
+		formDescrip=new JDialog();
 		formDescrip.setResizable(false);
 		formDescrip.setLocation(350,100);		
 	}
