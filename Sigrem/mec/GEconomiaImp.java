@@ -43,79 +43,9 @@ public class GEconomiaImp implements GEconomia
 		int nUltimoMesBal=Integer.valueOf(ultimoMesBal).intValue();
 		this.ultMesBal=nUltimoMesBal;
 		System.out.println("this.ultimoMesBal"+this.ultMesBal);
-		this.facturacion=new int[12];
-		this.gastos=new int[12];
-		this.balance=new int[12];
-		
-		//Pasamos del String al vector
-		int num=0;
-		int i=0;
-		int n=0;
-		String numero="";
-		char signo;
-		while ((i<facturacion.length())&&(n<12))
-		{
-			signo=facturacion.charAt(i);
-			i=i+1;
-			while (facturacion.charAt(i)!=',')
-			{
-				numero=numero+facturacion.charAt(i);
-				i=i+1;
-			}
-			num=Integer.valueOf(numero).intValue();
-			i=i+1;
-			if (signo=='-')	num=num*(-1);
-			this.facturacion[n]=num;
-			System.out.println("this.facturacion["+n+"] "+this.facturacion[n]);
-			numero="";
-			n=n+1;
-		}
-		
-		//Pasamos del String al vector
-		num=0;
-		i=0;
-		n=0;
-		numero="";
-		while ((i<gastos.length())&&(n<12))
-		{
-			signo=gastos.charAt(i);
-			i=i+1;
-			while (gastos.charAt(i)!=',')
-			{
-				numero=numero+gastos.charAt(i);
-				i=i+1;
-			}
-			num=Integer.valueOf(numero).intValue();
-			i=i+1;
-			if (signo=='-')	num=num*(-1);
-			this.gastos[n]=num;
-			System.out.println("this.gastos["+n+"] "+this.gastos[n]);
-			numero="";
-			n=n+1;
-		}
-		
-		//Pasamos del String al vector
-		num=0;
-		i=0;
-		n=0;
-		numero="";
-		while ((i<balance.length())&&(n<12))
-		{
-			signo=balance.charAt(i);
-			i=i+1;
-			while (balance.charAt(i)!=',')
-			{
-				numero=numero+balance.charAt(i);
-				i=i+1;
-			}
-			num=Integer.valueOf(numero).intValue();
-			i=i+1;
-			if (signo=='-')	num=num*(-1);
-			this.balance[n]=num;
-			System.out.println("this.balance["+n+"] "+this.balance[n]);
-			numero="";
-			n=n+1;
-		}		
+		this.facturacion=stringAVector(facturacion);
+		this.gastos=stringAVector(gastos);
+		this.balance=stringAVector(balance);
 		this.cuotaContrato=33;
 	}
 	
@@ -269,5 +199,33 @@ public class GEconomiaImp implements GEconomia
 	public int dameCuotaContrato()
 	{
 		return cuotaContrato;
+	}
+	
+	public int [] stringAVector (String s) 
+	{
+		int [] vect=new int[12];
+		int num=0;
+		int i=0;
+		int n=0;
+		String numero="";
+		char signo;
+		while ((i<s.length())&&(n<12))
+		{
+			signo=s.charAt(i);
+			i=i+1;
+			while (s.charAt(i)!=',')
+			{
+				numero=numero+s.charAt(i);
+				i=i+1;
+			}
+			num=Integer.valueOf(numero).intValue();
+			i=i+1;
+			if (signo=='-')	num=num*(-1);
+			vect[n]=num;
+			System.out.println("this.facturacion["+n+"] "+this.facturacion[n]);
+			numero="";
+			n=n+1;
+		}
+		return vect;
 	}
 }
