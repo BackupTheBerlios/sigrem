@@ -1056,8 +1056,9 @@ public class Persistencia
 			}
 			tab=tab.substring(1);
 			escritor.println(tab+"</listacodigosrecursos>");
-			tab=tab.substring(1);
+			
 		}
+		tab=tab.substring(1);
 		escritor.println(tab+"</empleado>");
 	}
 	 
@@ -1261,9 +1262,11 @@ public class Persistencia
 						tab=tab.substring(1);
 					}
 					datosEmpleado.add(listaCodigosRecurso);
+					
 				}
+				linea=lector.readLine();
 			}		
-			linea=lector.readLine();
+			
 			tab=tab.substring(1);
 			if (!linea.startsWith(tab+"</empleado>")){
 				System.out.println("No se ha encontrado la etiqueta que cierra empleado");
