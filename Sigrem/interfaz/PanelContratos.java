@@ -186,7 +186,6 @@ public class PanelContratos extends JPanel
 		dni.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				System.out.println("ok");
 				controlador.consultarClienteDni((String)dni.getSelectedItem());
 				formConsulta.setVisible(false);
 				formConsulta.getContentPane().removeAll();				
