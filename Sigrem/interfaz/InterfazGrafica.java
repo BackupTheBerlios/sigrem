@@ -155,12 +155,10 @@ public class InterfazGrafica
 		JMenu m1=new JMenu("Archivo");
 		JMenu m3=new JMenu("Herramientas");
 		JMenu m4=new JMenu("Acerca de");
-		JMenuItem cargar=new JMenuItem("Cargar datos");
 		JMenuItem guardar=new JMenuItem("Guardar datos");
 		JMenuItem salir=new JMenuItem("Salir");
 		JMenuItem ayuda=new JMenuItem("Ayuda");
 		JMenuItem acercade=new JMenuItem("Acerca de");
-		m1.add(cargar);
 		m1.add(guardar);
 		m1.addSeparator();
 		m1.add(salir);
@@ -372,12 +370,6 @@ public class InterfazGrafica
 				peconomia=new PanelEconomia(3,controlador);
 				panelVistas.addTab("Gestión Económica",peconomia);
 				panelVistas.setSelectedIndex(2);
-			}
-		});
-		cargar.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-				cargar();		
 			}
 		});
 		guardar.addActionListener(new ActionListener()
