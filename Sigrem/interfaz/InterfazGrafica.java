@@ -477,9 +477,7 @@ public class InterfazGrafica
 						fd = new BufferedReader (new FileReader ("interfaz/ayuda_menu.txt"));
 					}
 					catch(FileNotFoundException e)
-					{
-						System.out.println ("No se pude abrir el archivo de ayuda_menu.txt");
-					}
+					{}
 				}
 				else
 					if(lista.getSelectedIndex()==2)
@@ -490,9 +488,7 @@ public class InterfazGrafica
 							fd = new BufferedReader (new FileReader ("interfaz/ayuda_contratos.txt"));
 						}
 						catch(FileNotFoundException e)
-						{
-							System.out.println ("No se pude abrir el archivo de ayuda_contratos.txt");
-						}
+						{}
 					}
 				
 				try
@@ -504,9 +500,7 @@ public class InterfazGrafica
 					fd.close();
 				}
 				catch(IOException e)
-				{
-					System.out.println("Error al leer");
-				}			
+				{}			
 			}
 		});
 		
@@ -541,9 +535,7 @@ public class InterfazGrafica
 						fd = new BufferedReader (new FileReader ("interfaz/ayuda_menu.txt"));
 					}
 					catch(FileNotFoundException e)
-					{
-						System.out.println ("No se pude abrir el archivo de ayuda_menu.txt");
-					}
+					{}
 				}
 				else
 					if(lista.getSelectedIndex()==5)
@@ -554,9 +546,7 @@ public class InterfazGrafica
 							fd = new BufferedReader (new FileReader ("interfaz/ayuda_contratos.txt"));
 						}
 						catch(FileNotFoundException e)
-						{
-							System.out.println ("No se pude abrir el archivo de ayuda_contratos.txt");
-						}
+						{}
 					}
 				
 				try
@@ -568,9 +558,7 @@ public class InterfazGrafica
 					fd.close();
 				}
 				catch(IOException e)
-				{
-					System.out.println("Error al leer");
-				}									
+				{}									
 			}
 		});		
 	}
@@ -604,9 +592,7 @@ public class InterfazGrafica
 						fd = new BufferedReader (new FileReader ("interfaz/ayuda_menu.txt"));
 					}
 					catch(FileNotFoundException e)
-					{
-						System.out.println ("No se pude abrir el archivo de ayuda_menu.txt");
-					}
+					{}
 				}
 				else
 					if(lista.getSelectedIndex()==2)	
@@ -617,9 +603,7 @@ public class InterfazGrafica
 							fd = new BufferedReader (new FileReader ("interfaz/ayuda_contratos.txt"));
 						}
 						catch(FileNotFoundException e)
-						{
-							System.out.println ("No se pude abrir el archivo de ayuda_contratos.txt");
-						}
+						{}
 					}
 				
 				try
@@ -631,9 +615,7 @@ public class InterfazGrafica
 					fd.close();
 				}
 				catch(IOException e)
-				{
-					System.out.println("Error al leer");
-				}			
+				{}			
 			}
 		});
 		
