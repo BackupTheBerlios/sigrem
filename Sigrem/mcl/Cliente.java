@@ -140,7 +140,7 @@ public class Cliente
 	{
 		this.direccion=dir;
 	}
-	public void getCp(String cp)
+	public void setCp(String cp)
 	{
 		this.cp=cp;
 	}
@@ -164,11 +164,11 @@ public class Cliente
 	{
 		this.movil=mov;
 	}
-	public void getEmail(String email)
+	public void setEmail(String email)
 	{
 		this.email=email;
 	}
-	public void getFax(String fax)
+	public void setFax(String fax)
 	{
 		this.fax=fax;
 	}
