@@ -23,10 +23,6 @@ public class GClientesImp implements GClientes
 	private void incrementaCodigo()
 	{
 		String numero=siguienteCodigoCliente.substring(0,4);
-		/*Character car=null;
-		int num=car.digit(siguienteCodigoCliente.charAt(4),10);
-		for (int i=5;i<siguienteCodigoCliente.length();i++)
-		{	num=(num*10)+car.digit(siguienteCodigoCliente.charAt(i),10);}*/
 		int num=Integer.valueOf(siguienteCodigoCliente.substring(4)).intValue();
 		numero=numero+(num+1);
 		siguienteCodigoCliente=numero;
@@ -38,21 +34,20 @@ public class GClientesImp implements GClientes
 		claves[0]=null;
 		claves[1]=(String)datos.get(0);
 		claves[2]=(String)datos.get(1);
-		if (!listaClientes.esta(claves[2],2)){
-			claves[0]=new String(siguienteCodigoCliente);
+		if (!listaClientes.esta(claves[2],2))
+		{	claves[0]=new String(siguienteCodigoCliente);
 			Cliente nuevocliente=new Cliente(claves[0],datos);
 			listaClientes.insertar(claves,nuevocliente);
 			incrementaCodigo();
-			vista.actualizaVistaMensaje("Nuevo cliente insertado correctamente");
-		}else{
-			//como el dni es clave solo habra uno en la posicion 0
-			Cliente clienteExistente=(Cliente)listaClientes.buscar(claves[2],2).get(0);
-			if (clienteExistente.dameNombre().equals(claves[1])){
-				claves[0]=new String(clienteExistente.dameCodigo());
-				vista.actualizaVistaMensaje("El cliente ya existia y se le asociara el contrato");
-			}else{
-				vista.actualizaVistaMensaje("El cliente ya existe pero no coinciden los datos-Inserción de cliente y contrato imposible");
+		}
+		else
+		{	Cliente clienteExistente=(Cliente)listaClientes.buscar(claves[2],2).get(0);
+			if (clienteExistente.dameNombre().equals(claves[1]))
+			{	claves[0]=new String(clienteExistente.dameCodigo());
+				vista.actualizaVistaMensaje("El cliente ya existe y se le asociara el contrato");
 			}
+			else
+			{	vista.actualizaVistaMensaje("El cliente ya existe pero no coinciden los datos. Inserción de cliente y contrato imposible");}
 			
 		}
 		return claves[0];

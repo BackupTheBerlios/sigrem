@@ -25,10 +25,6 @@ public class GContratosImp implements GContratos
 	private void incrementaCodigo()
 	{
 		String numero=codigoContrato.substring(0,4);
-		/*Character car=null;
-		int num=car.digit(codigoContrato.charAt(4),10);
-		for (int i=5;i<codigoContrato.length();i++)
-		{	num=(num*10)+car.digit(codigoContrato.charAt(i),10);}*/
 		int num=Integer.valueOf(codigoContrato.substring(4)).intValue();
 		numero=numero+(num+1);
 		codigoContrato=numero;
@@ -45,11 +41,10 @@ public class GContratosImp implements GContratos
 			listaContratos.insertar(claves,nuevoContrato);
 			incrementaCodigo();
 			datos.addFirst(claves[0]);
-			vista.actualizaVistaMensaje("El contrato ha sido creado correctamente");
 			vista.actualizaVista(1,1,datos);
 		}
 		else
-		{	vista.actualizaVistaMensaje("La matricula del contrato que se quiere crear ya existe-Imposible crear contrato");}
+		{	vista.actualizaVistaMensaje("La matricula del contrato ya existe. Imposible crear contrato");}
 		return claves[0];
 	}
 	
