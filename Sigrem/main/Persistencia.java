@@ -10,6 +10,8 @@ import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.Vector;
 
+import javax.swing.JOptionPane;
+
 import mec.*;
 import med.EstructuraDatos;
 import mem.*;
@@ -41,7 +43,7 @@ public class Persistencia
 		grecursos=rec;
 		gempleados=emp;
 		geconomia=eco;
-		//this.cargarXML();
+		//this.cargarXML();				
 	}
 	
 	public void almacenarXML(){
@@ -333,5 +335,90 @@ public class Persistencia
 	LinkedList leerRecurso(String linea, BufferedReader lector) throws IOException{
 		return null;
 	}
+	
+	
+	// Persistencia del Historial Económico
+	public LinkedList dameHistorial()
+	{
+		return cargarHistorial();
+	}
+	
+	public void almacenarHistorial()
+	{
+		
+	}
+	
+	public LinkedList cargarHistorial()
+	{
+		LinkedList historial=new LinkedList();
+		try
+		{
+			BufferedReader entrada=new BufferedReader(new FileReader("confighis.ini"));
+			String cod=entrada.readLine();
+			int pos=cod.indexOf('=');
+			historial.add(cod.substring(pos+1));
+			cod=entrada.readLine();
+			pos=cod.indexOf('=');
+			historial.add(cod.substring(pos+1));
+			cod=entrada.readLine();
+			pos=cod.indexOf('=');
+			historial.add(cod.substring(pos+1));
+			cod=entrada.readLine();
+			pos=cod.indexOf('=');
+			historial.add(cod.substring(pos+1));
+			cod=entrada.readLine();
+			pos=cod.indexOf('=');
+			historial.add(cod.substring(pos+1));
+			cod=entrada.readLine();
+			pos=cod.indexOf('=');
+			historial.add(cod.substring(pos+1));
+		}
+		catch (Exception ex)
+		{	JOptionPane.showMessageDialog(null,"Error al cargar el fichero de historial","Sigrem",-1);
+			System.out.println(ex);
+		}
+		return historial;
+	}
+	
+	// Persistencia del Fichero de Configuración inicial
+	public LinkedList dameConfigIni()
+	{
+		return cargarConfigIni();
+	}
+	
+	public void almacenarConfigIni()
+	{
+		
+	}
+	
+	public LinkedList cargarConfigIni()
+	{
+		LinkedList configIni=new LinkedList();
+		try
+		{
+			BufferedReader entrada=new BufferedReader(new FileReader("configsig.ini"));
+			String cod=entrada.readLine();
+			int pos=cod.indexOf('=');
+			configIni.add(cod.substring(pos+1));
+			cod=entrada.readLine();
+			pos=cod.indexOf('=');
+			configIni.add(cod.substring(pos+1));
+			cod=entrada.readLine();
+			pos=cod.indexOf('=');
+			configIni.add(cod.substring(pos+1));
+			cod=entrada.readLine();
+			pos=cod.indexOf('=');
+			configIni.add(cod.substring(pos+1));
+			cod=entrada.readLine();
+			pos=cod.indexOf('=');
+			configIni.add(cod.substring(pos+1));
+		}
+		catch (Exception ex)
+		{	JOptionPane.showMessageDialog(null,"Error al cargar el fichero de configuración","Sigrem",-1);
+			System.out.println(ex);
+		}
+		return configIni;
+	}
+
 		
 }

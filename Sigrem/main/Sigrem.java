@@ -33,24 +33,25 @@ public class Sigrem
 	{
 		vista=new InterfazGrafica(this);
 		factoria=new FactoriaImp();
+		LinkedList his=new LinkedList();
+		persistencia=new Persistencia(gcontratos,gclientes,gempleados,gmultas,grecursos,geconomia);
 		String codcontrato=codigos[0];
 		String codcliente=codigos[1];
 		String codmulta=codigos[2];
 		String codrecurso=codigos[3];
-		String codempleado=codigos[4];
+		String codempleado=codigos[4];		
 		String ultimoMesFac=codigos[5];
 		String ultimoMesGas=codigos[6];
 		String ultimoMesBal=codigos[7];
 		String facturacion=codigos[8];
 		String gastos=codigos[9];
-		String balance=codigos[10];
+		String balance=codigos[10];		
 		gclientes=factoria.generaGCliente(vista,codcliente);
 		gcontratos=factoria.generaGContratos(vista,codcontrato);
 		gmultas=factoria.generaGMultas(vista,codmulta);
 		grecursos=factoria.generaGRecursos(vista,codrecurso);
 		gempleados=factoria.generaGEmpleados(vista,codempleado);
-		geconomia=factoria.generaGEconomia(vista,gempleados,gcontratos,ultimoMesFac,ultimoMesGas,ultimoMesBal,facturacion,gastos,balance);
-		persistencia=new Persistencia(gcontratos,gclientes,gempleados,gmultas,grecursos,geconomia);
+		geconomia=factoria.generaGEconomia(vista,gempleados,gcontratos,ultimoMesFac,ultimoMesGas,ultimoMesBal,facturacion,gastos,balance);		
 	}
 	
 	public void activa()
