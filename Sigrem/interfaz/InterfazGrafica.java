@@ -15,14 +15,15 @@ public class InterfazGrafica
 	public InterfazGrafica()
 	{
 		ventana=new JFrame("Sigrem");
+		
 		panelVistas=new JTabbedPane(JTabbedPane.BOTTOM);
-		panelVistas.addTab("Gestión Contatos",new PanelContratos());
+		panelVistas.addTab("Gestión Contratos",new PanelContratos());
 		panelVistas.addTab("Gestión Empleados",new PanelEmpleados());
 		panelVistas.addTab("Gestión Económica",new PanelEconomia());
 		ventana.getContentPane().add(panelVistas);
 		ventana.setJMenuBar(setMenu());
 		ventana.pack();
-		ventana.setLocation(200,50);
+		ventana.setLocation(100,50);
 		ventana.setResizable(false);
 		ventana.addWindowListener(new WindowAdapter()
 		{	public void windowClosing(WindowEvent e)
@@ -42,7 +43,21 @@ public class InterfazGrafica
 		JMenuItem mcc=new JMenuItem("Crear contrato");
 		JMenuItem mec=new JMenuItem("Eliminar contrato");
 		JMenuItem mce=new JMenuItem("Contratar empleado");
+		mce.addActionListener(new ActionListener()
+				{	public void actionPerformed(ActionEvent e)
+					{
+						PanelEmpleados p=new PanelEmpleados();
+						p.creaEmpleado();
+					}
+				});
 		JMenuItem mee=new JMenuItem("Despedir empleado");
+		mee.addActionListener(new ActionListener()
+				{	public void actionPerformed(ActionEvent e)
+					{
+					PanelEmpleados p=new PanelEmpleados();
+					p.eliminaEmpleado();
+					}
+				});
 		JMenuItem salir=new JMenuItem("Salir");
 		JMenuItem acercade=new JMenuItem("Acerca de");
 		m1.add(mcc);
