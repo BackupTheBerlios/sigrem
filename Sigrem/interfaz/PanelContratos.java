@@ -315,7 +315,12 @@ public class PanelContratos extends JPanel
 		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja,botonera);
 		sp.setDividerSize(4);
 		sp.setEnabled(false);
-		pco.add(sp);
+		JLabel logo=new JLabel(new ImageIcon("interfaz/sigrem2.jpg"));
+		logo.setPreferredSize(new Dimension(0,120));
+		JSplitPane sp2=new JSplitPane(JSplitPane.VERTICAL_SPLIT,sp,logo);
+		sp2.setDividerSize(4);
+		sp2.setEnabled(false);
+		pco.add(sp2);
 		bcrea.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{

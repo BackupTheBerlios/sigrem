@@ -193,7 +193,12 @@ public class PanelEmpleados extends JPanel
 		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja,p4);
 		sp.setDividerSize(4);
 		sp.setEnabled(false);
-		pemp.add(sp);		
+		JLabel logo=new JLabel(new ImageIcon("interfaz/sigrem2.jpg"));
+		logo.setPreferredSize(new Dimension(0,150));
+		JSplitPane sp2=new JSplitPane(JSplitPane.VERTICAL_SPLIT,sp,logo);
+		sp2.setDividerSize(4);
+		sp2.setEnabled(false);
+		pemp.add(sp2);		
 		bcontratar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
