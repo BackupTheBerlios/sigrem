@@ -2,8 +2,10 @@ package mem;
 
 import java.util.LinkedList;
 
-public abstract class Empleado {
+public abstract class Empleado 
+{
 	private String codigo;
+	private String perfil;
 	private String dni;
 	private String nombre;
 	private String direccion;
@@ -18,9 +20,10 @@ public abstract class Empleado {
 	private String nomina;
 	
 	// Constructor
-	public Empleado(String codigoEmpleado,LinkedList listaEmpleados) 
+	public Empleado(String codigoEmpleado,String perfilEmpleado,LinkedList listaEmpleados) 
 	{
 		codigo = 	codigoEmpleado;
+		perfil =	perfilEmpleado;
 		nombre = 	(String)listaEmpleados.get(0);
 		dni = 		(String)listaEmpleados.get(1);
 		direccion = (String)listaEmpleados.get(2);
@@ -48,6 +51,7 @@ public abstract class Empleado {
 	public String dameEmail(){return email;}
 	public String dameFax(){return fax;}
 	public String dameNomina(){return nomina;}
+	public String damePerfil(){return perfil;}
 	
 	// Método que devuelve una LinkedList con todos los datos del objeto con un cierto orden
 	public LinkedList dameListaDatos()
@@ -80,4 +84,5 @@ public abstract class Empleado {
 	public void ponEmail(String email){this.email = email;}
 	public void ponFax(String fax){this.fax = fax;}
 	public void ponNomina(String nomina){this.nomina = nomina;}
+	public void ponPerfil(String perfil){this.perfil = perfil;}
 }

@@ -2,11 +2,7 @@ package mem;
 
 import java.util.LinkedList;
 import java.util.Vector;
-
-import mcl.Cliente;
-import mco.Contrato;
 import med.*;
-import mmu.Multa;
 import interfaz.*;
 
 public class GEmpleadosImp implements GEmpleados 
@@ -44,9 +40,9 @@ public class GEmpleadosImp implements GEmpleados
 	{
 		Empleado nuevoEmpleado=null;
 		if (perfil.equals("Abogado"))
-		{	nuevoEmpleado=new Abogado(codigoEmpleado,datosEmpleado);}
+		{	nuevoEmpleado=new Abogado(codigoEmpleado,perfil,datosEmpleado);}
 		else if (perfil.equals("Administrativo"))
-		{	nuevoEmpleado=new Administrativo(codigoEmpleado,datosEmpleado);}
+		{	nuevoEmpleado=new Administrativo(codigoEmpleado,perfil,datosEmpleado);}
 		String[] claves = new String[3];
 		claves[0] = codigoEmpleado;
 		claves[1] = (String)datosEmpleado.get(0);
@@ -98,9 +94,8 @@ public class GEmpleadosImp implements GEmpleados
 			empleado.ponNomina((String)datosEmpleado.get(11));
 			LinkedList datosPanel1=new LinkedList();
 			datosPanel1.add(empleado.dameCodigo());
-			String nombre=(empleado.getClass()).getName();
-			datosPanel1.add(nombre.substring(4));
-			datosPanel1.add(datosEmpleado.get(11));
+			datosPanel1.add(empleado.damePerfil());
+			datosPanel1.add(empleado.dameNomina());
 			vista.actualizaVista(2,1,datosPanel1);
 			vista.actualizaVista(2,2,datosEmpleado);
 		}
@@ -120,7 +115,7 @@ public class GEmpleadosImp implements GEmpleados
 				datosPanel2.remove(0);
 				LinkedList datosPanel1=new LinkedList();
 				datosPanel1.add(empleado.dameCodigo());
-				datosPanel1.add(empleado.getClass().getName().substring(4));
+				datosPanel1.add(empleado.damePerfil());
 				datosPanel1.add(empleado.dameNomina());
 				vista.actualizaVista(2,1,datosPanel1);
 				vista.actualizaVista(2,2,datosPanel2);				
@@ -139,7 +134,7 @@ public class GEmpleadosImp implements GEmpleados
 			datosPanel2.remove(0);
 			LinkedList datosPanel1=new LinkedList();
 			datosPanel1.add(empleado.dameCodigo());
-			datosPanel1.add(empleado.getClass().getName().substring(4));
+			datosPanel1.add(empleado.damePerfil());
 			datosPanel1.add(empleado.dameNomina());
 			vista.actualizaVista(2,1,datosPanel1);
 			vista.actualizaVista(2,2,datosPanel2);				
@@ -157,7 +152,7 @@ public class GEmpleadosImp implements GEmpleados
 			datosPanel2.remove(0);
 			LinkedList datosPanel1=new LinkedList();
 			datosPanel1.add(empleado.dameCodigo());
-			datosPanel1.add(empleado.getClass().getName().substring(4));
+			datosPanel1.add(empleado.damePerfil());
 			datosPanel1.add(empleado.dameNomina());
 			vista.actualizaVista(2,1,datosPanel1);
 			vista.actualizaVista(2,2,datosPanel2);				

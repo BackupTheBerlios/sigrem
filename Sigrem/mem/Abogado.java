@@ -3,24 +3,28 @@ package mem;
 import java.util.LinkedList;
 import mre.*;
 
-public class Abogado extends Empleado {
-	
+public class Abogado extends Empleado 
+{
 	private LinkedList listaRecursos;
 	
-	public Abogado(String codigoEmpleado, LinkedList listaEmpleados) {
-		super(codigoEmpleado, listaEmpleados);
-		
+	public Abogado(String codigoEmpleado, String perfilEmpleado,LinkedList datosEmpleado) 
+	{
+		super(codigoEmpleado, perfilEmpleado, datosEmpleado);
 		listaRecursos = new LinkedList();
 	}
-	public void añadirRecurso(Recurso nuevoRecurso){
+	public void añadirRecurso(Recurso nuevoRecurso)
+	{
 		listaRecursos.add(nuevoRecurso);
 	}
-	public void eliminarRecurso(String codigoRecurso){
-		
-		if(listaRecursos.remove(codigoRecurso))
-			System.out.println("Recurso encontrado y eliminado");
-		else
-			System.out.println("Este recurso no lo lleva este abogado");
+	public void eliminarRecurso(String codigoRecurso)
+	{
+		int i=0;
+		boolean esta=false;
+		while ((!esta) && (i<listaRecursos.size()))
+		{	esta=codigoRecurso.equals((String)listaRecursos.get(i));
+			i++;			
+		}
+		if (esta)listaRecursos.remove(i-1);
 	}
 }
 
