@@ -59,6 +59,17 @@ public class PanelEmpleados extends JPanel
 		add(sp2);				
 	}
 	
+	public static boolean nominaValida(String nomina)
+	{	
+		boolean bien=true;
+		int i=0;
+		while ((i<nomina.length()) && (bien))
+		{	bien=Character.isDigit(nomina.charAt(i));
+			i++;
+		}
+		return bien;
+	}
+	
 	public void actualiza(int panel,LinkedList datos)
 	{
 		if (panel==1)
@@ -601,25 +612,29 @@ public class PanelEmpleados extends JPanel
 		bacepta.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				LinkedList datosEmpleado=new LinkedList();
-				datosEmpleado.add(tnom.getText());
-				datosEmpleado.add(tdni.getText());
-				datosEmpleado.add(tdir.getText());
-				datosEmpleado.add(tcp.getText());
-				datosEmpleado.add(tpob.getText());
-				datosEmpleado.add(tpro.getText());
-				datosEmpleado.add(ttel1.getText());
-				datosEmpleado.add(ttel2.getText());
-				datosEmpleado.add(tmov.getText());
-				datosEmpleado.add(temail.getText());
-				datosEmpleado.add(tfax.getText());
-				datosEmpleado.add(tnomina.getText());
-				if ((tdni.getText().equals("")) || (tnom.getText().equals("")))
+				if (!nominaValida(tnomina.getText()))
+				{
+					JOptionPane.showMessageDialog(null,"La nómina debe ser un valor numérico");
+				}
+				else if ((tdni.getText().equals("")) || (tnom.getText().equals("")))
 				{
 					JOptionPane.showMessageDialog(null,"Los campos marcados con * son obligatorios");
 				}
-				else
-				{	if (datos==null) controlador.contratarEmpleado((String)perfil.getSelectedItem(),datosEmpleado);
+				else	
+				{	LinkedList datosEmpleado=new LinkedList();
+					datosEmpleado.add(tnom.getText());
+					datosEmpleado.add(tdni.getText());
+					datosEmpleado.add(tdir.getText());
+					datosEmpleado.add(tcp.getText());
+					datosEmpleado.add(tpob.getText());
+					datosEmpleado.add(tpro.getText());
+					datosEmpleado.add(ttel1.getText());
+					datosEmpleado.add(ttel2.getText());
+					datosEmpleado.add(tmov.getText());
+					datosEmpleado.add(temail.getText());
+					datosEmpleado.add(tfax.getText());
+					datosEmpleado.add(tnomina.getText());
+					if (datos==null) controlador.contratarEmpleado((String)perfil.getSelectedItem(),datosEmpleado);
 					else controlador.modificarEmpleado(codigo,datosEmpleado);
 					formulario.setVisible(false);
 					formulario.getContentPane().removeAll();
