@@ -2,10 +2,8 @@ package interfaz;
 
 /*Cosas por hacer
  * Consultar por nombre y devolver varios resultados
- * Mostrar recursos (Hecho)
  * Controlar DNI no repetido
  * No permitir eliminar si tiene recursos
- * Actualizar los recursos al asignar uno al abogado motrado 
  */
 
 import javax.swing.*;
@@ -28,10 +26,13 @@ public class PanelEmpleados extends JPanel
 	
 	private Box cajaRecursos;
 	
+	private String empleadoMostrado;
+	
 	public PanelEmpleados(Sigrem controlador,JFrame v)
 	{
 		super();
 		this.controlador=controlador;
+		empleadoMostrado=new String();
 		formulario=new JDialog(v,true);
 		formulario.setResizable(false);
 		formulario.setLocation(350,100);
@@ -91,6 +92,14 @@ public class PanelEmpleados extends JPanel
 		cajaRecursos.add(relleno);		
 	}
 	
+	public void consultarAbogadoRemotamente(String codigo)
+	{
+		if (codigo.equals(empleadoMostrado))
+		{	inicializaCajaRecursos();
+			controlador.consultarEmpleadoCodigo(false,codigo);
+		}
+	}
+	
 	public JPanel dibujaEmpleado(final LinkedList datos)
 	{		
 		JPanel pemp=new JPanel();
@@ -116,6 +125,7 @@ public class PanelEmpleados extends JPanel
 		tnom.setBackground(Color.WHITE);
 		if (datos!=null)
 		{	tcod.setText((String)datos.get(0));
+			empleadoMostrado=(String)datos.get(0);
 			tper.setText((String)datos.get(1));
 			tnom.setText((String)datos.get(2));
 		}

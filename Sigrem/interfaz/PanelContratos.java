@@ -46,6 +46,8 @@ public class PanelContratos extends JPanel
 		super();
 		this.controlador=controlador;
 		datosModificables=new LinkedList();
+		listaAbogados=new Vector();
+		listaAbogados.add("Sin asignar");
 		panelRecursos=new JDialog(v,true);
 		panelRecursos.setResizable(false);
 		panelRecursos.addWindowListener(new WindowAdapter()
@@ -1282,6 +1284,7 @@ public class PanelContratos extends JPanel
 				{	datos.addFirst(codigo);
 					controlador.modificarRecurso(codigo,datos);
 				}
+				controlador.consultarAbogadoRemotamente((String)abo.getSelectedItem());
 				formRecurso.setVisible(false);
 				formRecurso.getContentPane().removeAll();
 			}

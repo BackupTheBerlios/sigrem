@@ -274,10 +274,16 @@ public class Sigrem
 	public void consultarEmpleadoNombre(String nombre)
 	{
 		gempleados.consultarEmpleadoNombre(nombre);
+		LinkedList listaRecursos=gempleados.dameListaRecursosEmpleado(1,nombre);
+		if (listaRecursos!=null)
+		{	grecursos.consultarListaRecursos(2,listaRecursos);}
 	}
 	public void consultarEmpleadoDni(String dni)
 	{
 		gempleados.consultarEmpleadoDni(dni);
+		LinkedList listaRecursos=gempleados.dameListaRecursosEmpleado(2,dni);
+		if (listaRecursos!=null)
+		{	grecursos.consultarListaRecursos(2,listaRecursos);}
 	}	
 	public void modificarEmpleado(String codigo,LinkedList datos)
 	{
@@ -287,5 +293,10 @@ public class Sigrem
 	public void consultarListaAbogados()
 	{
 		gempleados.consultarListaAbogados();
+	}
+	
+	public void consultarAbogadoRemotamente(String codigo)
+	{
+		vista.actualizarVistaConsultaAbogado(codigo);
 	}
 }

@@ -59,6 +59,7 @@ public class GEmpleadosImp implements GEmpleados
 		for (int i=0;i<11;i++) datosPanel2.add(datosEmpleado.get(i));
 		vista.actualizaVista(2,1,datosPanel1);
 		vista.actualizaVista(2,2,datosPanel2);
+		vista.actualizaVista(2,3,null);
 		return codigoAntiguo;
 	}
 	// Método para eliminar un empleado del sistema
