@@ -6,7 +6,7 @@ public interface GEconomia
 	public void balance();
 		
 	//Requisito 5.2
-	public void gastos();
+	public void gastos(int [] vGastos, int nGastos, int ultMes);
 	
 	//Requisito 5.1
 	public void facturacion();	

@@ -108,11 +108,29 @@ public class GEconomiaImp implements GEconomia
 	public void gastos(int [] vGastos, int nGastos, int ultMes)
 	{
 		Calendar hoy=Calendar.getInstance();
-		int i=hoy.get(Calendar.YEAR);
-		if 
-		//gempleados.dameListaEmpleados();
-		//para cada empleado mirar su nomina
-		//sumar todas las nominas		
+		int mesActual=hoy.get(Calendar.MONTH);
+		if (mesActual!=ultMes)
+		{
+			if(ultMes<mesActual)
+			{
+				int dif=mesActual-ultMes;
+				for(int i=0;i<dif;i++)
+				{
+					vGastos[i]=vGastos[i+dif];
+					vGastos[i+dif]=0;
+				}
+			}
+			else
+			{
+				int dif=ultMes-mesActual;
+				for(int i=0;i<dif;i++)
+				{
+					vGastos[i]=vGastos[i+dif];
+					vGastos[i+dif]=0;
+				}
+			}
+		}
+		vGastos[11]=nGastos;
 	}
 
 	public void facturacion()
