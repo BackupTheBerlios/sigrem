@@ -24,6 +24,10 @@ public class PanelEmpleados extends JPanel
 	
 	private JButton bdespedir;	
 	
+	private JComboBox estado;
+	
+	private JComboBox perfil;
+	
 	public PanelEmpleados()
 	{
 		super();
@@ -45,7 +49,7 @@ public class PanelEmpleados extends JPanel
 		formBaja=new JFrame();
 		formBaja.setResizable(false);
 		formBaja.setLocation(350,100);
-		formRecurso=new JFrame();
+		formRecurso=new JFrame();		
 		formRecurso.setResizable(false);
 		formRecurso.setLocation(350,100);
 		formDescrip=new JFrame();
@@ -63,7 +67,7 @@ public class PanelEmpleados extends JPanel
 		l1.setPreferredSize(new Dimension(150,20));
 		l2.setPreferredSize(new Dimension(150,20));
 		l3.setPreferredSize(new Dimension(150,20));
-		JTextField t1=new JTextField();
+		final JTextField t1=new JTextField("E001");
 		JTextField t2=new JTextField();
 		JTextField t3=new JTextField();
 		t1.setPreferredSize(new Dimension(100,20));
@@ -103,8 +107,7 @@ public class PanelEmpleados extends JPanel
 		{	public void actionPerformed(ActionEvent e)
 			{
 				if (!formAlta.isVisible())
-				{	JPanel panel=panelAltaEmpleado();
-					formAlta.getContentPane().add(panel);
+				{	formAlta.getContentPane().add(panelAltaEmpleado('c',t1.getText()));
 					formAlta.pack();	
 					formAlta.setVisible(true);
 				}
@@ -113,13 +116,21 @@ public class PanelEmpleados extends JPanel
 		bdespedir.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				eliminaEmpleado();
+				int seleccion=JOptionPane.showConfirmDialog(null,"         ¿Desea despedir al empleado "+t1.getText()+"?","Despedir empleado",JOptionPane.YES_NO_CANCEL_OPTION,-1);
+				if (seleccion==JOptionPane.YES_OPTION)
+				{	
+					
+				}
 			}
 		});
 		bmodificar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				modificaEmpleado();
+				if (!formAlta.isVisible())
+				{	formAlta.getContentPane().add(panelAltaEmpleado('m',t1.getText()));
+					formAlta.pack();	
+					formAlta.setVisible(true);
+				}
 			}
 		});
 		return pemp;
@@ -283,12 +294,18 @@ public class PanelEmpleados extends JPanel
 		return prec;		
 	}
 	
-	public JPanel panelAltaEmpleado() 
+	public JPanel panelAltaEmpleado(char tipo,String codigo) 
 	{		
-		formAlta.setTitle("Nuevo empleado");
+		if (tipo=='c') formAlta.setTitle("Contratar empleado");
+		else if (tipo=='m') formAlta.setTitle("Modificar empleado "+codigo);
 		JLabel lcodigo=new JLabel("Código del empleado");
 		JLabel lperfil=new JLabel("Perfil del empleado");
 		JLabel lnomina=new JLabel("Nómina del empleado");
+		String [] opciones={"Abogado","Administrativo","Procurador","Otros..."};
+		perfil=new JComboBox(opciones);
+		perfil.setPreferredSize(new Dimension(100,20));
+		perfil.setEditable(false);
+		perfil.setBackground(Color.WHITE);
 		lcodigo.setPreferredSize(new Dimension(150,20));
 		lperfil.setPreferredSize(new Dimension(150,20));
 		lnomina.setPreferredSize(new Dimension(150,20));
@@ -296,15 +313,15 @@ public class PanelEmpleados extends JPanel
 		JTextField tperfil=new JTextField();
 		JTextField tnomina=new JTextField();
 		tcodigo.setPreferredSize(new Dimension(100,20));
-		tperfil.setPreferredSize(new Dimension(100,20));
 		tnomina.setPreferredSize(new Dimension(100,20));
+		tcodigo.setEditable(false);
 		JPanel pcodigo=new JPanel();
 		JPanel pperfil=new JPanel();
 		JPanel pnomina=new JPanel();
 		pcodigo.add(lcodigo);
 		pcodigo.add(tcodigo);
 		pperfil.add(lperfil);
-		pperfil.add(tperfil);
+		pperfil.add(perfil);
 		pnomina.add(lnomina);
 		pnomina.add(tnomina);
 		Box caja=Box.createVerticalBox();
@@ -364,7 +381,7 @@ public class PanelEmpleados extends JPanel
 		formBaja.setTitle("Despidiendo empleado...");		
 		JLabel lcodigo=new JLabel("Código del empleado");		
 		lcodigo.setPreferredSize(new Dimension(150,20));		
-		JTextField tcodigo=new JTextField();		
+		final JTextField tcodigo=new JTextField();		
 		tcodigo.setPreferredSize(new Dimension(100,20));		
 		JPanel pcodigo=new JPanel();		
 		pcodigo.add(lcodigo);
@@ -386,6 +403,11 @@ public class PanelEmpleados extends JPanel
 		{	public void actionPerformed(ActionEvent e)
 			{
 				formBaja.setVisible(false);
+				int seleccion=JOptionPane.showConfirmDialog(null,"         ¿Desea despedir al empleado "+tcodigo.getText()+"?","Despedir empleado",JOptionPane.YES_NO_CANCEL_OPTION,-1);
+				if (seleccion==JOptionPane.YES_OPTION)
+				{	
+					
+				}
 				formBaja.getContentPane().removeAll();
 			}
 		});
@@ -399,28 +421,28 @@ public class PanelEmpleados extends JPanel
 		return pndat;
 	}
 	
-	public void modificaEmpleado()
+	public JPanel modificaRecurso(String codigo)
 	{
-	
-	}
-	
-	public JPanel modificaRecurso()
-	{
-		formRecurso.setTitle("Modificar estado de recurso");
+		formRecurso.setTitle("Modificar estado de recurso "+codigo);		
 		JLabel l1=new JLabel("Código");
 		JLabel l2=new JLabel("Estado");
+		String [] opciones={"Pendiente","Recurso 1º","Recurso 2º","Recurso 3º","Favorable","Perdido"};
+		estado=new JComboBox(opciones);
+		estado.setPreferredSize(new Dimension(100,20));
+		estado.setEditable(false);
+		estado.setBackground(Color.WHITE);
 		l1.setPreferredSize(new Dimension(80,20));
 		l2.setPreferredSize(new Dimension(80,20));
 		JTextField cod=new JTextField();
 		JTextField est=new JTextField();
-		cod.setPreferredSize(new Dimension(100,20));
-		est.setPreferredSize(new Dimension(100,20));
+		cod.setPreferredSize(new Dimension(100,20));		
+		cod.setEditable(false);
 		JPanel p1=new JPanel();
 		JPanel p2=new JPanel();
 		p1.add(l1);
 		p1.add(cod);
 		p2.add(l2);
-		p2.add(est);
+		p2.add(estado);
 		Box caja=Box.createVerticalBox();
 		caja.add(p1);
 		caja.add(p2);
@@ -429,6 +451,7 @@ public class PanelEmpleados extends JPanel
 		JPanel botonera=new JPanel();
 		botonera.add(aceptar);
 		botonera.add(cancelar);
+		botonera.setPreferredSize(new Dimension(300,40));
 		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja,botonera);
 		sp.setEnabled(false);		
 		sp.setDividerSize(4);
@@ -456,7 +479,7 @@ public class PanelEmpleados extends JPanel
 	
 	public JPanel anadeRecurso()
 	{
-		formRecurso.setTitle("Asignar recurso");
+		formRecurso.setTitle("Añadir recurso");
 		JLabel l1=new JLabel("Código");
 		l1.setPreferredSize(new Dimension(80,20));
 		JTextField cod=new JTextField();
@@ -476,7 +499,7 @@ public class PanelEmpleados extends JPanel
 		sp.setDividerSize(4);
 		JPanel panel=new JPanel();
 		panel.add(sp);
-		panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Añadir recurso",TitledBorder.LEFT,TitledBorder.TOP));
+		panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Añadir recurso al empleado",TitledBorder.LEFT,TitledBorder.TOP));
 		aceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
@@ -496,9 +519,9 @@ public class PanelEmpleados extends JPanel
 		return panel;
 	}
 	
-	public JPanel pintaDescrip()
+	public JPanel pintaDescrip(String cod)
 	{
-		formDescrip.setTitle("Descripción del recurso");
+		formDescrip.setTitle("Descripción del recurso "+cod);
 		JPanel panel=new JPanel();
 		JPanel p1=new JPanel();
 		JPanel p2=new JPanel();
@@ -529,20 +552,20 @@ public class PanelEmpleados extends JPanel
 	public JPanel dibujaLinea()
 	{		
 		JPanel panel=new JPanel();
-		final JTextField cod=new JTextField();
-		cod.setEnabled(false);
-		cod.setPreferredSize(new Dimension(130,25));
+		final JTextField cod=new JTextField("R001");
 		final JTextField exp=new JTextField();
-		exp.setEnabled(false);
-		exp.setPreferredSize(new Dimension(130,25));
 		final JTextField bol=new JTextField();
-		bol.setEnabled(false);
-		bol.setPreferredSize(new Dimension(130,25));
 		final JButton descrip=new JButton(new ImageIcon("interfaz/find.gif"));
-		descrip.setPreferredSize(new Dimension(80,25));
 		final JButton modi=new JButton(new ImageIcon("interfaz/tick.gif"));
-		modi.setPreferredSize(new Dimension (25,25));
 		final JButton elim=new JButton(new ImageIcon("interfaz/del.gif"));
+		cod.setEnabled(false);
+		cod.setPreferredSize(new Dimension(130,25));		
+		exp.setEnabled(false);
+		exp.setPreferredSize(new Dimension(130,25));		
+		bol.setEnabled(false);
+		bol.setPreferredSize(new Dimension(130,25));		
+		descrip.setPreferredSize(new Dimension(80,25));		
+		modi.setPreferredSize(new Dimension (25,25));		
 		elim.setPreferredSize(new Dimension (25,25));
 		panel.add(cod);
 		panel.add(exp);
@@ -554,7 +577,7 @@ public class PanelEmpleados extends JPanel
 		{	public void actionPerformed(ActionEvent e)
 			{
 				if (!formDescrip.isVisible())
-				{	formDescrip.getContentPane().add(pintaDescrip());
+				{	formDescrip.getContentPane().add(pintaDescrip(cod.getText()));
 					formDescrip.pack();
 					formDescrip.setVisible(true);
 				}
@@ -564,7 +587,7 @@ public class PanelEmpleados extends JPanel
 		{	public void actionPerformed(ActionEvent e)
 			{	
 				if (!formRecurso.isVisible())
-				{	formRecurso.getContentPane().add(modificaRecurso());
+				{	formRecurso.getContentPane().add(modificaRecurso(cod.getText()));
 					formRecurso.pack();
 					formRecurso.setVisible(true);
 				}		
@@ -572,7 +595,11 @@ public class PanelEmpleados extends JPanel
 		});
 		elim.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
-			{	
+			{	int seleccion=JOptionPane.showConfirmDialog(null,"         ¿Desea eliminar la asignación de este recurso "+cod.getText()+"?","Eliminar asignación",JOptionPane.YES_NO_CANCEL_OPTION,-1);
+				if (seleccion==JOptionPane.YES_OPTION)
+				{	
+				
+				}
 				
 		
 			}
