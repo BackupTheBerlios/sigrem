@@ -116,19 +116,52 @@ public class GEmpleadosImp implements GEmpleados
 			if (modificar)
 			{	vista.actualizaVistaDatos(2,empleado.dameListaDatos(),true);}
 			else
-			{//	vista.actualizaVista(1,1,contrato.dameListaDatos());
-				
+			{	LinkedList datosPanel2=empleado.dameListaDatos();
+				datosPanel2.remove(0);
+				LinkedList datosPanel1=new LinkedList();
+				datosPanel1.add(empleado.dameCodigo());
+				datosPanel1.add(empleado.getClass().getName().substring(4));
+				datosPanel1.add(empleado.dameNomina());
+				vista.actualizaVista(2,1,datosPanel1);
+				vista.actualizaVista(2,2,datosPanel2);				
 			}
 		}
 	}
 	// Método para consultar un empleado dado su Nombre
 	public void consultarEmpleadoNombre(String nombre)
 	{
+		Vector busqueda=listaEmpleados.buscar(nombre,1);
+		if (busqueda.size()==0)
+		{	vista.actualizaVistaMensaje("Error al buscar el empleado "+nombre+". No se ha encontrado");}
+		else 
+		{	Empleado empleado=(Empleado)busqueda.get(0);		
+			LinkedList datosPanel2=empleado.dameListaDatos();
+			datosPanel2.remove(0);
+			LinkedList datosPanel1=new LinkedList();
+			datosPanel1.add(empleado.dameCodigo());
+			datosPanel1.add(empleado.getClass().getName().substring(4));
+			datosPanel1.add(empleado.dameNomina());
+			vista.actualizaVista(2,1,datosPanel1);
+			vista.actualizaVista(2,2,datosPanel2);				
+		}
 	}
 	// Método para consultar un empleado dado su DNI
 	public void consultarEmpleadoDni(String dni)
 	{
-		
+		Vector busqueda=listaEmpleados.buscar(dni,2);
+		if (busqueda.size()==0)
+		{	vista.actualizaVistaMensaje("Error al buscar el empleado con DNI "+dni+". No se ha encontrado");}
+		else 
+		{	Empleado empleado=(Empleado)busqueda.get(0);		
+			LinkedList datosPanel2=empleado.dameListaDatos();
+			datosPanel2.remove(0);
+			LinkedList datosPanel1=new LinkedList();
+			datosPanel1.add(empleado.dameCodigo());
+			datosPanel1.add(empleado.getClass().getName().substring(4));
+			datosPanel1.add(empleado.dameNomina());
+			vista.actualizaVista(2,1,datosPanel1);
+			vista.actualizaVista(2,2,datosPanel2);				
+		}
 	}
 
 }

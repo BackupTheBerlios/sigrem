@@ -324,11 +324,11 @@ public class InterfazGrafica
 		emcod.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-			String valor=JOptionPane.showInputDialog(null,"Introduce el código del empleado","Consultar empleado",-1);
-			if (valor!=null)
-			{	
-				panelVistas.setSelectedIndex(1);
-			}
+				String valor=JOptionPane.showInputDialog(null,"Introduce el código del empleado","Consultar empleado",-1);
+				if (valor!=null)
+				{	panelVistas.setSelectedIndex(1);
+					controlador.consultarEmpleadoCodigo(false,valor);
+				}
 			}
 		});
 		emdni.addActionListener(new ActionListener()
@@ -336,8 +336,8 @@ public class InterfazGrafica
 			{
 				String valor=JOptionPane.showInputDialog(null,"Introduce el DNI del empleado","Consultar empleado",-1);
 				if (valor!=null)
-				{	
-					panelVistas.setSelectedIndex(1);
+				{	panelVistas.setSelectedIndex(1);
+					controlador.consultarEmpleadoDni(valor);
 				}
 			}
 		});
@@ -346,8 +346,8 @@ public class InterfazGrafica
 			{
 				String valor=JOptionPane.showInputDialog(null,"Introduce el nombre del empleado","Consultar empleado",-1);
 				if (valor!=null)
-				{	
-					panelVistas.setSelectedIndex(1);
+				{	panelVistas.setSelectedIndex(1);
+					controlador.consultarEmpleadoNombre(valor);
 				}
 			}
 		});

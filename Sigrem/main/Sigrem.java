@@ -230,7 +230,14 @@ public class Sigrem
 	{
 		gempleados.consultarEmpleadoCodigo(modificar,codigo);
 	}
-	
+	public void consultarEmpleadoNombre(String nombre)
+	{
+		gempleados.consultarEmpleadoNombre(nombre);
+	}
+	public void consultarEmpleadoDni(String dni)
+	{
+		gempleados.consultarEmpleadoDni(dni);
+	}	
 	public void modificarEmpleado(String codigo,LinkedList datos)
 	{
 		gempleados.modificarEmpleado(codigo,datos);

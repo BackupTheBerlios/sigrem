@@ -154,7 +154,7 @@ public class PanelEmpleados extends JPanel
 		pdat.setPreferredSize(new Dimension(0,320));
 		pdat.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos personales",TitledBorder.LEFT,TitledBorder.TOP));
 		JLabel l1=new JLabel("Nombre ",SwingConstants.RIGHT);
-		JLabel l2=new JLabel("DNI/CIF ",SwingConstants.RIGHT);
+		JLabel l2=new JLabel("DNI ",SwingConstants.RIGHT);
 		JLabel l3=new JLabel("Dirección ",SwingConstants.RIGHT);
 		JLabel l4=new JLabel("Código postal ",SwingConstants.RIGHT);
 		JLabel l5=new JLabel("Población ",SwingConstants.RIGHT);
@@ -400,8 +400,8 @@ public class PanelEmpleados extends JPanel
 		caja1.add(pnomina);
 		JPanel pdat=new JPanel();
 		pdat.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos personales",TitledBorder.LEFT,TitledBorder.TOP));
-		JLabel l1=new JLabel("Nombre ",SwingConstants.RIGHT);
-		JLabel l2=new JLabel("DNI/CIF ",SwingConstants.RIGHT);
+		JLabel l1=new JLabel("* Nombre ",SwingConstants.RIGHT);
+		JLabel l2=new JLabel("* DNI ",SwingConstants.RIGHT);
 		JLabel l3=new JLabel("Dirección ",SwingConstants.RIGHT);
 		JLabel l4=new JLabel("Código postal ",SwingConstants.RIGHT);
 		JLabel l5=new JLabel("Población ",SwingConstants.RIGHT);
@@ -560,10 +560,16 @@ public class PanelEmpleados extends JPanel
 				datosEmpleado.add(temail.getText());
 				datosEmpleado.add(tfax.getText());
 				datosEmpleado.add(tnomina.getText());
-				if (datos==null) controlador.contratarEmpleado((String)perfil.getSelectedItem(),datosEmpleado);
-				else controlador.modificarEmpleado(codigo,datosEmpleado);
-				formulario.setVisible(false);
-				formulario.getContentPane().removeAll();
+				if ((tdni.getText().equals("")) || (tnom.getText().equals("")))
+				{
+					JOptionPane.showMessageDialog(null,"Los campos marcados con * son obligatorios");
+				}
+				else
+				{	if (datos==null) controlador.contratarEmpleado((String)perfil.getSelectedItem(),datosEmpleado);
+					else controlador.modificarEmpleado(codigo,datosEmpleado);
+					formulario.setVisible(false);
+					formulario.getContentPane().removeAll();
+				}
 			}
 		});
 		bcancela.addActionListener(new ActionListener()
