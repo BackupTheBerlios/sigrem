@@ -63,6 +63,7 @@ public class PanelEconomia extends JPanel
 			facturacion=fact;
 			int mes=Integer.valueOf((String)datos.get(2)).intValue();
 			mesFac=dameMeses(mes);
+			System.out.println("mesFac "+mes);
 			if (fact[11]>maxValorGrafico) maxValorGrafico=fact[11];
 			dibujaPaneles(fact,"Histórico de Facturación",1,mesFac);
 		}
@@ -72,6 +73,7 @@ public class PanelEconomia extends JPanel
 			gastos=gas;
 			int mes=Integer.valueOf((String)datos.get(2)).intValue();
 			mesGas=dameMeses(mes);
+			System.out.println("mesGas "+mes);
 			if (gas[11]>maxValorGrafico) maxValorGrafico=gas[11];
 			dibujaPaneles(gas,"Histórico de Gastos",2,mesGas);
 		}
@@ -81,6 +83,7 @@ public class PanelEconomia extends JPanel
 			balance=bal;
 			int mes=Integer.valueOf((String)datos.get(2)).intValue();
 			mesBal=dameMeses(mes);
+			System.out.println("mesBal "+mes);
 			if (bal[11]>maxValorGrafico) maxValorGrafico=bal[11];
 			dibujaPaneles(bal,"Histórico de Balance",3,mesBal);
 		}		
