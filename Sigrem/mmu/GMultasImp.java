@@ -45,9 +45,7 @@ public class GMultasImp implements GMultas
 		String codigoantiguo=codigoMulta;
 		incrementaCodigo();
 		datos.addFirst(codigoantiguo);
-		LinkedList datosmultas=new LinkedList();
-		datosmultas.add(datos);
-		vista.actualizaVistaCajaMultas('a',datos);
+		vista.actualizaVistaCaja('m','a',datos);
 		vista.actualizaVista(1,3,null);
 		return codigoantiguo;
 	}
@@ -58,7 +56,7 @@ public class GMultasImp implements GMultas
 		if (eliminado) 
 		{	LinkedList datos=new LinkedList();
 			datos.add(codigo);
-			vista.actualizaVistaCajaMultas('e',datos);
+			vista.actualizaVistaCaja('m','e',datos);
 			vista.actualizaVista(1,3,null);
 		}
 		else vista.actualizaVistaMensaje("Error al eliminar la multa "+codigo+". No se ha encontrado");
@@ -75,7 +73,7 @@ public class GMultasImp implements GMultas
 			multa.ponFechaDenuncia((String)datos.get(3));
 			multa.ponInfraccion((String)datos.get(4));
 			multa.ponDescripcion((String)datos.get(5));
-			vista.actualizaVistaCajaMultas('m',datos);
+			vista.actualizaVistaCaja('m','m',datos);
 			vista.actualizaVista(1,3,null);
 		}
 	}
@@ -128,7 +126,7 @@ public class GMultasImp implements GMultas
 			{	vista.actualizaVistaMensaje("Error al buscar la multa "+codigo+". No se ha encontrado");}
 			else 
 			{	Multa multa=(Multa)busqueda.get(0);
-				vista.actualizaVistaCajaMultas('a',multa.dameListaDatos());
+				vista.actualizaVistaCaja('m','a',multa.dameListaDatos());
 			}
 		}
 		vista.actualizaVista(1,3,null);

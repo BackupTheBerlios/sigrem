@@ -15,7 +15,7 @@ public class GRecursosImp implements GRecursos
 	public GRecursosImp(InterfazGrafica vista,String codigo) 
 	{
 		this.codigoRecurso=codigo;
-		this.listaRecursos=new EstructuraDatosImp(3);
+		this.listaRecursos=new EstructuraDatosImp(1);
 	    this.vista=vista;
 	}
 	
@@ -33,16 +33,28 @@ public class GRecursosImp implements GRecursos
 	public String añadirRecurso(LinkedList datos)
 	{
 		Recurso nuevorecurso=new Recurso(codigoRecurso,datos);
-		String[] claves=new String[3];
+		System.out.println(datos.get(0));
+		System.out.println(datos.get(1));
+		System.out.println(datos.get(2));
+		System.out.println(datos.get(3));
+		System.out.println(datos.get(4));
+		System.out.println(datos.get(5));
+		String[] claves=new String[1];
 		claves[0]=codigoRecurso;
 		listaRecursos.insertar(claves,nuevorecurso);
 		String codigoantiguo=codigoRecurso;
 		incrementaCodigo();
 		datos.addFirst(codigoantiguo);
-		LinkedList datosrecurso=new LinkedList();
-		datosrecurso.add(datos);
-	//	vista.actualizaVistaCajaMultas('a',datos);
-	//	vista.actualizaVista(1,3,null);
+		System.out.println(datos.get(0));
+		System.out.println(datos.get(1));
+		System.out.println(datos.get(2));
+		System.out.println(datos.get(3));
+		System.out.println(datos.get(4));
+		System.out.println(datos.get(5));
+		System.out.println(datos.get(6));
+		System.out.println(datos.get(7));
+		vista.actualizaVistaCaja('r','a',datos);
+		vista.actualizaVista(1,4,datos);
 		return codigoantiguo;
 	}
 	

@@ -19,6 +19,8 @@ public class PanelContratos extends JPanel
 {
 	private Sigrem controlador;
 	
+	private JDialog panelRecursos;
+	
 	private JDialog formulario;
 	
 	private JDialog formRecurso;
@@ -33,6 +35,8 @@ public class PanelContratos extends JPanel
 	
 	private Box cajaMultas;
 	
+	private Box cajaRecursos;
+	
 	private JComboBox selector;
 	
 	public PanelContratos(Sigrem controlador,JFrame v)
@@ -40,6 +44,14 @@ public class PanelContratos extends JPanel
 		super();
 		this.controlador=controlador;
 		datosModificables=new LinkedList();
+		panelRecursos=new JDialog(v,true);
+		panelRecursos.setResizable(false);
+		panelRecursos.addWindowListener(new WindowAdapter()
+		{	public void windowClosing(WindowEvent e)
+			{
+				panelRecursos.getContentPane().removeAll();
+			}
+		});	
 		formulario=new JDialog(v,true);
 		formulario.setResizable(false);
 		formulario.addWindowListener(new WindowAdapter()
@@ -48,7 +60,7 @@ public class PanelContratos extends JPanel
 				formulario.getContentPane().removeAll();
 			}
 		});	
-		formRecurso=new JDialog(formulario,true);
+		formRecurso=new JDialog(panelRecursos,true);
 		formRecurso.setResizable(false);
 		formRecurso.addWindowListener(new WindowAdapter()
 		{	public void windowClosing(WindowEvent e)
@@ -56,7 +68,7 @@ public class PanelContratos extends JPanel
 				formRecurso.getContentPane().removeAll();
 			}
 		});
-		formConsulta=new JDialog();
+		formConsulta=new JDialog(v,true);
 		formConsulta.setResizable(false);
 		formConsulta.addWindowListener(new WindowAdapter()
 		{	public void windowClosing(WindowEvent e)
@@ -90,6 +102,11 @@ public class PanelContratos extends JPanel
 		else if (panel==3)
 		{	JSplitPane sp=((JSplitPane)getComponent(0));
 			sp.setBottomComponent(dibujaMultas(true,datos));
+		}
+		else if (panel==4)
+		{	panelRecursos.getContentPane().removeAll();
+			panelRecursos.getContentPane().add(dibujaRecursos((String)datos.get(7)));
+			panelRecursos.pack();
 		}
 	}
 	
@@ -127,6 +144,28 @@ public class PanelContratos extends JPanel
 		}		
 	}
 	
+	public void actualizaCajaRecursos(char tipo,LinkedList datos)
+	{
+		if (tipo=='a')
+		{	int lineas=cajaRecursos.getComponentCount();
+			cajaRecursos.add(dibujaLineaRecurso(datos),lineas-1);
+		}
+		else 
+		{	int i=0;
+			boolean esta=false;
+			while((!esta) && (i<cajaRecursos.getComponentCount()-1))
+			{	JPanel panel=(JPanel)cajaRecursos.getComponent(i);
+				JTextField texto=(JTextField)panel.getComponent(0);
+				String codigo=(String)datos.get(0);
+				if (codigo.equals(texto.getText()))
+				{	esta=true;
+					cajaRecursos.remove(i);
+					if (tipo=='m') cajaRecursos.add(dibujaLineaRecurso(datos),i);	
+				}
+				i++;
+			}			
+		}		
+	}
 	public void actualizaPanelConsulta(String nombre,Vector dnis)
 	{
 		formConsulta.setTitle("Resultados de la consulta");
@@ -162,6 +201,14 @@ public class PanelContratos extends JPanel
 		JLabel relleno=new JLabel("");
 		relleno.setPreferredSize(new Dimension(20,100));
 		cajaMultas.add(relleno);		
+	}
+	
+	public void inicializaCajaRecursos()
+	{
+		cajaRecursos=Box.createVerticalBox();
+		JLabel relleno=new JLabel("");
+		relleno.setPreferredSize(new Dimension(20,220));
+		cajaRecursos.add(relleno);		
 	}
 	
 	public JPanel dibujaContrato(LinkedList datos)
@@ -522,8 +569,8 @@ public class PanelContratos extends JPanel
 	
 	public JPanel dibujaRecursos(final String codigo)
 	{
-		formulario.setTitle("Recursos de la multa "+codigo);
-		formulario.setLocation(25,100);
+		panelRecursos.setTitle("Recursos de la multa "+codigo);
+		panelRecursos.setLocation(25,100);
 		JPanel prec=new JPanel();
 		prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Recursos de la multa "+codigo,TitledBorder.LEFT,TitledBorder.TOP));
 		Box tabla=Box.createVerticalBox();
@@ -545,7 +592,7 @@ public class PanelContratos extends JPanel
 		l7.setPreferredSize(new Dimension(90,20));
 		l8.setPreferredSize(new Dimension(80,20));
 		l9.setPreferredSize(new Dimension(25,20));
-		l10.setPreferredSize(new Dimension(25,20));
+		l10.setPreferredSize(new Dimension(30,20));
 		p.add(l1);
 		p.add(l2);
 		p.add(l4);
@@ -555,26 +602,24 @@ public class PanelContratos extends JPanel
 		p.add(l8);
 		p.add(l9);
 		p.add(l10);
-		tabla.add(p);
-		for (int i=0;i<9;i++)
-		{	JPanel linea=dibujaLineaRecurso();
-			tabla.add(linea);		
-		}
-		JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		JScrollPane ptabla=new JScrollPane(cajaRecursos,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		ptabla.setPreferredSize(new Dimension(940,300));
+		JSplitPane sp1=new JSplitPane(JSplitPane.VERTICAL_SPLIT,p,ptabla);
+		sp1.setEnabled(false);
+		sp1.setDividerSize(4);
 		JButton bcrea=new JButton("Añadir recurso");
 		JButton baceptar=new JButton("Aceptar");
 		JPanel botonera=new JPanel();
 		botonera.add(bcrea);
-		JSplitPane sp1=new JSplitPane(JSplitPane.VERTICAL_SPLIT,ptabla,botonera);
-		sp1.setEnabled(false);
-		sp1.setDividerSize(4);
-		JPanel paceptar=new JPanel();
-		paceptar.add(baceptar);
-		JSplitPane sp2=new JSplitPane(JSplitPane.VERTICAL_SPLIT,sp1,paceptar);
+		JSplitPane sp2=new JSplitPane(JSplitPane.VERTICAL_SPLIT,sp1,botonera);
 		sp2.setEnabled(false);
 		sp2.setDividerSize(4);
-		prec.add(sp2);
+		JPanel paceptar=new JPanel();
+		paceptar.add(baceptar);
+		JSplitPane sp3=new JSplitPane(JSplitPane.VERTICAL_SPLIT,sp2,paceptar);
+		sp3.setEnabled(false);
+		sp3.setDividerSize(4);
+		prec.add(sp3);
 		bcrea.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
@@ -586,8 +631,8 @@ public class PanelContratos extends JPanel
 		baceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formulario.setVisible(false);
-				formulario.getContentPane().removeAll();			
+				panelRecursos.setVisible(false);
+				panelRecursos.getContentPane().removeAll();	
 			}
 		});
 		return prec;
@@ -1204,7 +1249,6 @@ public class PanelContratos extends JPanel
 				datos.add((String)est.getSelectedItem());
 				datos.add(abo.getText());
 				datos.add(descrip.getText());
-				System.out.println(codigo);
 				datos.add(codigo);
 				controlador.añadirRecurso(codigo,datos);
 				formRecurso.setVisible(false);
@@ -1272,9 +1316,10 @@ public class PanelContratos extends JPanel
 		recur.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formulario.getContentPane().add(dibujaRecursos(cod.getText()));
-				formulario.pack();
-				formulario.setVisible(true);				
+				inicializaCajaRecursos();
+				panelRecursos.getContentPane().add(dibujaRecursos(cod.getText()));
+				panelRecursos.pack();
+				panelRecursos.setVisible(true);				
 			}
 		});
 		mod.addActionListener(new ActionListener()
@@ -1296,15 +1341,15 @@ public class PanelContratos extends JPanel
 		return panel;
 	}
 	
-	public JPanel dibujaLineaRecurso()
+	public JPanel dibujaLineaRecurso(final LinkedList datos)
 	{		
 		JPanel panel=new JPanel();
-		final JTextField cod=new JTextField();
-		JTextField femi=new JTextField();
-		JTextField ere=new JTextField();
-		JTextField epr=new JTextField();
-		JTextField est=new JTextField();
-		JTextField abo=new JTextField();
+		final JTextField cod=new JTextField((String)datos.get(0));
+		JTextField femi=new JTextField((String)datos.get(1));
+		JTextField ere=new JTextField((String)datos.get(2));
+		JTextField epr=new JTextField((String)datos.get(3));
+		JTextField est=new JTextField((String)datos.get(4));
+		JTextField abo=new JTextField((String)datos.get(5));
 		JButton descrip=new JButton(new ImageIcon("interfaz/find.gif"));
 		JButton modi=new JButton(new ImageIcon("interfaz/tick.gif"));
 		JButton elim=new JButton(new ImageIcon("interfaz/del.gif"));
@@ -1341,17 +1386,17 @@ public class PanelContratos extends JPanel
 		descrip.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formRecurso.getContentPane().add(panelDescripcion('r',cod.getText(),""));
-				formRecurso.pack();
-				formRecurso.setVisible(true);	
+				formulario.getContentPane().add(panelDescripcion('r',cod.getText(),(String)datos.get(6)));
+				formulario.pack();
+				formulario.setVisible(true);	
 			}
 		});
 		modi.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formRecurso.getContentPane().add(panelAltaRecurso('m',cod.getText()));
-				formRecurso.pack();
-				formRecurso.setVisible(true);				
+				formulario.getContentPane().add(panelAltaRecurso('m',cod.getText()));
+				formulario.pack();
+				formulario.setVisible(true);				
 			}
 		});
 		elim.addActionListener(new ActionListener()
@@ -1371,8 +1416,8 @@ public class PanelContratos extends JPanel
 	public JPanel panelDescripcion(final char tipo,String codigo,String texto)
 	{
 		if (tipo=='r')
-		{	formRecurso.setTitle("Descripción del recurso "+codigo);
-			formRecurso.setLocation(350,100);			
+		{	formulario.setTitle("Descripción del recurso "+codigo);
+			formulario.setLocation(350,100);			
 		}
 		else if (tipo=='m')
 		{	formulario.setTitle("Descripción de la multa "+codigo);
@@ -1399,16 +1444,8 @@ public class PanelContratos extends JPanel
 		aceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				if (tipo=='r')
-				{
-					formRecurso.setVisible(false);
-					formRecurso.getContentPane().removeAll();
-				}
-				else if (tipo=='m')
-				{
-					formulario.setVisible(false);
-					formulario.getContentPane().removeAll();
-				}
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
 			}
 		});
 		return panel;
