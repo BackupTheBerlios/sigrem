@@ -478,16 +478,7 @@ public class InterfazGrafica
 					}
 					catch(FileNotFoundException e)
 					{}
-					try
-					{
-						while((linea=fd.readLine())!=null)
-						{
-							salida.append(linea+"\n");						
-						}
-						fd.close();
-					}
-					catch(IOException e)
-					{}
+					
 				}
 				else
 					if(lista.getSelectedIndex()==2)
@@ -499,19 +490,21 @@ public class InterfazGrafica
 						}
 						catch(FileNotFoundException e)
 						{}
-						try
-						{
-							while((linea=fd.readLine())!=null)
-							{
-								salida.append(linea+"\n");						
-							}
-							fd.close();
-						}
-						catch(IOException e)
-						{}
+						
 					}
-				
-							
+				try
+				{
+					if (fd!=null)
+					{
+						while((linea=fd.readLine())!=null)
+						{
+							salida.append(linea+"\n");						
+						}
+						fd.close();
+					}
+				}
+				catch(IOException e)
+				{}							
 			}
 		});
 		
@@ -546,17 +539,7 @@ public class InterfazGrafica
 						fd = new BufferedReader (new FileReader ("interfaz/ayuda_menu.txt"));
 					}
 					catch(FileNotFoundException e)
-					{}
-					try
-					{
-						while((linea=fd.readLine())!=null)
-						{
-							salida.append(linea+"\n");						
-						}
-						fd.close();
-					}
-					catch(IOException e)
-					{}
+					{}					
 				}
 				else
 					if(lista.getSelectedIndex()==5)
@@ -567,18 +550,21 @@ public class InterfazGrafica
 							fd = new BufferedReader (new FileReader ("interfaz/ayuda_contratos.txt"));
 						}
 						catch(FileNotFoundException e)
-						{}
-						try
+						{}						
+					}	
+				try
+				{
+					if (fd!=null)
+					{
+						while((linea=fd.readLine())!=null)
 						{
-							while((linea=fd.readLine())!=null)
-							{
-								salida.append(linea+"\n");						
-							}
-							fd.close();
+							salida.append(linea+"\n");						
 						}
-						catch(IOException e)
-						{}
-					}													
+						fd.close();
+					}
+				}
+				catch(IOException e)
+				{}
 			}
 		});		
 	}
@@ -612,17 +598,7 @@ public class InterfazGrafica
 						fd = new BufferedReader (new FileReader ("interfaz/ayuda_menu.txt"));
 					}
 					catch(FileNotFoundException e)
-					{}
-					try
-					{
-						while((linea=fd.readLine())!=null)
-						{
-							salida.append(linea+"\n");						
-						}
-						fd.close();
-					}
-					catch(IOException e)
-					{}
+					{}					
 				}
 				else
 					if(lista.getSelectedIndex()==2)	
@@ -633,21 +609,22 @@ public class InterfazGrafica
 							fd = new BufferedReader (new FileReader ("interfaz/ayuda_contratos.txt"));
 						}
 						catch(FileNotFoundException e)
-						{}
-						try
+						{}					
+					}
+				try
+				{
+					if (fd!=null)
+					{
+						while((linea=fd.readLine())!=null)
 						{
-							while((linea=fd.readLine())!=null)
-							{
-								salida.append(linea+"\n");						
-							}
-							fd.close();
+							salida.append(linea+"\n");						
 						}
-						catch(IOException e)
-						{}
-					}							
+						fd.close();
+					}
+				}
+				catch(IOException e)
+				{}
 			}
-		});
-		
-	}
-	
+		});		
+	}	
 }
