@@ -292,6 +292,7 @@ public class PanelContratos extends JPanel
 		l2.setPreferredSize(new Dimension(150,20));
 		l3.setPreferredSize(new Dimension(150,20));
 		JTextField tcontrato=new JTextField();
+		tcontrato.setEditable(false);
 		JTextField tcliente=new JTextField();
 		JTextField tmatricula=new JTextField();
 		tcontrato.setPreferredSize(new Dimension(100,20));
@@ -358,6 +359,7 @@ public class PanelContratos extends JPanel
 		l2.setPreferredSize(new Dimension(80,20));
 		l3.setPreferredSize(new Dimension(80,20));
 		JTextField cod=new JTextField();
+		cod.setEditable(false);
 		JTextField exp=new JTextField();
 		JTextField bol=new JTextField();
 		cod.setPreferredSize(new Dimension(100,20));
@@ -557,7 +559,7 @@ public class PanelContratos extends JPanel
 		elim.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				int seleccion=JOptionPane.showConfirmDialog(null,"           ¿Desea eliminar el recurso "+cod.getText()+"?","Eliminar recurso",JOptionPane.YES_NO_CANCEL_OPTION,-1);
+				int seleccion=JOptionPane.showConfirmDialog(null,"         ¿Desea eliminar el recurso "+cod.getText()+"?","Eliminar recurso",JOptionPane.YES_NO_CANCEL_OPTION,-1);
 				if (seleccion==JOptionPane.YES_OPTION)
 				{	//eliminar multa
 					//borrar el panel de multas
@@ -628,7 +630,7 @@ public class PanelContratos extends JPanel
 		elim.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				int seleccion=JOptionPane.showConfirmDialog(null,"           ¿Desea eliminar la multa "+cod.getText()+"?","Eliminar multa",JOptionPane.YES_NO_CANCEL_OPTION,-1);
+				int seleccion=JOptionPane.showConfirmDialog(null,"          ¿Desea eliminar la multa "+cod.getText()+"?","Eliminar multa",JOptionPane.YES_NO_CANCEL_OPTION,-1);
 				if (seleccion==JOptionPane.YES_OPTION)
 				{	//eliminar multa
 					//borrar el panel de multas
