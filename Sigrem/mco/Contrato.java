@@ -8,6 +8,11 @@ package mco;
  * @author unascribed
  * @version 1.0
  */
+import mcl.*;
 
 public interface Contrato {
+	public Integer dameCodigo();
+	public String dameMatricula();
+	public Cliente dameCliente();
+	
 }
