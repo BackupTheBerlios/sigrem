@@ -39,7 +39,11 @@ public class Sigrem
 	
 	private String codempleado;
 	
-	private String ultimomes;
+	private String ultimoMesFac;
+	
+	private String ultimoMesGas;
+	
+	private String ultimoMesBal;
 	
 	private String facturacion;
 	
@@ -56,16 +60,18 @@ public class Sigrem
 		codmulta=codigos[2];
 		codrecurso=codigos[3];
 		codempleado=codigos[4];
-		ultimomes=codigos[5];
-		facturacion=codigos[6];
-		gastos=codigos[7];
-		balance=codigos[8];
+		ultimoMesFac=codigos[5];
+		ultimoMesGas=codigos[6];
+		ultimoMesBal=codigos[7];
+		facturacion=codigos[8];
+		gastos=codigos[9];
+		balance=codigos[10];
 		gclientes=factoria.generaGCliente(vista,codcliente);
 		gcontratos=factoria.generaGContratos(vista,codcontrato);
 		gmultas=factoria.generaGMultas(vista,codmulta);
 		grecursos=factoria.generaGRecursos(vista,codrecurso);
 		gempleados=factoria.generaGEmpleados(vista,codempleado);
-		geconomia=factoria.generaGEconomia(vista,gempleados,gcontratos,ultimomes,facturacion,gastos,balance);
+		geconomia=factoria.generaGEconomia(vista,gempleados,gcontratos,ultimoMesFac,ultimoMesGas,ultimoMesBal,facturacion,gastos,balance);
 		persistencia=new Persistencia(gcontratos,gclientes,gempleados,gmultas,grecursos,geconomia);
 	}
 	
@@ -306,24 +312,32 @@ public class Sigrem
 		vista.actualizarVistaConsultaAbogado(codigo);
 	}
 	
-	public void calculaFacturacion()
+	public int calculaFacturacion(int [] facturacion, int ultimoMesFac)
 	{
-		//pasar el vector de String a vector de enteros
-		//int facturacion=cuotaCOntratos*gcontratos.dameListaContratos().dameTamaño();
-		//geconomia.facturacion(...);
+		int fact=geconomia.dameCuotaContrato() * gcontratos.dameListaContratos().dameTamaño();
+		geconomia.facturacion(fact);
+		return facturacion[11];
 	}
 	
-	public void calculaGastos()
+	public int calculaGastos(int [] gastos, int ultimoMesGas)
 	{
-		//pasar el vector de String a vector de enteros
-		//int gastos=gempleados.calculaNominas();
-		//geconomia.gastos(...);
+		Empleado emp;
+		int gas=0;
+		for(int i=0;i<gempleados.dameListaEmpleados().dameTamaño();i++)
+		{
+			emp=(Empleado)gempleados.dameListaEmpleados().dameIndice(0).dameElementos().get(i);
+			gas=gas + Integer.valueOf(emp.dameNomina()).intValue();
+		}
+		geconomia.gastos(gastos,gas);
+		return gastos[11];
 	}
 	
-	public void calculaBalance()
+	public int calculaBalance(int [] facturacion, int [] gastos, int [] balance, int ultimoMesFac, int ultimoMesGas, int ultimoMesBal)
 	{
-		//pasar el vector de String a vector de enteros
-		//int balance=facturacion-gastos;
-		//geconomia.balance(...);
+		int fac=calculaFacturacion(facturacion,ultimoMesFac);
+		int gas=calculaGastos(gastos,ultimoMesGas);
+		int bal=fac-gas;
+		geconomia.balance(fac,gas,bal);
+		return balance[11];		
 	}
 }

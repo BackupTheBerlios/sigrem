@@ -18,7 +18,11 @@ public class ClasePrincipal
 	
 	private static String codempleado;
 	
-	private static String ultimomes;
+	private static String ultimoMesFac;
+	
+	private static String ultimoMesGas;
+	
+	private static String ultimoMesBal;
 	
 	private static String facturacion;
 	
@@ -47,7 +51,13 @@ public class ClasePrincipal
 			codempleado=cod.substring(pos+1);
 			cod=entrada.readLine();
 			pos=cod.indexOf('=');
-			ultimomes=cod.substring(pos+1);
+			ultimoMesFac=cod.substring(pos+1);
+			cod=entrada.readLine();
+			pos=cod.indexOf('=');
+			ultimoMesGas=cod.substring(pos+1);
+			cod=entrada.readLine();
+			pos=cod.indexOf('=');
+			ultimoMesBal=cod.substring(pos+1);
 			cod=entrada.readLine();
 			pos=cod.indexOf('=');
 			facturacion=cod.substring(pos+1);
@@ -68,16 +78,18 @@ public class ClasePrincipal
 	{
 		System.out.println("El programa Sigrem ha comenzado");
 		leerFicheroConfig();
-		String[] codigos=new String[9];
+		String[] codigos=new String[11];
 		codigos[0]=codcontrato;
 		codigos[1]=codcliente;
 		codigos[2]=codmulta;
 		codigos[3]=codrecurso;
 		codigos[4]=codempleado;
-		codigos[5]=ultimomes;
-		codigos[6]=facturacion;
-		codigos[7]=gastos;
-		codigos[8]=balance;
+		codigos[5]=ultimoMesFac;
+		codigos[6]=ultimoMesGas;
+		codigos[7]=ultimoMesBal;
+		codigos[8]=facturacion;
+		codigos[9]=gastos;
+		codigos[10]=balance;
 		controlador=new Sigrem(codigos);
 		controlador.activa();
 	}

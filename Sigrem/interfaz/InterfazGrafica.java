@@ -154,9 +154,9 @@ public class InterfazGrafica
 	
 	public void actualizaVista(int pestaña,int panel,LinkedList datos)
 	{
-		if (pestaña==1) pcontratos.actualiza(panel,datos);
-		else if (pestaña==2){pempleados.actualiza(panel,datos);}
-		else if (pestaña==3) {peconomia.actualiza(panel,datos);}
+		if (pestaña==1)	pcontratos.actualiza(panel,datos);
+		else if (pestaña==2) pempleados.actualiza(panel,datos);
+			else if (pestaña==3) peconomia.actualiza(panel,datos);
 	}
 	
 	public void actualizaVistaMensaje(String mensaje)
@@ -194,6 +194,21 @@ public class InterfazGrafica
 	public void actualizaVistaAbogados(Vector listaAbogados)
 	{
 		pcontratos.actualizaListaAbogados(listaAbogados);
+	}
+	
+	public void actualizaVistaFacturacion(int [] facturacion,int ultimoMesFac)
+	{
+		peconomia.actualizaFacturacion(facturacion,ultimoMesFac);
+	}
+	
+	public void actualizaVistaGastos(int [] gastos,int ultimoMesGas)
+	{
+		peconomia.actualizaGastos(gastos,ultimoMesGas);
+	}
+	
+	public void actualizaVistaBalance(int [] facturacion,int [] gastos,int [] balance,int ultimoMesFac,int ultimoMesGas,int ultimoMesBal)
+	{
+		peconomia.actualizaBalance(facturacion,gastos,balance,ultimoMesFac,ultimoMesGas,ultimoMesBal);
 	}
 	
 	public void muestraPanelRecursos(String codmulta)

@@ -24,20 +24,49 @@ public class PanelEconomia extends JPanel
 	
 	private int [] balance;
 	
-	private int mesActual;
+	private int ultimoMesFac;
 	
-	private String [] meses;
+	private int ultimoMesGas;
+	
+	private int ultimoMesBal;
+	
+	private String [] mesesFac;
+	
+	private String [] mesesGas;
+	
+	private String [] mesesBal;
 	
 	private Sigrem controlador;
+	
+	private JTextField t1;
+	
+	private JTextField t2;
+	
+	private JTextField t3;
 		
 	public PanelEconomia(int grafico,Sigrem controlador,JFrame v)
 	{
 		super();
 		this.controlador=controlador;
+		this.facturacion=new int[12];
+		this.gastos=new int[12];
+		this.balance=new int[12];
+		this.mesesFac=new String [12];
+		this.mesesGas=new String [12];
+		this.mesesBal=new String [12];
+		dameMeses(this.mesesFac,0);
+		dameMeses(this.mesesGas,0);
+		dameMeses(this.mesesBal,0);
 		if (grafico==1) dibujaPaneles(facturacion,"Histórico de Facturación",1);
 		else if (grafico==2) dibujaPaneles(gastos,"Histórico de Gastos",2);
 		else if (grafico==3) dibujaPaneles(balance,"Histórico de Balance",3);
 		else dibujaPaneles(null,null,0);
+		for(int i=0;i<12;i++)
+		{
+			System.out.println("fac["+i+"] "+facturacion[i]);
+			System.out.println("gas["+i+"] "+gastos[i]);
+			System.out.println("bal["+i+"] "+balance[i]);
+		}
 	}
 	
 	public void actualiza(int panel,LinkedList datos)
@@ -46,14 +75,54 @@ public class PanelEconomia extends JPanel
 		gastos=(int[])datos.get(1);
 		balance=(int[])datos.get(2);
 		String sMesActual=(String)datos.get(3);
-		mesActual=Integer.valueOf(sMesActual).intValue();
+		ultimoMesFac=Integer.valueOf(sMesActual).intValue();
+		ultimoMesGas=Integer.valueOf(sMesActual).intValue();
+		ultimoMesBal=Integer.valueOf(sMesActual).intValue();
+		actualizaFacturacion(facturacion,ultimoMesFac);
+		actualizaGastos(gastos,ultimoMesGas);
+		actualizaBalance(facturacion,gastos,balance,ultimoMesFac,ultimoMesGas,ultimoMesBal);
+	}
+	
+	public void actualizaFacturacion(int [] facturacion,int ultimoMesFac)
+	{
+		String st1=""+facturacion[11];
+		t1.setText(st1);
+		dibujaPaneles(facturacion,"Histórico de Facturación",1);
+	}
+	
+	public void actualizaGastos(int [] gastos,int ultimoMesGas)
+	{
+		String st2=""+gastos[11];
+		t2.setText(st2);
+		dibujaPaneles(gastos,"Histórico de Gastos",2);
+	}
+	
+	public void actualizaBalance(int [] facturacion,int [] gastos,int [] balance,int ultimoMesFac,int ultimoMesGas,int ultimoMesBal)
+	{
+		String st3=""+balance[11];
+		t3.setText(st3);
+		dibujaPaneles(balance,"Histórico de Balance",3);
+	}
+	
+	public void dameMeses(String [] meses,int mes)
+	{
+		int i=0;
+		int m=mes;
+		String [] mesesIni={"ENE ","FEB ","MAR ","ABR ","MAY ","JUN ","JUL ","AGO ","SEP ","OCT ","NOV ","DIC "};
+		while (i<12)
+		{
+			meses[i]=mesesIni[m];
+			if (m<11) m=m+1;
+			else m=0;
+			i=i+1;
+		}
 	}
 	
 	public void dibujaPaneles(int [] num, String s,int boton)
 	{
 		JPanel pbalance=dibujaBalance(boton);
 		pbalance.setPreferredSize(new Dimension(950,322));
-		JPanel pgrafico=dibujaGrafico(num,s);
+		JPanel pgrafico=dibujaGrafico(num,s,boton);
 		pgrafico.setPreferredSize(new Dimension(950,280));
 		JSplitPane spx=new JSplitPane(JSplitPane.VERTICAL_SPLIT,pbalance,pgrafico);
 		spx.setEnabled(false);		
@@ -73,9 +142,9 @@ public class PanelEconomia extends JPanel
 		l1.setPreferredSize(new Dimension(100,20));
 		l2.setPreferredSize(new Dimension(100,20));
 		l3.setPreferredSize(new Dimension(100,20));
-		JTextField t1=new JTextField();
-		JTextField t2=new JTextField();
-		JTextField t3=new JTextField();
+		t1=new JTextField(facturacion[11]);
+		t2=new JTextField(gastos[11]);
+		t3=new JTextField(balance[11]);
 		t1.setPreferredSize(new Dimension(100,20));
 		t2.setPreferredSize(new Dimension(100,20));
 		t3.setPreferredSize(new Dimension(100,20));
@@ -128,6 +197,7 @@ public class PanelEconomia extends JPanel
 		{	public void actionPerformed(ActionEvent e)
 			{
 				removeAll();
+				dameMeses(mesesBal,ultimoMesBal);
 				dibujaPaneles(balance, "Histórico de Balance",3);
 			}
 		});
@@ -135,6 +205,7 @@ public class PanelEconomia extends JPanel
 		{	public void actionPerformed(ActionEvent e)
 			{
 				removeAll();
+				dameMeses(mesesBal,ultimoMesFac);
 				dibujaPaneles(facturacion, "Histórico de Facturación",1);
 			}
 		});
@@ -142,31 +213,35 @@ public class PanelEconomia extends JPanel
 		{	public void actionPerformed(ActionEvent e)
 			{
 				removeAll();
+				dameMeses(mesesBal,ultimoMesGas);
 				dibujaPaneles(gastos, "Histórico de Gastos",2);
 			}
 		});
 		bfacturacion.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				//controlador.calculaFacturacion(...);				
+				controlador.calculaFacturacion(facturacion,ultimoMesFac);
+				dameMeses(mesesBal,ultimoMesFac);
 			}
 		});
 		bgastos.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				//controlador.calculaGastos(...);
+				controlador.calculaGastos(gastos,ultimoMesGas);
+				dameMeses(mesesBal,ultimoMesGas);
 			}
 		});
 		bbalance.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				//controlador.calculaBalance(...);
+				controlador.calculaBalance(facturacion,gastos,balance,ultimoMesFac,ultimoMesGas,ultimoMesBal);
+				dameMeses(mesesBal,ultimoMesBal);
 			}
 		});
 		return pbal;
 	}
 	
-	public JPanel dibujaGrafico(int [] num, String s)
+	public JPanel dibujaGrafico(int [] num, String s,int boton)
 	{
 		JPanel pgra=new JPanel();
 		pgra.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),s,TitledBorder.LEFT,TitledBorder.TOP));
@@ -210,8 +285,24 @@ public class PanelEconomia extends JPanel
 			caja.add(c1);	
 			Color c;
 			for(int i=0;i<12;i++)
-				if (num[i]<0)	caja.add(dibujaBarra(-num[i],meses[i],Color.RED));
-				else	caja.add(dibujaBarra(num[i],meses[i],Color.GREEN));
+				if (boton==1)
+				{
+					dameMeses(mesesFac,ultimoMesFac);
+					if (num[i]<0)	caja.add(dibujaBarra(-num[i],mesesFac[i],Color.RED));
+					else	caja.add(dibujaBarra(num[i],mesesFac[i],Color.GREEN));
+				}
+				else if (boton==2)
+					{
+						dameMeses(mesesGas,ultimoMesGas);
+						if (num[i]<0)	caja.add(dibujaBarra(-num[i],mesesGas[i],Color.RED));
+						else	caja.add(dibujaBarra(num[i],mesesGas[i],Color.GREEN));
+					}
+					else if (boton==3)
+						{
+							dameMeses(mesesBal,ultimoMesBal);
+							if (num[i]<0)	caja.add(dibujaBarra(-num[i],mesesBal[i],Color.RED));
+							else	caja.add(dibujaBarra(num[i],mesesBal[i],Color.GREEN));
+						}
 			pgra.add(caja);
 		}
 		return pgra;
