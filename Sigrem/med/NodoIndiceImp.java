@@ -22,5 +22,20 @@ public class NodoIndiceImp {
     posiciones=posicionesNuevo;
     elemento=elementoNuevo;
     estructura=estructuraNuevo;
-  } 
+  }
+  
+  
+  public void cambiaClave(int indice, Comparable nuevaClave){
+  	claves[indice]=nuevaClave;
+  	
+  }
+  
+  public void cambiaPosicion(int indice, int nuevaPosicion){
+  	posiciones[indice]=nuevaPosicion;
+  	
+  }
+  
+  public Object dameElemento(){
+  	return elemento;
+  }
 }
