@@ -26,5 +26,9 @@ public class Abogado extends Empleado
 		}
 		if (esta)listaRecursos.remove(i-1);
 	}
+	public LinkedList dameListaRecursos()
+	{
+		return listaRecursos;
+	}
 }
 

@@ -26,4 +26,6 @@ public interface GEmpleados
 	public void eliminarRecursoAbogado(String codrecurso,String codempleado);
 	
 	public void consultarListaAbogados();
+	
+	public LinkedList dameListaRecursosEmpleado(int clave,String codigo);
 }

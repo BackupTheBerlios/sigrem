@@ -177,10 +177,14 @@ public class InterfazGrafica
 	}
 	
 	
-	public void actualizaVistaCaja(char caja,char tipo,LinkedList datos)
+	public void actualizaVistaCaja(int panel,char caja,char tipo,LinkedList datos)
 	{
-		if (caja=='m') pcontratos.actualizaCajaMultas(tipo,datos);
-		else if (caja=='r') pcontratos.actualizaCajaRecursos(tipo,datos);
+		if (panel==1)
+		{	if (caja=='m') pcontratos.actualizaCajaMultas(tipo,datos);
+			else if (caja=='r') pcontratos.actualizaCajaRecursos(tipo,datos);
+		}
+		else
+		{	pempleados.actualizaCajaRecursos(datos);}			
 	}
 	
 	public void actualizaVistaAbogados(Vector listaAbogados)
@@ -332,6 +336,7 @@ public class InterfazGrafica
 				String valor=JOptionPane.showInputDialog(null,"Introduce el código del empleado","Consultar empleado",-1);
 				if (valor!=null)
 				{	panelVistas.setSelectedIndex(1);
+					pempleados.inicializaCajaRecursos();
 					controlador.consultarEmpleadoCodigo(false,valor);
 				}
 			}
@@ -342,6 +347,7 @@ public class InterfazGrafica
 				String valor=JOptionPane.showInputDialog(null,"Introduce el DNI del empleado","Consultar empleado",-1);
 				if (valor!=null)
 				{	panelVistas.setSelectedIndex(1);
+					pempleados.inicializaCajaRecursos();
 					controlador.consultarEmpleadoDni(valor);
 				}
 			}
@@ -352,6 +358,7 @@ public class InterfazGrafica
 				String valor=JOptionPane.showInputDialog(null,"Introduce el nombre del empleado","Consultar empleado",-1);
 				if (valor!=null)
 				{	panelVistas.setSelectedIndex(1);
+					pempleados.inicializaCajaRecursos();
 					controlador.consultarEmpleadoNombre(valor);
 				}
 			}

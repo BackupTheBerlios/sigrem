@@ -1,6 +1,15 @@
 package interfaz;
 
+/*Cosas por hacer
+ * Consultar por nombre y devolver varios resultados
+ * Mostrar recursos (Hecho)
+ * Controlar DNI no repetido
+ * No permitir eliminar si tiene recursos
+ * Actualizar los recursos al asignar uno al abogado motrado 
+ */
+
 import javax.swing.*;
+
 import main.Sigrem;
 import java.util.LinkedList;
 import java.awt.Color;
@@ -66,6 +75,20 @@ public class PanelEmpleados extends JPanel
 		formulario.getContentPane().add(panelAltaEmpleado((String)datos.get(0),datos));
 		formulario.pack();
 		formulario.setVisible(true);
+	}
+	
+	public void actualizaCajaRecursos(LinkedList datos)
+	{
+		int lineas=cajaRecursos.getComponentCount();
+		cajaRecursos.add(dibujaLineaRecurso(datos),lineas-1);
+	}
+	
+	public void inicializaCajaRecursos()
+	{
+		cajaRecursos=Box.createVerticalBox();
+		JLabel relleno=new JLabel("");
+		relleno.setPreferredSize(new Dimension(20,150));
+		cajaRecursos.add(relleno);		
 	}
 	
 	public JPanel dibujaEmpleado(final LinkedList datos)
@@ -360,8 +383,7 @@ public class PanelEmpleados extends JPanel
 		String [] opciones={"Abogado","Administrativo"};
 		lperfil.setPreferredSize(new Dimension(150,20));
 		lnomina.setPreferredSize(new Dimension(150,20));
-		final JComboBox perfil=new JComboBox();
-		perfilesEmpleados(perfil);
+		final JComboBox perfil=new JComboBox(opciones);
 		perfil.setPreferredSize(new Dimension(100,20));
 		perfil.setEditable(false);
 		final JTextField tnomina=new JTextField();
@@ -646,73 +668,18 @@ public class PanelEmpleados extends JPanel
 		});
 		return pndat;
 	}
-	
-/*	public JPanel modificaRecurso(String codigo)
-	{
-		formulario.setTitle("Modificar estado del recurso "+codigo);		
-		JLabel l1=new JLabel("Código");
-		JLabel l2=new JLabel("Estado");
-		JComboBox estado=new JComboBox();
-		estadosRecursos(estado);
-		estado.setEditable(false);
-		estado.setBackground(Color.WHITE);
-		l1.setPreferredSize(new Dimension(80,20));
-		l2.setPreferredSize(new Dimension(80,20));
-		estado.setPreferredSize(new Dimension(100,20));
-		JTextField cod=new JTextField();
-		JTextField est=new JTextField();
-		cod.setPreferredSize(new Dimension(100,20));		
-		cod.setEditable(false);
-		JPanel p1=new JPanel();
-		JPanel p2=new JPanel();
-		p1.add(l1);
-		p1.add(cod);
-		p2.add(l2);
-		p2.add(estado);
-		Box caja=Box.createVerticalBox();
-		caja.add(p1);
-		caja.add(p2);
-		JButton aceptar=new JButton("Aceptar");
-		JButton cancelar=new JButton("Cancelar");
-		JPanel botonera=new JPanel();
-		botonera.add(aceptar);
-		botonera.add(cancelar);
-		botonera.setPreferredSize(new Dimension(300,40));
-		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja,botonera);
-		sp.setEnabled(false);		
-		sp.setDividerSize(4);
-		JPanel panel=new JPanel();
-		panel.add(sp);
-		panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Modificar estado del recurso",TitledBorder.LEFT,TitledBorder.TOP));
-		aceptar.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-				formulario.setVisible(false);
-				formulario.getContentPane().removeAll();
-				//validar datos
-				//enviar datos a Sigrem para almacenarlos en la estructura de datos
-			}
-		});
-		cancelar.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-				formulario.setVisible(false);
-				formulario.getContentPane().removeAll();
-			}
-		});
-		return panel;
-	}
-	*/
-	public JPanel pintaDescrip(String cod)
+
+	public JPanel panelDescripcion(String cod,String texto)
 	{
 		formulario.setTitle("Descripción del recurso "+cod);
 		JPanel panel=new JPanel();
 		JPanel p1=new JPanel();
 		JPanel p2=new JPanel();
 		p1.add(new JLabel("Descripción"));
-		JTextPane texto=new JTextPane();
-		texto.setEditable(false);
-		JScrollPane ptexto=new JScrollPane(texto,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
+		JTextPane descrip=new JTextPane();
+		descrip.setText(texto);
+		descrip.setEditable(false);
+		JScrollPane ptexto=new JScrollPane(descrip,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
 		ptexto.setPreferredSize(new Dimension(300,150));
 		JSplitPane sp1=new JSplitPane(JSplitPane.VERTICAL_SPLIT,p1,ptexto);
 		sp1.setEnabled(false);
@@ -733,84 +700,45 @@ public class PanelEmpleados extends JPanel
 		return panel;
 	}
 	
-	public JPanel dibujaLineaRecurso()
+	public JPanel dibujaLineaRecurso(final LinkedList datos)
 	{	
 		JPanel panel=new JPanel();
-		final JTextField cod=new JTextField();
-		JTextField fem=new JTextField();
-		JTextField ere=new JTextField();
-		JTextField epr=new JTextField();
-		JTextField est=new JTextField();
+		final JTextField cod=new JTextField((String)datos.get(0));
+		final JTextField femi=new JTextField((String)datos.get(1));
+		JTextField ere=new JTextField((String)datos.get(2));
+		JTextField epr=new JTextField((String)datos.get(3));
+		JTextField est=new JTextField((String)datos.get(4));
 		JButton descrip=new JButton(new ImageIcon("interfaz/find.gif"));
-		JButton modi=new JButton(new ImageIcon("interfaz/tick.gif"));
-		JButton elim=new JButton(new ImageIcon("interfaz/del.gif"));
 		cod.setEditable(false);
-		fem.setEditable(false);
+		femi.setEditable(false);
 		ere.setEditable(false);
 		epr.setEditable(false);
 		est.setEditable(false);
 		cod.setBackground(Color.WHITE);
-		fem.setBackground(Color.WHITE);
+		femi.setBackground(Color.WHITE);
 		ere.setBackground(Color.WHITE);
 		epr.setBackground(Color.WHITE);
 		est.setBackground(Color.WHITE);
 		cod.setPreferredSize(new Dimension(80,25));
-		fem.setPreferredSize(new Dimension(90,25));
-		ere.setPreferredSize(new Dimension(190,25));
-		epr.setPreferredSize(new Dimension(190,25));
+		femi.setPreferredSize(new Dimension(90,25));
+		ere.setPreferredSize(new Dimension(220,25));
+		epr.setPreferredSize(new Dimension(220,25));
 		est.setPreferredSize(new Dimension(90,25));
-		descrip.setPreferredSize(new Dimension(80,25));		
-		modi.setPreferredSize(new Dimension (25,25));		
-		elim.setPreferredSize(new Dimension (25,25));
+		descrip.setPreferredSize(new Dimension(80,25));
 		panel.add(cod);
-		panel.add(fem);
+		panel.add(femi);
 		panel.add(ere);
 		panel.add(epr);
 		panel.add(est);
 		panel.add(descrip);
-		panel.add(modi);
-		panel.add(elim);
 		descrip.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formulario.getContentPane().add(pintaDescrip(cod.getText()));
+				formulario.getContentPane().add(panelDescripcion(cod.getText(),(String)datos.get(6)));
 				formulario.pack();
 				formulario.setVisible(true);			
 			}
 		});
-		modi.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{	
-			//	formulario.getContentPane().add(modificaRecurso(cod.getText()));
-				formulario.pack();
-				formulario.setVisible(true);				
-			}
-		});
-		elim.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{	int seleccion=JOptionPane.showConfirmDialog(null,"        ¿Desea eliminar la asignación del recurso "+cod.getText()+"?","Eliminar asignación",JOptionPane.YES_NO_CANCEL_OPTION,-1);
-				if (seleccion==JOptionPane.YES_OPTION)
-				{	
-				
-				}
-			}
-		});
 		return panel;
-	}
-	
-	private void perfilesEmpleados(JComboBox perfil)
-	{
-		perfil.addItem("Abogado");
-		perfil.addItem("Administrativo");
-	}
-	
-	private void estadosRecursos(JComboBox estado)
-	{
-		estado.addItem("Pendiente");
-		estado.addItem("Recurso 1º");
-		estado.addItem("Recurso 2º");
-		estado.addItem("Recurso 3º");
-		estado.addItem("Favorable");
-		estado.addItem("Desfavorable");
 	}
 }

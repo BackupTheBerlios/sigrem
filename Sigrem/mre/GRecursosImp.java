@@ -40,7 +40,7 @@ public class GRecursosImp implements GRecursos
 		String codigoantiguo=codigoRecurso;
 		incrementaCodigo();
 		datos.addFirst(codigoantiguo);
-		vista.actualizaVistaCaja('r','a',datos);
+		vista.actualizaVistaCaja(1,'r','a',datos);
 		vista.actualizaVista(1,4,datos);
 		return codigoantiguo;
 	}
@@ -52,7 +52,7 @@ public class GRecursosImp implements GRecursos
 		{	LinkedList datos=new LinkedList();
 			datos.add(codrecurso);
 			datos.add(codmulta);
-			vista.actualizaVistaCaja('r','e',datos);
+			vista.actualizaVistaCaja(1,'r','e',datos);
 			vista.actualizaVista(1,4,datos);
 		}
 		else vista.actualizaVistaMensaje("Error al eliminar el recurso "+codrecurso+". No se ha encontrado");
@@ -70,7 +70,7 @@ public class GRecursosImp implements GRecursos
 			recurso.ponEstado((String)datos.get(3));
 			recurso.ponDescripcion((String)datos.get(5));
 			datos.add(recurso.dameCodigoMulta());
-			vista.actualizaVistaCaja('r','m',datos);
+			vista.actualizaVistaCaja(1,'r','m',datos);
 			vista.actualizaVista(1,4,datos);
 		}
 	}
@@ -90,7 +90,7 @@ public class GRecursosImp implements GRecursos
 		}
 	}
 	
-	public void consultarListaRecursos(LinkedList lista)
+	public void consultarListaRecursos(int panel,LinkedList lista)
 	{
 		for (int i=0;i<lista.size();i++)
 		{	String codigo=(String)lista.get(i);
@@ -99,9 +99,10 @@ public class GRecursosImp implements GRecursos
 			{	vista.actualizaVistaMensaje("Error al buscar el recurso "+codigo+". No se ha encontrado");}
 			else 
 			{	Recurso recurso=(Recurso)busqueda.get(0);
-				vista.actualizaVistaCaja('r','a',recurso.dameListaDatos());
+				vista.actualizaVistaCaja(panel,'r','a',recurso.dameListaDatos());
 			}
 		}
+		if (panel==2) vista.actualizaVista(2,3,new LinkedList());
 	}
 
 	public void eliminarListaRecursos(LinkedList lista)

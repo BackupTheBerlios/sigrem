@@ -198,4 +198,20 @@ public class GEmpleadosImp implements GEmpleados
 			empleado.eliminarRecurso(codrecurso);			
 		}
 	}
+	
+	public LinkedList dameListaRecursosEmpleado(int clave,String codigo)
+	{
+		Vector busqueda=listaEmpleados.buscar(codigo,clave);
+		if (busqueda.size()==0)
+		{	vista.actualizaVistaMensaje("Error al buscar el empleado "+codigo+". No se ha encontrado");
+			return null;
+		}
+		else 
+		{	Abogado empleado=(Abogado)busqueda.get(0);
+			if (empleado.damePerfil().equals("Abogado"))
+				return empleado.dameListaRecursos();
+			else
+				return null;			
+		}
+	}
 }

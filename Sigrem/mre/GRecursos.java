@@ -13,7 +13,7 @@ public interface GRecursos
 	//Requisito 4.4
 	public String consultarRecursoCodigo(String codigo);
 	
-	public void consultarListaRecursos(LinkedList listaRecursos);
+	public void consultarListaRecursos(int panel,LinkedList listaRecursos);
 	
 	public void eliminarListaRecursos(LinkedList listaRecursos);
 	
