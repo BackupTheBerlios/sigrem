@@ -30,13 +30,15 @@ public class GMultasImp implements GMultas
 		
 	//clave0=codigo  clave1=expediente  clave2=boletin
 	public String añadirMulta(LinkedList datos)
-	{	String expediente=(String)datos.get(0);
+	{	String codigoAntiguo=null;
+		String expediente=(String)datos.get(0);
 		String boletin=(String)datos.get(1);		
 		if (consultarMultaExpediente(false,expediente)==null) 
 			if (consultarMultaBoletin(false,boletin)==null)
 			{	Multa nuevaMulta=new Multa(codigoMulta,datos);
 				meteMulta(nuevaMulta);
 				datos.addFirst(codigoMulta);
+				codigoAntiguo=codigoMulta;
 				incrementaCodigo();				
 				vista.actualizaVistaCaja(1,'m','a',datos);
 				vista.actualizaVista(1,3,null);
@@ -45,7 +47,7 @@ public class GMultasImp implements GMultas
 			{	vista.actualizaVistaMensaje("Ya existe una multa con ese número de boletín. Imposible crear la multa");}
 		else
 		{	vista.actualizaVistaMensaje("Ya existe una multa con ese número de expediente. Imposible crear la multa");}
-		return codigoMulta;
+		return codigoAntiguo;
 	}
 	
 	
