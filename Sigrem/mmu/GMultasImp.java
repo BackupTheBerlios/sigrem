@@ -30,13 +30,11 @@ public class GMultasImp implements GMultas
 		
 	//clave0=codigo  clave1=expediente  clave2=boletin
 	public String añadirMulta(LinkedList datos)
-	{	String codigoMulta=null;
-		String expediente=(String)datos.get(0);
+	{	String expediente=(String)datos.get(0);
 		String boletin=(String)datos.get(1);		
 		if (consultarMultaExpediente(false,expediente)==null) 
 			if (consultarMultaBoletin(false,boletin)==null)
-			{	codigoMulta=new String(codigoMulta);
-				Multa nuevaMulta=new Multa(codigoMulta,datos);
+			{	Multa nuevaMulta=new Multa(codigoMulta,datos);
 				meteMulta(nuevaMulta);
 				incrementaCodigo();
 				datos.addFirst(codigoMulta);
