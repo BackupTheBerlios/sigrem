@@ -1,7 +1,6 @@
 package interfaz;
 
 import javax.swing.*;
-
 import java.util.LinkedList;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
@@ -12,7 +11,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileFilter;
 import java.io.*;
-
 import javax.swing.JList;
 import java.util.Vector;
 import main.Sigrem;
@@ -109,7 +107,7 @@ public class InterfazGrafica
 		formacercade.setLocation(350,250);
 		formayuda=new JFrame();
 		formayuda.setResizable(false);
-		formayuda.setLocation(60,80);
+		formayuda.setLocation(40,60);
 		panelVistas=new JTabbedPane(JTabbedPane.BOTTOM);
 		pcontratos=new PanelContratos(this.controlador,ventana);
 		pempleados=new PanelEmpleados(this.controlador,ventana);
@@ -516,7 +514,7 @@ public class InterfazGrafica
 		salida=new JTextArea();
 		psalida=new JScrollPane(salida);
 		psalida.setEnabled(false);
-		psalida.setPreferredSize(new Dimension(850,750));
+		psalida.setPreferredSize(new Dimension(820,645));
 		String[] opciones = {"Sigrem"," + Menú"," + Gestión Contratos"," + Gestión Empleados"," + Gestión Económica"};
 		lista=new JList(opciones);
 		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -604,7 +602,7 @@ public class InterfazGrafica
 		salida=new JTextArea();
 		psalida=new JScrollPane(salida);
 		psalida.setEnabled(false);
-		psalida.setPreferredSize(new Dimension(850,750));
+		psalida.setPreferredSize(new Dimension(820,645));
 		String[] opciones = {"Sigrem"," -  Menú","     > Archivo","     > Herramientas","     > Acerca de"," + Gestión Contratos"," + Gestión Empleados"," + Gestión Económica"};
 		lista=new JList(opciones);
 		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -722,7 +720,7 @@ public class InterfazGrafica
 		salida=new JTextArea();
 		psalida=new JScrollPane(salida);
 		psalida.setEnabled(false);
-		psalida.setPreferredSize(new Dimension(850,750));
+		psalida.setPreferredSize(new Dimension(820,645));
 		String[] opciones = {"Sigrem"," + Menú"," -  Gestión Contratos","     > Datos del Contrato","     > Datos del Cliente","     > Multas del Contrato"," + Gestión Empleados"," + Gestión Económica"};
 		lista=new JList(opciones);
 		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -840,7 +838,7 @@ public class InterfazGrafica
 		salida=new JTextArea();
 		psalida=new JScrollPane(salida);
 		psalida.setEnabled(false);
-		psalida.setPreferredSize(new Dimension(850,750));
+		psalida.setPreferredSize(new Dimension(820,645));
 		String[] opciones = {"Sigrem"," + Menú"," + Gestión Contratos"," -  Gestión Empleados","     > Datos del empleado","     > Datos personales","     > Recursos asignados"," + Gestión Económica"};
 		lista=new JList(opciones);
 		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -958,7 +956,7 @@ public class InterfazGrafica
 		salida=new JTextArea();
 		psalida=new JScrollPane(salida);
 		psalida.setEnabled(false);
-		psalida.setPreferredSize(new Dimension(850,750));
+		psalida.setPreferredSize(new Dimension(820,645));
 		String[] opciones = {"Sigrem"," + Menú"," + Gestión Contratos"," + Gestión Empleados"," -  Gestión Económica","     > Datos económicos","     > Históricos"};
 		lista=new JList(opciones);
 		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -1066,7 +1064,7 @@ public class InterfazGrafica
 		salida=new JTextArea();
 		psalida=new JScrollPane(salida);
 		psalida.setEnabled(false);
-		psalida.setPreferredSize(new Dimension(850,750));
+		psalida.setPreferredSize(new Dimension(820,645));
 		String[] opciones = {"Sigrem"," -  Menú","     > Archivo","     > Herramientas","     > Acerca de"," -  Gestión Contratos","     > Datos del Contrato","     > Datos del Cliente","     > Multas del Contrato"," + Gestión Empleados"," + Gestión Económica"};
 		lista=new JList(opciones);
 		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -1214,7 +1212,7 @@ public class InterfazGrafica
 		salida=new JTextArea();
 		psalida=new JScrollPane(salida);
 		psalida.setEnabled(false);
-		psalida.setPreferredSize(new Dimension(850,750));
+		psalida.setPreferredSize(new Dimension(820,645));
 		String[] opciones = {"Sigrem"," -  Menú","     > Archivo","     > Herramientas","     > Acerca de"," + Gestión Contratos"," -  Gestión Empleados","     > Datos del empleado","     > Datos personales","     > Recursos asignados"," + Gestión Económica"};
 		lista=new JList(opciones);
 		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -1362,7 +1360,7 @@ public class InterfazGrafica
 		salida=new JTextArea();
 		psalida=new JScrollPane(salida);
 		psalida.setEnabled(false);
-		psalida.setPreferredSize(new Dimension(850,750));
+		psalida.setPreferredSize(new Dimension(820,645));
 		String[] opciones = {"Sigrem"," + Menú"," -  Gestión Contratos","     > Datos del Contrato","     > Datos del Cliente","     > Multas del Contrato"," -  Gestión Empleados","     > Datos del empleado","     > Datos personales","     > Recursos asignados"," + Gestión Económica"};
 		lista=new JList(opciones);
 		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -1488,6 +1486,144 @@ public class InterfazGrafica
 															catch(FileNotFoundException e)
 															{}
 														}
+				try
+				{
+					if (fd!=null)
+					{
+						while((linea=fd.readLine())!=null)
+						{
+							salida.append(linea+"\n");						
+						}
+						fd.close();
+					}
+				}
+				catch(IOException e)
+				{}
+			}
+		});		
+	}
+	
+	public void panel8()
+	{		
+		salida=new JTextArea();
+		psalida=new JScrollPane(salida);
+		psalida.setEnabled(false);
+		psalida.setPreferredSize(new Dimension(820,645));
+		String[] opciones = {"Sigrem"," + Menú"," -  Gestión Contratos","     > Datos del Contrato","     > Datos del Cliente","     > Multas del Contrato"," -  Gestión Empleados","     > Datos del empleado","     > Datos personales","     > Recursos asignados"," + Gestión Económica"};
+		lista=new JList(opciones);
+		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		lista.setPreferredSize(new Dimension(150,400));
+		JSplitPane sp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,lista,psalida);
+		sp1.setEnabled(false);
+		formayuda.getContentPane().add(sp1);
+		formayuda.setTitle("Ayuda - Sigrem");
+		formayuda.pack();
+		lista.addListSelectionListener(new ListSelectionListener()
+		{
+			public void valueChanged(ListSelectionEvent ev)
+			{
+				psalida.removeAll();
+				salida.removeAll();
+				if (lista.getSelectedIndex()==0)
+				{
+					dibujaAyuda(8);
+					try
+					{
+						fd = new BufferedReader (new FileReader ("interfaz/ayuda_sigrem.txt"));
+					}
+					catch(FileNotFoundException e)
+					{}
+				}
+				else if(lista.getSelectedIndex()==1) 
+					{
+						dibujaAyuda(4);
+						try
+						{
+							fd = new BufferedReader (new FileReader ("interfaz/ayuda_menu.txt"));
+						}
+						catch(FileNotFoundException e)
+						{}					
+					}
+					else if(lista.getSelectedIndex()==2)	
+						{
+							dibujaAyuda(8);
+							try
+							{
+								fd = new BufferedReader (new FileReader ("interfaz/ayuda_menu1.txt"));
+							}
+							catch(FileNotFoundException e)
+							{}					
+						}
+						else if(lista.getSelectedIndex()==3)	
+							{
+								dibujaAyuda(8);
+								try
+								{
+									fd = new BufferedReader (new FileReader ("interfaz/ayuda_menu2.txt"));
+								}
+								catch(FileNotFoundException e)
+								{}					
+							}
+							else if(lista.getSelectedIndex()==4)	
+								{
+									dibujaAyuda(8);
+									try
+									{
+										fd = new BufferedReader (new FileReader ("interfaz/ayuda_menu3.txt"));
+									}
+									catch(FileNotFoundException e)
+									{}					
+								}
+								else if(lista.getSelectedIndex()==5)	
+									{
+										dibujaAyuda(12);
+										try
+										{
+											fd = new BufferedReader (new FileReader ("interfaz/ayuda_contratos.txt"));
+										}
+										catch(FileNotFoundException e)
+										{}					
+									}
+									else if(lista.getSelectedIndex()==6)	
+										{
+											dibujaAyuda(13);
+											try
+											{
+												fd = new BufferedReader (new FileReader ("interfaz/ayuda_empleados.txt"));
+											}
+											catch(FileNotFoundException e)
+											{}					
+										}
+										else if(lista.getSelectedIndex()==7)	
+											{
+												dibujaAyuda(1);
+												try
+												{
+													fd = new BufferedReader (new FileReader ("interfaz/ayuda_economia.txt"));
+												}
+												catch(FileNotFoundException e)
+												{}
+											}
+											else if(lista.getSelectedIndex()==8)	
+												{
+													dibujaAyuda(8);
+													try
+													{
+														fd = new BufferedReader (new FileReader ("interfaz/ayuda_economia1.txt"));
+													}	
+													catch(FileNotFoundException e)
+													{}
+												}
+												else if(lista.getSelectedIndex()==9)	
+													{
+														dibujaAyuda(8);
+														try
+														{
+															fd = new BufferedReader (new FileReader ("interfaz/ayuda_economia2.txt"));
+														}
+														catch(FileNotFoundException e)
+														{}
+													}													
 				try
 				{
 					if (fd!=null)
