@@ -17,4 +17,6 @@ public interface GContratos
 	public String consultarContratoMatricula(String matricula);
 	
 	public String modificarFechaBaja(String codigo);
+	
+	public void asociaContratoMulta(String codcontrato,String codmulta);
 }

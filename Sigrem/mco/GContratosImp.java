@@ -1,5 +1,6 @@
 package mco;
 
+import mcl.Cliente;
 import med.*;
 import interfaz.*;
 import java.util.Vector;
@@ -116,5 +117,12 @@ public class GContratosImp implements GContratos
 			vista.actualizaVista(1,1,contrato.dameListaDatos());
 			return contrato.dameCodigoCliente();
 		}
+	}
+	
+	public void asociaContratoMulta(String codcontrato,String codmulta)
+	{
+		Vector busqueda=listaContratos.buscar(codcontrato,0);
+		Contrato contrato=(Contrato)busqueda.get(0);
+		contrato.añadeMulta(codmulta);
 	}
 }

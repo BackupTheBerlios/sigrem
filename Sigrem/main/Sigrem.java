@@ -73,6 +73,7 @@ public class Sigrem
 		datoscontrato.addFirst(codcliente);
 		String contratonuevo=gcontratos.añadirContrato(datoscontrato);
 		gclientes.asociaClienteContrato(codcliente,contratonuevo);
+		vista.actualizaVista(1,3,null);
 	}
 	
 	public void eliminarContrato(boolean borrar,boolean actualizar,String codcontrato)
@@ -124,8 +125,9 @@ public class Sigrem
 		gcontratos.modificarContrato(codcontrato,datos);
 	}
 	
-	public void añadirMulta(LinkedList datos)
+	public void añadirMulta(String codcontrato,LinkedList datos)
 	{
 		String codmulta=gmultas.añadirMulta(datos);
+		gcontratos.asociaContratoMulta(codcontrato,codmulta);
 	}
 }
