@@ -11,8 +11,9 @@ public class PanelEconomia extends JPanel
 {
 	//valores entre 0-170
 	public int [] facturacion={170,130,125, 27,150, 90,134,170,120,106, 60,169};
-	public int [] gastos=     {  0, 20,100, 10, 30, 34,134,  0, 36,  6, 10,150};
-	public int [] balance=    {170,110, 25, 17,120, 56,  0,170, 84,100, 50, 19};
+	public int [] gastos=     {  0, -140,-100, -127, -30, -34,-134,  0, -36,  -6, -10,-150};
+	public int [] balance=    {170,-10, 25, 17,-100, 56,  0,170, 84,100, 50, 19};
+	public String [] meses={"ENE ","FEB ","MAR ","ABR ","MAY ","JUN ","JUL ","AGO ","SEP ","OCT ","NOV ","DIC "};
 	
 	private Sigrem controlador;
 		
@@ -20,17 +21,17 @@ public class PanelEconomia extends JPanel
 	{
 		super();
 		this.controlador=controlador;
-		if (grafico==1) dibujaPaneles(Color.GREEN,facturacion,"Histórico de Facturación",1);
-		else if (grafico==2) dibujaPaneles(Color.RED,gastos,"Histórico de Gastos",2);
-		else if (grafico==3) dibujaPaneles(Color.BLUE,balance,"Histórico de Balance",3);
-		else dibujaPaneles(null,null,null,0);
+		if (grafico==1) dibujaPaneles(facturacion,"Histórico de Facturación",1);
+		else if (grafico==2) dibujaPaneles(gastos,"Histórico de Gastos",2);
+		else if (grafico==3) dibujaPaneles(balance,"Histórico de Balance",3);
+		else dibujaPaneles(null,null,0);
 	}
 	
-	public void dibujaPaneles(Color c, int [] num, String s,int boton)
+	public void dibujaPaneles(int [] num, String s,int boton)
 	{
 		JPanel pbalance=dibujaBalance(boton);
 		pbalance.setPreferredSize(new Dimension(950,322));
-		JPanel pgrafico=dibujaGrafico(c,num,s);
+		JPanel pgrafico=dibujaGrafico(num,s);
 		pgrafico.setPreferredSize(new Dimension(950,280));
 		JSplitPane spx=new JSplitPane(JSplitPane.VERTICAL_SPLIT,pbalance,pgrafico);
 		spx.setEnabled(false);		
@@ -102,32 +103,32 @@ public class PanelEconomia extends JPanel
 		{	public void actionPerformed(ActionEvent e)
 			{
 				removeAll();
-				dibujaPaneles(Color.BLUE, balance, "Histórico de Balance",3);
+				dibujaPaneles(balance, "Histórico de Balance",3);
 			}
 		});
 		bhfac.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
 				removeAll();
-				dibujaPaneles(Color.GREEN, facturacion, "Histórico de Facturación",1);
+				dibujaPaneles(facturacion, "Histórico de Facturación",1);
 			}
 		});
 		bhgas.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
 				removeAll();
-				dibujaPaneles(Color.RED, gastos, "Histórico de Gastos",2);
+				dibujaPaneles(gastos, "Histórico de Gastos",2);
 			}
 		});
 		return pbal;
 	}
 	
-	public JPanel dibujaGrafico(Color c, int [] num, String s)
+	public JPanel dibujaGrafico(int [] num, String s)
 	{
 		JPanel pgra=new JPanel();
 		pgra.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),s,TitledBorder.LEFT,TitledBorder.TOP));
 		pgra.setPreferredSize(new Dimension(700,250));
-		if (c!=null)
+		if (num!=null)
 		{	JLabel l1=new JLabel("  0 ",SwingConstants.RIGHT);
 			JLabel l2=new JLabel(" 10 ",SwingConstants.RIGHT);
 			JLabel l3=new JLabel(" 20 ",SwingConstants.RIGHT);
@@ -163,19 +164,11 @@ public class PanelEconomia extends JPanel
 			c1.add(l2);
 			c1.add(l1);
 			Box caja=Box.createHorizontalBox();				
-			caja.add(c1);			
-			caja.add(dibujaBarra(num[0], "  ENE", c));
-			caja.add(dibujaBarra(num[1], "  FEB", c));
-			caja.add(dibujaBarra(num[2], "  MAR", c));
-			caja.add(dibujaBarra(num[3], "  ABR", c));
-			caja.add(dibujaBarra(num[4], "  MAY", c));
-			caja.add(dibujaBarra(num[5], "  JUN", c));
-			caja.add(dibujaBarra(num[6], "  JUL", c));
-			caja.add(dibujaBarra(num[7], "  AGO", c));
-			caja.add(dibujaBarra(num[8], "  SEP", c));
-			caja.add(dibujaBarra(num[9], "  OCT", c));
-			caja.add(dibujaBarra(num[10], "  NOV", c));
-			caja.add(dibujaBarra(num[11], "  DIC", c));
+			caja.add(c1);	
+			Color c;
+			for(int i=0;i<12;i++)
+				if (num[i]<0)	caja.add(dibujaBarra(-num[i],meses[i],Color.RED));
+				else	caja.add(dibujaBarra(num[i],meses[i],Color.GREEN));
 			pgra.add(caja);
 		}
 		return pgra;
