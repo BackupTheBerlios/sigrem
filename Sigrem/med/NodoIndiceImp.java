@@ -1,13 +1,5 @@
 package med;
 
-/**
- * <p>Title: </p>
- * <p>Description: </p>
- * <p>Copyright: Copyright (c) 2005</p>
- * <p>Company: </p>
- * @author unascribed
- * @version 1.0
- */
 
 //Existe un NodoIndiceImp por cada elemento de cada estructura
 //y son referenciados desde los distintos indices

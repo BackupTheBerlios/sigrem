@@ -1,15 +1,6 @@
 package med;
 
 import java.util.Vector;
-/**
- * <p>Title: </p>
- * <p>Description: </p>
- * <p>Copyright: Copyright (c) 2005</p>
- * <p>Company: </p>
- * @author unascribed
- * @version 1.0
- */
-
 
 //La estructura de datos tiene distintos indices para acceder a los elementos
 //Para movernos por la estructura de datos nos hace falta la clave y el indice donde se busca la clave
