@@ -9,7 +9,13 @@ import java.awt.event.*;
 public class PanelEconomia extends JPanel 
 {
 	private JFrame formulario;
-
+	private JSplitPane spx;
+	private JPanel pgrafico;
+	private JPanel pbalance;
+	private JButton bhfac;
+    private JButton bhbal;
+	private JButton bhgas;
+	
 	//valores entre 0-170
 	public int [] facturacion={170,130,125, 27,150, 90,134,170,120,106, 60,169};
 	public int [] gastos=     {  0, 20,100, 10, 30, 34,134,  0, 36,  6, 10,150};
@@ -21,12 +27,11 @@ public class PanelEconomia extends JPanel
 		formulario=new JFrame();
 		formulario.setResizable(false);
 		formulario.setLocation(210,320);
-	    JPanel pbalance=dibujaBalance();
-		JPanel pgrafico=dibujaGrafico(Color.BLUE, balance, "Histórico del Balance");
-		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,pbalance,pgrafico);
-		sp.setEnabled(false);		
-		sp.setDividerSize(4);
-		add(sp);
+	    pbalance=dibujaBalance();
+		spx=new JSplitPane(JSplitPane.VERTICAL_SPLIT,pbalance,pgrafico);
+		spx.setEnabled(false);		
+		spx.setDividerSize(4);
+		add(spx);
 		pbalance.setPreferredSize(new Dimension(625,200));				
 	}
 	
@@ -53,13 +58,13 @@ public class PanelEconomia extends JPanel
 		t2.setBackground(Color.WHITE);
 		t3.setBackground(Color.WHITE);
 		JButton bactualiza=new JButton ("Actualizar");
-		JButton bhfac=new JButton ("Ver Histórico");
-		JButton bhgas=new JButton ("Ver Histórico");
-		JButton bhbal=new JButton ("Ver Histórico");
+		bhfac=new JButton ("Ver Histórico");
+		bhgas=new JButton ("Ver Histórico");
+		bhbal=new JButton ("Ver Histórico");
 		bhbal.addActionListener(new ActionListener()
 				{	public void actionPerformed(ActionEvent e)
 					{
-						if (!formulario.isVisible())
+						/*if (!formulario.isVisible())
 						{
 							dibujaBal();
 						}
@@ -68,14 +73,23 @@ public class PanelEconomia extends JPanel
 							formulario.setVisible(false);
 							formulario.getContentPane().removeAll();
 							dibujaBal();
-						}					
-					
+						}*/
+						spx.removeAll();
+						pbalance=dibujaBalance();
+						pgrafico=dibujaGrafico(Color.BLUE, balance, "Histórico del Balance");
+						spx=new JSplitPane(JSplitPane.VERTICAL_SPLIT,pbalance,pgrafico);
+						spx.setEnabled(false);		
+						spx.setDividerSize(4);
+						add(spx);
+						bhbal.setEnabled(false);
+						bhgas.setEnabled(true);
+						bhfac.setEnabled(true);
 					}
 				});
 		bhfac.addActionListener(new ActionListener()
 				{	public void actionPerformed(ActionEvent e)
 					{
-						if (!formulario.isVisible())
+						/*if (!formulario.isVisible())
 						{
 							dibujaFac();
 						}
@@ -84,13 +98,23 @@ public class PanelEconomia extends JPanel
 							formulario.setVisible(false);
 							formulario.getContentPane().removeAll();
 							dibujaFac();
-						}		
+						}*/
+						spx.removeAll();
+						pbalance=dibujaBalance();
+						pgrafico=dibujaGrafico(Color.GREEN, facturacion, "Histórico de Facturación");
+						spx=new JSplitPane(JSplitPane.VERTICAL_SPLIT,pbalance,pgrafico);
+						spx.setEnabled(false);		
+						spx.setDividerSize(4);
+						add(spx);
+						bhbal.setEnabled(true);
+						bhgas.setEnabled(true);
+						bhfac.setEnabled(false);
 					}
 				});
 		bhgas.addActionListener(new ActionListener()
 				{	public void actionPerformed(ActionEvent e)
 					{
-						if (!formulario.isVisible())
+						/*if (!formulario.isVisible())
 						{
 							dibujaGas();
 						}
@@ -99,7 +123,17 @@ public class PanelEconomia extends JPanel
 							formulario.setVisible(false);
 							formulario.getContentPane().removeAll();
 							dibujaGas();
-						}
+						}*/
+						spx.removeAll();
+						pbalance=dibujaBalance();
+						pgrafico=dibujaGrafico(Color.RED, gastos, "Histórico de Gastos");
+						spx=new JSplitPane(JSplitPane.VERTICAL_SPLIT,pbalance,pgrafico);
+						spx.setEnabled(false);		
+						spx.setDividerSize(4);
+						add(spx);
+						bhbal.setEnabled(true);
+						bhgas.setEnabled(false);
+						bhfac.setEnabled(true);
 					}
 				});
 		JPanel p1=new JPanel();
@@ -328,7 +362,7 @@ public class PanelEconomia extends JPanel
 		return pgra;
 	}
 	
-	public void dibujaBal()
+	/*public void dibujaBal()
 	{		
 		JPanel pd=panelBal();
 		formulario.getContentPane().add(pd);
@@ -395,5 +429,5 @@ public class PanelEconomia extends JPanel
 		JPanel pgas=new JPanel();
 		pgas=dibujaGrafico(Color.RED, gastos, "Histórico de Gastos");
 		return pgas; 
-	}
+	}*/
 }
