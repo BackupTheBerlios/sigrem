@@ -66,7 +66,7 @@ public class PanelEmpleados extends JPanel
 		super();
 		ucod=0;
 		urec=0;
-		dibujaPaneles(null,null,null);
+		dibujaPaneles("","","");
 		
 	}
 	
@@ -96,10 +96,10 @@ public class PanelEmpleados extends JPanel
 		formBaja.setLocation(350,100);
 		formRecurso=new JFrame();		
 		formRecurso.setResizable(false);
-		formRecurso.setLocation(350,100);
+		formRecurso.setLocation(370,200);
 		formDescrip=new JFrame();
 		formDescrip.setResizable(false);
-		formDescrip.setLocation(350,100);		
+		formDescrip.setLocation(350,200);		
 	}
 		
 	public JPanel dibujaEmpleado(String codigo, final String perfil, String nomina)
@@ -361,7 +361,7 @@ public class PanelEmpleados extends JPanel
 	public JPanel dibujaRecursos(String perfil)
 	{	
 		JPanel prec;
-		if (perfil=="Abogado")
+		if (perfil.equals("Abogado"))
 		{
 			Box tabla=Box.createVerticalBox();
 			JPanel p=new JPanel();
@@ -412,7 +412,7 @@ public class PanelEmpleados extends JPanel
 		}
 		else
 		{
-			if (perfil=="Administrativo")
+			if (perfil.equals("Administrativo"))
 			{
 				JLabel ll1=new JLabel("No hay información adicional sobre Administrativos...",SwingConstants.CENTER);
 				prec=new JPanel();
@@ -446,7 +446,7 @@ public class PanelEmpleados extends JPanel
 		perfil.setPreferredSize(new Dimension(100,20));
 		perfil.setEditable(false);
 		perfil.setBackground(Color.WHITE);
-		if ((per=="Administrativo")&&(tipo=='m'))	perfil.setSelectedIndex(1);
+		if ((per.equals("Administrativo"))&&(tipo=='m'))	perfil.setSelectedIndex(1);
 		final JTextField tnomina=new JTextField();
 		tcodigo.setPreferredSize(new Dimension(100,20));
 		tnomina.setPreferredSize(new Dimension(100,20));
