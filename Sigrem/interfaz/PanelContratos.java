@@ -105,8 +105,7 @@ public class PanelContratos extends JPanel
 	
 	public void actualizaCajaMultas(LinkedList datos)
 	{
-		int lineas=cajaMultas.getComponentCount();
-		cajaMultas.add(dibujaLineaMulta(datos),lineas-1);
+		cajaMultas.add(dibujaLineaMulta(datos));
 	}
 	
 	public void actualizaPanelConsulta(String nombre,Vector dnis)
@@ -170,9 +169,6 @@ public class PanelContratos extends JPanel
 		p.add(l9);
 		Box caja=Box.createVerticalBox();
 		caja.add(p);
-		JLabel relleno=new JLabel("");
-		relleno.setPreferredSize(new Dimension(20,130));
-		caja.add(relleno);
 		return caja;
 	}
 	
