@@ -29,8 +29,4 @@ public interface Indice {
 	public Object cambiar(Comparable clave, Comparable nuevaCla);
 	//este metodo cambia el indice pero no el valor del elemento asociado a nodoIndice
 	//devuelve el elemento cambiado, si no existe devuelve null
-
-	public void mostrarClavesOrdenadas();
-		
-	
 }

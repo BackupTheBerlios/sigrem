@@ -46,7 +46,7 @@ public class EstructuraDatosImp implements EstructuraDatos{
 //	INSERTAR
 	  public void insertar(Comparable[] claves, Object elemento){
 	   this.arrayIndices[0].insertar(claves,elemento);	   
-	   this.mostrarTodosIndices();
+	//   this.mostrarTodosIndices();
 	  }
 	  
 	  
@@ -54,7 +54,7 @@ public class EstructuraDatosImp implements EstructuraDatos{
 	  public boolean eliminar(Comparable clave,int indice){
 	  	//eliminamos desde el "indice" con la "clave"
 	  	Object elementoEliminado=arrayIndices[indice].eliminar(clave);
-	  	this.mostrarTodosIndices();
+//	  	this.mostrarTodosIndices();
 	  	if(elementoEliminado!=null){
 	  		vectorEliminados.add(elementoEliminado);
 	  		return true;
@@ -88,105 +88,4 @@ public class EstructuraDatosImp implements EstructuraDatos{
 	  	return (Vector)vectorEliminados.clone(); 
 		
 	  }
-	  
-	  	  
-//MOSTRAR EN LA CONSOLA
-	  public void mostrarTodosIndices(){
-	  	for (int i=0;i<arrayIndices.length;i++){
-	  		arrayIndices[i].mostrarClavesOrdenadas();
-	  	}
-	  }
-	  
-	  
-	  public void mostrarDatosInteger(){
-	  	Vector actuales=dameDatosActuales();
-	  	System.out.println("Elementos actuales de la estructura de tamaño "+actuales.size());
-	  	for (int i=0;i<actuales.size();i++){
-	  		System.out.println(((Integer)actuales.get(i)).intValue());
-	  	}	  		
-	  	Vector eliminados=dameDatosEliminados();
-	  	System.out.println("Elementos que fueron eliminados");
-	  	for (int i=0;i<eliminados.size();i++){
-			System.out.println(((Integer)eliminados.get(i)).intValue());
-		}
-	  }
-	  
-  
-//MAIN PARA EJECUTAR PRUEBAS
-		public static void main(String[] args) 
-		{
-			EstructuraDatosImp estructura=new EstructuraDatosImp(1);
-			//prueba con un indice
-			Integer[] enteros = new Integer[10];
-			for (int i=0;i<10;i++){
-				enteros[i]=new Integer(i);
-			}
-			System.out.println("--------------Elementos creados----------");
-			for (int i=0;i<10;i++){
-				Integer[] claves=new Integer[1];
-				claves[0]=enteros[i];
-				estructura.insertar(claves,enteros[i]);
-				estructura.mostrarDatosInteger();
-			}
-			System.out.println("-----------Elementos insertados---");
-			for (int i=0;i<10;i=i+2){
-				estructura.eliminar(new Integer(i),0);
-				estructura.mostrarDatosInteger();
-			}
-			
-			Integer[] enteros2 = new Integer[10];
-			for (int i=0;i<10;i++){
-				enteros[i]=new Integer(i);
-			}
-			System.out.println("--------------Elementos creados----------");
-			for (int i=0;i<10;i++){
-				Integer[] claves=new Integer[1];
-				claves[0]=enteros[i];
-				estructura.insertar(claves,enteros[i]);
-				estructura.mostrarDatosInteger();
-			}
-			estructura.cambiarClaveDeIndice(new Integer(2),new Integer(42),0);
-			estructura.cambiarClaveDeIndice(new Integer(2),new Integer(43),0);
-			estructura.cambiarClaveDeIndice(new Integer(5),new Integer(45),0);
-			estructura.cambiarClaveDeIndice(new Integer(6),new Integer(46),0);
-			estructura.mostrarDatosInteger();
-
-			/*
-			Integer[] enteros = new Integer[10];
-			Integer[] valoracion= new Integer[10];
-			for (int i=0;i<10;i++){
-				enteros[i]=new Integer(i);
-				valoracion[i]=new Integer((enteros[i].intValue()-5)*(enteros[i].intValue()-5));
-			}
-			System.out.println("--------------Elementos creados----------");
-			for (int i=0;i<10;i++){
-				Integer[] claves=new Integer[2];
-				claves[0]=enteros[i];
-				claves[1]=valoracion[i];
-				estructura.insertar(claves,enteros[i]);
-				estructura.mostrarDatosInteger();
-			}
-			System.out.println("-----------Elementos insertados---");
-			for (int i=0;i<10;i=i+2){
-				estructura.eliminar(new Integer(i),0);
-				estructura.mostrarDatosInteger();
-			}
-			
-			Integer[] enteros2 = new Integer[10];
-			Integer[] valoracion2 = new Integer[10];
-			for (int i=0;i<10;i++){
-				enteros[i]=new Integer(i);
-				valoracion[i]=new Integer((enteros[i].intValue()-3)*(enteros[i].intValue()-3));
-			}
-			System.out.println("--------------Elementos creados----------");
-			for (int i=0;i<10;i++){
-				Integer[] claves=new Integer[1];
-				claves[0]=enteros[i];
-				claves[1]=valoracion2[i];
-				estructura.insertar(claves,enteros[i]);
-				estructura.mostrarDatosInteger();
-			}
-
-			*/
-		}
 }

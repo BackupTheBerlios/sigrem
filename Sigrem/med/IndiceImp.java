@@ -114,11 +114,6 @@ public class IndiceImp implements Indice{
 	for (int i=0;i<numeroDeIndices;i++){
 		bienInsertado=bienInsertado&&this.estructura.dameIndice(i).añadirNodoIndice(nodoIndice);
 	}
-  	if (bienInsertado){
-  		System.out.println("El elemento ha sido insertado");
-  	}else{
-  		System.out.println("Ha habido algún problema en la inserción");
-  	}
   }
 
   //el nodoIndice debe tener sus posiciones con los valores correctos
@@ -160,11 +155,10 @@ public class IndiceImp implements Indice{
   		for (int i=0;i<this.estructura.dameNumeroIndices();i++){
   			bienEliminado=bienEliminado && this.estructura.dameIndice(i).eliminaNodoIndice(nodoIndice);		
   	  	}
-  		System.out.println("Existe la clave ¿bien eliminado?"+bienEliminado);
+  		
     	return elementoAEliminar;
   	}else{
   		//la funcion elimina en los indices que puede y devuelve falso si no a podido eliminar alguno  	
-  		System.out.println("No existe la clave");
   		return null;
   	}
   }
@@ -214,10 +208,8 @@ public class IndiceImp implements Indice{
       NodoIndiceImp nodoIndice=(NodoIndiceImp)listaIndice.get(posicion);
       int nuevaPosicion=dondeIria(nuevaClave);
       Object elementoCambiado=cambiaPosicion(posicion,nuevaPosicion,nodoIndice);       
-      System.out.println("Existe la clave antigua y ha sido cambiada por la nueva");         
       return elementoCambiado;
   	}else{
-    	 System.out.println("No existe la clave antigua y no se ha realizado cambio");
     	return null;
     }
   }
@@ -236,25 +228,8 @@ public class IndiceImp implements Indice{
   			eliminaPosicion(posicion);
   			bienCambiado=insertaPosicion(nuevaPosicion,nodoIndice);
   		}
-  		
-  		if (!bienCambiado){
-  			System.out.println("Problema al cambiar la clave en el cambio de posición de los indices");
-  		}
   	  	return elementoCambiado;
   	}
   	return null;
   }
-  
-  //MOSTRAR
-  
-  public void mostrarClavesOrdenadas(){
-  	System.out.print("claves ordenadas por el indice "+this.numeroDeIndice+": ");
-  	for (int i=0;i<listaIndice.size();i++){
-  		NodoIndiceImp nodoIndiceActual=((NodoIndiceImp)listaIndice.get(i));
-  		System.out.print(nodoIndiceActual.claves[numeroDeIndice]+ " -> " );
-  	}
-  	System.out.println();
-  }
-  
-  
 }
