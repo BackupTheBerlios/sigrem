@@ -41,7 +41,7 @@ public class Persistencia
 		grecursos=rec;
 		gempleados=emp;
 		geconomia=eco;
-		this.cargarXML();
+		//this.cargarXML();
 	}
 	
 	public void almacenarXML(){
@@ -83,26 +83,33 @@ public class Persistencia
 	}
 	public void almacenarClientesXML(){
 		try {
-			PrintWriter escritor=new PrintWriter(new BufferedWriter(new FileWriter("clientes.txt")));
+			PrintWriter escritor=new PrintWriter(new BufferedWriter(new FileWriter("clientes.xml")));
 			escritor.println("<xml version=\"1.0\" encoding=\"UTF-8 standalone=\"yes\">");
+			System.out.println("Primera linea del archivo XML creada");
 			escritor.println("<!DOCTYPE listaClientes>");
 			EstructuraDatos clientes=gclientes.dameListaClientes();
 			escritor.println("<listaClientes>");
-			escritor.println("</tactivos>");
+			String tab="\t";
+			escritor.println(tab+"<activos>");
 			Vector clientesActivos=clientes.dameIndice(0).dameElementos();
+			tab=tab.concat("\t");
 			for(int i=0;i<clientesActivos.size();i++){
 				Cliente clienteActual=(Cliente)clientesActivos.get(i);
-				escribirCliente(escritor,clienteActual);
+				escribirCliente(escritor,clienteActual,tab);
 			}
-			escritor.println("<//activos>");
-			escritor.println("</teliminados>");
+			tab=tab.substring(2);
+			escritor.println(tab+"</activos>");
+			escritor.println(tab+"<eliminados>");
 			Vector clientesEliminados=clientes.dameEliminados();
+			tab=tab.concat("\t");
 			for(int i=0;i<clientesEliminados.size();i++){
 				Cliente clienteActual=(Cliente)clientesEliminados.get(i);
-				escribirCliente(escritor,clienteActual);
+				escribirCliente(escritor,clienteActual,tab);
 			}
-			escritor.println("<//eliminados>");
-			escritor.println("<//listaClientes>");
+			tab=tab.substring(2);
+			escritor.println(tab+"</eliminados>");
+			escritor.println("</listaClientes>");
+			escritor.close();
 						
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -113,33 +120,35 @@ public class Persistencia
 		
 	}
 
-	void escribirCliente(PrintWriter escritor, Cliente actual){
-		escritor.println("/t/t<cliente>");
-		escritor.println("/t/t/t<codigo>"+actual.dameCodigo()+"<//codigo>");
-		escritor.println("/t/t/t<nombre>"+actual.dameNombre()+"<//nombre>");
-		escritor.println("/t/t/t<dni>"+actual.dameDni()+"<//dni>");
-		escritor.println("/t/t/t<direccion>"+actual.dameDireccion()+"<//direccion>");
-		escritor.println("/t/t/t<cp>"+actual.dameCp()+"<//cp>");
-		escritor.println("/t/t/t<poblacion"+actual.damePoblacion()+"<//poblacion>");
-		escritor.println("/t/t/t<provincia>"+actual.dameProvincia()+"<//provincia>");
-		escritor.println("/t/t/t<telefono1>"+actual.dameCodigo()+"<//telefono1>");
-		escritor.println("/t/t/t<telefono2>"+actual.dameNombre()+"<//telefono2>");
-		escritor.println("/t/t/t<movil>"+actual.dameDni()+"<//movil>");
-		escritor.println("/t/t/t<email>"+actual.dameDireccion()+"<//email>");
-		escritor.println("/t/t/t<fax>"+actual.dameCp()+"<//fax>");
-		escritor.println("/t/t/t<listacodigoscontratos>");
+	void escribirCliente(PrintWriter escritor, Cliente actual, String tab){
+		escritor.println(tab+"<cliente>");
+		tab=tab.concat("\t");
+		escritor.println(tab+"<codigo>"+actual.dameCodigo()+"</codigo>");
+		escritor.println(tab+"<nombre>"+actual.dameNombre()+"</nombre>");
+		escritor.println(tab+"<dni>"+actual.dameDni()+"</dni>");
+		escritor.println(tab+"<direccion>"+actual.dameDireccion()+"</direccion>");
+		escritor.println(tab+"<cp>"+actual.dameCp()+"</cp>");
+		escritor.println(tab+"<poblacion"+actual.damePoblacion()+"</poblacion>");
+		escritor.println(tab+"<provincia>"+actual.dameProvincia()+"</provincia>");
+		escritor.println(tab+"<telefono1>"+actual.dameCodigo()+"</telefono1>");
+		escritor.println(tab+"<telefono2>"+actual.dameNombre()+"</telefono2>");
+		escritor.println(tab+"<movil>"+actual.dameDni()+"</movil>");
+		escritor.println(tab+"<email>"+actual.dameDireccion()+"</email>");
+		escritor.println(tab+"<fax>"+actual.dameCp()+"</fax>");
+		escritor.println(tab+"<listacodigoscontratos>");
 		LinkedList codigoscontratos=actual.dameListaContratos();
+		tab=tab.concat("\t");
 		for (int i=0;i<codigoscontratos.size();i++){
-	 		escritor.println("/t/t/t/t<codigocontrato>"+(String) codigoscontratos.get(i)+"<//codigocontrato>");
+	 		escritor.println(tab+"<codigocontrato>"+(String) codigoscontratos.get(i)+"<//codigocontrato>");
 	 	}
-		escritor.println("/t/t/t<//listacodigoscontratos>");
-		
-		escritor.println("/t/t<//cliente>");
-	
-	 }
+		tab=tab.substring(2);
+		escritor.println(tab+"</listacodigoscontratos>");
+		tab=tab.substring(2);
+		escritor.println(tab+"<//cliente>");
+	}
 	 
 	 public boolean cargarClientesXML() throws IOException{
-		BufferedReader lector=new BufferedReader(new FileReader("clientes.txt"));
+		BufferedReader lector=new BufferedReader(new FileReader("clientes.xml"));
 		String lineaActual;
 		lineaActual=lector.readLine();
 		if (!lineaActual.equals("<xml version=\"1.0\" encoding=\"UTF-8 standalone=\"yes\">")){
