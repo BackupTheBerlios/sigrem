@@ -1,7 +1,43 @@
-===================
-= Panel Empleados =
-===================
+????????????????????????????????????????????????????????????
+?                      PANEL EMPLEADOS                     ?
+????????????????????????????????????????????????????????????
 
-Descripción de las utilidades del "Panel Empleados" de SIGREM.
+Descripción de utilidades del "Panel Empleados" de SIGREM.
 
-- ¡¡¡ UNDER CONSTRUCTION !!! -
+Disponemos de los siguientes Sectores:
+
+• "Datos del empleado": 
+             Contiene los botones 
+                              -> "Contratar" 
+                              -> "Despedir"
+                              -> "Modificar"
+             Contiene las casillas
+                              -> "Código del empleado"
+                              -> "Perfil del empleado"
+                              -> "Nómina del empleado"
+   (Ver "Ayuda > Panel Empleados > Datos del empleado")
+   
+• "Datos personales": 
+             Contiene las casillas
+                              -> "Nombre"
+                              -> "DNI"
+                              -> "Dirección"
+                              -> "Código Postal"
+                              -> "Población"
+                              -> "Provincia"
+                              -> "Teléfono1"
+                              -> "Teléfono2"
+                              -> "Móvil"
+                              -> "em@il"
+                              -> "Fax"
+   (Ver "Ayuda > Panel Empleados > Datos personales")
+   
+• "Recursos asignados al empleado":
+             Contiene las casillas
+                              -> "Código"
+                              -> "Fecha de emisión"
+                              -> "Escrito recibido"
+                              -> "Escrito presentado"
+                              -> "Estado"
+                              -> "Descripción"
+   (Ver "Ayuda > Panel Empleados > Recursos asignados")
