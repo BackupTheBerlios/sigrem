@@ -46,7 +46,7 @@ public class ClasePrincipal
 	
 	public static void main(String[] args) 
 	{
-		System.out.println("Sigrem ha comenzado");
+		System.out.println("El programa Sigrem ha comenzado");
 		leerFicheroConfig();
 		String[] codigos=new String[5];
 		codigos[0]=codcontrato;
