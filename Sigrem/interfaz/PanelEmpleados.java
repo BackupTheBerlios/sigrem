@@ -290,26 +290,35 @@ public class PanelEmpleados extends JPanel
 			Box tabla=Box.createVerticalBox();
 			JPanel p=new JPanel();
 			JLabel l1=new JLabel("Código",SwingConstants.CENTER);
-			JLabel l2=new JLabel("Multa",SwingConstants.CENTER);
-			JLabel l3=new JLabel("Estado",SwingConstants.CENTER);
-			JLabel l4=new JLabel("Descripción",SwingConstants.CENTER);
-			JLabel l5=new JLabel("",SwingConstants.CENTER);
-			JLabel l6=new JLabel("",SwingConstants.CENTER);
-			l1.setPreferredSize(new Dimension(130,25));
-			l2.setPreferredSize(new Dimension(130,25));
-			l3.setPreferredSize(new Dimension(130,25));
-			l4.setPreferredSize(new Dimension(80,25));
-			l5.setPreferredSize(new Dimension(25,25));
-			l6.setPreferredSize(new Dimension(25,25));
+			JLabel l2=new JLabel("Fecha Cliente",SwingConstants.CENTER);
+			JLabel l3=new JLabel("Fecha Sigrem",SwingConstants.CENTER);
+			JLabel l4=new JLabel("Escrito recibido",SwingConstants.CENTER);
+			JLabel l5=new JLabel("Escrito presentado",SwingConstants.CENTER);
+			JLabel l6=new JLabel("Estado",SwingConstants.CENTER);
+			JLabel l7=new JLabel("Descripción",SwingConstants.CENTER);
+			JLabel l8=new JLabel("",SwingConstants.CENTER);
+			JLabel l9=new JLabel("",SwingConstants.CENTER);
+			l1.setPreferredSize(new Dimension(100,25));
+			l2.setPreferredSize(new Dimension(75,25));
+			l3.setPreferredSize(new Dimension(75,25));
+			l4.setPreferredSize(new Dimension(130,25));
+			l5.setPreferredSize(new Dimension(130,25));
+			l6.setPreferredSize(new Dimension(130,25));
+			l7.setPreferredSize(new Dimension(80,25));
+			l8.setPreferredSize(new Dimension(25,25));
+			l9.setPreferredSize(new Dimension(25,25));
 			p.add(l1);
 			p.add(l2);
 			p.add(l3);
 			p.add(l4);
 			p.add(l5);
 			p.add(l6);
+			p.add(l7);
+			p.add(l8);
+			p.add(l9);
 			tabla.add(p);
 			for (int i=0;i<9;i++)
-			{	JPanel linea=dibujaLinea();
+			{	JPanel linea=dibujaLineaRecursos();
 				tabla.add(linea);		
 			}
 			JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -581,10 +590,9 @@ public class PanelEmpleados extends JPanel
 	public JPanel modificaRecurso(String codigo)
 	{
 		formulario.setTitle("Modificar estado del recurso "+codigo);		
-		formulario.setTitle("Modificar estado de recurso "+codigo);		
 		JLabel l1=new JLabel("Código");
 		JLabel l2=new JLabel("Estado");
-		String [] opciones={"Pendiente","Recurso 1º","Recurso 2º","Recurso 3º","Favorable","Perdido"};
+		String [] opciones={"Pendiente","Recurso 1º","Recurso 2º","Recurso 3º","Favorable","Desfavorable"};
 		estado=new JComboBox(opciones);
 		estado.setEditable(false);
 		estado.setBackground(Color.WHITE);
@@ -707,31 +715,46 @@ public class PanelEmpleados extends JPanel
 		return panel;
 	}
 	
-	public JPanel dibujaLinea()
-	{		
+	public JPanel dibujaLineaRecursos()
+	{	
 		JPanel panel=new JPanel();
 		urec++;
 		final JTextField cod=new JTextField("R00"+urec);
-		final JTextField exp=new JTextField();
-		final JTextField bol=new JTextField();
+		final JTextField fcl=new JTextField();
+		final JTextField fsi=new JTextField();
+		final JTextField ere=new JTextField();
+		final JTextField epr=new JTextField();
+		final JTextField est=new JTextField();
 		final JButton descrip=new JButton(new ImageIcon("interfaz/find.gif"));
 		final JButton modi=new JButton(new ImageIcon("interfaz/tick.gif"));
 		final JButton elim=new JButton(new ImageIcon("interfaz/del.gif"));
 		cod.setEditable(false);
-		exp.setEditable(false);
-		bol.setEditable(false);
+		fcl.setEditable(false);
+		fsi.setEditable(false);
+		ere.setEditable(false);
+		epr.setEditable(false);
+		est.setEditable(false);
 		cod.setBackground(Color.WHITE);
-		exp.setBackground(Color.WHITE);
-		bol.setBackground(Color.WHITE);
-		cod.setPreferredSize(new Dimension(130,25));
-		exp.setPreferredSize(new Dimension(130,25));
-		bol.setPreferredSize(new Dimension(130,25));
+		fcl.setBackground(Color.WHITE);
+		fsi.setBackground(Color.WHITE);
+		ere.setBackground(Color.WHITE);
+		epr.setBackground(Color.WHITE);
+		est.setBackground(Color.WHITE);
+		cod.setPreferredSize(new Dimension(100,25));
+		fcl.setPreferredSize(new Dimension(75,25));
+		fsi.setPreferredSize(new Dimension(75,25));
+		ere.setPreferredSize(new Dimension(130,25));
+		epr.setPreferredSize(new Dimension(130,25));
+		est.setPreferredSize(new Dimension(130,25));
 		descrip.setPreferredSize(new Dimension(80,25));		
 		modi.setPreferredSize(new Dimension (25,25));		
 		elim.setPreferredSize(new Dimension (25,25));
 		panel.add(cod);
-		panel.add(exp);
-		panel.add(bol);
+		panel.add(fcl);
+		panel.add(fsi);
+		panel.add(ere);
+		panel.add(epr);
+		panel.add(est);
 		panel.add(descrip);
 		panel.add(modi);
 		panel.add(elim);
