@@ -312,32 +312,31 @@ public class Sigrem
 		vista.actualizarVistaConsultaAbogado(codigo);
 	}
 	
-	public int calculaFacturacion(int [] facturacion, int ultimoMesFac)
+	public void calculaFacturacion()
 	{
-		int fact=geconomia.dameCuotaContrato() * gcontratos.dameListaContratos().dameTamaño();
-		geconomia.facturacion(fact);
-		return facturacion[11];
+		int fac=geconomia.dameCuotaContrato() * gcontratos.dameListaContratos().dameTamaño();
+		geconomia.facturacion(fac);
 	}
 	
-	public int calculaGastos(int [] gastos, int ultimoMesGas)
+	public void calculaGastos()
 	{
-		Empleado emp;
 		int gas=0;
 		for(int i=0;i<gempleados.dameListaEmpleados().dameTamaño();i++)
 		{
-			emp=(Empleado)gempleados.dameListaEmpleados().dameIndice(0).dameElementos().get(i);
-			gas=gas + Integer.valueOf(emp.dameNomina()).intValue();
+			gas=gas + Integer.valueOf(((Empleado)gempleados.dameListaEmpleados().dameIndice(0).dameElementos().get(i)).dameNomina()).intValue();
 		}
-		geconomia.gastos(gastos,gas);
-		return gastos[11];
+		geconomia.gastos(gas);
 	}
 	
-	public int calculaBalance(int [] facturacion, int [] gastos, int [] balance, int ultimoMesFac, int ultimoMesGas, int ultimoMesBal)
+	public void calculaBalance()
 	{
-		int fac=calculaFacturacion(facturacion,ultimoMesFac);
-		int gas=calculaGastos(gastos,ultimoMesGas);
+		int fac=geconomia.dameCuotaContrato() * gcontratos.dameListaContratos().dameTamaño();
+		int gas=0;
+		for(int i=0;i<gempleados.dameListaEmpleados().dameTamaño();i++)
+		{
+			gas=gas + Integer.valueOf(((Empleado)gempleados.dameListaEmpleados().dameIndice(0).dameElementos().get(i)).dameNomina()).intValue();
+		}
 		int bal=fac-gas;
-		geconomia.balance(fac,gas,bal);
-		return balance[11];		
+		geconomia.balance(bal);				
 	}
 }
