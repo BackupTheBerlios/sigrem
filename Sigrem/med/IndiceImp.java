@@ -24,7 +24,11 @@ public class IndiceImp implements Indice{
   
   public Vector dameElementos(){
   	Vector elementos=new Vector();
-  	
+  	int tam=dameTamaño();
+  	for (int i=0;i<tam;i++)
+  	{	NodoIndiceImp nodo=(NodoIndiceImp)listaIndice.get(i);
+  		elementos.add(nodo.dameElemento());  		
+  	}
   	return elementos;
   }
   
