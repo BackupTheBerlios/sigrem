@@ -16,4 +16,6 @@ public interface GRecursos
 	public void consultarListaRecursos(LinkedList listaRecursos);
 	
 	public void eliminarListaRecursos(LinkedList listaRecursos);
+	
+	public String consultarAbogadoRecurso(String codrecurso);
 }

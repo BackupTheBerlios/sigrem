@@ -113,4 +113,17 @@ public class GRecursosImp implements GRecursos
 			{	vista.actualizaVistaMensaje("Error al eliminar el recurso "+codigo+". No se ha encontrado");}
 		}
 	}
+	
+	public String consultarAbogadoRecurso(String codigo)
+	{
+		Vector busqueda=listaRecursos.buscar(codigo,0);
+		if (busqueda.size()==0)
+		{	vista.actualizaVistaMensaje("Error al buscar el recurso "+codigo+". No se ha encontrado");
+			return null;
+		}
+		else 
+		{	Recurso recurso=(Recurso)busqueda.get(0);
+			return recurso.dameAbogado();
+		}
+	}
 }

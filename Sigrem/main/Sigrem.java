@@ -99,11 +99,22 @@ public class Sigrem
 		{	LinkedList listamultas=gcontratos.dameListaMultasContrato(0,codcontrato);
 			for (int i=0;i<listamultas.size();i++)
 			{	LinkedList listaRecursos=gmultas.dameListaRecursosMulta((String)listamultas.get(i));
-				grecursos.eliminarListaRecursos(listaRecursos);			
+				eliminarAsociacionRecursos(listaRecursos);
+				grecursos.eliminarListaRecursos(listaRecursos);				
 			}
 			gmultas.eliminaListaMultas(actualizar,listamultas);
 			gcontratos.eliminarContrato(borrar,codcontrato);
 			gclientes.eliminarCliente(actualizar,codcliente,codcontrato);			
+		}
+	}
+	
+	public void eliminarAsociacionRecursos(LinkedList listaRecursos)
+	{
+		for (int i=0;i<listaRecursos.size();i++)
+		{	String codrecurso=(String)listaRecursos.get(i);
+			String codabogado=grecursos.consultarAbogadoRecurso(codrecurso);
+			if ((codabogado!=null) && (!codempleado.equals("Sin asignar")))
+			{	gempleados.eliminarRecursoAbogado(codrecurso,codabogado);}			
 		}
 	}
 	
