@@ -23,16 +23,13 @@ public class InterfazGrafica
 		
 		formSigrem=new JFrame();
 		formSigrem.setResizable(false);
-		formSigrem.setUndecorated(true);
-		formSigrem.setVisible(true);
-		formSigrem.setAlwaysOnTop(true);
+		formSigrem.setUndecorated(true);		
 		formSigrem.setLocation(250,150);
 //		pantallaInicio();
 		
 		formacercade=new JFrame();
 		formacercade.setResizable(false);
-		formacercade.setUndecorated(true);
-		formacercade.setVisible(true);
+		formacercade.setUndecorated(true);		
 		formacercade.setAlwaysOnTop(true);
 		formacercade.setLocation(350,250);
 		
@@ -275,7 +272,8 @@ public class InterfazGrafica
 	}
 	
 	public void pantallaInicio()
-	{		
+	{	
+		formSigrem.setTitle("SIGREM");
 		JButton b=new JButton(new ImageIcon("interfaz/sigrem.jpg"));
 		b.setPreferredSize(new Dimension(570,350));
 		formSigrem.getContentPane().add(b);
@@ -294,6 +292,7 @@ public class InterfazGrafica
 	
 	public void acercade()
 	{		
+		formacercade.setTitle("Acerca de... SIGREM");
 		JButton b=new JButton(new ImageIcon("interfaz/sigrem.gif"));
 		b.setPreferredSize(new Dimension(290,180));
 		formacercade.getContentPane().add(b);
