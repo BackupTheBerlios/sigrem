@@ -766,12 +766,12 @@ public class PanelContratos extends JPanel
 		aceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{			
-			/*	if ((tmatricula.getText().equals("")) && (tdni.getText().equals("")) && (tnom.getText().equals("")))
+				if ((tmatricula.getText().equals("")) && (tdni.getText().equals("")) && (tnom.getText().equals("")))
 				{
 					JOptionPane.showMessageDialog(null,"Los campos marcados con * son obligatorios");
 				}
 				else
-				{*/	LinkedList datoscontrato=new LinkedList();
+				{	LinkedList datoscontrato=new LinkedList();
 					LinkedList datoscliente=new LinkedList();
 					if (tipo=='c')
 					{	datoscontrato.add(tmatricula.getText());
@@ -815,7 +815,7 @@ public class PanelContratos extends JPanel
 					}
 					formulario.setVisible(false);
 					formulario.getContentPane().removeAll();										
-			//	}
+				}
 			}
 		});
 		cancelar.addActionListener(new ActionListener()
