@@ -16,14 +16,6 @@ public class PanelEmpleados extends JPanel
 	
 	private JDialog formulario;
 	
-	private JButton bmodificar;
-	
-	private JButton bdespedir;	
-	
-	private JComboBox estado;
-		
-	private JComboBox perfil;
-	
 	private int pmostrado;
 	
 	private String cmostrado;
@@ -51,8 +43,6 @@ public class PanelEmpleados extends JPanel
 	
 	public void dibujaPaneles()
 	{		
-		bmodificar=new JButton("Modificar");
-		bdespedir=new JButton("Despedir");
 		JPanel pempleado=dibujaEmpleado();
 		pempleado.setPreferredSize(new Dimension(314,0));
 		JPanel pdatos=dibujaDatos(false);
@@ -95,6 +85,8 @@ public class PanelEmpleados extends JPanel
 		t2.setBackground(Color.WHITE);
 		t3.setBackground(Color.WHITE);
 		JButton bcontratar=new JButton ("Contratar");
+		JButton bmodificar=new JButton("Modificar");
+		JButton bdespedir=new JButton("Despedir");
 		bdespedir.setEnabled(false);
 		bmodificar.setEnabled(false);
 		bcontratar.setPreferredSize(new Dimension(90,25));
@@ -358,7 +350,8 @@ public class PanelEmpleados extends JPanel
 		lperfil.setPreferredSize(new Dimension(150,20));
 		lnomina.setPreferredSize(new Dimension(150,20));
 		final JTextField tcodigo=new JTextField();
-		perfil=new JComboBox(opciones);
+		final JComboBox perfil=new JComboBox();
+		perfilesEmpleados(perfil);
 		perfil.setPreferredSize(new Dimension(100,20));
 		perfil.setEditable(false);
 		perfil.setBackground(Color.WHITE);		
@@ -404,9 +397,7 @@ public class PanelEmpleados extends JPanel
 				pmostrado=perfil.getSelectedIndex();
 				cmostrado=tcodigo.getText();
 				nmostrado=tnomina.getText();
-				dibujaPaneles();
-				bdespedir.setEnabled(true);
-				bmodificar.setEnabled(true);								
+				dibujaPaneles();												
 				urec=0;
 				ucod=ucod+1;						
 			}
@@ -520,7 +511,7 @@ public class PanelEmpleados extends JPanel
 		lperfil.setPreferredSize(new Dimension(150,20));
 		lnomina.setPreferredSize(new Dimension(150,20));
 		final JTextField tcodigo=new JTextField(cod);
-		perfil=new JComboBox();
+		final JComboBox perfil=new JComboBox();
 		perfilesEmpleados(perfil);
 		perfil.setPreferredSize(new Dimension(100,20));
 		perfil.setEditable(false);
@@ -568,9 +559,7 @@ public class PanelEmpleados extends JPanel
 				pmostrado=perfil.getSelectedIndex();
 				cmostrado=tcodigo.getText();
 				nmostrado=tnomina.getText();
-				dibujaPaneles();
-				bdespedir.setEnabled(true);
-				bmodificar.setEnabled(true);								
+				dibujaPaneles();												
 				urec=0;			
 			}
 		});
