@@ -50,16 +50,18 @@ public class Persistencia
 	}
 	
 	
-	public Persistencia(GContratos cont,GClientes cli,GEmpleados emp,GMultas mul,
-						GRecursos rec,GEconomia eco)
-	{
+	public Persistencia(GContratos cont,GClientes cli,GEmpleados emp,GMultas mul,GRecursos rec,GEconomia eco){
 		gcontratos=cont;
 		gclientes=cli;
 		gmultas=mul;
 		grecursos=rec;
 		gempleados=emp;
 		geconomia=eco;
-		//cargarXML() es llamado desde controlador.activa();
+		//File archivo=new File("clientes.xml");
+		//archivo.exists();
+		if (!cargarXML()){
+			System.out.println("La carga de XML no ha sido correcta");				
+		}
 	}
 	
 	public void almacenarXML(){
