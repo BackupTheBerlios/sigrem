@@ -152,7 +152,7 @@ public class Persistencia
 		BufferedReader lector=new BufferedReader(new FileReader("clientes.xml"));
 		String lineaActual;
 		lineaActual=lector.readLine();
-		if (!lineaActual.equals("<xml version=\"1.0\" encoding=\"UTF-8 standalone=\"yes\">")){
+		if (!lineaActual.equals("<¿xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")){
 			System.out.println("La primera linea es incorrecta");
 		}else{
 			lineaActual=lector.readLine();
