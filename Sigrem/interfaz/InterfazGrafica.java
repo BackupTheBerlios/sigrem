@@ -9,27 +9,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.filechooser.FileFilter;
 import java.io.*;
 import javax.swing.JList;
 import java.util.Vector;
 import main.Sigrem;
-
-class Filtro extends FileFilter
-{
-	public Filtro() 
-	{	super();}
-	
-	public boolean accept(File f)
-	{
-		String nombre=f.getName();
-		return nombre.substring(Math.max(nombre.length()-4,0)).equals(".xml");
-	}
-	public String getDescription()
-	{
-		return "Ficheros de datos (*.xml)";
-	}
-}
 
 public class InterfazGrafica 
 {
@@ -43,9 +26,7 @@ public class InterfazGrafica
 	
 	private PanelEconomia peconomia;
 	
-	private JFileChooser selec;
-	
-	private JDialog formSigrem;
+	private JFrame formSigrem;
 	
 	private JDialog formacercade;
 	
@@ -67,7 +48,6 @@ public class InterfazGrafica
 	{		
 		ventana=new JFrame("Sigrem");
 		this.controlador=controlador;
-		//cambiamos el Look&Feel al de Windows
 		int lf=2;
 		if (lf>=UIManager.getInstalledLookAndFeels().length) lf=0;
 		UIManager.LookAndFeelInfo lfinfo=UIManager.getInstalledLookAndFeels()[lf];
@@ -82,25 +62,12 @@ public class InterfazGrafica
 		}
 		SwingUtilities.updateComponentTreeUI(ventana);
 		ventana.pack();
-		//Look&Feel cambiado
-		//Pantalla de Inicio		
-/*		formSigrem=new JDialog();
-		formSigrem.setResizable(false);
+		formSigrem=new JFrame();
 		formSigrem.setUndecorated(true);		
 		formSigrem.setLocation(250,150);
 		formSigrem.getContentPane().add(pantallaInicio());
 		formSigrem.pack();
 		formSigrem.setVisible(true);
-		try
-		{
-	    	Thread.sleep(2000);
-	    }
-	    catch(InterruptedException e)
-	    {
-	    	System.out.println("Sleep Interrupted");
-	    }		
-		formSigrem.setVisible(false);*/
-		//Pantalla de Inicio mostrada
 		formacercade=new JDialog(ventana,true);
 		formacercade.setResizable(false);
 		formacercade.setUndecorated(true);		
@@ -115,9 +82,6 @@ public class InterfazGrafica
 		panelVistas.addTab("Gestión Contratos",pcontratos);
 		panelVistas.addTab("Gestión Empleados",pempleados);
 		panelVistas.addTab("Gestión Económica",peconomia);
-		selec=new JFileChooser(new File(System.getProperty("user.dir")));
-		selec.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		selec.setFileFilter(new Filtro());
 		ventana.getContentPane().add(panelVistas);
 		ventana.setJMenuBar(setMenu());
 		ventana.pack();
@@ -129,6 +93,13 @@ public class InterfazGrafica
 				acabarAplicacion();				
 			}
 		});	
+		ventana.addWindowListener(new WindowAdapter()
+		{
+			public void windowActivated(WindowEvent e)
+			{
+				formSigrem.setVisible(false);		
+			}			
+		});
 	}
 		
 	public void acabarAplicacion()
@@ -136,22 +107,6 @@ public class InterfazGrafica
 		controlador.desactiva();
 		System.out.println("El programa Sigrem ha terminado");
 		System.exit(0);
-	}
-	
-	private void guardar()
-	{
-		try
-		{	if (selec.showSaveDialog(null)==JFileChooser.APPROVE_OPTION)
-			{	String nombre=selec.getSelectedFile().getName();
-				if (nombre.substring(Math.max(nombre.length()-4,0)).equals(".xml"))
-				{	nombre=nombre.substring(0,nombre.length()-4);}
-				PrintWriter ficheroSal=new PrintWriter(new BufferedWriter(new FileWriter(nombre+".xml")));
-				ficheroSal.println("Esto es una prueba");
-				ficheroSal.close();
-			}
-		}
-		catch (Exception ex)
-		{	JOptionPane.showMessageDialog(null,"Error al guardar","Sigrem",-1);}		
 	}
 	
 	public void activa()
@@ -451,18 +406,25 @@ public class InterfazGrafica
 		return menu;	
 	}
 	
-	public JButton pantallaInicio()
+	public JPanel pantallaInicio()
 	{	
-		JButton b=new JButton(new ImageIcon("interfaz/sigrem.jpg"));
-		b.setPreferredSize(new Dimension(570,355));
-		b.addActionListener(new ActionListener()
+		JLabel l1=new JLabel(new ImageIcon("interfaz/sigrem.jpg"));
+		l1.setPreferredSize(new Dimension(570,355));
+		JLabel l2=new JLabel("Iniciando Sigrem...");
+		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,l1,l2);
+		sp.setEnabled(false);
+		sp.setDividerSize(4);
+		JPanel panel=new JPanel();
+		panel.add(sp);
+		return panel;
+	/*	b.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
 				formSigrem.setVisible(false);
 				formSigrem.getContentPane().removeAll();
 			}
 		});
-		return b;
+	*/	
 	}
 	
 	public JPanel panelacercade()
@@ -547,6 +509,7 @@ public class InterfazGrafica
 		else if (opcion==15) opciones=opciones15;
 		else opciones=opciones0;					
 		lista=new JList(opciones);
+		lista.setSelectedIndex(0);
 		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		lista.setPreferredSize(new Dimension(150,400));
 		JSplitPane sp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,lista,psalida);
@@ -560,17 +523,7 @@ public class InterfazGrafica
 			{
 				psalida.removeAll();
 				salida.removeAll();
-				if (lista.getSelectedValue().equals("Sigrem"))
-				{
-					dibujaAyuda(opcion);
-					try
-					{
-						fd = new BufferedReader (new FileReader ("interfaz/ayuda_sigrem.txt"));
-					}
-					catch(FileNotFoundException e)
-					{}
-				}
-				else if((lista.getSelectedValue().equals(" + Menú"))&&(opcion==0))	
+				if((lista.getSelectedValue().equals(" + Menú"))&&(opcion==0))	
 				{
 					dibujaAyuda(1);
 					try

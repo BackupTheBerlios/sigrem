@@ -421,7 +421,7 @@ public class PanelEmpleados extends JPanel
 			p.add(l5);
 			p.add(l6);
 			JScrollPane ptabla=new JScrollPane(cajaRecursos,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-			ptabla.setPreferredSize(new Dimension(930,236));
+			ptabla.setPreferredSize(new Dimension(930,205));
 			JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,p,ptabla);
 			sp.setEnabled(false);
 			sp.setDividerSize(4);

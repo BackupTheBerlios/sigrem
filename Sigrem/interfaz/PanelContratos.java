@@ -1486,7 +1486,9 @@ public class PanelContratos extends JPanel
 			{
 				int seleccion=JOptionPane.showConfirmDialog(null,"         ¿Desea eliminar el recurso "+cod.getText()+"?","Eliminar recurso",JOptionPane.YES_NO_CANCEL_OPTION,-1);
 				if (seleccion==JOptionPane.YES_OPTION)
-				{	controlador.eliminarRecurso(cod.getText(),(String)datos.get(7),abo.getText());}		
+				{	controlador.eliminarRecurso(cod.getText(),(String)datos.get(7),abo.getText());
+					controlador.consultarAbogadoRemotamente((String)abo.getText());
+				}		
 			}
 		});
 		return panel;
