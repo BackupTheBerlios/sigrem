@@ -13,10 +13,13 @@ public class PanelEconomia extends JPanel
 	public int [] gastos=     {  0, 20,100, 10, 30, 34,134,  0, 36,  6, 10,150};
 	public int [] balance=    {170,110, 25, 17,120, 56,  0,170, 84,100, 50, 19};
 		
-	public PanelEconomia()
+	public PanelEconomia(int grafico)
 	{
 		super();
-		dibujaPaneles(null,null,null,0);
+		if (grafico==1) dibujaPaneles(Color.GREEN,facturacion,"Histórico de Facturación",1);
+		else if (grafico==2) dibujaPaneles(Color.RED,gastos,"Histórico de Gastos",2);
+		else if (grafico==3) dibujaPaneles(Color.BLUE,balance,"Histórico de Balance",3);
+		else dibujaPaneles(null,null,null,0);
 	}
 	
 	public void dibujaPaneles(Color c, int [] num, String s,int boton)
@@ -60,9 +63,9 @@ public class PanelEconomia extends JPanel
 		bhgas.setPreferredSize(new Dimension(20,20));
 		JButton bhbal=new JButton (new ImageIcon("interfaz/grafico.gif"));
 		bhbal.setPreferredSize(new Dimension(20,20));
-		if (boton==1) bhbal.setEnabled(false);
+		if (boton==1) bhfac.setEnabled(false);
 		else if (boton==2) bhgas.setEnabled(false);
-		else if (boton==3) bhfac.setEnabled(false);
+		else if (boton==3) bhbal.setEnabled(false);
 		JPanel p1=new JPanel();
 		JPanel p2=new JPanel();
 		JPanel p3=new JPanel();
@@ -90,14 +93,14 @@ public class PanelEconomia extends JPanel
 		{	public void actionPerformed(ActionEvent e)
 			{
 				removeAll();
-				dibujaPaneles(Color.BLUE, balance, "Histórico de Balance",1);
+				dibujaPaneles(Color.BLUE, balance, "Histórico de Balance",3);
 			}
 		});
 		bhfac.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
 				removeAll();
-				dibujaPaneles(Color.GREEN, facturacion, "Histórico de Facturación",3);
+				dibujaPaneles(Color.GREEN, facturacion, "Histórico de Facturación",1);
 			}
 		});
 		bhgas.addActionListener(new ActionListener()

@@ -20,23 +20,20 @@ public class InterfazGrafica
 	public InterfazGrafica()
 	{
 		ventana=new JFrame("Sigrem");
-		
 		formSigrem=new JFrame();
 		formSigrem.setResizable(false);
 		formSigrem.setUndecorated(true);		
 		formSigrem.setLocation(250,150);
 //		pantallaInicio();
-		
 		formacercade=new JFrame();
 		formacercade.setResizable(false);
 		formacercade.setUndecorated(true);		
 		formacercade.setAlwaysOnTop(true);
 		formacercade.setLocation(350,250);
-		
 		panelVistas=new JTabbedPane(JTabbedPane.BOTTOM);
 		panelVistas.addTab("Gestión Contratos",new PanelContratos());
 		panelVistas.addTab("Gestión Empleados",new PanelEmpleados());
-		panelVistas.addTab("Gestión Económica",new PanelEconomia());
+		panelVistas.addTab("Gestión Económica",new PanelEconomia(0));
 		ventana.getContentPane().add(panelVistas);
 		ventana.setJMenuBar(setMenu());
 		ventana.pack();
@@ -50,40 +47,28 @@ public class InterfazGrafica
 		});	
 	}
 	
+	public void activa()
+	{
+		ventana.setVisible(true);
+	}
+	
 	public JMenuBar setMenu()
 	{
 		JMenuBar menu=new JMenuBar();
 		JMenu m1=new JMenu("Archivo");
-		JMenu m2=new JMenu("Edición");
 		JMenu m3=new JMenu("Herramientas");
 		JMenu m4=new JMenu("Acerca de");
-		
-		JMenuItem mac=new JMenuItem("Abrir datos");
+		JMenuItem mac=new JMenuItem("Cargar datos");
 		JMenuItem mgc=new JMenuItem("Guardar datos");
 		JMenuItem mgg=new JMenuItem("Guardar datos como");
-		JMenuItem mcc=new JMenuItem("Crear contrato");
-		JMenuItem mec=new JMenuItem("Eliminar contrato");
-		JMenuItem mce=new JMenuItem("Contratar empleado");
-		JMenuItem mee=new JMenuItem("Despedir empleado");
 		JMenuItem salir=new JMenuItem("Salir");
+		JMenuItem ayuda=new JMenuItem("Ayuda");
 		JMenuItem acercade=new JMenuItem("Acerca de");
-		
 		m1.add(mac);
 		m1.add(mgc);
 		m1.add(mgg);
-		
-		/*m1.add(mcc);
-		m1.add(mec);
-		m1.add(new JSeparator());
-		m1.add(mce);
-		m1.add(mee);*/
-		
 		m1.add(new JSeparator());
 		m1.add(salir);
-		JMenuItem modc=new JMenuItem("Modificar contrato");
-		JMenuItem mode=new JMenuItem("Modificar empleado");
-		m2.add(modc);
-		m2.add(mode);
 		JMenu consul=new JMenu("Consultar");
 		JMenu cont=new JMenu("Contrato");
 		JMenuItem ccod=new JMenuItem("Por código");
@@ -128,35 +113,12 @@ public class InterfazGrafica
 		consul.add(rec);
 		m3.add(consul);
 		m3.add(adm);
+		m4.add(ayuda);
+		m4.add(new JSeparator());
 		m4.add(acercade);
 		menu.add(m1);
-		menu.add(m2);
 		menu.add(m3);
 		menu.add(m4);
-		mcc.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-				panelVistas.setSelectedIndex(0);
-			}
-		});
-		mec.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-				panelVistas.setSelectedIndex(0);
-			}
-		});
-		mce.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-				panelVistas.setSelectedIndex(1);
-			}
-		});
-		mee.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-				panelVistas.setSelectedIndex(1);
-			}
-		});
 		salir.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
@@ -169,114 +131,152 @@ public class InterfazGrafica
 				acercade();
 			}
 		});			
-		modc.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-				panelVistas.setSelectedIndex(0);
-			}
-		});
-		mode.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-				panelVistas.setSelectedIndex(1);
-			}
-		});
 		ccod.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				panelVistas.setSelectedIndex(0);
+				String valor=JOptionPane.showInputDialog(null,"Introduce el código del contrato","Consultar contrato",-1);
+				if (valor!=null)
+				{	
+					panelVistas.setSelectedIndex(0);
+				}
 			}
 		});
 		cmat.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
-			{
-				panelVistas.setSelectedIndex(0);
+			{	
+				String valor=JOptionPane.showInputDialog(null,"Introduce la matrícula del vehículo","Consultar contrato",-1);
+				if (valor!=null)
+				{	
+					panelVistas.setSelectedIndex(0);
+				}
 			}
 		});
 		clcod.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				panelVistas.setSelectedIndex(0);
+				String valor=JOptionPane.showInputDialog(null,"Introduce el código del cliente","Consultar cliente",-1);
+				if (valor!=null)
+				{	
+					panelVistas.setSelectedIndex(0);
+				}
 			}
 		});
 		cldni.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				panelVistas.setSelectedIndex(0);
+				String valor=JOptionPane.showInputDialog(null,"Introduce el DNI/CIF del cliente","Consultar cliente",-1);
+				if (valor!=null)
+				{	
+					panelVistas.setSelectedIndex(0);
+				}
 			}
 		});
 		clnom.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				panelVistas.setSelectedIndex(0);
+				String valor=JOptionPane.showInputDialog(null,"Introduce el nombre del cliente","Consultar cliente",-1);
+				if (valor!=null)
+				{	
+					panelVistas.setSelectedIndex(0);
+				}
 			}
 		});
 		emcod.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
+			String valor=JOptionPane.showInputDialog(null,"Introduce el código del empleado","Consultar empleado",-1);
+			if (valor!=null)
+			{	
 				panelVistas.setSelectedIndex(1);
+			}
 			}
 		});
 		emdni.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				panelVistas.setSelectedIndex(1);
+				String valor=JOptionPane.showInputDialog(null,"Introduce el DNI del empleado","Consultar empleado",-1);
+				if (valor!=null)
+				{	
+					panelVistas.setSelectedIndex(1);
+				}
 			}
 		});
 		emnom.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				panelVistas.setSelectedIndex(1);
+				String valor=JOptionPane.showInputDialog(null,"Introduce el nombre del empleado","Consultar empleado",-1);
+				if (valor!=null)
+				{	
+					panelVistas.setSelectedIndex(1);
+				}
 			}
 		});
 		mcod.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				panelVistas.setSelectedIndex(0);
+				String valor=JOptionPane.showInputDialog(null,"Introduce el código de la multa","Consultar multa",-1);
+				if (valor!=null)
+				{	
+					panelVistas.setSelectedIndex(0);
+				}
 			}
 		});
 		mexp.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				panelVistas.setSelectedIndex(0);
+				String valor=JOptionPane.showInputDialog(null,"Introduce el expediente de la multa","Consultar multa",-1);
+				if (valor!=null)
+				{	
+					panelVistas.setSelectedIndex(0);
+				}
 			}
 		});
 		mbol.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				panelVistas.setSelectedIndex(0);
+				String valor=JOptionPane.showInputDialog(null,"Introduce el boletín de la multa","Consultar multa",-1);
+				if (valor!=null)
+				{	
+					panelVistas.setSelectedIndex(0);
+				}
 			}
 		});
 		rcod.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				panelVistas.setSelectedIndex(0);
+				String valor=JOptionPane.showInputDialog(null,"Introduce el código del recurso","Consultar recurso",-1);
+				if (valor!=null)
+				{	
+					panelVistas.setSelectedIndex(0);
+				}
 			}
 		});
 		fac.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
+				panelVistas.remove(2);
+				panelVistas.addTab("Gestión Económica",new PanelEconomia(1));
 				panelVistas.setSelectedIndex(2);
+				
 			}
 		});
 		gas.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
+				panelVistas.remove(2);
+				panelVistas.addTab("Gestión Económica",new PanelEconomia(2));
 				panelVistas.setSelectedIndex(2);
 			}
 		});
 		bal.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
+				panelVistas.remove(2);
+				panelVistas.addTab("Gestión Económica",new PanelEconomia(3));
 				panelVistas.setSelectedIndex(2);
 			}
 		});
 		return menu;	
-	}
-	
-	public void activa()
-	{
-		ventana.setVisible(true);
 	}
 	
 	public void pantallaInicio()

@@ -1,5 +1,6 @@
 package interfaz;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -22,6 +23,8 @@ public class PanelContratos extends JPanel
 	
 	private JFrame formBaja;
 	
+	private JFrame formMod;
+	
 	private JButton elimcont;
 	
 	private JButton modcont;
@@ -33,22 +36,16 @@ public class PanelContratos extends JPanel
 		elimcont=new JButton("Eliminar");
 		modcont.setEnabled(false);
 		elimcont.setEnabled(false);
-		JPanel pcontrato=dibujaContrato();
-		JPanel pcliente=dibujaCliente(false);
-		JPanel pmultas=dibujaMultas();
-		JSplitPane sp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,pcontrato,pcliente);
-		sp1.setDividerSize(4);
-		sp1.setEnabled(false);
-		JSplitPane sp2=new JSplitPane(JSplitPane.VERTICAL_SPLIT,sp1,pmultas);
-		sp2.setEnabled(false);		
-		sp2.setDividerSize(4);
-		add(sp2);
+		dibujaPaneles(false);
 		formAlta=new JFrame();
 		formAlta.setResizable(false);
 		formAlta.setLocation(350,100);
 		formBaja=new JFrame();
 		formBaja.setResizable(false);
 		formBaja.setLocation(350,100);
+		formMod=new JFrame();
+		formMod.setResizable(false);
+		formMod.setLocation(350,100);
 		formMulta=new JFrame();
 		formMulta.setResizable(false);
 		formMulta.setLocation(350,150);
@@ -65,7 +62,29 @@ public class PanelContratos extends JPanel
 		formAltaRec.setResizable(false);
 		formAltaRec.setLocation(350,100);
 	}
-		
+	
+	public void dibujaPaneles(boolean multas)
+	{
+		JPanel pcontrato=dibujaContrato();
+		pcontrato.setPreferredSize(new Dimension(314,0));
+		JPanel pcliente=dibujaCliente(false);
+		pcliente.setPreferredSize(new Dimension(0,260));
+		JPanel pmultas=new JPanel();
+		if (multas) 
+		{	pmultas=dibujaMultas();}
+		else
+		{	pmultas.setPreferredSize(new Dimension(724,280));
+			pmultas.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"",TitledBorder.LEFT,TitledBorder.TOP));		
+		}
+		JSplitPane sp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,pcontrato,pcliente);
+		sp1.setDividerSize(4);
+		sp1.setEnabled(false);
+		JSplitPane sp2=new JSplitPane(JSplitPane.VERTICAL_SPLIT,sp1,pmultas);
+		sp2.setEnabled(false);		
+		sp2.setDividerSize(4);
+		add(sp2);		
+	}
+	
 	public JPanel dibujaContrato()
 	{
 		JPanel pco=new JPanel();
@@ -82,9 +101,12 @@ public class PanelContratos extends JPanel
 		tcontrato.setPreferredSize(new Dimension(100,20));
 		tcliente.setPreferredSize(new Dimension(100,20));
 		tmatricula.setPreferredSize(new Dimension(100,20));
-		tcontrato.setEnabled(false);
-		tcliente.setEnabled(false);
-		tmatricula.setEnabled(false);
+		tcontrato.setEditable(false);
+		tcliente.setEditable(false);
+		tmatricula.setEditable(false);
+		tcontrato.setBackground(Color.WHITE);
+		tcliente.setBackground(Color.WHITE);
+		tmatricula.setBackground(Color.WHITE);
 		JButton bcrea=new JButton ("Crear");
 		bcrea.setPreferredSize(new Dimension(90,25));
 		modcont.setPreferredSize(new Dimension(90,25));
@@ -123,10 +145,10 @@ public class PanelContratos extends JPanel
 		modcont.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				if (!formAlta.isVisible())
-				{	formAlta.getContentPane().add(panelAlta('m',tcontrato.getText()));
-					formAlta.pack();	
-					formAlta.setVisible(true);
+				if (!formMod.isVisible())
+				{	formMod.getContentPane().add(panelMod(tcontrato.getText()));
+					formMod.pack();	
+					formMod.setVisible(true);
 				}
 			}
 		});
@@ -190,14 +212,22 @@ public class PanelContratos extends JPanel
 		ttel.setPreferredSize(new Dimension(80,20));
 		temail.setPreferredSize(new Dimension(80,20));
 		if (!editable)
-		{	tnom.setEnabled(false);
-			tdni.setEnabled(false);
-			tdir.setEnabled(false);
-			tcp.setEnabled(false);
-			tloc.setEnabled(false);
-			tpro.setEnabled(false);
-			ttel.setEnabled(false);
-			temail.setEnabled(false);
+		{	tnom.setEditable(false);
+			tdni.setEditable(false);
+			tdir.setEditable(false);
+			tcp.setEditable(false);
+			tloc.setEditable(false);
+			tpro.setEditable(false);
+			ttel.setEditable(false);
+			temail.setEditable(false);
+			tnom.setBackground(Color.WHITE);
+			tdni.setBackground(Color.WHITE);
+			tdir.setBackground(Color.WHITE);
+			tcp.setBackground(Color.WHITE);
+			tloc.setBackground(Color.WHITE);
+			tpro.setBackground(Color.WHITE);
+			ttel.setBackground(Color.WHITE);
+			temail.setBackground(Color.WHITE);
 		}
 		Box c1=Box.createHorizontalBox();
 		Box c2=Box.createHorizontalBox();
@@ -373,6 +403,8 @@ public class PanelContratos extends JPanel
 				formAlta.getContentPane().removeAll();
 				modcont.setEnabled(true);
 				elimcont.setEnabled(true);
+				removeAll();
+				dibujaPaneles(true);
 				//validar datos
 				//enviar datos a Sigrem para almacenarlos en la estructura de datos
 				//cargar contrato en el panel
@@ -392,7 +424,6 @@ public class PanelContratos extends JPanel
 	{
 		formBaja.setTitle("Eliminar contrato");		
 		JLabel l=new JLabel("Introduce el código del contrato");
-		codigo="C001";
 		final JTextField tcodigo=new JTextField(codigo);		
 		tcodigo.setPreferredSize(new Dimension(100,20));		
 		JPanel pcodigo=new JPanel();		
@@ -409,8 +440,8 @@ public class PanelContratos extends JPanel
 		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja,p2);
 		sp.setDividerSize(4);
 		sp.setEnabled(false);
-		JPanel pndat=new JPanel();
-		pndat.add(sp);
+		JPanel pbaja=new JPanel();
+		pbaja.add(sp);
 		bacepta.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
@@ -430,9 +461,53 @@ public class PanelContratos extends JPanel
 				formBaja.getContentPane().removeAll();
 			}
 		});
-		return pndat;
+		return pbaja;
 	}
-		
+	
+	public JPanel panelMod(final String codigo)
+	{
+		formMod.setTitle("Modificar contrato");		
+		JLabel l=new JLabel("Introduce el código del contrato");
+		final JTextField tcodigo=new JTextField(codigo);		
+		tcodigo.setPreferredSize(new Dimension(100,20));		
+		JPanel pcodigo=new JPanel();		
+		pcodigo.add(l);
+		pcodigo.add(tcodigo);	
+		Box caja=Box.createVerticalBox();
+		caja.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos del contrato",TitledBorder.LEFT,TitledBorder.TOP));
+		caja.add(pcodigo);		
+		JPanel p2=new JPanel();
+		JButton bacepta=new JButton ("Aceptar");
+		JButton bcancela=new JButton ("Cancelar");
+		p2.add(bacepta);
+		p2.add(bcancela);
+		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja,p2);
+		sp.setDividerSize(4);
+		sp.setEnabled(false);
+		JPanel pmod=new JPanel();
+		pmod.add(sp);
+		bacepta.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				formMod.setVisible(false);
+				formMod.getContentPane().removeAll();
+				if (!formAlta.isVisible())
+				{	formAlta.getContentPane().add(panelAlta('m',codigo));
+					formAlta.pack();	
+					formAlta.setVisible(true);
+				}
+			}
+		});
+		bcancela.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				formMod.setVisible(false);
+				formMod.getContentPane().removeAll();
+			}
+		});
+		return pmod;
+	}
+			
 	public JPanel panelMulta(char tipo,String codigo)
 	{
 		if (tipo=='c') formMulta.setTitle("Crear multa");
@@ -693,13 +768,16 @@ public class PanelContratos extends JPanel
 	{		
 		JPanel panel=new JPanel();
 		final JTextField cod=new JTextField("R001");
-		cod.setEnabled(false);
+		cod.setEditable(false);
+		cod.setBackground(Color.WHITE);
 		cod.setPreferredSize(new Dimension(130,25));
 		JTextField est=new JTextField();
-		est.setEnabled(false);
+		est.setEditable(false);
+		est.setBackground(Color.WHITE);
 		est.setPreferredSize(new Dimension(130,25));
 		JTextField abo=new JTextField();
-		abo.setEnabled(false);
+		abo.setEditable(false);
+		abo.setBackground(Color.WHITE);
 		abo.setPreferredSize(new Dimension(130,25));
 		JButton descrip=new JButton(new ImageIcon("interfaz/find.gif"));
 		descrip.setPreferredSize(new Dimension(80,25));
@@ -751,13 +829,16 @@ public class PanelContratos extends JPanel
 	{		
 		JPanel panel=new JPanel();
 		final JTextField cod=new JTextField("M001");
-		cod.setEnabled(false);
+		cod.setEditable(false);
+		cod.setBackground(Color.WHITE);
 		cod.setPreferredSize(new Dimension(130,25));
 		JTextField exp=new JTextField();
-		exp.setEnabled(false);
+		exp.setEditable(false);
+		exp.setBackground(Color.WHITE);
 		exp.setPreferredSize(new Dimension(130,25));
 		JTextField bol=new JTextField();
-		bol.setEnabled(false);
+		bol.setEditable(false);
+		bol.setBackground(Color.WHITE);
 		bol.setPreferredSize(new Dimension(130,25));
 		JButton descrip=new JButton(new ImageIcon("interfaz/find.gif"));
 		descrip.setPreferredSize(new Dimension(80,25));
