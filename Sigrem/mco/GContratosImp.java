@@ -21,6 +21,29 @@ public class GContratosImp implements GContratos
 	{
 		return null;
 	}
+	
+	public void eliminarContrato(Integer codigo)
+	{
+		
+	}
+
+	public void modificarContrato(Integer codigo)
+	{
+		
+	}
+	
+	public void consultarContratoCodigo(Integer codigo)
+	{
+		
+	}
+	
+	public void consultarContratoMatrícula(String matricula)
+	{
+		
+	}
+	
+	
+	
 /*
 	public boolean añadirContrato(Cliente cliente, Integer codigo,String matricula)
 	{	//falta añadir todos los parametros de contrato
