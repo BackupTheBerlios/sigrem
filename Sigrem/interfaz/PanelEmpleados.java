@@ -53,9 +53,9 @@ public class PanelEmpleados extends JPanel
 		t1.setEditable(false);
 		t2.setEditable(false);
 		t3.setEditable(false);
-		t1.setBackground(Color.YELLOW);
-		t2.setBackground(Color.YELLOW);
-		t3.setBackground(Color.YELLOW);
+		t1.setBackground(Color.WHITE);
+		t2.setBackground(Color.WHITE);
+		t3.setBackground(Color.WHITE);
 		JButton bcrea=new JButton ("Crear");
 		JButton belimina=new JButton ("Eliminar");
 		JButton bmodifica=new JButton ("Modificar");
@@ -161,14 +161,14 @@ public class PanelEmpleados extends JPanel
 			tpro.setEditable(false);
 			ttel.setEditable(false);
 			temail.setEditable(false);
-			tnom.setBackground(Color.YELLOW);
-			tdni.setBackground(Color.YELLOW);
-			tdir.setBackground(Color.YELLOW);
-			tcp.setBackground(Color.YELLOW);
-			tloc.setBackground(Color.YELLOW);
-			tpro.setBackground(Color.YELLOW);
-			ttel.setBackground(Color.YELLOW);
-			temail.setBackground(Color.YELLOW);
+			tnom.setBackground(Color.WHITE);
+			tdni.setBackground(Color.WHITE);
+			tdir.setBackground(Color.WHITE);
+			tcp.setBackground(Color.WHITE);
+			tloc.setBackground(Color.WHITE);
+			tpro.setBackground(Color.WHITE);
+			ttel.setBackground(Color.WHITE);
+			temail.setBackground(Color.WHITE);
 		}
 		Box c1=Box.createHorizontalBox();
 		Box c2=Box.createHorizontalBox();

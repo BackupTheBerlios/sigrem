@@ -23,7 +23,7 @@ public class PanelEconomia extends JPanel
 		sp.setEnabled(false);		
 		sp.setDividerSize(4);
 		add(sp);
-		Dimension d=new Dimension(650,200);
+		Dimension d=new Dimension(625,200);
 		pbalance.setPreferredSize(d);
 	}
 	
@@ -34,9 +34,9 @@ public class PanelEconomia extends JPanel
 		JLabel l1=new JLabel("Facturación");
 		JLabel l2=new JLabel("Gastos");
 		JLabel l3=new JLabel("Balance");
-		l1.setPreferredSize(new Dimension(150,20));
-		l2.setPreferredSize(new Dimension(150,20));
-		l3.setPreferredSize(new Dimension(150,20));
+		l1.setPreferredSize(new Dimension(100,20));
+		l2.setPreferredSize(new Dimension(100,20));
+		l3.setPreferredSize(new Dimension(100,20));
 		JTextField t1=new JTextField();
 		JTextField t2=new JTextField();
 		JTextField t3=new JTextField();
@@ -46,9 +46,9 @@ public class PanelEconomia extends JPanel
 		t1.setEditable(false);
 		t2.setEditable(false);
 		t3.setEditable(false);
-		t1.setBackground(Color.YELLOW);
-		t2.setBackground(Color.YELLOW);
-		t3.setBackground(Color.YELLOW);
+		t1.setBackground(Color.WHITE);
+		t2.setBackground(Color.WHITE);
+		t3.setBackground(Color.WHITE);
 		JButton bactualiza=new JButton ("Actualizar");
 		JPanel p1=new JPanel();
 		JPanel p2=new JPanel();
