@@ -71,7 +71,9 @@ public class PanelEconomia extends JPanel
 		t1.setBackground(Color.WHITE);
 		t2.setBackground(Color.WHITE);
 		t3.setBackground(Color.WHITE);
-		JButton bactualiza=new JButton ("Actualizar");
+		JButton bfacturacion=new JButton ("Calcular");
+		JButton bgastos=new JButton ("Calcular");
+		JButton bbalance=new JButton ("Calcular");
 		JButton bhfac=new JButton (new ImageIcon("interfaz/grafico.gif"));
 		bhfac.setPreferredSize(new Dimension(20,20));
 		JButton bhgas=new JButton (new ImageIcon("interfaz/grafico.gif"));
@@ -85,28 +87,26 @@ public class PanelEconomia extends JPanel
 		JPanel p1=new JPanel();
 		JPanel p2=new JPanel();
 		JPanel p3=new JPanel();
-		JPanel p4=new JPanel();
 		p0.add(l0);
 		p1.add(l1);
 		p1.add(t1);
 		p1.add(bhfac);
+		p1.add(bfacturacion);
 		p2.add(l2);
 		p2.add(t2);
 		p2.add(bhgas);
+		p2.add(bgastos);
 		p3.add(l3);
 		p3.add(t3);
 		p3.add(bhbal);
-		p4.add(bactualiza);
+		p3.add(bbalance);
 		Box caja=Box.createVerticalBox();
 		caja.add(p0);
 		caja.add(p1);
 		caja.add(p2);
 		caja.add(p3);
 		caja.setPreferredSize(new Dimension(930,250));
-		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja,p4);
-		sp.setDividerSize(4);
-		sp.setEnabled(false);
-		pbal.add(sp);
+		pbal.add(caja);
 		bhbal.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
@@ -126,6 +126,24 @@ public class PanelEconomia extends JPanel
 			{
 				removeAll();
 				dibujaPaneles(gastos, "Histórico de Gastos",2);
+			}
+		});
+		bfacturacion.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				//controlador.facturacion(...);				
+			}
+		});
+		bgastos.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				//controlador.gastos(...);
+			}
+		});
+		bbalance.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				//controlador.balance(...);
 			}
 		});
 		return pbal;
