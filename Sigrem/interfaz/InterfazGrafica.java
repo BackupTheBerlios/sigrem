@@ -22,7 +22,7 @@ public class InterfazGrafica
 		ventana.getContentPane().add(panelVistas);
 		ventana.setJMenuBar(setMenu());
 		ventana.pack();
-		ventana.setLocation(100,50);
+		ventana.setLocation(200,50);
 		ventana.setResizable(false);
 		ventana.addWindowListener(new WindowAdapter()
 		{	public void windowClosing(WindowEvent e)

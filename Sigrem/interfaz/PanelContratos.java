@@ -3,14 +3,18 @@ package interfaz;
 import java.awt.Dimension;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PanelContratos extends JPanel
 {
+	public JFrame formulario;
+	
 	public PanelContratos()
 	{
 		super();
 		JPanel pcontrato=dibujaContrato();
-		JPanel pcliente=dibujaCliente();
+		JPanel pcliente=dibujaCliente(false);
 		JScrollPane pmultas=dibujaMultas();
 		JSplitPane sp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,pcontrato,pcliente);
 		sp1.setDividerSize(4);
@@ -19,6 +23,9 @@ public class PanelContratos extends JPanel
 		sp2.setEnabled(false);		
 		sp2.setDividerSize(4);
 		add(sp2);
+		formulario=new JFrame();
+		formulario.setResizable(false);
+		formulario.setLocation(350,100);
 	}
 		
 	public JPanel dibujaContrato()
@@ -48,31 +55,40 @@ public class PanelContratos extends JPanel
 		JPanel p1=new JPanel();
 		JPanel p2=new JPanel();
 		JPanel p3=new JPanel();
-		JPanel p4=new JPanel();
+		JPanel botonera=new JPanel();
 		p1.add(l1);
 		p1.add(tcontrato);
 		p2.add(l2);
 		p2.add(tmatricula);
 		p3.add(l3);
 		p3.add(tcliente);
-		p4.add(bcrea);
-		p4.add(belim);
-		p4.add(bmod);
+		botonera.add(bcrea);
+		botonera.add(belim);
+		botonera.add(bmod);
 		Box caja=Box.createVerticalBox();
 		caja.add(p1);
 		caja.add(p2);
 		caja.add(p3);
-		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja,p4);
+		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja,botonera);
 		sp.setDividerSize(4);
 		sp.setEnabled(false);
 		pco.add(sp);
+		bcrea.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				JPanel panel=panelAlta();
+				formulario.getContentPane().add(panel);
+				formulario.pack();	
+				formulario.setVisible(true);		
+			}
+		});
 		return pco;
 	}
 	
-	public JPanel dibujaCliente()
+	public JPanel dibujaCliente(boolean editable)
 	{
-		JPanel pcl=new JPanel();
-		pcl.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos del cliente",TitledBorder.LEFT,TitledBorder.TOP));
+		JPanel panel=new JPanel();
+		panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos del cliente",TitledBorder.LEFT,TitledBorder.TOP));
 		JLabel l1=new JLabel("Nombre ",SwingConstants.RIGHT);
 		JLabel l2=new JLabel("DNI/CIF ",SwingConstants.RIGHT);
 		JLabel l3=new JLabel("Dirección ",SwingConstants.RIGHT);
@@ -115,14 +131,16 @@ public class PanelContratos extends JPanel
 		tpro.setPreferredSize(new Dimension(160,20));
 		ttel.setPreferredSize(new Dimension(80,20));
 		temail.setPreferredSize(new Dimension(80,20));
-		tnom.setEnabled(false);
-		tdni.setEnabled(false);
-		tdir.setEnabled(false);
-		tcp.setEnabled(false);
-		tloc.setEnabled(false);
-		tpro.setEnabled(false);
-		ttel.setEnabled(false);
-		temail.setEnabled(false);
+		if (!editable)
+		{	tnom.setEnabled(false);
+			tdni.setEnabled(false);
+			tdir.setEnabled(false);
+			tcp.setEnabled(false);
+			tloc.setEnabled(false);
+			tpro.setEnabled(false);
+			ttel.setEnabled(false);
+			temail.setEnabled(false);
+		}
 		Box c1=Box.createHorizontalBox();
 		Box c2=Box.createHorizontalBox();
 		Box c3=Box.createHorizontalBox();
@@ -161,10 +179,10 @@ public class PanelContratos extends JPanel
 		caja.add(c6);
 		caja.add(c7);
 		caja.add(c8);
-		pcl.add(caja);
-		return pcl;
+		panel.add(caja);
+		return panel;
 	}
-	
+
 	public JScrollPane dibujaMultas()
 	{
 		String[] vec2={"Código","Expediente","Boletín","Descripción","Recursos"};
@@ -176,5 +194,69 @@ public class PanelContratos extends JPanel
 		pmul.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Multas del contrato",TitledBorder.LEFT,TitledBorder.TOP));
 		pmul.setPreferredSize(new Dimension(250,200));
 		return pmul;
+	}
+	
+	public JPanel panelAlta()
+	{
+		formulario.setTitle("Crear contrato");
+		JLabel l1=new JLabel("Código del contrato");
+		JLabel l2=new JLabel("Matrícula del vehículo");
+		JLabel l3=new JLabel("Código del cliente");
+		l1.setPreferredSize(new Dimension(150,20));
+		l2.setPreferredSize(new Dimension(150,20));
+		l3.setPreferredSize(new Dimension(150,20));
+		JTextField tcontrato=new JTextField();
+		JTextField tcliente=new JTextField();
+		JTextField tmatricula=new JTextField();
+		tcontrato.setPreferredSize(new Dimension(100,20));
+		tcliente.setPreferredSize(new Dimension(100,20));
+		tmatricula.setPreferredSize(new Dimension(100,20));
+		JPanel p1=new JPanel();
+		JPanel p2=new JPanel();
+		JPanel p3=new JPanel();
+		p1.add(l1);
+		p1.add(tcontrato);
+		p2.add(l2);
+		p2.add(tmatricula);
+		p3.add(l3);
+		p3.add(tcliente);
+		Box caja=Box.createVerticalBox();
+		caja.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos del contrato",TitledBorder.LEFT,TitledBorder.TOP));
+		caja.add(p1);
+		caja.add(p2);
+		caja.add(p3);
+		JPanel pcl=dibujaCliente(true);
+		JSplitPane sp1=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja,pcl);
+		sp1.setEnabled(false);		
+		sp1.setDividerSize(4);
+		JButton aceptar=new JButton("Aceptar");
+		JButton cancelar=new JButton("Cancelar");
+		JPanel botonera=new JPanel();
+		botonera.add(aceptar);
+		botonera.add(cancelar);
+		JSplitPane sp2=new JSplitPane(JSplitPane.VERTICAL_SPLIT,sp1,botonera);
+		sp2.setEnabled(false);		
+		sp2.setDividerSize(4);
+		JPanel panel=new JPanel();
+		panel.add(sp2);
+		aceptar.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
+				//validar datos
+				//enviar datos a Sigrem para almacenarlos en la estructura de datos
+				//cargar contrato en el panel
+				//activar modificar y eliminar
+			}
+		});
+		cancelar.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
+			}
+		});
+		return panel;
 	}
 }
