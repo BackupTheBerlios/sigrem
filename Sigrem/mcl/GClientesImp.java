@@ -122,13 +122,31 @@ public class GClientesImp implements GClientes
 		}
 	}
 	
-	public void consultarClienteNombre(String nombre)
+	public String consultarClienteNombre(String nombre)
 	{
-		
+		Vector busqueda=listaclientes.buscar(nombre,1);
+		if (busqueda.size()==0)
+		{	vista.actualizaVistaMensaje("Error al buscar el cliente con nombre "+nombre+". No se ha encontrado");
+			return null;			
+		}
+		else 
+		{	Cliente cliente=(Cliente)busqueda.get(0);
+			vista.actualizaVista(1,2,cliente.dameListaDatos());
+			return (String)cliente.dameListaContratos().getFirst();
+		}
 	}
 	
-	public void consultarClienteDni(String dni)
+	public String consultarClienteDni(String dni)
 	{
-		
+		Vector busqueda=listaclientes.buscar(dni,2);
+		if (busqueda.size()==0)
+		{	vista.actualizaVistaMensaje("Error al buscar el cliente con dni "+dni+". No se ha encontrado");
+			return null;			
+		}
+		else 
+		{	Cliente cliente=(Cliente)busqueda.get(0);
+			vista.actualizaVista(1,2,cliente.dameListaDatos());
+			return (String)cliente.dameListaContratos().getFirst();
+		}
 	}
 }

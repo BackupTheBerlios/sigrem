@@ -108,7 +108,7 @@ public class GContratosImp implements GContratos
 	{
 		Vector busqueda=listacontratos.buscar(matricula,1);
 		if (busqueda.size()==0)
-		{	vista.actualizaVistaMensaje("Error al buscar el contrato "+matricula+". No se ha encontrado");
+		{	vista.actualizaVistaMensaje("Error al buscar el contrato con matrícula "+matricula+". No se ha encontrado");
 			return null;			
 		}
 		else 

@@ -101,6 +101,18 @@ public class Sigrem
 		if (codcontrato!=null) gcontratos.consultarContratoCodigo(modificar,codcontrato); 
 	}
 	
+	public void consultarClienteDni(String dni)
+	{
+		String codcontrato=gclientes.consultarClienteDni(dni);
+		if (codcontrato!=null) gcontratos.consultarContratoCodigo(false,codcontrato); 
+	}
+	
+	public void consultarClienteNombre(String nombre)
+	{
+		String codcontrato=gclientes.consultarClienteNombre(nombre);
+		if (codcontrato!=null) gcontratos.consultarContratoCodigo(false,codcontrato); 
+	}
+	
 	public void modificarCliente(String codcliente,LinkedList datos)
 	{
 		gclientes.modificarCliente(codcliente,datos);

@@ -280,8 +280,8 @@ public class InterfazGrafica
 			{
 				String valor=JOptionPane.showInputDialog(null,"Introduce el DNI/CIF del cliente","Consultar cliente",-1);
 				if (valor!=null)
-				{	
-					panelVistas.setSelectedIndex(0);
+				{	panelVistas.setSelectedIndex(0);
+					controlador.consultarClienteDni(valor);
 				}
 			}
 		});
@@ -290,8 +290,8 @@ public class InterfazGrafica
 			{
 				String valor=JOptionPane.showInputDialog(null,"Introduce el nombre del cliente","Consultar cliente",-1);
 				if (valor!=null)
-				{	
-					panelVistas.setSelectedIndex(0);
+				{	panelVistas.setSelectedIndex(0);
+					controlador.consultarClienteNombre(valor);
 				}
 			}
 		});
