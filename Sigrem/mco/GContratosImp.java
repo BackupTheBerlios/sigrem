@@ -148,4 +148,9 @@ public class GContratosImp implements GContratos
 		Contrato contrato=(Contrato)busqueda.get(0);
 		return contrato.dameListaMultas();
 	}
+	
+	public EstructuraDatos dameListaContratos()
+	{
+		return listaContratos;
+	}
 }

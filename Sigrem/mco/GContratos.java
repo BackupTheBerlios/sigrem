@@ -3,6 +3,8 @@ package mco;
 //import mcl.Cliente;
 import java.util.LinkedList;
 
+import med.EstructuraDatos;
+
 public interface GContratos 
 {
 	//Requisito 2.1
@@ -23,4 +25,6 @@ public interface GContratos
 	public void eliminarMulta(String codcontrato,String codmulta);
 	
 	public LinkedList dameListaMultasContrato(int clave,String codigo);
+	
+	public EstructuraDatos dameListaContratos();
 }
