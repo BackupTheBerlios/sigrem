@@ -26,10 +26,19 @@ public class PanelEconomia extends JPanel
 	private String [] mesBal;
 	
 	private int maxValorGrafico;
+	
+	private boolean actualizadoGasto;
+	
+	private boolean actualizadoFacturacion;
+	
+	private boolean actualizadoBalance;
 		
 	public PanelEconomia(int grafico,Sigrem controlador,JFrame v)
 	{
 		super();
+		actualizadoBalance=false;
+		actualizadoGasto=false;
+		actualizadoFacturacion=false;
 		this.controlador=controlador;
 		this.facturacion=new int [12];
 		this.gastos=new int [12];
@@ -39,13 +48,11 @@ public class PanelEconomia extends JPanel
 		this.mesBal=new String [12];
 		this.maxValorGrafico=1;
 		JPanel pbalance=dibujaBalance();
-		pbalance.setPreferredSize(new Dimension(950,322));
 		JPanel pgrafico=dibujaGrafico(null,null,null);
-		pgrafico.setPreferredSize(new Dimension(950,280));
-		JSplitPane spx=new JSplitPane(JSplitPane.VERTICAL_SPLIT,pbalance,pgrafico);
-		spx.setEnabled(false);		
-		spx.setDividerSize(4);
-		add(spx);
+		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,pbalance,pgrafico);
+		sp.setEnabled(false);		
+		sp.setDividerSize(4);
+		add(sp);
 	}
 	
 	public void actualiza(int panel,LinkedList datos)
@@ -136,20 +143,28 @@ public class PanelEconomia extends JPanel
 		tgas.setEditable(false);
 		tbal.setEditable(false);
 		tgas.setForeground(Color.RED);
+		int intbal=bal.intValue();
+		if (intbal<0) tbal.setForeground(Color.RED);			
 		tfac.setBackground(Color.WHITE);
 		tgas.setBackground(Color.WHITE);
 		tbal.setBackground(Color.WHITE);
 		JButton bfacturacion=new JButton ("Calcular");
+		bfacturacion.setToolTipText("Calcular facturación para el mes actual");
 		bfacturacion.setPreferredSize(new Dimension(80,20));
 		JButton bgastos=new JButton ("Calcular");
+		bgastos.setToolTipText("Calcular gastos para el mes actual");
 		bgastos.setPreferredSize(new Dimension(80,20));
 		JButton bbalance=new JButton ("Calcular");
+		bbalance.setToolTipText("Calcular balance para el mes actual");
 		bbalance.setPreferredSize(new Dimension(80,20));
 		JButton bhfac=new JButton (new ImageIcon("interfaz/grafico.gif"));
+		bhfac.setToolTipText("Mostrar gráfico de facturación del último año");
 		bhfac.setPreferredSize(new Dimension(20,20));
 		JButton bhgas=new JButton (new ImageIcon("interfaz/grafico.gif"));
+		bhgas.setToolTipText("Mostrar gráfico de gastos del último año");
 		bhgas.setPreferredSize(new Dimension(20,20));
 		JButton bhbal=new JButton (new ImageIcon("interfaz/grafico.gif"));
+		bhbal.setToolTipText("Mostrar gráfico de balance del último año");
 		bhbal.setPreferredSize(new Dimension(20,20));
 		JPanel p0=new JPanel();
 		JPanel p1=new JPanel();
@@ -173,47 +188,73 @@ public class PanelEconomia extends JPanel
 		caja.add(p1);
 		caja.add(p2);
 		caja.add(p3);
-		caja.setPreferredSize(new Dimension(930,250));
-		pbal.add(caja);
+		caja.setPreferredSize(new Dimension(755,286));
+		JLabel logo=new JLabel(new ImageIcon("interfaz/sigrem2.jpg"));
+		logo.setPreferredSize(new Dimension(168,0));
+		JSplitPane sp=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,logo,caja);
+		sp.setEnabled(false);		
+		sp.setDividerSize(4);
+		pbal.add(sp);
 		bhfac.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				LinkedList datos=new LinkedList();
-				datos.add(new String("facturacion"));
-				actualiza(2,datos);
+				if (!actualizadoFacturacion) 
+				{
+					JOptionPane.showMessageDialog(null,"Los valores del histórico no están actualizados");
+				}
+				else
+				{	LinkedList datos=new LinkedList();
+					datos.add(new String("facturacion"));
+					actualiza(2,datos);
+				}
 			}
 		});
 		bhgas.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				LinkedList datos=new LinkedList();
-				datos.add(new String("gastos"));
-				actualiza(2,datos);
+				if (!actualizadoGasto) 
+				{
+					JOptionPane.showMessageDialog(null,"Los valores del histórico no están actualizados");
+				}
+				else
+				{	LinkedList datos=new LinkedList();
+					datos.add(new String("gastos"));
+					actualiza(2,datos);
+				}
 			}
 		});
 		bhbal.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				LinkedList datos=new LinkedList();
-				datos.add(new String("balance"));
-				actualiza(2,datos);			
+				if (!actualizadoBalance) 
+				{
+					JOptionPane.showMessageDialog(null,"Los valores del histórico no están actualizados");
+				}
+				else
+				{	LinkedList datos=new LinkedList();
+					datos.add(new String("balance"));
+					actualiza(2,datos);
+				}
 			}
 		});
 		bfacturacion.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
+				actualizadoFacturacion=true;
 				controlador.calculaFacturacion();
 			}
 		});
 		bgastos.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
+				actualizadoGasto=true;
 				controlador.calculaGastos();			
 			}
 		});
 		bbalance.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
+				actualizadoBalance=true;	
 				controlador.calculaBalance();
 			}
 		});
