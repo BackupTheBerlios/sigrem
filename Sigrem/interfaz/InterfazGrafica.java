@@ -196,21 +196,6 @@ public class InterfazGrafica
 		pcontratos.actualizaListaAbogados(listaAbogados);
 	}
 	
-	public void actualizaVistaFacturacion(int [] facturacion,int ultimoMesFac)
-	{
-		peconomia.actualizaFacturacion(facturacion,ultimoMesFac);
-	}
-	
-	public void actualizaVistaGastos(int [] gastos,int ultimoMesGas)
-	{
-		peconomia.actualizaGastos(gastos,ultimoMesGas);
-	}
-	
-	public void actualizaVistaBalance(int [] facturacion,int [] gastos,int [] balance,int ultimoMesFac,int ultimoMesGas,int ultimoMesBal)
-	{
-		peconomia.actualizaBalance(facturacion,gastos,balance,ultimoMesFac,ultimoMesGas,ultimoMesBal);
-	}
-	
 	public void muestraPanelRecursos(String codmulta)
 	{
 		pcontratos.muestraPanelRecursos(codmulta);

@@ -104,7 +104,6 @@ public class GEconomiaImp implements GEconomia
 			i=i+1;
 			if (signo=='-')	num=num*(-1);
 			vect[n]=num;
-			System.out.println("this.facturacion["+n+"] "+this.facturacion[n]);
 			numero="";
 			n=n+1;
 		}
