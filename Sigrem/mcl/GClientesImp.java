@@ -33,16 +33,28 @@ public class GClientesImp implements GClientes
 	
 	//clave0=codigo	clave1=nombre clave2=dni
 	public String añadirCliente(LinkedList datos)
-	{
-		Cliente nuevocliente=new Cliente(codigoCliente,datos);
-		String[] claves=new String[3];
-		claves[0]=codigoCliente;
+	{	String[] claves=new String[3];
+		claves[0]=null;
 		claves[1]=(String)datos.get(0);
 		claves[2]=(String)datos.get(1);
-		listaClientes.insertar(claves,nuevocliente);
-		String codigoantiguo=codigoCliente;
-		incrementaCodigo();
-		return codigoantiguo;
+		if (!listaClientes.esta(claves[2],2)){
+			claves[0]=new String(codigoCliente);
+			Cliente nuevocliente=new Cliente(claves[0],datos);
+			listaClientes.insertar(claves,nuevocliente);
+			incrementaCodigo();
+			vista.actualizaVistaMensaje("Nuevo cliente insertado correctamente");
+		}else{
+			//como el dni es clave solo habra uno en la posicion 0
+			Cliente clienteExistente=(Cliente)listaClientes.buscar(claves[2],2).get(0);
+			if (clienteExistente.dameNombre().equals(claves[1])){
+				claves[0]=clienteExistente.dameCodigo();
+				vista.actualizaVistaMensaje("El cliente ya existia y se le asociara el contrato");
+			}else{
+				vista.actualizaVistaMensaje("El cliente ya existe pero no coinciden los datos-Inserción de cliente y contrato imposible");
+			}
+			
+		}
+		return claves[0];
 	}
 	
 	public void asociaClienteContrato(String codcliente,String codcontrato)
