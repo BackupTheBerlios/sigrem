@@ -11,11 +11,13 @@ public interface GMultas
 	//Requisito 3.3
 	public void modificarMulta(String codigo,LinkedList datos);
 	//Requisito 3.4
-	public void consultarMultaCodigo(String codigo);
+	public String consultarMultaCodigo(String codigo);
 	//Requisito 3.5
-	public void consultarMultaExpediente(String expediente);
+	public String consultarMultaExpediente(String expediente);
 	//Requisito 3.6
-	public void consultarMultaBoletin(String boletin);
+	public String consultarMultaBoletin(String boletin);
 	
 	public void consultarListaMultas(LinkedList lista);
+	
+	public void eliminaListaMultas(LinkedList lista);
 }

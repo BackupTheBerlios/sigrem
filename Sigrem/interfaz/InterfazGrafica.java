@@ -353,6 +353,7 @@ public class InterfazGrafica
 				{	
 					panelVistas.setSelectedIndex(0);
 					pcontratos.inicializaCajaMultas();
+					controlador.consultarMultaCodigo(valor);
 				}
 			}
 		});
@@ -364,6 +365,7 @@ public class InterfazGrafica
 				{	
 					panelVistas.setSelectedIndex(0);
 					pcontratos.inicializaCajaMultas();
+					controlador.consultarMultaExpediente(valor);
 				}
 			}
 		});
@@ -375,6 +377,7 @@ public class InterfazGrafica
 				{	
 					panelVistas.setSelectedIndex(0);
 					pcontratos.inicializaCajaMultas();
+					controlador.consultarMultaBoletin(valor);
 				}
 			}
 		});

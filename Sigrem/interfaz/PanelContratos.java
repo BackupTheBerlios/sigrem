@@ -484,6 +484,7 @@ public class PanelContratos extends JPanel
 		selector.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
+				inicializaCajaMultas();
 				controlador.consultarContratoCodigo(false,false,(String)selector.getSelectedItem());
 			}
 		});
@@ -880,7 +881,8 @@ public class PanelContratos extends JPanel
 				formulario.setVisible(false);
 				int seleccion=JOptionPane.showConfirmDialog(null,"           ¿Desea eliminar el contrato "+tcodigo.getText()+"?","Eliminar contrato",JOptionPane.YES_NO_CANCEL_OPTION,-1);
 				if (seleccion==JOptionPane.YES_OPTION)
-				{	boolean borrar;
+				{	inicializaCajaMultas();
+					boolean borrar;
 					if (codigo.equals(tcodigo.getText())) borrar=true;
 					else borrar=false;
 					boolean actualizar=false;

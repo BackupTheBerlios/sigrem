@@ -74,7 +74,7 @@ public class Multa
 		datos.add(expediente);
 		datos.add(boletin);
 		datos.add(fechaDenuncia);
-		datos.add(fechaResolucion);
+	//	datos.add(fechaResolucion);
 		datos.add(infraccion);
 		datos.add(descripcion);
 		datos.add(codigoContrato);

@@ -80,19 +80,43 @@ public class GMultasImp implements GMultas
 		}
 	}
 
-	public void consultarMultaCodigo(String codigo)
+	public String consultarMultaCodigo(String codigo)
 	{
-		
+		Vector busqueda=listaMultas.buscar(codigo,0);
+		if (busqueda.size()==0)
+		{	vista.actualizaVistaMensaje("Error al buscar la multa "+codigo+". No se ha encontrado");
+			return null;
+		}
+		else 
+		{	Multa multa=(Multa)busqueda.get(0);
+			return multa.dameCodigoContrato();			
+		}
 	}
 
-	public void consultarMultaExpediente(String expediente)
+	public String consultarMultaExpediente(String expediente)
 	{
-		
+		Vector busqueda=listaMultas.buscar(expediente,1);
+		if (busqueda.size()==0)
+		{	vista.actualizaVistaMensaje("Error al buscar la multa con expediente "+expediente+". No se ha encontrado");
+			return null;
+		}
+		else 
+		{	Multa multa=(Multa)busqueda.get(0);
+			return multa.dameCodigoContrato();			
+		}
 	}
 
-	public void consultarMultaBoletin(String boletin)
+	public String consultarMultaBoletin(String boletin)
 	{
-		
+		Vector busqueda=listaMultas.buscar(boletin,2);
+		if (busqueda.size()==0)
+		{	vista.actualizaVistaMensaje("Error al buscar la multa con boletín "+boletin+". No se ha encontrado");
+			return null;
+		}
+		else 
+		{	Multa multa=(Multa)busqueda.get(0);
+			return multa.dameCodigoContrato();			
+		}
 	}
 	
 	public void consultarListaMultas(LinkedList lista)
@@ -106,6 +130,17 @@ public class GMultasImp implements GMultas
 			{	Multa multa=(Multa)busqueda.get(0);
 				vista.actualizaVistaCajaMultas('a',multa.dameListaDatos());
 			}
+		}
+		vista.actualizaVista(1,3,null);
+	}
+	
+	public void eliminaListaMultas(LinkedList lista)
+	{
+		for (int i=0;i<lista.size();i++)
+		{	String codigo=(String)lista.get(i);
+			boolean eliminado=listaMultas.eliminar(codigo,0);
+			if (!eliminado)  
+			{	vista.actualizaVistaMensaje("Error al eliminar la multa "+codigo+". No se ha encontrado");}
 		}
 		vista.actualizaVista(1,3,null);
 	}
