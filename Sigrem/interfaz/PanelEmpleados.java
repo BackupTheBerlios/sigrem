@@ -308,7 +308,7 @@ public class PanelEmpleados extends JPanel
 	public JPanel dibujaRecursos(String codigo)
 	{	
 		JPanel prec=new JPanel();
-		prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),("Recursos asignados al empleado "+codigo),TitledBorder.LEFT,TitledBorder.TOP));
+		prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),("Recursos asignados al empleado"),TitledBorder.LEFT,TitledBorder.TOP));
 		prec.setPreferredSize(new Dimension(950,280));	
 			Box tabla=Box.createVerticalBox();
 			JPanel p=new JPanel();
