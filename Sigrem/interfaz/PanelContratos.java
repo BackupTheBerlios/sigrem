@@ -105,8 +105,9 @@ public class PanelContratos extends JPanel
 		}
 		else if (panel==4)
 		{	panelRecursos.getContentPane().removeAll();
+	//	System.out.println((String)datos.getLast());
 			panelRecursos.getContentPane().add(dibujaRecursos((String)datos.getLast()));
-			panelRecursos.pack();
+			panelRecursos.pack();			
 		}
 	}
 	
@@ -207,7 +208,7 @@ public class PanelContratos extends JPanel
 	{
 		cajaRecursos=Box.createVerticalBox();
 		JLabel relleno=new JLabel("");
-		relleno.setPreferredSize(new Dimension(20,220));
+		relleno.setPreferredSize(new Dimension(20,230));
 		cajaRecursos.add(relleno);		
 	}
 	
@@ -623,7 +624,7 @@ public class PanelContratos extends JPanel
 		bcrea.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formRecurso.getContentPane().add(panelAltaRecurso('c',codigo));
+				formRecurso.getContentPane().add(panelAltaRecurso('c',codigo,null));
 				formRecurso.pack();
 				formRecurso.setVisible(true);				
 			}
@@ -1151,7 +1152,7 @@ public class PanelContratos extends JPanel
 		return panel;
 	}
 	
-	public JPanel panelAltaRecurso(char tipo,final String codigo)
+	public JPanel panelAltaRecurso(final char tipo,final String codigo,final String fecha)
 	{
 		if (tipo=='c') formRecurso.setTitle("Crear recurso");
 		else if (tipo=='m') formRecurso.setTitle("Modificar recurso "+codigo);
@@ -1177,9 +1178,6 @@ public class PanelContratos extends JPanel
 		r6.setPreferredSize(new Dimension(150,20));
 		r7.setPreferredSize(new Dimension(150,20));
 		final JTextField femi=new JTextField();
-		Date hoy = new Date();
-		SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
-		femi.setText(formato.format(hoy));
 		femi.setEditable(false);
 		final JComboBox ere=new JComboBox();
 		final JComboBox epr=new JComboBox();
@@ -1193,6 +1191,15 @@ public class PanelContratos extends JPanel
 		epr.setPreferredSize(new Dimension(250,20));
 		est.setPreferredSize(new Dimension(100,20));
 		abo.setPreferredSize(new Dimension(100,20));
+		if (tipo=='c')
+		{	Date hoy = new Date();
+			SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
+			femi.setText(formato.format(hoy));
+		}
+		else if (tipo=='m')
+		{	femi.setText(fecha);
+			abo.setEditable(false);
+		}
 		JPanel p2=new JPanel();
 		JPanel p4=new JPanel();
 		JPanel p5=new JPanel();
@@ -1249,8 +1256,15 @@ public class PanelContratos extends JPanel
 				datos.add((String)est.getSelectedItem());
 				datos.add(abo.getText());
 				datos.add(descrip.getText());
-				datos.add(codigo);
-				controlador.añadirRecurso(codigo,datos);
+				if (tipo=='c') 
+				{	datos.add(codigo);
+					controlador.añadirRecurso(codigo,datos);					
+				}
+				else if (tipo=='m') 
+				{	datos.addFirst(codigo);
+					controlador.modificarRecurso(codigo,datos);
+				}
+				System.out.println("ok");
 				formRecurso.setVisible(false);
 				formRecurso.getContentPane().removeAll();
 			}
@@ -1345,7 +1359,7 @@ public class PanelContratos extends JPanel
 	{		
 		JPanel panel=new JPanel();
 		final JTextField cod=new JTextField((String)datos.get(0));
-		JTextField femi=new JTextField((String)datos.get(1));
+		final JTextField femi=new JTextField((String)datos.get(1));
 		JTextField ere=new JTextField((String)datos.get(2));
 		JTextField epr=new JTextField((String)datos.get(3));
 		JTextField est=new JTextField((String)datos.get(4));
@@ -1394,9 +1408,9 @@ public class PanelContratos extends JPanel
 		modi.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formulario.getContentPane().add(panelAltaRecurso('m',cod.getText()));
-				formulario.pack();
-				formulario.setVisible(true);				
+				formRecurso.getContentPane().add(panelAltaRecurso('m',cod.getText(),femi.getText()));
+				formRecurso.pack();
+				formRecurso.setVisible(true);				
 			}
 		});
 		elim.addActionListener(new ActionListener()

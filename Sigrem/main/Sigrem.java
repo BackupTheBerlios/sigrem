@@ -195,4 +195,9 @@ public class Sigrem
 		grecursos.eliminarRecurso(codrecurso,codmulta);
 		gmultas.eliminarRecurso(codmulta,codrecurso);
 	}
+	
+	public void modificarRecurso(String codigo,LinkedList datos)
+	{
+		grecursos.modificarRecurso(codigo,datos);
+	}
 }

@@ -9,7 +9,7 @@ public interface GRecursos
 	//Requisito 4.2
 	public void eliminarRecurso(String codrecurso,String codmulta);
 	//Requisito 4.3
-	public void modificarRecurso(String codigo);
+	public void modificarRecurso(String codigo,LinkedList datos);
 	//Requisito 4.4
 	public void consultarRecursoCodigo(String codigo);
 }

@@ -2,7 +2,10 @@ package mre;
 
 import interfaz.InterfazGrafica;
 import java.util.LinkedList;
+import java.util.Vector;
+
 import med.*;
+import mmu.Multa;
 
 public class GRecursosImp implements GRecursos 
 {
@@ -57,9 +60,21 @@ public class GRecursosImp implements GRecursos
 		else vista.actualizaVistaMensaje("Error al eliminar el recurso "+codrecurso+". No se ha encontrado");
 	}
 
-	public void modificarRecurso(String codigo)
+	public void modificarRecurso(String codigo,LinkedList datos)
 	{
-		
+		Vector busqueda=listaRecursos.buscar(codigo,0);
+		if (busqueda.size()==0)
+		{	vista.actualizaVistaMensaje("Error al buscar el recurso "+codigo+". No se ha encontrado");}
+		else 
+		{	Recurso recurso=(Recurso)busqueda.get(0);
+			recurso.ponEscritoRecibido((String)datos.get(1));
+			recurso.ponEscritoPresentado((String)datos.get(2));
+			recurso.ponEstado((String)datos.get(3));
+			recurso.ponDescripcion((String)datos.get(5));
+			datos.add(recurso.dameCodigoMulta());
+			vista.actualizaVistaCaja('r','m',datos);
+			vista.actualizaVista(1,4,datos);
+		}
 	}
 
 	public void consultarRecursoCodigo(String codigo)

@@ -106,8 +106,8 @@ public class Recurso {
 		this.estado=est;
 	}
 	
-	public void ponAbogado(String abo)
+	public void ponDescripcion(String descrip)
 	{
-		this.abogado=abo;
+		this.descripcion=descrip;
 	}	
 }
