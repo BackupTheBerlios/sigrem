@@ -59,13 +59,16 @@ public class GRecursosImp implements GRecursos
 		else vista.actualizaVistaMensaje("Error al eliminar el recurso "+codrecurso+". No se ha encontrado");
 	}
 
-	public void modificarRecurso(String codigo,LinkedList datos)
+	public String modificarRecurso(String codigo,LinkedList datos)
 	{
 		Vector busqueda=listaRecursos.buscar(codigo,0);
 		if (busqueda.size()==0)
-		{	vista.actualizaVistaMensaje("Error al buscar el recurso "+codigo+". No se ha encontrado");}
+		{	vista.actualizaVistaMensaje("Error al buscar el recurso "+codigo+". No se ha encontrado");
+			return null;
+		}
 		else 
 		{	Recurso recurso=(Recurso)busqueda.get(0);
+			String antiguoAbogado=recurso.dameAbogado();
 			recurso.ponEscritoRecibido((String)datos.get(2));
 			recurso.ponEscritoPresentado((String)datos.get(3));
 			recurso.ponEstado((String)datos.get(4));
@@ -74,6 +77,7 @@ public class GRecursosImp implements GRecursos
 			datos.add(recurso.dameCodigoMulta());
 			vista.actualizaVistaCaja(1,'r','m',datos);
 			vista.actualizaVista(1,4,datos);
+			return antiguoAbogado;
 		}
 	}
 

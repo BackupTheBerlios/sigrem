@@ -232,10 +232,15 @@ public class Sigrem
 	
 	public void modificarRecurso(String codigo,LinkedList datos)
 	{
-		grecursos.modificarRecurso(codigo,datos);
+		String antiguoCodEmpleado=grecursos.modificarRecurso(codigo,datos);
+		if (!antiguoCodEmpleado.equals("Sin asignar"))
+		{	gempleados.eliminarRecursoAbogado(codigo,antiguoCodEmpleado);
+			consultarAbogadoRemotamente(antiguoCodEmpleado);
+		}
 		String codempleado=(String)datos.get(5);
 		if (!codempleado.equals("Sin asignar"))
 			gempleados.asociaAbogadoRecurso(codempleado,codigo);
+		
 	}
 	
 	public void consultarListaRecursos(String codigo)
