@@ -12,7 +12,11 @@ public class PanelContratos extends JPanel
 	
 	private JFrame formMulta;
 	
-	private JFrame formDescrip;
+	private JFrame formDescripM;
+	
+	private JFrame formDescripR;
+	
+	private JFrame formRecurso;
 	
 	private JButton elimcont;
 	
@@ -41,9 +45,15 @@ public class PanelContratos extends JPanel
 		formMulta=new JFrame();
 		formMulta.setResizable(false);
 		formMulta.setLocation(350,100);
-		formDescrip=new JFrame();
-		formDescrip.setResizable(false);
-		formDescrip.setLocation(350,100);
+		formDescripM=new JFrame();
+		formDescripM.setResizable(false);
+		formDescripM.setLocation(350,100);
+		formDescripR=new JFrame();
+		formDescripR.setResizable(false);
+		formDescripR.setLocation(350,150);
+		formRecurso=new JFrame();
+		formRecurso.setResizable(false);
+		formRecurso.setLocation(200,100);
 	}
 		
 	public JPanel dibujaContrato()
@@ -56,7 +66,7 @@ public class PanelContratos extends JPanel
 		l1.setPreferredSize(new Dimension(150,20));
 		l2.setPreferredSize(new Dimension(150,20));
 		l3.setPreferredSize(new Dimension(150,20));
-		JTextField tcontrato=new JTextField();
+		final JTextField tcontrato=new JTextField();
 		JTextField tcliente=new JTextField();
 		JTextField tmatricula=new JTextField();
 		tcontrato.setPreferredSize(new Dimension(100,20));
@@ -94,10 +104,26 @@ public class PanelContratos extends JPanel
 		{	public void actionPerformed(ActionEvent e)
 			{
 				if (!formAlta.isVisible())
-				{	formAlta.getContentPane().add(panelAlta());
+				{	formAlta.getContentPane().add(panelAlta('c',null));
 					formAlta.pack();	
 					formAlta.setVisible(true);
 				}
+			}
+		});
+		modcont.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				if (!formAlta.isVisible())
+				{	formAlta.getContentPane().add(panelAlta('m',tcontrato.getText()));
+					formAlta.pack();	
+					formAlta.setVisible(true);
+				}
+			}
+		});
+		elimcont.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				
 			}
 		});
 		return pco;
@@ -203,6 +229,8 @@ public class PanelContratos extends JPanel
 
 	public JPanel dibujaMultas()
 	{
+		JPanel pmul=new JPanel();
+		pmul.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Multas del contrato",TitledBorder.LEFT,TitledBorder.TOP));
 		Box tabla=Box.createVerticalBox();
 		JPanel p=new JPanel();
 		JLabel l1=new JLabel("Código",SwingConstants.CENTER);
@@ -228,7 +256,7 @@ public class PanelContratos extends JPanel
 		p.add(l7);
 		tabla.add(p);
 		for (int i=0;i<9;i++)
-		{	JPanel linea=dibujaLinea();
+		{	JPanel linea=dibujaLineaMulta();
 			tabla.add(linea);		
 		}
 		JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -239,14 +267,12 @@ public class PanelContratos extends JPanel
 		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,ptabla,botonera);
 		sp.setEnabled(false);
 		sp.setDividerSize(4);
-		JPanel pmul=new JPanel();
-		pmul.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Multas del contrato",TitledBorder.LEFT,TitledBorder.TOP));
 		pmul.add(sp);
 		bcrea.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
 				if (!formMulta.isVisible())
-				{	formMulta.getContentPane().add(panelMulta());
+				{	formMulta.getContentPane().add(panelMulta('c',null));
 					formMulta.pack();
 					formMulta.setVisible(true);
 				}
@@ -255,9 +281,10 @@ public class PanelContratos extends JPanel
 		return pmul;
 	}
 	
-	public JPanel panelAlta()
+	public JPanel panelAlta(char tipo,String codigo)
 	{
-		formAlta.setTitle("Crear contrato");
+		if (tipo=='c') formAlta.setTitle("Crear contrato");
+		else if (tipo=='m') formAlta.setTitle("Modificar contrato "+codigo);
 		JLabel l1=new JLabel("Código del contrato");
 		JLabel l2=new JLabel("Matrícula del vehículo");
 		JLabel l3=new JLabel("Código del cliente");
@@ -320,9 +347,10 @@ public class PanelContratos extends JPanel
 		return panel;
 	}
 		
-	public JPanel panelMulta()
+	public JPanel panelMulta(char tipo,String codigo)
 	{
-		formMulta.setTitle("Crear multa");
+		if (tipo=='c') formMulta.setTitle("Crear multa");
+		else if (tipo=='m') formMulta.setTitle("Modificar multa "+codigo);
 		JLabel l1=new JLabel("Código");
 		JLabel l2=new JLabel("Expediente");
 		JLabel l3=new JLabel("Boletín");
@@ -389,9 +417,22 @@ public class PanelContratos extends JPanel
 		return panel;
 	}
 	
-	public JPanel pintaDescrip()
+	public JPanel panelDescripM(String codigo)
 	{
-		formDescrip.setTitle("Descripción de la multa");
+		formDescripM.setTitle("Descripción de la multa "+codigo);
+		JPanel panel=panelDescrip('m');
+		return panel;
+	}
+	
+	public JPanel panelDescripR(String codigo)
+	{
+		formDescripR.setTitle("Descripción del recurso "+codigo);
+		JPanel panel=panelDescrip('r');
+		return panel;
+	}
+	
+	public JPanel panelDescrip(final char tipo)
+	{
 		JPanel panel=new JPanel();
 		JPanel p1=new JPanel();
 		JPanel p2=new JPanel();
@@ -412,17 +453,125 @@ public class PanelContratos extends JPanel
 		aceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formDescrip.setVisible(false);
-				formDescrip.getContentPane().removeAll();								
+				if (tipo=='m')
+				{	formDescripM.setVisible(false);
+					formDescripM.getContentPane().removeAll();
+				}
+				else if (tipo=='r')
+				{	formDescripR.setVisible(false);
+					formDescripR.getContentPane().removeAll();
+				}
 			}
 		});
 		return panel;
 	}
 	
-	public JPanel dibujaLinea()
+	public JPanel panelRecurso(String codigo)
+	{
+		formRecurso.setTitle("Recursos de la multa "+codigo);
+		JPanel prec=new JPanel();
+		prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Recursos de la multa "+codigo,TitledBorder.LEFT,TitledBorder.TOP));
+		Box tabla=Box.createVerticalBox();
+		JPanel p=new JPanel();
+		JLabel l1=new JLabel("Código",SwingConstants.CENTER);
+		JLabel l2=new JLabel("Estado",SwingConstants.CENTER);
+		JLabel l3=new JLabel("Abogado",SwingConstants.CENTER);
+		JLabel l4=new JLabel("Descripción",SwingConstants.CENTER);
+		JLabel l5=new JLabel("");
+		JLabel l6=new JLabel("");
+		l1.setPreferredSize(new Dimension(130,25));
+		l2.setPreferredSize(new Dimension(130,25));
+		l3.setPreferredSize(new Dimension(130,25));
+		l4.setPreferredSize(new Dimension(80,25));
+		l5.setPreferredSize(new Dimension(25,25));
+		l6.setPreferredSize(new Dimension(25,25));
+		p.add(l1);
+		p.add(l2);
+		p.add(l3);
+		p.add(l4);
+		p.add(l5);
+		p.add(l6);
+		tabla.add(p);
+		for (int i=0;i<9;i++)
+		{	JPanel linea=dibujaLineaRecurso();
+			tabla.add(linea);
+		}
+		JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		ptabla.setPreferredSize(new Dimension(600,200));
+		JButton bcrea=new JButton("Añadir recurso");
+		JPanel botonera=new JPanel();
+		botonera.add(bcrea);
+		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,ptabla,botonera);
+		sp.setEnabled(false);
+		sp.setDividerSize(4);
+		prec.add(sp);
+		bcrea.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+			
+			}
+		});
+		return prec;
+	}
+	
+	public JPanel dibujaLineaRecurso()
 	{		
 		JPanel panel=new JPanel();
-		JTextField cod=new JTextField();
+		final JTextField cod=new JTextField("R001");
+		cod.setEnabled(false);
+		cod.setPreferredSize(new Dimension(130,25));
+		JTextField est=new JTextField();
+		est.setEnabled(false);
+		est.setPreferredSize(new Dimension(130,25));
+		JTextField abo=new JTextField();
+		abo.setEnabled(false);
+		abo.setPreferredSize(new Dimension(130,25));
+		JButton descrip=new JButton(new ImageIcon("interfaz/find.gif"));
+		descrip.setPreferredSize(new Dimension(80,25));
+		JButton mod=new JButton(new ImageIcon("interfaz/tick.gif"));
+		mod.setPreferredSize(new Dimension(25,25));
+		JButton elim=new JButton(new ImageIcon("interfaz/del.gif"));
+		elim.setPreferredSize(new Dimension(25,25));
+		panel.add(cod);
+		panel.add(est);
+		panel.add(abo);
+		panel.add(descrip);
+		panel.add(mod);
+		panel.add(elim);
+		descrip.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				if (!formDescripR.isVisible())
+				{	formDescripR.getContentPane().add(panelDescripR(cod.getText()));
+					formDescripR.pack();
+					formDescripR.setVisible(true);
+				}
+			}
+		});
+		mod.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				
+			}
+		});
+		elim.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				int seleccion=JOptionPane.showConfirmDialog(null,"           ¿Desea eliminar el recurso "+cod.getText()+"?","Eliminar recurso",JOptionPane.YES_NO_CANCEL_OPTION,-1);
+				if (seleccion==JOptionPane.YES_OPTION)
+				{	//eliminar multa
+					//borrar el panel de multas
+					//llamar a dibujaMulta()
+				}				
+			}
+		});
+		return panel;
+	}
+	
+	public JPanel dibujaLineaMulta()
+	{		
+		JPanel panel=new JPanel();
+		final JTextField cod=new JTextField("M001");
 		cod.setEnabled(false);
 		cod.setPreferredSize(new Dimension(130,25));
 		JTextField exp=new JTextField();
@@ -449,11 +598,42 @@ public class PanelContratos extends JPanel
 		descrip.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				if (!formDescrip.isVisible())
-				{	formDescrip.getContentPane().add(pintaDescrip());
-					formDescrip.pack();
-					formDescrip.setVisible(true);
+				if (!formDescripM.isVisible())
+				{	formDescripM.getContentPane().add(panelDescripM(cod.getText()));
+					formDescripM.pack();
+					formDescripM.setVisible(true);
 				}
+			}
+		});
+		recur.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				if (!formRecurso.isVisible())
+				{	formRecurso.getContentPane().add(panelRecurso(cod.getText()));
+					formRecurso.pack();
+					formRecurso.setVisible(true);
+				}
+			}
+		});
+		mod.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				if (!formMulta.isVisible())
+				{	formMulta.getContentPane().add(panelMulta('m',cod.getText()));
+					formMulta.pack();
+					formMulta.setVisible(true);
+				}
+			}
+		});
+		elim.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				int seleccion=JOptionPane.showConfirmDialog(null,"           ¿Desea eliminar la multa "+cod.getText()+"?","Eliminar multa",JOptionPane.YES_NO_CANCEL_OPTION,-1);
+				if (seleccion==JOptionPane.YES_OPTION)
+				{	//eliminar multa
+					//borrar el panel de multas
+					//llamar a dibujaMulta()
+				}				
 			}
 		});
 		return panel;
