@@ -258,8 +258,8 @@ public class InterfazGrafica
 			{	
 				String valor=JOptionPane.showInputDialog(null,"Introduce la matrícula del vehículo","Consultar contrato",-1);
 				if (valor!=null)
-				{	
-					panelVistas.setSelectedIndex(0);
+				{	panelVistas.setSelectedIndex(0);
+					controlador.consultarContratoMatricula(valor);
 				}
 			}
 		});

@@ -17,5 +17,5 @@ public interface GClientes
 	//Requisito 1.6
 	public void consultarClienteDni(String dni);	
 	
-	public void asociaClienteContrato(String codcliente,String codcontrato);
+	public void asociaClienteContrato(int clave,String codcliente,String codcontrato);
 }

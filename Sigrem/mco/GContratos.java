@@ -14,7 +14,7 @@ public interface GContratos
 	//Requisito 2.4
 	public String consultarContratoCodigo(boolean modificar,String codigo);
 	//Requisito 2.5
-	public void consultarContratoMatricula(String matricula);
+	public String consultarContratoMatricula(String matricula);
 	
 	public String modificarFechaBaja(String codigo);
 }

@@ -76,7 +76,7 @@ public class GContratosImp implements GContratos
 			if (busqueda[0]!=null)
 			{	Contrato contrato=(Contrato)busqueda[0];
 				Date hoy=new Date();
-				SimpleDateFormat formato=new SimpleDateFormat("dd.MM.yyyy");
+				SimpleDateFormat formato=new SimpleDateFormat("dd/mm/yyyy");
 				contrato.setFechaBaja(formato.format(hoy));
 				return contrato.getCodigoCliente();
 			}
@@ -110,83 +110,26 @@ public class GContratosImp implements GContratos
 			}
 			else
 			{	vista.actualizaVistaMensaje("Error al buscar el contrato "+codigo+". No se ha encontrado");
-			return null;
+				return null;
 			}		
 	}
 	
-	public void consultarContratoMatricula(String matricula)
+	public String consultarContratoMatricula(String matricula)
 	{
-		
-	}
-	
-	
-	
-/*
-	public boolean añadirContrato(Cliente cliente, Integer codigo,String matricula)
-	{	//falta añadir todos los parametros de contrato
-		Contrato nuevo=new Contrato(cliente,codigo,matricula);
-		Comparable[] claves=null;
-		claves[0]= nuevo.dameCodigo();
-		claves[1]= nuevo.dameMatricula();
-		if (consultarContratoCodigo((Integer)claves[0])==null && consultarContratoMatricula((String)claves[1])==null)
-		{	contratos.insertar(claves,nuevo);
-			//vista.actualizaContratos();
-			//falta saber como se comunica con la interfaz
-  	   		return true;
+		Object[] busqueda=listacontratos.buscar(matricula,1);
+		if (busqueda.length==0)
+		{	vista.actualizaVistaMensaje("Error al buscar el contrato "+matricula+". No se ha encontrado");
+			return null;			
 		}
-		return false;
+		else 
+			if (busqueda[0]!=null)
+			{	Contrato contrato=(Contrato)busqueda[0];
+				vista.actualizaVista(1,1,contrato.getListaDatos());
+				return contrato.getCodigoCliente();
+			}
+			else
+			{	vista.actualizaVistaMensaje("Error al buscar el contrato "+matricula+". No se ha encontrado");
+				return null;
+			}
 	}
-
-	public boolean eliminarContrato(Integer codigo)
-	{
-		boolean eliminado=contratos.eliminar(codigo,0);
-		if (eliminado) 
-		{	//vista.actualizaContratos();
-			//	falta saber como se comunica con la interfaz
-		}
-		return eliminado; 
-	}
-
-
-	public boolean modificarContrato(Integer codigoAntiguo,Cliente cliente, Integer codigoNuevo,String matriculaNuevo)
-	{ 	//falta añadir todos los parametros de contrato
-		Contrato nuevo=new Contrato(cliente,codigoNuevo,matriculaNuevo);
-		Contrato antiguo=this.consultarContratoCodigo(codigoAntiguo);
-		if (antiguo!=null)
-		{	String matriculaAntiguo=antiguo.dameMatricula(); 
-			//controla TODAS las posibles combinaciones de cambios de indice de codigo y matricula no permitidas
-  			if (codigoNuevo!=codigoAntiguo){
-  				if (matriculaNuevo!=matriculaAntiguo){
-  					if (consultarContratoCodigo(codigoNuevo)==null && this.consultarContratoMatricula(matriculaNuevo)==null){
-  						contratos.cambiarClaveDeIndice(codigoAntiguo,codigoNuevo,0);  	
-  						contratos.cambiarClaveDeIndice(matriculaAntiguo,matriculaNuevo,1);
-  					}else return false;
-  				}else{
-  					if (this.consultarContratoCodigo(codigoNuevo)==null){
-  						contratos.cambiarClaveDeIndice(codigoAntiguo,codigoNuevo,0);
-  					}else return false;
-  				}
-  			}else{
-  				if (matriculaNuevo!=matriculaAntiguo){
-  					if (this.consultarContratoMatricula(matriculaNuevo)==null){
-  						contratos.cambiarClaveDeIndice(matriculaAntiguo,matriculaNuevo,1);
-  					}else return false;
-  				}
-  			}
-  			//vista.actualizaContratos();
-  			//falta saber como se comunica con la interfaz
-  			return true;
-		}
-		return false;
-	}
-  
-	public Contrato consultarContratoCodigo(Integer codigo)
-	{
-		return (Contrato) this.contratos.buscar(codigo,0);
-	}
-
-  	public Contrato consultarContratoMatricula(String matricula)
-  	{
-  		return (Contrato) this.contratos.buscar(matricula,1);
-  	}*/
-  }
+}

@@ -64,7 +64,14 @@ public class Sigrem
 		String clientenuevo=gclientes.añadirCliente(datoscliente);
 		datoscontrato.addFirst(clientenuevo);
 		String contratonuevo=gcontratos.añadirContrato(datoscontrato);
-		gclientes.asociaClienteContrato(clientenuevo,contratonuevo);
+		gclientes.asociaClienteContrato(0,clientenuevo,contratonuevo);
+	}
+	
+	public void añadirContratoACliente(LinkedList datoscontrato,String dnicliente)
+	{
+		datoscontrato.addFirst(dnicliente);
+		String contratonuevo=gcontratos.añadirContrato(datoscontrato);
+		gclientes.asociaClienteContrato(2,dnicliente,contratonuevo);
 	}
 	
 	public void eliminarContrato(boolean borrar,String codcontrato)
@@ -80,6 +87,12 @@ public class Sigrem
 	{
 		String codcliente=gcontratos.consultarContratoCodigo(modificar,codigo);
 		if (codcliente!=null) gclientes.consultarClienteCodigo(modificar,codcliente);
+	}	
+	
+	public void consultarContratoMatricula(String matricula)
+	{
+		String codcliente=gcontratos.consultarContratoMatricula(matricula);
+		if (codcliente!=null) gclientes.consultarClienteCodigo(false,codcliente);
 	}	
 	
 	public void modificarCliente(String codcliente,LinkedList datos)

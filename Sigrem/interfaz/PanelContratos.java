@@ -175,7 +175,7 @@ public class PanelContratos extends JPanel
 		JPanel panel=new JPanel();
 		panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos del cliente",TitledBorder.LEFT,TitledBorder.TOP));
 		JLabel l1=new JLabel("Nombre ",SwingConstants.RIGHT);
-		JLabel l2=new JLabel("NIF/CIF ",SwingConstants.RIGHT);
+		JLabel l2=new JLabel("DNI/CIF ",SwingConstants.RIGHT);
 		JLabel l3=new JLabel("Dirección ",SwingConstants.RIGHT);
 		JLabel l4=new JLabel("Código postal ",SwingConstants.RIGHT);
 		JLabel l5=new JLabel("Población ",SwingConstants.RIGHT);
@@ -352,9 +352,16 @@ public class PanelContratos extends JPanel
 		nuevoContrato.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formulario.getContentPane().add(panelAlta('n',null,datos));
-				formulario.pack();	
-				formulario.setVisible(true);
+				if (datos!=null)
+				{	formulario.getContentPane().add(panelAlta('n',null,datos));
+					formulario.pack();
+					formulario.setVisible(true);
+				}
+				else
+				{	formulario.getContentPane().add(panelAlta('c',null,datos));
+					formulario.pack();	
+					formulario.setVisible(true);
+				}
 			}
 		});
 		return panel;
@@ -426,7 +433,7 @@ public class PanelContratos extends JPanel
 		final JTextField tfechaalta=new JTextField();
 		if ((tipo=='c') || (tipo=='n'))
 		{	Date hoy = new Date();
-			SimpleDateFormat formato=new SimpleDateFormat("dd.MM.yyyy");
+			SimpleDateFormat formato=new SimpleDateFormat("dd/mm/yyyy");
 			tfechaalta.setText(formato.format(hoy));
 		}
 		else if (tipo=='m')
@@ -626,8 +633,6 @@ public class PanelContratos extends JPanel
 					datoscliente.add(temail.getText());
 					datoscliente.add(tfax.getText());
 					controlador.añadirContrato(datoscontrato,datoscliente);
-					formulario.setVisible(false);
-					formulario.getContentPane().removeAll();
 				}
 				else if (tipo=='m')
 				{	datoscontrato.add(datos.get(0));
@@ -647,9 +652,14 @@ public class PanelContratos extends JPanel
 					datoscliente.add(tfax.getText());
 					controlador.modificarContrato((String)datos.get(0),datoscontrato);
 					controlador.modificarCliente((String)datos.get(1),datoscliente);
-					formulario.setVisible(false);
-					formulario.getContentPane().removeAll();					
 				}
+				else if(tipo=='n')
+				{	datoscontrato.add(tmatricula.getText());
+					datoscontrato.add(tfechaalta.getText());
+					controlador.añadirContratoACliente(datoscontrato,tdni.getText());
+				}
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
 			}
 		});
 		cancelar.addActionListener(new ActionListener()
