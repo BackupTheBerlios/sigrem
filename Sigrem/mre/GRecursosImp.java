@@ -42,7 +42,7 @@ public class GRecursosImp implements GRecursos
 	
 	public void meteRecurso(Recurso recurso){
 		String[] claves=new String[1];
-		claves[0]=codigoRecurso;
+		claves[0]=recurso.dameCodigo();
 		this.dameEstructuraRecursos().insertar(claves,recurso);
 	}
 	
