@@ -105,6 +105,36 @@ public class GEconomiaImp implements GEconomia
 		this.cuotaContrato=33;
 	}
 	
+	public void facturacion(int [] vFacturacion, int nFacturacion, int ultMes)
+	{
+		//int nCon=gcontratos.dameListaContratos().dameTamaño();
+		//int fac=nCon*cuotaContrato;
+		Calendar hoy=Calendar.getInstance();
+		int mesActual=hoy.get(Calendar.MONTH);
+		if (mesActual!=ultMes)
+		{
+			if(ultMes<mesActual)
+			{
+				int dif=mesActual-ultMes;
+				for(int i=0;i<dif;i++)
+				{
+					vFacturacion[i]=vFacturacion[i+dif];
+					vFacturacion[i+dif]=0;
+				}
+			}
+			else
+			{
+				int dif=ultMes-mesActual;
+				for(int i=0;i<dif;i++)
+				{
+					vFacturacion[i]=vFacturacion[i+dif];
+					vFacturacion[i+dif]=0;
+				}
+			}
+		}
+		vFacturacion[11]=nFacturacion;
+	}
+	
 	public void gastos(int [] vGastos, int nGastos, int ultMes)
 	{
 		Calendar hoy=Calendar.getInstance();
@@ -133,22 +163,7 @@ public class GEconomiaImp implements GEconomia
 		vGastos[11]=nGastos;
 	}
 
-	public void facturacion()
-	{
-		int nCon=gcontratos.dameListaContratos().dameTamaño();
-		int fac=nCon*cuotaContrato;
-		Calendar hoy=Calendar.getInstance();
-		int mesActual=hoy.get(Calendar.MONTH);
-		if (mesActual==ultimomes)
-		{
-			//facturacion[11]=fac;
-		}
-		//gcontratos.dameListaContratos();
-		//en funcion de las mulras y los recursos de cada contrato se cancula su valor
-		//sumar todos los valores de los contratos
-	}
-	
-	public void balance()
+	public void balance(int [] vBalance, int nFacturacion, int nGastos, int nBalance, int ultMes)
 	{
 		//facturacion-gastos
 	}
