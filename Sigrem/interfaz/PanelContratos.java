@@ -1677,11 +1677,8 @@ public class PanelContratos extends JPanel
 	
 	private void estadosRecursos(JComboBox estado)
 	{
-		estado.addItem("Pendiente");
-		estado.addItem("Recurso 1º");
-		estado.addItem("Recurso 2º");
-		estado.addItem("Recurso 3º");
-		estado.addItem("Favorable");
-		estado.addItem("Desfavorable");
+		estado.addItem("Solicitado");
+		estado.addItem("Presentado");
+		estado.addItem("Resuelto");
 	}
 }
