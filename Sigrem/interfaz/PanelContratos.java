@@ -183,17 +183,18 @@ public class PanelContratos extends JPanel
 		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,p1,p2);
 		sp.setEnabled(false);
 		sp.setDividerSize(4);
-		formConsulta.getContentPane().add(sp);
-		formConsulta.pack();
-		formConsulta.setVisible(true);
 		dni.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
+				System.out.println("ok");
 				controlador.consultarClienteDni((String)dni.getSelectedItem());
 				formConsulta.setVisible(false);
 				formConsulta.getContentPane().removeAll();				
 			}
 		});
+		formConsulta.getContentPane().add(sp);
+		formConsulta.pack();
+		formConsulta.setVisible(true);
 	}
 	
 	public void muestraPanelRecursos(String codmulta)
