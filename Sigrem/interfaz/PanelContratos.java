@@ -93,6 +93,22 @@ public class PanelContratos extends JPanel
 		inicializaCajaMultas();
 	}
 	
+	private boolean fechaValida(int dia, int mes, int año)
+	{
+		boolean bien=true;
+		if ((mes==4) || (mes==6) || (mes==9) || (mes==11))
+		{	if (dia>30) bien=false;}
+		else 
+		{	if (mes==2)
+			{	if ((año%4)==0)
+				{	if (dia>29) bien=false;}
+				else
+				{	if (dia>28) bien=false;}
+			}
+		}	
+		return bien;
+	}
+	
 	public void actualiza(int panel,LinkedList datos)
 	{
 		if (panel==1)
@@ -1130,21 +1146,30 @@ public class PanelContratos extends JPanel
 					JOptionPane.showMessageDialog(null,"Los campos marcados con * son obligatorios");
 				}
 				else
-				{	LinkedList datos=new LinkedList();
-					datos.add(exp.getText());
-					datos.add(bol.getText());
-					datos.add(dia.getSelectedItem()+"/"+mes.getSelectedItem()+"/"+año.getSelectedItem());
-					datos.add((String)infraccion.getSelectedItem());
-					datos.add(descrip.getText());
-					datos.add(codigoContrato.getText());
-					if (tipo=='c') 
-					{	controlador.añadirMulta(codigoContrato.getText(),datos);}
-					else if (tipo=='m')
-					{	datos.addFirst(codigo);
-						controlador.modificarMulta(codigo,datos);
+				{	int d=Integer.valueOf((String)dia.getSelectedItem()).intValue();
+					int m=Integer.valueOf((String)mes.getSelectedItem()).intValue();
+					int a=((Integer)año.getSelectedItem()).intValue();
+					if (fechaValida(d,m,a))
+					{	LinkedList datos=new LinkedList();
+						datos.add(exp.getText());
+						datos.add(bol.getText());
+						datos.add(dia.getSelectedItem()+"/"+mes.getSelectedItem()+"/"+año.getSelectedItem());
+						datos.add((String)infraccion.getSelectedItem());
+						datos.add(descrip.getText());
+						datos.add(codigoContrato.getText());
+						if (tipo=='c') 
+						{	controlador.añadirMulta(codigoContrato.getText(),datos);}
+						else if (tipo=='m')
+						{	datos.addFirst(codigo);
+							controlador.modificarMulta(codigo,datos);
+						}
+						formulario.setVisible(false);
+						formulario.getContentPane().removeAll();
 					}
-					formulario.setVisible(false);
-					formulario.getContentPane().removeAll();
+					else
+					{
+						JOptionPane.showMessageDialog(null,"La fecha introducida no es válida");
+					}
 				}
 			}
 		});
