@@ -14,17 +14,7 @@ public class PanelEmpleados extends JPanel
 {
 	private Sigrem controlador;
 	
-	private JDialog formAlta;	
-	
-	private JDialog formBaja;
-	
-	private JDialog formMod1;
-	
-	private JDialog formMod2;
-	
-	private JDialog formRecurso;
-	
-	private JDialog formDescrip;
+	private JDialog formulario;
 	
 	private JButton bmodificar;
 	
@@ -53,32 +43,14 @@ public class PanelEmpleados extends JPanel
 		pmostrado=-1;
 		cmostrado="";
 		nmostrado="";
-		formAlta=new JDialog(v,true);
-		formAlta.setResizable(false);
-		formAlta.setLocation(350,100);
-		formBaja=new JDialog(v,true);
-		formBaja.setResizable(false);
-		formBaja.setLocation(350,100);
-		formMod1=new JDialog(v,true);
-		formMod1.setResizable(false);
-		formMod1.setLocation(350,100);
-		formMod2=new JDialog(v,true);
-		formMod2.setResizable(false);
-		formMod2.setLocation(350,100);
-		formRecurso=new JDialog(v,true);		
-		formRecurso.setResizable(false);
-		formRecurso.setLocation(350,100);
-		formDescrip=new JDialog(v,true);
-		formDescrip.setResizable(false);
-		formDescrip.setLocation(350,100);
 		dibujaPaneles();
-		
-		
-		
+		formulario=new JDialog(v,true);
+		formulario.setResizable(false);
+		formulario.setLocation(350,100);
 	}
 	
 	public void dibujaPaneles()
-	{
+	{		
 		bmodificar=new JButton("Modificar");
 		bdespedir=new JButton("Despedir");
 		JPanel pempleado=dibujaEmpleado();
@@ -152,34 +124,25 @@ public class PanelEmpleados extends JPanel
 		bcontratar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				if (!formAlta.isVisible())
-				{	
-					formAlta.getContentPane().add(panelAltaEmpleado());
-					formAlta.pack();	
-					formAlta.setVisible(true);	
-				}
+				formulario.getContentPane().add(panelAltaEmpleado());
+				formulario.pack();	
+				formulario.setVisible(true);				
 			}
 		});
 		bdespedir.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				if (!formBaja.isVisible())
-				{	
-					formBaja.getContentPane().add(panelBajaEmpleado());
-					formBaja.pack();
-					formBaja.setVisible(true);
-				}
+				formulario.getContentPane().add(panelBajaEmpleado());
+				formulario.pack();
+				formulario.setVisible(true);				
 			}
 		});
 		bmodificar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				if (!formAlta.isVisible() && !formBaja.isVisible())
-				{	
-					formMod1.getContentPane().add(panelModificaEmpleado1());
-					formMod1.pack();	
-					formMod1.setVisible(true);
-				}
+				formulario.getContentPane().add(panelModificaEmpleado1());
+				formulario.pack();	
+				formulario.setVisible(true);
 			}
 		});
 		return pemp;
@@ -353,9 +316,8 @@ public class PanelEmpleados extends JPanel
 	}
 	
 	public JPanel panelAltaEmpleado() 
-	{	
-		JPanel pndat=new JPanel();
-		formAlta.setTitle("Contratar empleado");
+	{	JPanel pndat=new JPanel();
+		formulario.setTitle("Contratar empleado");
 		JLabel lcodigo=new JLabel("Código del empleado");
 		JLabel lperfil=new JLabel("Perfil del empleado");
 		JLabel lnomina=new JLabel("Nómina del empleado");
@@ -404,8 +366,8 @@ public class PanelEmpleados extends JPanel
 		bacepta.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formAlta.setVisible(false);
-				formAlta.getContentPane().removeAll();
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
 				removeAll();
 				pmostrado=perfil.getSelectedIndex();
 				cmostrado=tcodigo.getText();
@@ -420,8 +382,8 @@ public class PanelEmpleados extends JPanel
 		bcancela.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formAlta.setVisible(false);
-				formAlta.getContentPane().removeAll();
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
 			}
 		});
 		return pndat;
@@ -430,7 +392,7 @@ public class PanelEmpleados extends JPanel
 	public JPanel panelBajaEmpleado()
 	{
 		JPanel pndat=new JPanel();
-		formBaja.setTitle("Despidiendo empleado... "+cmostrado);
+		formulario.setTitle("Despidiendo empleado... "+cmostrado);
 		JLabel lcodigo=new JLabel("Código del empleado");		
 		lcodigo.setPreferredSize(new Dimension(150,20));		
 		final JTextField tcodigo=new JTextField(cmostrado);		
@@ -453,20 +415,20 @@ public class PanelEmpleados extends JPanel
 		bacepta.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{	
-				formBaja.setVisible(false);
+				formulario.setVisible(false);
 				int seleccion=JOptionPane.showConfirmDialog(null,"         ¿Desea despedir al empleado "+tcodigo.getText()+"?","Despedir empleado",JOptionPane.YES_NO_CANCEL_OPTION,-1);
 				if (seleccion==JOptionPane.YES_OPTION)
 				{	
 					
 				}
-				formBaja.getContentPane().removeAll();				
+				formulario.getContentPane().removeAll();				
 			}
 		});
 		bcancela.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formBaja.setVisible(false);
-				formBaja.getContentPane().removeAll();
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
 			}
 		});
 		return pndat;
@@ -475,7 +437,7 @@ public class PanelEmpleados extends JPanel
 	public JPanel panelModificaEmpleado1()	
 	{
 		JPanel pndat=new JPanel();
-		formMod1.setTitle("¿Modificar empleado?");
+		formulario.setTitle("¿Modificar empleado?");
 		JLabel lcodigo=new JLabel("Código del empleado");		
 		lcodigo.setPreferredSize(new Dimension(150,20));		
 		final JTextField tcodigo=new JTextField(cmostrado);		
@@ -498,18 +460,18 @@ public class PanelEmpleados extends JPanel
 		bacepta.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{	
-				formMod1.setVisible(false);
-				formMod2.getContentPane().removeAll();
-				formMod2.getContentPane().add(panelModificaEmpleado2(tcodigo.getText()));
-				formMod2.pack();	
-				formMod2.setVisible(true);			
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
+				formulario.getContentPane().add(panelModificaEmpleado2(tcodigo.getText()));
+				formulario.pack();	
+				formulario.setVisible(true);			
 			}
 		});
 		bcancela.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formMod1.setVisible(false);
-				formMod1.getContentPane().removeAll();
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
 			}
 		});
 		return pndat;
@@ -518,7 +480,7 @@ public class PanelEmpleados extends JPanel
 	public JPanel panelModificaEmpleado2(String cod)
 	{
 		JPanel pndat=new JPanel();
-		formMod2.setTitle("Modificar empleado "+cod);
+		formulario.setTitle("Modificar empleado "+cod);
 		JLabel lcodigo=new JLabel("Código del empleado");
 		JLabel lperfil=new JLabel("Perfil del empleado");
 		JLabel lnomina=new JLabel("Nómina del empleado");
@@ -568,8 +530,8 @@ public class PanelEmpleados extends JPanel
 		bacepta.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formMod2.setVisible(false);
-				formMod2.getContentPane().removeAll();
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
 				removeAll();
 				pmostrado=perfil.getSelectedIndex();
 				cmostrado=tcodigo.getText();
@@ -583,8 +545,8 @@ public class PanelEmpleados extends JPanel
 		bcancela.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formMod2.setVisible(false);
-				formMod2.getContentPane().removeAll();
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
 			}
 		});
 		return pndat;
@@ -592,8 +554,8 @@ public class PanelEmpleados extends JPanel
 		
 	public JPanel modificaRecurso(String codigo)
 	{
-		formRecurso.setTitle("Modificar estado del recurso "+codigo);		
-		formRecurso.setTitle("Modificar estado de recurso "+codigo);		
+		formulario.setTitle("Modificar estado del recurso "+codigo);		
+		formulario.setTitle("Modificar estado de recurso "+codigo);		
 		JLabel l1=new JLabel("Código");
 		JLabel l2=new JLabel("Estado");
 		String [] opciones={"Pendiente","Recurso 1º","Recurso 2º","Recurso 3º","Favorable","Perdido"};
@@ -631,8 +593,8 @@ public class PanelEmpleados extends JPanel
 		aceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formRecurso.setVisible(false);
-				formRecurso.getContentPane().removeAll();
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
 				//validar datos
 				//enviar datos a Sigrem para almacenarlos en la estructura de datos
 			}
@@ -640,8 +602,8 @@ public class PanelEmpleados extends JPanel
 		cancelar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formRecurso.setVisible(false);
-				formRecurso.getContentPane().removeAll();
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
 			}
 		});
 		return panel;
@@ -649,7 +611,7 @@ public class PanelEmpleados extends JPanel
 	
 	public JPanel anadeRecurso()
 	{
-		formRecurso.setTitle("Añadir recurso");
+		formulario.setTitle("Añadir recurso");
 		JLabel l1=new JLabel("Código");
 		l1.setPreferredSize(new Dimension(80,20));
 		JTextField cod=new JTextField();
@@ -673,8 +635,8 @@ public class PanelEmpleados extends JPanel
 		aceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formRecurso.setVisible(false);
-				formRecurso.getContentPane().removeAll();
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
 				//validar datos
 				//enviar datos a Sigrem para almacenarlos en la estructura de datos
 			}
@@ -682,8 +644,8 @@ public class PanelEmpleados extends JPanel
 		cancelar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formRecurso.setVisible(false);
-				formRecurso.getContentPane().removeAll();
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
 			}
 		});
 		return panel;
@@ -691,7 +653,7 @@ public class PanelEmpleados extends JPanel
 	
 	public JPanel pintaDescrip(String cod)
 	{
-		formDescrip.setTitle("Descripción del recurso "+cod);
+		formulario.setTitle("Descripción del recurso "+cod);
 		JPanel panel=new JPanel();
 		JPanel p1=new JPanel();
 		JPanel p2=new JPanel();
@@ -712,8 +674,8 @@ public class PanelEmpleados extends JPanel
 		aceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formDescrip.setVisible(false);
-				formDescrip.getContentPane().removeAll();								
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();								
 			}
 		});
 		return panel;
@@ -750,21 +712,17 @@ public class PanelEmpleados extends JPanel
 		descrip.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				if (!formDescrip.isVisible())
-				{	formDescrip.getContentPane().add(pintaDescrip(cod.getText()));
-					formDescrip.pack();
-					formDescrip.setVisible(true);
-				}
+				formulario.getContentPane().add(pintaDescrip(cod.getText()));
+				formulario.pack();
+				formulario.setVisible(true);			
 			}
 		});
 		modi.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{	
-				if (!formRecurso.isVisible())
-				{	formRecurso.getContentPane().add(modificaRecurso(cod.getText()));
-					formRecurso.pack();
-					formRecurso.setVisible(true);
-				}		
+				formulario.getContentPane().add(modificaRecurso(cod.getText()));
+				formulario.pack();
+				formulario.setVisible(true);				
 			}
 		});
 		elim.addActionListener(new ActionListener()
