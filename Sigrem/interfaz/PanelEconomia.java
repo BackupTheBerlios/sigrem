@@ -28,11 +28,12 @@ public class PanelEconomia extends JPanel
 		formulario.setResizable(false);
 		formulario.setLocation(210,320);
 	    pbalance=dibujaBalance();
-		spx=new JSplitPane(JSplitPane.VERTICAL_SPLIT,pbalance,pgrafico);
+	    spx=new JSplitPane(JSplitPane.VERTICAL_SPLIT,pbalance,pgrafico);
 		spx.setEnabled(false);		
 		spx.setDividerSize(4);
 		add(spx);
-		pbalance.setPreferredSize(new Dimension(625,200));				
+		//pbalance.setPreferredSize(new Dimension(629,200));		
+		pbalance.setPreferredSize(new Dimension(777,200));
 	}
 	
 	public JPanel dibujaBalance()
@@ -64,19 +65,10 @@ public class PanelEconomia extends JPanel
 		bhbal.addActionListener(new ActionListener()
 				{	public void actionPerformed(ActionEvent e)
 					{
-						/*if (!formulario.isVisible())
-						{
-							dibujaBal();
-						}
-						else
-						{
-							formulario.setVisible(false);
-							formulario.getContentPane().removeAll();
-							dibujaBal();
-						}*/
 						spx.removeAll();
 						pbalance=dibujaBalance();
 						pgrafico=dibujaGrafico(Color.BLUE, balance, "Histórico del Balance");
+						pgrafico.setPreferredSize(new Dimension(777,280));
 						spx=new JSplitPane(JSplitPane.VERTICAL_SPLIT,pbalance,pgrafico);
 						spx.setEnabled(false);		
 						spx.setDividerSize(4);
@@ -89,19 +81,10 @@ public class PanelEconomia extends JPanel
 		bhfac.addActionListener(new ActionListener()
 				{	public void actionPerformed(ActionEvent e)
 					{
-						/*if (!formulario.isVisible())
-						{
-							dibujaFac();
-						}
-						else
-						{
-							formulario.setVisible(false);
-							formulario.getContentPane().removeAll();
-							dibujaFac();
-						}*/
 						spx.removeAll();
 						pbalance=dibujaBalance();
 						pgrafico=dibujaGrafico(Color.GREEN, facturacion, "Histórico de Facturación");
+						pgrafico.setPreferredSize(new Dimension(777,280));
 						spx=new JSplitPane(JSplitPane.VERTICAL_SPLIT,pbalance,pgrafico);
 						spx.setEnabled(false);		
 						spx.setDividerSize(4);
@@ -114,19 +97,10 @@ public class PanelEconomia extends JPanel
 		bhgas.addActionListener(new ActionListener()
 				{	public void actionPerformed(ActionEvent e)
 					{
-						/*if (!formulario.isVisible())
-						{
-							dibujaGas();
-						}
-						else
-						{
-							formulario.setVisible(false);
-							formulario.getContentPane().removeAll();
-							dibujaGas();
-						}*/
 						spx.removeAll();
 						pbalance=dibujaBalance();
 						pgrafico=dibujaGrafico(Color.RED, gastos, "Histórico de Gastos");
+						pgrafico.setPreferredSize(new Dimension(777,280));
 						spx=new JSplitPane(JSplitPane.VERTICAL_SPLIT,pbalance,pgrafico);
 						spx.setEnabled(false);		
 						spx.setDividerSize(4);
@@ -165,7 +139,8 @@ public class PanelEconomia extends JPanel
 	{
 		JPanel pgra=new JPanel();
 		pgra.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),s,TitledBorder.LEFT,TitledBorder.TOP));
-		pgra.setPreferredSize(new Dimension(625,280));
+		//pgra.setPreferredSize(new Dimension(629,280));
+		pgra.setPreferredSize(new Dimension(777,200));
 		JLabel l1=new JLabel("  0 ",SwingConstants.RIGHT);
 		JLabel l2=new JLabel(" 10 ",SwingConstants.RIGHT);
 		JLabel l3=new JLabel(" 20 ",SwingConstants.RIGHT);
