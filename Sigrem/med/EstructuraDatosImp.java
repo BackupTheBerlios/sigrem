@@ -14,7 +14,7 @@ public class EstructuraDatosImp implements EstructuraDatos{
 	    }else{
 	       	//crea los distintos indices que tendra la estructura
 	    	for(int i=0;i<numeroDeIndices;i++){
-	       		arrayIndices[i]=new IndiceImp(i,this);
+	       		arrayIndices[i]=new IndiceImp(this,i);
 	       	}
 	    	vectorEliminados=new Vector();
 	    }
@@ -28,13 +28,17 @@ public class EstructuraDatosImp implements EstructuraDatos{
 	  	return arrayIndices.length;
 	  }
 	  
+	  public Indice dameIndice(int indice){
+	  	return arrayIndices[indice];
+	  }
+	  
 //	BUSCAR
 	  public boolean esta(Comparable clave, int indice){
-	    return buscar(clave,indice)!=null;
+	    return buscar(clave,indice).size()==0;
 	  }
 
-	  
-	  public Object[] buscar(Comparable clave, int indice){
+	  	  
+	  public Vector buscar(Comparable clave, int indice){
 	    return arrayIndices[indice].buscar(clave);
 	  }
 
@@ -42,13 +46,15 @@ public class EstructuraDatosImp implements EstructuraDatos{
 //	INSERTAR
 	  public void insertar(Comparable[] claves, Object elemento){
 	   this.arrayIndices[0].insertar(claves,elemento);	   
+	   this.mostrarTodosIndices();
 	  }
 	  
 	  
 //	ELIMINAR
 	  public boolean eliminar(Comparable clave,int indice){
-	  	//eliminamos de los indices
+	  	//eliminamos desde el "indice" con la "clave"
 	  	Object elementoEliminado=arrayIndices[indice].eliminar(clave);
+	  	this.mostrarTodosIndices();
 	  	if(elementoEliminado!=null){
 	  		vectorEliminados.add(elementoEliminado);
 	  		return true;
@@ -58,33 +64,40 @@ public class EstructuraDatosImp implements EstructuraDatos{
 
 	 
 //	CAMBIO
-	  public boolean cambiarClaveDeIndice(Comparable clave, Comparable nuevaCla, int indice){
+	  public Object cambiarClaveDeIndice(Comparable clave, Comparable nuevaCla, int indice){
 	    //Este metodo no cambia la clave dentro del objeto, solo lo cambia en el indice
 	    return this.arrayIndices[indice].cambiar(clave,nuevaCla);
 	  }
 	  
 //FUNCIONES PARA DEVOLVER TODOS LOS DATOS
 	  public Vector dameDatosActuales(){
-	  	return this.arrayIndices[0].dameTodos();
+	  	return this.arrayIndices[0].dameElementos();
 	  }
 	  
 	  
-	  public Vector dameDatosPorIndice(int indice){
+	  public Vector dameDatosOrdenadosPorIndice(int indice){
 	  	Vector elementosOrdenados=new Vector();
 	  	if (-1<indice && indice<this.dameNumeroIndices()){
-	  		elementosOrdenados=this.arrayIndices[indice].dameTodos();
+	  		elementosOrdenados=this.arrayIndices[indice].dameElementos();
 	  	}
 	  	return elementosOrdenados;	
 	  }
 	  
 	  
 	  public Vector dameDatosEliminados(){
-	  	return vectorEliminados; 
+	  	return (Vector)vectorEliminados.clone(); 
 		
 	  }
 	  
 	  	  
 //MOSTRAR EN LA CONSOLA
+	  public void mostrarTodosIndices(){
+	  	for (int i=0;i<arrayIndices.length;i++){
+	  		arrayIndices[i].mostrarClavesOrdenadas();
+	  	}
+	  }
+	  
+	  
 	  public void mostrarDatosInteger(){
 	  	Vector actuales=dameDatosActuales();
 	  	System.out.println("Elementos actuales de la estructura de tamaño "+actuales.size());

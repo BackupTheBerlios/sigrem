@@ -17,20 +17,20 @@ public class NodoIndiceImp {
   Object elemento;
   EstructuraDatos estructura;
     
-  public NodoIndiceImp(Comparable[] clavesNuevo,Object elementoNuevo,int[] posicionesNuevo,EstructuraDatos estructuraNuevo){
-    claves=clavesNuevo;
-    posiciones=posicionesNuevo;
-    elemento=elementoNuevo;
-    estructura=estructuraNuevo;
+  public NodoIndiceImp(Comparable[] clavesInicio,Object elementoInicio,int[] posicionesInicio,EstructuraDatos estructuraInicio){
+    claves=clavesInicio;
+    posiciones=posicionesInicio;
+    elemento=elementoInicio;
+    estructura=estructuraInicio;   
   }
   
-  
-  public void cambiaClave(int indice, Comparable nuevaClave){
+   	
+  public void cambiaClave(Comparable nuevaClave, int indice){
   	claves[indice]=nuevaClave;
   	
   }
   
-  public void cambiaPosicion(int indice, int nuevaPosicion){
+  public void cambiaPosicion(int nuevaPosicion, int indice){
   	posiciones[indice]=nuevaPosicion;
   	
   }
