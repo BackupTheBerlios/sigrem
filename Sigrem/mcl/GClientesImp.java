@@ -55,11 +55,11 @@ public class GClientesImp implements GClientes
 	}
 	
 	public void meteCliente(Cliente cliente){
-		String[] claves=new String[this.dameEstructuraClientes().dameNumeroIndices()];
+		String[] claves=new String[listaClientes.dameNumeroIndices()];
 		claves[0]=new String(cliente.dameCodigo());
 		claves[1]=new String(cliente.dameNombre());
 		claves[2]=new String(cliente.dameDni());
-		this.dameEstructuraClientes().insertar(claves,cliente);
+		listaClientes.insertar(claves,cliente);
 	}
 	
 	public void asociaClienteContrato(String codcliente,String codcontrato)
