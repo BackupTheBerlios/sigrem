@@ -9,7 +9,7 @@ public interface GMultas
 	//Requisito 3.2
 	public void eliminarMulta(String codigo);
 	//Requisito 3.3
-	public void modificarMulta(String codigo);
+	public void modificarMulta(String codigo,LinkedList datos);
 	//Requisito 3.4
 	public void consultarMultaCodigo(String codigo);
 	//Requisito 3.5

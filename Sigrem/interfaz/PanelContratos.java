@@ -104,13 +104,13 @@ public class PanelContratos extends JPanel
 		}
 	}
 	
-	public void actualizaCajaMultas(boolean borrar,LinkedList datos)
+	public void actualizaCajaMultas(char tipo,LinkedList datos)
 	{
-		if (!borrar)
+		if (tipo=='a')
 		{	int lineas=cajaMultas.getComponentCount();
 			cajaMultas.add(dibujaLineaMulta(datos),lineas-1);
 		}
-		else
+		else 
 		{	int i=1;
 			boolean esta=false;
 			while((!esta) && (i<cajaMultas.getComponentCount()-1))
@@ -120,10 +120,11 @@ public class PanelContratos extends JPanel
 				if (codigo.equals(texto.getText()))
 				{	esta=true;
 					cajaMultas.remove(i);
+					if (tipo=='m') cajaMultas.add(dibujaLineaMulta(datos),i);	
 				}
 				i++;
 			}			
-		}
+		}		
 	}
 	
 	public void actualizaPanelConsulta(String nombre,Vector dnis)
@@ -507,7 +508,7 @@ public class PanelContratos extends JPanel
 			bcrea.addActionListener(new ActionListener()
 			{	public void actionPerformed(ActionEvent e)
 				{
-					formulario.getContentPane().add(panelAltaMulta('c',null));
+					formulario.getContentPane().add(panelAltaMulta('c',null,null,null));
 					formulario.pack();
 					formulario.setVisible(true);				
 				}
@@ -786,7 +787,7 @@ public class PanelContratos extends JPanel
 		aceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{			
-				if ((tmatricula.getText().equals("")) && (tdni.getText().equals("")) && (tnom.getText().equals("")))
+				if ((tmatricula.getText().equals("")) || (tdni.getText().equals("")) || (tnom.getText().equals("")))
 				{
 					JOptionPane.showMessageDialog(null,"Los campos marcados con * son obligatorios");
 				}
@@ -944,13 +945,13 @@ public class PanelContratos extends JPanel
 		return pmod;
 	}
 	
-	public JPanel panelAltaMulta(final char tipo,String codigo)
+	public JPanel panelAltaMulta(final char tipo,final String codigo,String expediente,String boletin)
 	{
 		if (tipo=='c') formulario.setTitle("Crear multa");
 		else if (tipo=='m') formulario.setTitle("Modificar multa "+codigo);
 		formulario.setLocation(300,100);
-		JLabel l2=new JLabel("Expediente ",SwingConstants.RIGHT);
-		JLabel l3=new JLabel("Boletín ",SwingConstants.RIGHT);
+		JLabel l2=new JLabel("* Expediente ",SwingConstants.RIGHT);
+		JLabel l3=new JLabel("* Boletín ",SwingConstants.RIGHT);
 		JLabel l4=new JLabel("Fecha denuncia ",SwingConstants.RIGHT);
 		JLabel l5=new JLabel("Infracción ",SwingConstants.RIGHT);
 		JLabel r1=new JLabel(" ",SwingConstants.RIGHT);
@@ -973,7 +974,9 @@ public class PanelContratos extends JPanel
 		final JTextField fecha=new JTextField();
 		fecha.setPreferredSize(new Dimension(100,20));
 		if (tipo=='m')
-		{	exp.setEditable(false);
+		{	exp.setText(expediente);
+			bol.setText(boletin);
+			exp.setEditable(false);
 			bol.setEditable(false);			
 		}
 		String [] dias={"1","2","3","4","5","6","7","8","9","10","11","12","13","14",
@@ -1052,22 +1055,27 @@ public class PanelContratos extends JPanel
 		aceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				LinkedList datos=new LinkedList();
-				if (tipo=='c')
-				{	datos.add(exp.getText());
+				if ((exp.getText().equals("")) || (bol.getText().equals("")))
+				{
+					JOptionPane.showMessageDialog(null,"Los campos marcados con * son obligatorios");
+				}
+				else
+				{	LinkedList datos=new LinkedList();
+					datos.add(exp.getText());
 					datos.add(bol.getText());
 					datos.add(dia.getSelectedItem()+"/"+mes.getSelectedItem()+"/"+año.getSelectedItem());
 					datos.add((String)infraccion.getSelectedItem());
 					datos.add(descrip.getText());
 					datos.add(codigoContrato.getText());
-					controlador.añadirMulta(codigoContrato.getText(),datos);
+					if (tipo=='c') 
+					{	controlador.añadirMulta(codigoContrato.getText(),datos);}
+					else if (tipo=='m')
+					{	datos.addFirst(codigo);
+						controlador.modificarMulta(codigo,datos);
+					}
+					formulario.setVisible(false);
+					formulario.getContentPane().removeAll();
 				}
-				else if (tipo=='m')
-				{
-					
-				}
-				formulario.setVisible(false);
-				formulario.getContentPane().removeAll();				
 			}
 		});
 		cancelar.addActionListener(new ActionListener()
@@ -1222,11 +1230,11 @@ public class PanelContratos extends JPanel
 		cod.setEditable(false);
 		cod.setBackground(Color.WHITE);
 		cod.setPreferredSize(new Dimension(100,25));
-		JTextField exp=new JTextField((String)datos.get(1));
+		final JTextField exp=new JTextField((String)datos.get(1));
 		exp.setEditable(false);
 		exp.setBackground(Color.WHITE);
 		exp.setPreferredSize(new Dimension(100,25));
-		JTextField bol=new JTextField((String)datos.get(2));
+		final JTextField bol=new JTextField((String)datos.get(2));
 		bol.setEditable(false);
 		bol.setBackground(Color.WHITE);
 		bol.setPreferredSize(new Dimension(100,25));
@@ -1274,7 +1282,7 @@ public class PanelContratos extends JPanel
 		mod.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formulario.getContentPane().add(panelAltaMulta('m',cod.getText()));
+				formulario.getContentPane().add(panelAltaMulta('m',cod.getText(),exp.getText(),bol.getText()));
 				formulario.pack();
 				formulario.setVisible(true);				
 			}

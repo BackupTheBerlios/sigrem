@@ -1,8 +1,10 @@
 package mmu;
 
 import java.util.LinkedList;
+import java.util.Vector;
 
 import interfaz.InterfazGrafica;
+import mco.Contrato;
 import med.*;
 
 public class GMultasImp implements GMultas 
@@ -45,7 +47,7 @@ public class GMultasImp implements GMultas
 		datos.addFirst(codigoantiguo);
 		LinkedList datosmultas=new LinkedList();
 		datosmultas.add(datos);
-		vista.actualizaVistaCajaMultas(false,datos);
+		vista.actualizaVistaCajaMultas('a',datos);
 		vista.actualizaVista(1,3,null);
 		return codigoantiguo;
 	}
@@ -56,16 +58,30 @@ public class GMultasImp implements GMultas
 		if (eliminado) 
 		{	LinkedList datos=new LinkedList();
 			datos.add(codigo);
-			vista.actualizaVistaCajaMultas(true,datos);
+			vista.actualizaVistaCajaMultas('e',datos);
 			vista.actualizaVista(1,3,null);
 		}
 		else vista.actualizaVistaMensaje("Error al eliminar la multa "+codigo+". No se ha encontrado");
 	
 	}
 
-	public void modificarMulta(String codigo)
+	public void modificarMulta(String codigo,LinkedList datos)
 	{
-		
+		Vector busqueda=listaMultas.buscar(codigo,0);
+		if (busqueda.size()==0)
+		{	vista.actualizaVistaMensaje("Error al buscar la multa "+codigo+". No se ha encontrado");}
+		else 
+		{	Multa multa=(Multa)busqueda.get(0);
+			multa.ponFechaDenuncia((String)datos.get(3));
+			multa.ponInfraccion((String)datos.get(4));
+			multa.ponDescripcion((String)datos.get(5));
+			System.out.println((String)datos.get(0));
+			System.out.println((String)datos.get(3));
+			System.out.println((String)datos.get(4));
+			System.out.println((String)datos.get(5));
+			vista.actualizaVistaCajaMultas('m',datos);
+			vista.actualizaVista(1,3,null);
+		}
 	}
 
 	public void consultarMultaCodigo(String codigo)

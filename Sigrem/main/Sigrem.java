@@ -136,4 +136,9 @@ public class Sigrem
 		gmultas.eliminarMulta(codmulta);
 		gcontratos.eliminarMulta(codcontrato,codmulta);
 	}
+	
+	public void modificarMulta(String codigo,LinkedList datos)
+	{
+		gmultas.modificarMulta(codigo,datos);
+	}
 }
