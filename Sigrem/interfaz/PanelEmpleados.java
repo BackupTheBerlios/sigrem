@@ -771,6 +771,7 @@ public class PanelEmpleados extends JPanel
 		JTextField epr=new JTextField((String)datos.get(3));
 		JTextField est=new JTextField((String)datos.get(4));
 		JButton descrip=new JButton(new ImageIcon("interfaz/find.gif"));
+		descrip.setToolTipText("Mostrar la descripción del recurso");
 		cod.setEditable(false);
 		femi.setEditable(false);
 		ere.setEditable(false);
