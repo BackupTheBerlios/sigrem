@@ -111,7 +111,7 @@ public class PanelContratos extends JPanel
 			cajaMultas.add(dibujaLineaMulta(datos),lineas-1);
 		}
 		else 
-		{	int i=1;
+		{	int i=0;
 			boolean esta=false;
 			while((!esta) && (i<cajaMultas.getComponentCount()-1))
 			{	JPanel panel=(JPanel)cajaMultas.getComponent(i);
@@ -158,39 +158,10 @@ public class PanelContratos extends JPanel
 	
 	public void inicializaCajaMultas()
 	{
-		JPanel p=new JPanel();
-		JLabel l1=new JLabel("Código",SwingConstants.CENTER);
-		JLabel l2=new JLabel("Expediente",SwingConstants.CENTER);
-		JLabel l3=new JLabel("Boletín",SwingConstants.CENTER);
-		JLabel l4=new JLabel("Fecha denuncia",SwingConstants.CENTER);
-		JLabel l5=new JLabel("Infracción",SwingConstants.CENTER);
-		JLabel l6=new JLabel("Descripción",SwingConstants.CENTER);
-		JLabel l7=new JLabel("Recursos",SwingConstants.CENTER);
-		JLabel l8=new JLabel("");
-		JLabel l9=new JLabel("");
-		l1.setPreferredSize(new Dimension(100,20));
-		l2.setPreferredSize(new Dimension(100,20));
-		l3.setPreferredSize(new Dimension(100,20));
-		l4.setPreferredSize(new Dimension(100,20));
-		l5.setPreferredSize(new Dimension(250,20));
-		l6.setPreferredSize(new Dimension(80,20));
-		l7.setPreferredSize(new Dimension(80,20));
-		l8.setPreferredSize(new Dimension(25,20));
-		l9.setPreferredSize(new Dimension(25,20));
-		p.add(l1);
-		p.add(l2);
-		p.add(l3);
-		p.add(l4);
-		p.add(l5);
-		p.add(l6);
-		p.add(l7);
-		p.add(l8);
-		p.add(l9);
 		cajaMultas=Box.createVerticalBox();
-		cajaMultas.add(p);
 		JLabel relleno=new JLabel("");
-		relleno.setPreferredSize(new Dimension(20,135));
-		cajaMultas.add(relleno);
+		relleno.setPreferredSize(new Dimension(20,100));
+		cajaMultas.add(relleno);		
 	}
 	
 	public JPanel dibujaContrato(LinkedList datos)
@@ -496,16 +467,53 @@ public class PanelContratos extends JPanel
 		JPanel pmul=new JPanel();
 		pmul.setPreferredSize(new Dimension(950,280));
 		pmul.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Multas del contrato",TitledBorder.LEFT,TitledBorder.TOP));
+		
+		//cajaMultas=Box.createVerticalBox();
+		//cajaMultas.add(p);
+		//JLabel relleno=new JLabel("");
+		//relleno.setPreferredSize(new Dimension(20,135));
+		//cajaMultas.add(relleno);
 		if (activo)
-		{	JScrollPane ptabla=new JScrollPane(cajaMultas,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-			ptabla.setPreferredSize(new Dimension(930,200));
+		{	JPanel p=new JPanel();
+			JLabel l1=new JLabel("Código",SwingConstants.CENTER);
+			JLabel l2=new JLabel("Expediente",SwingConstants.CENTER);
+			JLabel l3=new JLabel("Boletín",SwingConstants.CENTER);
+			JLabel l4=new JLabel("Fecha denuncia",SwingConstants.CENTER);
+			JLabel l5=new JLabel("Infracción",SwingConstants.CENTER);
+			JLabel l6=new JLabel("Descripción",SwingConstants.CENTER);
+			JLabel l7=new JLabel("Recursos",SwingConstants.CENTER);
+			JLabel l8=new JLabel("");
+			JLabel l9=new JLabel("");
+			l1.setPreferredSize(new Dimension(100,20));
+			l2.setPreferredSize(new Dimension(100,20));
+			l3.setPreferredSize(new Dimension(100,20));
+			l4.setPreferredSize(new Dimension(100,20));
+			l5.setPreferredSize(new Dimension(250,20));
+			l6.setPreferredSize(new Dimension(80,20));
+			l7.setPreferredSize(new Dimension(80,20));
+			l8.setPreferredSize(new Dimension(25,20));
+			l9.setPreferredSize(new Dimension(30,20));
+			p.add(l1);
+			p.add(l2);
+			p.add(l3);
+			p.add(l4);
+			p.add(l5);
+			p.add(l6);
+			p.add(l7);
+			p.add(l8);
+			p.add(l9);
+			JScrollPane ptabla=new JScrollPane(cajaMultas,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+			ptabla.setPreferredSize(new Dimension(930,170));
+			JSplitPane sp1=new JSplitPane(JSplitPane.VERTICAL_SPLIT,p,ptabla);
+			sp1.setEnabled(false);
+			sp1.setDividerSize(4);
 			JButton bcrea=new JButton("Añadir multa");
 			JPanel botonera=new JPanel();
 			botonera.add(bcrea);
-			JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,ptabla,botonera);
-			sp.setEnabled(false);
-			sp.setDividerSize(4);
-			pmul.add(sp);
+			JSplitPane sp2=new JSplitPane(JSplitPane.VERTICAL_SPLIT,sp1,botonera);
+			sp2.setEnabled(false);
+			sp2.setDividerSize(4);
+			pmul.add(sp2);
 			bcrea.addActionListener(new ActionListener()
 			{	public void actionPerformed(ActionEvent e)
 				{
