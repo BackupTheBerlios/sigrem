@@ -50,9 +50,9 @@ public class GContratosImp implements GContratos
 	
 	public void meteContrato(Contrato nuevoContrato){
 		Comparable[] claves=new Comparable[this.dameEstructuraContratos().dameNumeroIndices()];
-		claves[0]=nuevoContrato.dameCodigoContrato();
-		claves[1]=nuevoContrato.dameMatricula();
-		listaContratos.insertar(claves,nuevoContrato);
+		claves[0]=new String(nuevoContrato.dameCodigoContrato());
+		claves[1]=new String(nuevoContrato.dameMatricula());
+		this.dameEstructuraContratos().insertar(claves,nuevoContrato);
 		
 	}
 	

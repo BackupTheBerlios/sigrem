@@ -67,7 +67,7 @@ public class Persistencia
 	public void almacenarXML(){
 		almacenarClientesXML();
 		almacenarContratosXML();
-		almacenarMultasXML();
+		//almacenarMultasXML();
 		almacenarRecursosXML();
 	}
 	
@@ -91,7 +91,7 @@ public class Persistencia
 			System.out.println("Algun dato de gcontratos es erroneo");
 			bienCargado=false;
 		}
-		try {
+		/*try {
 			cargarMultasXML();
 			System.out.println("La carga de multas se ha realizado correctamente");
 		} catch (IOException e2) {
@@ -99,7 +99,7 @@ public class Persistencia
 			e2.printStackTrace();
 			System.out.println("Algun dato de gmultas es erroneo");
 			bienCargado=false;
-		}
+		}*/
 		try {	
 			cargarRecursosXML();
 			System.out.println("La carga de recursos se ha realizado correctamente");
@@ -114,7 +114,7 @@ public class Persistencia
 	public void almacenarClientesXML(){
 		try {
 			PrintWriter escritor=new PrintWriter(new BufferedWriter(new FileWriter("clientes.xml")));
-			escritor.println("<xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\">");
+			escritor.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
 			//System.out.println("Primera linea del archivo XML creada");
 			escritor.println("<!DOCTYPE listaClientes>");
 			EstructuraDatos clientes=gclientes.dameEstructuraClientes();
@@ -182,7 +182,7 @@ public class Persistencia
 		String lineaActual;
 		String tab="";
 		lineaActual=lector.readLine();
-		if (!lineaActual.startsWith("<xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\">")){
+		if (!lineaActual.startsWith("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")){
 			System.out.println("La primera linea es incorrecta");
 		}else{
 			lineaActual=lector.readLine();
@@ -264,8 +264,7 @@ public class Persistencia
 			
 			tab=tab.concat("\t");
 			linea=lector.readLine();
-			//cuidado con los limites!!!
-			//que pasa cuando no se encuentran???
+			
 			principio="<codigo>";
 			fin ="</codigo>";
 			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
@@ -370,7 +369,7 @@ public class Persistencia
 	public void almacenarContratosXML(){
 		try {
 			PrintWriter escritor=new PrintWriter(new BufferedWriter(new FileWriter("contratos.xml")));
-			escritor.println("<xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\">");
+			escritor.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
 			escritor.println("<!DOCTYPE listaContratos>");
 			EstructuraDatos contratos=gcontratos.dameEstructuraContratos();
 			escritor.println("<listaContratos>");
@@ -407,10 +406,10 @@ public class Persistencia
 		escritor.println(tab+"<contrato>");
 		tab=tab.concat("\t");
 		escritor.println(tab+"<codigo>"+actual.dameCodigoContrato()+"</codigo>");
+		escritor.println(tab+"<codigocliente>"+actual.dameCodigoCliente()+"</codigocliente>");
 		escritor.println(tab+"<matricula>"+actual.dameMatricula()+"</matricula>");
 		escritor.println(tab+"<fechaAlta>"+actual.dameFechaAlta()+"</fechaAlta>");
 		escritor.println(tab+"<fechaBaja>"+actual.dameFechaBaja()+"</fechaBaja>");
-		escritor.println(tab+"<codigocliente>"+actual.dameCodigoCliente()+"</codigocliente>");
 		escritor.println(tab+"<listacodigosmultas>");
 		LinkedList codigosmultas=actual.dameListaMultas();
 		tab=tab.concat("\t");
@@ -423,82 +422,82 @@ public class Persistencia
 		escritor.println(tab+"</contrato>");
 	}
 	
-	public boolean cargarContratosXML() throws IOException{BufferedReader lector=new BufferedReader(new FileReader("contratos.xml"));
-	String lineaActual;
-	String tab="";
-	lineaActual=lector.readLine();
-	if (!lineaActual.startsWith("<xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\">")){
-		System.out.println("La primera linea es incorrecta");
-	}else{
+	public boolean cargarContratosXML() throws IOException{
+		BufferedReader lector=new BufferedReader(new FileReader("contratos.xml"));
+		String lineaActual;
+		String tab="";
 		lineaActual=lector.readLine();
-		if (!lineaActual.startsWith("<!DOCTYPE listaContratos>")){
-			System.out.println("La segunda linea es incorrecta");
+		if (!lineaActual.startsWith("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")){
+		System.out.println("La primera linea es incorrecta");
 		}else{
 			lineaActual=lector.readLine();
-			if (!lineaActual.startsWith("<listaContratos>")){
-				System.out.println("No hay etiqueta listaContratos");
+			if (!lineaActual.startsWith("<!DOCTYPE listaContratos>")){
+				System.out.println("La segunda linea es incorrecta");
 			}else{
-				tab=tab.concat("\t");
 				lineaActual=lector.readLine();
-				if (!lineaActual.startsWith(tab+"<activos>")){
-					System.out.println("No hay etiqueta activos");
+				if (!lineaActual.startsWith("<listaContratos>")){
+					System.out.println("No hay etiqueta listaContratos");
 				}else{
+					tab=tab.concat("\t");
 					lineaActual=lector.readLine();
-					while (!lineaActual.startsWith(tab+"</activos>")){
-						tab=tab.concat("\t");
-						LinkedList datosContrato=leerContrato(lineaActual,lector,tab);
-						//sacamos los contratos y el codigo de ese cliente de la LinkedList 
-						Vector multasAsociados=(Vector)datosContrato.removeLast();
-						String codigoContrato=(String)datosContrato.removeFirst();
-						Contrato nuevoContrato=new Contrato(codigoContrato,datosContrato);
-						gcontratos.meteContrato(nuevoContrato);
-						tab=tab.concat("\t");
-						for (int i=0;i<multasAsociados.size();i++){
-							gcontratos.asociaContratoMulta(codigoContrato,(String)multasAsociados.get(i));
-						}
-						tab=tab.substring(1);
-						lineaActual=lector.readLine();
-						tab=tab.substring(1);
-					}
-					lineaActual=lector.readLine();
-					if (!lineaActual.startsWith(tab+"<eliminados>")){
-						System.out.println("No hay etiqueta eliminados");
+					if (!lineaActual.startsWith(tab+"<activos>")){
+						System.out.println("No hay etiqueta activos");
 					}else{
 						lineaActual=lector.readLine();
-						while (!lineaActual.startsWith(tab+"</eliminados>")){
+						while (!lineaActual.startsWith(tab+"</activos>")){
 							tab=tab.concat("\t");
 							LinkedList datosContrato=leerContrato(lineaActual,lector,tab);
-							Vector contratosAsociados=(Vector)datosContrato.removeLast();
-							gcontratos.dameEstructuraContratos().insertarAEliminados(datosContrato);
-							/*for (int i=0;i<contratosAsociados.size();i++){
+							//sacamos los contratos y el codigo de ese cliente de la LinkedList 
+							Vector multasAsociados=(Vector)datosContrato.removeLast();
+							String codigoContrato=(String)datosContrato.removeFirst();
+							Contrato nuevoContrato=new Contrato(codigoContrato,datosContrato);
+							gcontratos.meteContrato(nuevoContrato);
+							tab=tab.concat("\t");
+							for (int i=0;i<multasAsociados.size();i++){
+								gcontratos.asociaContratoMulta(codigoContrato,(String)multasAsociados.get(i));
+							}
+							tab=tab.substring(1);
+							lineaActual=lector.readLine();
+							tab=tab.substring(1);
+						}
+						lineaActual=lector.readLine();
+						if (!lineaActual.startsWith(tab+"<eliminados>")){
+							System.out.println("No hay etiqueta eliminados");
+						}else{
+							lineaActual=lector.readLine();
+							while (!lineaActual.startsWith(tab+"</eliminados>")){
+								tab=tab.concat("\t");
+								LinkedList datosContrato=leerContrato(lineaActual,lector,tab);
+								Vector contratosAsociados=(Vector)datosContrato.removeLast();
+								gcontratos.dameEstructuraContratos().insertarAEliminados(datosContrato);
+								/*for (int i=0;i<contratosAsociados.size();i++){
 								gclientes.asociaClienteContrato((String)datosCliente.getFirst(),(String)contratosAsociados.get(i));
 							}
 							//gclientes.eliminarCliente(false,datosCliente.g)
 							//falta eliminar los clientes eliminados, se podría hacer en casacada eliminando exclusivamente los contratos
-						*/	lineaActual=lector.readLine();
+						*/		lineaActual=lector.readLine();
+								tab=tab.substring(1);
+							}
 							tab=tab.substring(1);
-						}
-						tab=tab.substring(1);
-						lineaActual=lector.readLine();
-						if (!lineaActual.startsWith("</listaContratos>")){
-							System.out.println("No hay cierre de etiqueta listaContratos");
-						}else{
 							lineaActual=lector.readLine();
-							if(lineaActual!=null){
-								System.out.println("Existen datos despues de la ultima etiqueta </listaContratos>" );
-							}else return true;
+							if (!lineaActual.startsWith("</listaContratos>")){
+								System.out.println("No hay cierre de etiqueta listaContratos");
+							}else{
+								lineaActual=lector.readLine();
+								if(lineaActual!=null){
+									System.out.println("Existen datos despues de la ultima etiqueta </listaContratos>" );
+								}else return true;
 						/*catch (IOException e) {
 								return true;	
 							}*/
+							}
 						}
-					}
 					
+					}
 				}
 			}
-		}
-	}
- 	return false;		
-	
+		}	
+		return false;		
 	}
 	
 	LinkedList leerContrato(String linea, BufferedReader lector, String tab) throws IOException{
@@ -515,6 +514,12 @@ public class Persistencia
 			
 			principio="<codigo>";
 			fin ="</codigo>";
+			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
+			datosContrato.add(interior);	
+			linea=lector.readLine();
+			
+			principio="<codigocliente>";
+			fin ="</codigocliente>";
 			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
 			datosContrato.add(interior);	
 			linea=lector.readLine();
@@ -537,13 +542,7 @@ public class Persistencia
 			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
 			datosContrato.add(interior);	
 			linea=lector.readLine();
-			
-			principio="<codigocliente>";
-			fin ="</codigocliente>";
-			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
-			datosContrato.add(interior);	
-			linea=lector.readLine();
-							
+						
 			if (linea.indexOf(tab+"<listacodigosmultas>")!=0){
 				System.out.println("No se ha encontado la lista de codigos de multa");
 			}else{
@@ -571,10 +570,141 @@ public class Persistencia
 		return null;	
 	}
 		
-	public void almacenarMultasXML(){}
-	void escribirMulta(PrintWriter escritor, Multa actual){}
+	public void almacenarMultasXML(){
+		try {
+			PrintWriter escritor=new PrintWriter(new BufferedWriter(new FileWriter("multas.xml")));
+			escritor.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
+			escritor.println("<!DOCTYPE listaMultas>");
+			EstructuraDatos multas=gmultas.dameEstructuraMultas();
+			escritor.println("<listaMultas>");
+			String tab="\t";
+			escritor.println(tab+"<activos>");
+			Vector multasActivos=multas.dameIndice(0).dameElementos();
+			tab=tab.concat("\t");
+			for(int i=0;i<multasActivos.size();i++){
+				Multa multaActual=(Multa)multasActivos.get(i);
+				escribirMulta(escritor,multaActual,tab);
+			}
+			tab=tab.substring(1);
+			escritor.println(tab+"</activos>");
+			escritor.println(tab+"<eliminados>");
+			Vector multasEliminados=multas.dameEliminados();
+			tab=tab.concat("\t");
+			for(int i=0;i<multasEliminados.size();i++){
+				Multa multaActual=(Multa)multasEliminados.get(i);
+				escribirMulta(escritor,multaActual,tab);
+			}
+			tab=tab.substring(1);
+			escritor.println(tab+"</eliminados>");
+			escritor.println("</listaMultas>");
+			escritor.close();
+						
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	}
+	
+	void escribirMulta(PrintWriter escritor, Multa actual,String tab){
+		escritor.println(tab+"<multa>");
+		tab=tab.concat("\t");		
+		escritor.println(tab+"<codigo>"+actual.dameCodigoMulta()+"</codigo>");
+		escritor.println(tab+"<expediente>"+actual.dameExpediente()+"</expediente>");
+		escritor.println(tab+"<boletin>"+actual.dameBoletin()+"</boletin>");
+		escritor.println(tab+"<fechaDenuncia>"+actual.dameFechaDenuncia()+"</fechaDenuncia>");
+		escritor.println(tab+"<infraccion>"+actual.dameInfraccion()+"</infraccion>");
+		escritor.println(tab+"<descripcion>"+actual.dameDescripcion()+"</descripcion>");
+		escritor.println(tab+"<codigoContrato>"+actual.dameCodigoContrato()+"</codigoContrato>");	
+		
+		escritor.println(tab+"<listacodigosmultas>");
+		LinkedList codigosrecursos=actual.dameEstructuraRecursos();
+		tab=tab.concat("\t");
+		for (int i=0;i<codigosrecursos.size();i++){
+	 		escritor.println(tab+"<codigorecurso>"+(String) codigosrecursos.get(i)+"</codigorecurso>");
+	 	}
+		tab=tab.substring(1);
+		escritor.println(tab+"</listacodigosrecursos>");
+		tab=tab.substring(1);
+		escritor.println(tab+"</multa>");
+		}
+	
 	public boolean cargarMultasXML() throws IOException{	
-		return true;
+		BufferedReader lector=new BufferedReader(new FileReader("multas.xml"));
+		String lineaActual;
+		String tab="";
+		lineaActual=lector.readLine();
+		if (!lineaActual.startsWith("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>")){
+		System.out.println("La primera linea es incorrecta");
+		}else{
+			lineaActual=lector.readLine();
+			if (!lineaActual.startsWith("<!DOCTYPE listaMultas>")){
+				System.out.println("La segunda linea es incorrecta");
+			}else{
+				lineaActual=lector.readLine();
+				if (!lineaActual.startsWith("<listaMultas>")){
+					System.out.println("No hay etiqueta listaMultas");
+				}else{
+					tab=tab.concat("\t");
+					lineaActual=lector.readLine();
+					if (!lineaActual.startsWith(tab+"<activos>")){
+						System.out.println("No hay etiqueta activos");
+					}else{
+						lineaActual=lector.readLine();
+						while (!lineaActual.startsWith(tab+"</activos>")){
+							tab=tab.concat("\t");
+							LinkedList datosMulta=leerMulta(lineaActual,lector,tab);
+							//sacamos los contratos y el codigo de ese cliente de la LinkedList 
+							Vector recursosAsociados=(Vector)datosMulta.removeLast();
+							String codigoMulta=(String)datosMulta.removeFirst();
+							Multa nuevoMulta=new Multa(codigoMulta,datosMulta);
+							gcontratos.meteMulta(nuevoMulta);
+							tab=tab.concat("\t");
+							for (int i=0;i<recursosAsociados.size();i++){
+								gmultas.asociaMultaRecurso(codigoMulta,(String)recursosAsociados.get(i));
+							}
+							tab=tab.substring(1);
+							lineaActual=lector.readLine();
+							tab=tab.substring(1);
+						}
+						lineaActual=lector.readLine();
+						if (!lineaActual.startsWith(tab+"<eliminados>")){
+							System.out.println("No hay etiqueta eliminados");
+						}else{
+							lineaActual=lector.readLine();
+							while (!lineaActual.startsWith(tab+"</eliminados>")){
+								tab=tab.concat("\t");
+								LinkedList datosMulta=leerMulta(lineaActual,lector,tab);
+								Vector recursosAsociados=(Vector)datosMulta.removeLast();
+								gcontratos.dameEstructuraContratos().insertarAEliminados(datosContrato);
+								/*for (int i=0;i<contratosAsociados.size();i++){
+								gclientes.asociaClienteContrato((String)datosCliente.getFirst(),(String)contratosAsociados.get(i));
+							}
+							//gclientes.eliminarCliente(false,datosCliente.g)
+							//falta eliminar los clientes eliminados, se podría hacer en casacada eliminando exclusivamente los contratos
+						*/		lineaActual=lector.readLine();
+								tab=tab.substring(1);
+							}
+							tab=tab.substring(1);
+							lineaActual=lector.readLine();
+							if (!lineaActual.startsWith("</listaContratos>")){
+								System.out.println("No hay cierre de etiqueta listaContratos");
+							}else{
+								lineaActual=lector.readLine();
+								if(lineaActual!=null){
+									System.out.println("Existen datos despues de la ultima etiqueta </listaContratos>" );
+								}else return true;
+						/*catch (IOException e) {
+								return true;	
+							}*/
+							}
+						}
+					
+					}
+				}
+			}
+		}	
+		return false;		
 	}
 	public LinkedList leerMulta(String linea, BufferedReader lector) throws IOException{
 		return null;
