@@ -252,4 +252,9 @@ public class Sigrem
 	{
 		gempleados.modificarEmpleado(codigo,datos);
 	}
+	
+	public void consultarListaAbogados()
+	{
+		gempleados.consultarListaAbogados();
+	}
 }
