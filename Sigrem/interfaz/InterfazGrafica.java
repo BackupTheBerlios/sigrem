@@ -474,11 +474,11 @@ public class InterfazGrafica
 					dibujaAyuda(1);
 					try
 					{
-						fd = new BufferedReader (new FileReader ("interfaz/ayuda1.txt"));
+						fd = new BufferedReader (new FileReader ("interfaz/ayuda_menu.txt"));
 					}
 					catch(FileNotFoundException e)
 					{
-						System.out.println ("No se pude abrir el archivo ayuda1.txt");
+						System.out.println ("No se pude abrir el archivo de ayuda_menu.txt");
 					}
 				}
 				else
@@ -487,11 +487,11 @@ public class InterfazGrafica
 						dibujaAyuda(2);
 						try
 						{
-							fd = new BufferedReader (new FileReader ("interfaz/ayuda2.txt"));
+							fd = new BufferedReader (new FileReader ("interfaz/ayuda_contratos.txt"));
 						}
 						catch(FileNotFoundException e)
 						{
-							System.out.println ("No se pude abrir el archivo ayuda2.txt");
+							System.out.println ("No se pude abrir el archivo de ayuda_contratos.txt");
 						}
 					}
 				
@@ -538,11 +538,11 @@ public class InterfazGrafica
 					dibujaAyuda(0);
 					try
 					{
-						fd = new BufferedReader (new FileReader ("interfaz/ayuda1.txt"));
+						fd = new BufferedReader (new FileReader ("interfaz/ayuda_menu.txt"));
 					}
 					catch(FileNotFoundException e)
 					{
-						System.out.println ("No se pude abrir el archivo ayuda1.txt");
+						System.out.println ("No se pude abrir el archivo de ayuda_menu.txt");
 					}
 				}
 				else
@@ -551,11 +551,11 @@ public class InterfazGrafica
 						dibujaAyuda(2);
 						try
 						{
-							fd = new BufferedReader (new FileReader ("interfaz/ayuda2.txt"));
+							fd = new BufferedReader (new FileReader ("interfaz/ayuda_contratos.txt"));
 						}
 						catch(FileNotFoundException e)
 						{
-							System.out.println ("No se pude abrir el archivo ayuda2.txt");
+							System.out.println ("No se pude abrir el archivo de ayuda_contratos.txt");
 						}
 					}
 				
@@ -581,7 +581,7 @@ public class InterfazGrafica
 		psalida=new JScrollPane(salida);
 		psalida.setEnabled(false);
 		psalida.setPreferredSize(new Dimension(500,400));
-		String[] opciones = {"Sigrem"," + Menú"," + Gestión Contratos","    + Datos del Contrato","    + Datos del Cliente","    + Multas del Contrato"," + Gestión Empleados"," + Gestión Económica"};
+		String[] opciones = {"Sigrem"," + Menú"," -  Gestión Contratos","    + Datos del Contrato","    + Datos del Cliente","    + Multas del Contrato"," + Gestión Empleados"," + Gestión Económica"};
 		lista=new JList(opciones);
 		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		lista.setPreferredSize(new Dimension(150,400));
