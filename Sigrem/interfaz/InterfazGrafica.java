@@ -13,6 +13,7 @@ import javax.swing.filechooser.FileFilter;
 import java.io.*;
 import javax.swing.JList;
 import java.awt.Font;
+import java.awt.Color;
 import main.Sigrem;
 
 class Filtro extends FileFilter
@@ -57,6 +58,10 @@ public class InterfazGrafica
 	
 	private static JList lista;
 	
+	private BufferedReader fd;
+	
+	private String linea;
+	
 	private Sigrem controlador;
 	
 	public InterfazGrafica(Sigrem controlador)
@@ -74,12 +79,24 @@ public class InterfazGrafica
 		SwingUtilities.updateComponentTreeUI(ventana);
 		ventana.pack();
 		//Look&Feel cambiado
-		formSigrem=new JDialog(ventana,true);
+		//Pantalla de Inicio		
+/*		formSigrem=new JDialog();
 		formSigrem.setResizable(false);
 		formSigrem.setUndecorated(true);		
 		formSigrem.setLocation(250,150);
-//		pantallaInicio(false);
-//		pantallaInicio(true);
+		formSigrem.getContentPane().add(pantallaInicio());
+		formSigrem.pack();
+		formSigrem.setVisible(true);
+		try
+		{
+	    	Thread.sleep(2000);
+	    }
+	    catch(InterruptedException e)
+	    {
+	    	System.out.println("Sleep Interrupted");
+	    }		
+		formSigrem.setVisible(false);*/
+		//Pantalla de Inicio mostrada
 		formacercade=new JDialog(ventana,true);
 		formacercade.setResizable(false);
 		formacercade.setUndecorated(true);		
@@ -88,6 +105,7 @@ public class InterfazGrafica
 		formayuda.setResizable(false);
 		formayuda.setLocation(150,50);
 //		formayuda.setPreferredSize(new Dimension(500,400));
+				
 		panelVistas=new JTabbedPane(JTabbedPane.BOTTOM);
 		pcontratos=new PanelContratos(this.controlador,ventana);
 		pempleados=new PanelEmpleados(this.controlador,ventana);
@@ -380,31 +398,25 @@ public class InterfazGrafica
 		{	public void actionPerformed(ActionEvent e)
 			{
 				formayuda.getContentPane().removeAll();
-				formayuda.getContentPane().add(dibujaAyuda(0));
-				formayuda.pack();	
-				formayuda.setVisible(true);				
+				dibujaAyuda(0);
+				formayuda.setVisible(true);							
 			}
 		});
 		return menu;	
 	}
 	
-	public void pantallaInicio(boolean vis)
+	public JButton pantallaInicio()
 	{	
-		formSigrem.setTitle("SIGREM");
 		JButton b=new JButton(new ImageIcon("interfaz/sigrem.jpg"));
-		b.setPreferredSize(new Dimension(570,350));
-		formSigrem.getContentPane().add(b);
-		formSigrem.pack();
-		formSigrem.setVisible(vis);
-		try
-		{
-	    	Thread.sleep(2000);
-	    }
-	    catch(InterruptedException e)
-	    {
-	    	System.out.println("Sleep Interrupted");
-	    }		
-		formSigrem.setVisible(false);
+		b.setPreferredSize(new Dimension(570,355));
+		b.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				formSigrem.setVisible(false);
+				formSigrem.getContentPane().removeAll();
+			}
+		});
+		return b;
 	}
 	
 	public JPanel panelacercade()
@@ -426,78 +438,221 @@ public class InterfazGrafica
 		return pad;
 	}
 	
-	public JPanel dibujaAyuda(int npanel)
-	{
-		JPanel pa=new JPanel();
+	public void dibujaAyuda(int npanel)
+	{		
 		formayuda.getContentPane().removeAll();
-		formayuda.setTitle("Ayuda - Sigrem");
-		salida=new JTextArea();
-		salida.setEditable(false);
-		psalida=new JScrollPane(salida);
-		psalida.setPreferredSize(new Dimension(400,500));
-		salida.removeAll();
-		
-		if (npanel==0)
-		{
-			pa.add(panel1());			
-		}			
+		if (npanel==0)	panel0();		
 		else
-			if (npanel==1)
-			{
-				pa.add(panel2());		
-			}		
-		return pa;
+			if (npanel==1)	panel1();
+			else 
+				if (npanel==2) panel2();
+				else formayuda.getContentPane().removeAll();
+				
 	}
 	
-	public JSplitPane panel1()
-	{				
+	public void panel0()
+	{		
+		salida=new JTextArea();
+		psalida=new JScrollPane(salida);
+		psalida.setEnabled(false);
+		psalida.setPreferredSize(new Dimension(500,400));
 		String[] opciones = {"Sigrem"," + Menú"," + Gestión Contratos"," + Gestión Empleados"," + Gestión Económica"};
 		lista=new JList(opciones);
 		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		lista.addListSelectionListener(new ListSelectionListener()
-		{
-			public void valueChanged(ListSelectionEvent e)
-			{
-			
-				if(lista.getSelectedIndex()==1)
-				{
-					formayuda.getContentPane().add(dibujaAyuda(1));
-					formayuda.pack();	
-					formayuda.setVisible(true);	
-				}					
-				salida.append(" Descripción del Menú de la aplicación SIGREM\n");	
-			}
-		});		
+		lista.setPreferredSize(new Dimension(150,400));
 		JSplitPane sp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,lista,psalida);
-		return sp1;
-	}
-	
-	public JSplitPane panel2()
-	{		
-		String[] opciones = {"Sigrem"," -  Menú","    + Archivo","    + Herramientas","    + Acerca de"," + Gestión Contratos"," + Gestión Empleados"," + Gestión Económica"};
-		lista=new JList(opciones);
-		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		//lista.setFont(Font.ITALIC);
-		formayuda.getContentPane().add(new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,lista,psalida));
+		sp1.setEnabled(false);
+		formayuda.getContentPane().add(sp1);
 		formayuda.setTitle("Ayuda - Sigrem");
 		formayuda.pack();
 		lista.addListSelectionListener(new ListSelectionListener()
 		{
-			public void valueChanged(ListSelectionEvent e)
+			public void valueChanged(ListSelectionEvent ev)
 			{
-			
-				if(lista.getSelectedIndex()==1)
+				psalida.removeAll();
+				salida.removeAll();
+				if(lista.getSelectedIndex()==1)	
 				{
-					formayuda.getContentPane().add(dibujaAyuda(0));
-					formayuda.pack();	
-					formayuda.setVisible(true);	
-				}					
-				salida.append(" Descripción del Menú de la aplicación SIGREM\n");
+					dibujaAyuda(1);
+					try
+					{
+						fd = new BufferedReader (new FileReader ("interfaz/ayuda1.txt"));
+					}
+					catch(FileNotFoundException e)
+					{
+						System.out.println ("No se pude abrir el archivo ayuda1.txt");
+					}
+				}
+				else
+					if(lista.getSelectedIndex()==2)
+					{
+						dibujaAyuda(2);
+						try
+						{
+							fd = new BufferedReader (new FileReader ("interfaz/ayuda2.txt"));
+						}
+						catch(FileNotFoundException e)
+						{
+							System.out.println ("No se pude abrir el archivo ayuda2.txt");
+						}
+					}
+				
+				try
+				{
+					while((linea=fd.readLine())!=null)
+					{
+						salida.append(linea+"\n");						
+					}
+					fd.close();
+				}
+				catch(IOException e)
+				{
+					System.out.println("Error al leer");
+				}			
 			}
 		});
-		JSplitPane sp2=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,lista,psalida);
-		return sp2;
+		
 	}
 	
+	public void panel1()
+	{		
+		salida=new JTextArea();
+		psalida=new JScrollPane(salida);
+		psalida.setEnabled(false);
+		psalida.setPreferredSize(new Dimension(500,400));
+		String[] opciones = {"Sigrem"," -  Menú","    + Archivo","    + Herramientas","    + Acerca de"," + Gestión Contratos"," + Gestión Empleados"," + Gestión Económica"};
+		lista=new JList(opciones);
+		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		lista.setPreferredSize(new Dimension(150,400));
+		JSplitPane sp2=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,lista,psalida);
+		sp2.setEnabled(false);
+		formayuda.getContentPane().add(sp2);
+		formayuda.setTitle("Ayuda - Sigrem");
+		formayuda.pack();
+		lista.addListSelectionListener(new ListSelectionListener()
+		{
+			public void valueChanged(ListSelectionEvent ev)
+			{
+				psalida.removeAll();
+				salida.removeAll();
+				if(lista.getSelectedIndex()==1)	
+				{
+					dibujaAyuda(0);
+					try
+					{
+						fd = new BufferedReader (new FileReader ("interfaz/ayuda1.txt"));
+					}
+					catch(FileNotFoundException e)
+					{
+						System.out.println ("No se pude abrir el archivo ayuda1.txt");
+					}
+				}
+				else
+					if(lista.getSelectedIndex()==5)
+					{
+						dibujaAyuda(2);
+						try
+						{
+							fd = new BufferedReader (new FileReader ("interfaz/ayuda2.txt"));
+						}
+						catch(FileNotFoundException e)
+						{
+							System.out.println ("No se pude abrir el archivo ayuda2.txt");
+						}
+					}
+				try
+				{
+					fd = new BufferedReader (new FileReader ("interfaz/ayuda1.txt"));
+				}
+				catch(FileNotFoundException e)
+				{
+					System.out.println ("No se pude abrir el archivo ayuda1.txt");
+				}
+				try
+				{
+					while((linea=fd.readLine())!=null)
+					{
+						salida.append(linea+"\n");						
+					}
+					fd.close();
+				}
+				catch(IOException e)
+				{
+					System.out.println("Error al leer");
+				}									
+			}
+		});		
+	}
+	
+	public void panel2()
+	{		
+		salida=new JTextArea();
+		psalida=new JScrollPane(salida);
+		psalida.setEnabled(false);
+		psalida.setPreferredSize(new Dimension(500,400));
+		String[] opciones = {"Sigrem"," + Menú"," + Gestión Contratos","    + Datos del Contrato","    + Datos del Cliente","    + Multas del Contrato"," + Gestión Empleados"," + Gestión Económica"};
+		lista=new JList(opciones);
+		lista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		lista.setPreferredSize(new Dimension(150,400));
+		JSplitPane sp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,lista,psalida);
+		sp1.setEnabled(false);
+		formayuda.getContentPane().add(sp1);
+		formayuda.setTitle("Ayuda - Sigrem");
+		formayuda.pack();
+		lista.addListSelectionListener(new ListSelectionListener()
+		{
+			public void valueChanged(ListSelectionEvent ev)
+			{
+				psalida.removeAll();
+				salida.removeAll();
+				if(lista.getSelectedIndex()==1) 
+				{
+					dibujaAyuda(1);
+					try
+					{
+						fd = new BufferedReader (new FileReader ("interfaz/ayuda1.txt"));
+					}
+					catch(FileNotFoundException e)
+					{
+						System.out.println ("No se pude abrir el archivo ayuda1.txt");
+					}
+				}
+				else
+					if(lista.getSelectedIndex()==2)	
+					{
+						dibujaAyuda(0);
+						try
+						{
+							fd = new BufferedReader (new FileReader ("interfaz/ayuda2.txt"));
+						}
+						catch(FileNotFoundException e)
+						{
+							System.out.println ("No se pude abrir el archivo ayuda2.txt");
+						}
+					}
+				try
+				{
+					fd = new BufferedReader (new FileReader ("interfaz/ayuda2.txt"));
+				}
+				catch(FileNotFoundException e)
+				{
+					System.out.println ("No se pude abrir el archivo ayuda2.txt");
+				}
+				try
+				{
+					while((linea=fd.readLine())!=null)
+					{
+						salida.append(linea+"\n");						
+					}
+					fd.close();
+				}
+				catch(IOException e)
+				{
+					System.out.println("Error al leer");
+				}			
+			}
+		});
+		
+	}
 	
 }
