@@ -33,7 +33,6 @@ public class Sigrem
 	{
 		vista=new InterfazGrafica(this);
 		factoria=new FactoriaImp();
-		LinkedList his=new LinkedList();
 		String codcontrato=codigos[0];
 		String codcliente=codigos[1];
 		String codmulta=codigos[2];
