@@ -5,11 +5,13 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.GridLayout;
+//import java.awt.GridLayout;
 
 public class PanelContratos extends JPanel
 {
-	private JFrame formulario;
+	private JFrame formAlta;
+	
+	private JFrame formMulta;
 	
 	private JButton elimcont;
 	
@@ -32,9 +34,12 @@ public class PanelContratos extends JPanel
 		sp2.setEnabled(false);		
 		sp2.setDividerSize(4);
 		add(sp2);
-		formulario=new JFrame();
-		formulario.setResizable(false);
-		formulario.setLocation(350,100);
+		formAlta=new JFrame();
+		formAlta.setResizable(false);
+		formAlta.setLocation(350,100);
+		formMulta=new JFrame();
+		formMulta.setResizable(false);
+		formMulta.setLocation(350,100);		
 	}
 		
 	public JPanel dibujaContrato()
@@ -81,11 +86,10 @@ public class PanelContratos extends JPanel
 		bcrea.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				if (!formulario.isVisible())
-				{	JPanel panel=panelAlta();
-					formulario.getContentPane().add(panel);
-					formulario.pack();	
-					formulario.setVisible(true);
+				if (!formAlta.isVisible())
+				{	formAlta.getContentPane().add(panelAlta());
+					formAlta.pack();	
+					formAlta.setVisible(true);
 				}
 			}
 		});
@@ -192,7 +196,7 @@ public class PanelContratos extends JPanel
 
 	public JPanel dibujaMultas()
 	{
-		int f=8;
+	/*	int f=8;
 		int c=5;
 		JPanel tabla=new JPanel(new GridLayout(f,c));
 		tabla.add(new JLabel("Código",SwingConstants.CENTER));
@@ -232,12 +236,68 @@ public class PanelContratos extends JPanel
 		JPanel pmul=new JPanel();
 		pmul.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Multas del contrato",TitledBorder.LEFT,TitledBorder.TOP));
 		pmul.add(sp);		
+*/
+		Box tabla=Box.createVerticalBox();
+		JPanel p=new JPanel();
+		JLabel l1=new JLabel("Código",SwingConstants.CENTER);
+		JLabel l2=new JLabel("Expediente",SwingConstants.CENTER);
+		JLabel l3=new JLabel("Boletín",SwingConstants.CENTER);
+		JLabel l4=new JLabel("Descripción",SwingConstants.CENTER);
+		JLabel l5=new JLabel("Recursos",SwingConstants.CENTER);
+	//	JLabel l1=new JLabel("Código");
+	//	JLabel l2=new JLabel("Expediente");
+	//	JLabel l3=new JLabel("Boletín");
+	//	JLabel l4=new JLabel("Descripción");
+	//	JLabel l5=new JLabel("Recursos");
+		l1.setPreferredSize(new Dimension(130,25));
+		l2.setPreferredSize(new Dimension(130,25));
+		l3.setPreferredSize(new Dimension(130,25));
+		l4.setPreferredSize(new Dimension(80,25));
+		l5.setPreferredSize(new Dimension(80,25));
+		p.add(l1);
+		p.add(l2);
+		p.add(l3);
+		p.add(l4);
+		p.add(l5);
+		tabla.add(p);
+		for (int i=0;i<9;i++)
+		{	JPanel linea=dibujaLinea();
+			tabla.add(linea);		
+		}
+		JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		ptabla.setPreferredSize(new Dimension(600,200));
+		JButton bcrea=new JButton("Añadir");
+		JButton bmod=new JButton("Modifica");
+		JButton belim=new JButton("Eliminar");
+		bcrea.setPreferredSize(new Dimension(85,25));
+		bmod.setPreferredSize(new Dimension(85,25));
+		belim.setPreferredSize(new Dimension(85,25));
+		JPanel botonera=new JPanel();
+		botonera.add(bcrea);
+		botonera.add(bmod);
+		botonera.add(belim);
+		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,ptabla,botonera);
+		sp.setEnabled(false);
+		sp.setDividerSize(4);
+		JPanel pmul=new JPanel();
+		pmul.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Multas del contrato",TitledBorder.LEFT,TitledBorder.TOP));
+		pmul.add(sp);
+		bcrea.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				if (!formMulta.isVisible())
+				{	formMulta.getContentPane().add(panelMulta());
+					formMulta.pack();
+					formMulta.setVisible(true);
+				}
+			}
+		});
 		return pmul;
 	}
 	
 	public JPanel panelAlta()
 	{
-		formulario.setTitle("Crear contrato");
+		formAlta.setTitle("Crear contrato");
 		JLabel l1=new JLabel("Código del contrato");
 		JLabel l2=new JLabel("Matrícula del vehículo");
 		JLabel l3=new JLabel("Código del cliente");
@@ -281,8 +341,8 @@ public class PanelContratos extends JPanel
 		aceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formulario.setVisible(false);
-				formulario.getContentPane().removeAll();
+				formAlta.setVisible(false);
+				formAlta.getContentPane().removeAll();
 				modcont.setEnabled(true);
 				elimcont.setEnabled(true);
 				//validar datos
@@ -293,8 +353,111 @@ public class PanelContratos extends JPanel
 		cancelar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formulario.setVisible(false);
-				formulario.getContentPane().removeAll();
+				formMulta.setVisible(false);
+				formMulta.getContentPane().removeAll();
+			}
+		});
+		return panel;
+	}
+	
+	public JPanel dibujaLinea()
+	{		
+		JPanel panel=new JPanel();
+		final JButton selec=new JButton();
+		selec.setPreferredSize(new Dimension (25,25));
+		final JTextField cod=new JTextField();
+		cod.setEnabled(false);
+		cod.setPreferredSize(new Dimension(130,25));
+		final JTextField exp=new JTextField();
+		exp.setEnabled(false);
+		exp.setPreferredSize(new Dimension(130,25));
+		final JTextField bol=new JTextField();
+		bol.setEnabled(false);
+		bol.setPreferredSize(new Dimension(130,25));
+		final JButton descrip=new JButton("Ver");
+		descrip.setPreferredSize(new Dimension(80,25));
+		final JButton recur=new JButton("Ver");
+		recur.setPreferredSize(new Dimension(80,25));
+//		panel.add(selec);
+		panel.add(cod);
+		panel.add(exp);
+		panel.add(bol);
+		panel.add(descrip);
+		panel.add(recur);
+		selec.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{	
+				
+		
+			}
+		});
+		return panel;
+	}
+	
+	public JPanel panelMulta()
+	{
+		formMulta.setTitle("Crear multa");
+		JLabel l1=new JLabel("Código");
+		JLabel l2=new JLabel("Expediente");
+		JLabel l3=new JLabel("Boletín");
+		l1.setPreferredSize(new Dimension(80,20));
+		l2.setPreferredSize(new Dimension(80,20));
+		l3.setPreferredSize(new Dimension(80,20));
+		JTextField cod=new JTextField();
+		JTextField exp=new JTextField();
+		JTextField bol=new JTextField();
+		cod.setPreferredSize(new Dimension(100,20));
+		exp.setPreferredSize(new Dimension(100,20));
+		bol.setPreferredSize(new Dimension(100,20));
+		JPanel p1=new JPanel();
+		JPanel p2=new JPanel();
+		JPanel p3=new JPanel();
+		p1.add(l1);
+		p1.add(cod);
+		p2.add(l2);
+		p2.add(exp);
+		p3.add(l3);
+		p3.add(bol);
+		Box caja1=Box.createVerticalBox();
+		caja1.add(p1);
+		caja1.add(p2);
+		caja1.add(p3);
+		JPanel p4=new JPanel();
+		p4.add(new JLabel("Descripción"));
+		JTextPane texto=new JTextPane();
+		JScrollPane ptexto=new JScrollPane(texto,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
+		ptexto.setPreferredSize(new Dimension(300,150));
+		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,p4,ptexto);
+		sp.setEnabled(false);		
+		sp.setDividerSize(1);
+		JSplitPane sp1=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja1,sp);
+		sp1.setEnabled(false);		
+		sp1.setDividerSize(4);
+		JButton aceptar=new JButton("Aceptar");
+		JButton cancelar=new JButton("Cancelar");
+		JPanel botonera=new JPanel();
+		botonera.add(aceptar);
+		botonera.add(cancelar);
+		JSplitPane sp2=new JSplitPane(JSplitPane.VERTICAL_SPLIT,sp1,botonera);
+		sp2.setEnabled(false);		
+		sp2.setDividerSize(4);
+		JPanel panel=new JPanel();
+		panel.add(sp2);
+		panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos de lla multa",TitledBorder.LEFT,TitledBorder.TOP));
+		aceptar.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				formMulta.setVisible(false);
+				formMulta.getContentPane().removeAll();
+				//validar datos
+				//enviar datos a Sigrem para almacenarlos en la estructura de datos
+			}
+		});
+		cancelar.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				formMulta.setVisible(false);
+				formMulta.getContentPane().removeAll();
 			}
 		});
 		return panel;
