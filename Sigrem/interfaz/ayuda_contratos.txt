@@ -16,7 +16,7 @@ Disponemos de los siguientes Sectores:
                               -> "Código del Cliente"
                               -> "Matrícula del Vehículo"
                               -> "Fecha de Alta"
-   (Ver "Ayuda > Menú > Panel Contratos")
+   (Ver "Ayuda > Panel Contratos > Datos del Contrato")
    
 • "Datos del Cliente": 
              Contiene los botones 
@@ -35,7 +35,7 @@ Disponemos de los siguientes Sectores:
                               -> "Móvil"
                               -> "em@il"
                               -> "Fax"
-   (Ver "Ayuda > Menú > Herramientas")
+   (Ver "Ayuda > Panel Contratos > Datos del Cliente")
    
 • "Multas del Contrato":
 	     Contiene los botones
@@ -50,4 +50,4 @@ Disponemos de los siguientes Sectores:
                               -> "Boletín"
                               -> "Fecha denuncia"
                               -> "Infracción"
-   (Ver "Ayuda > Menú > Acerca de") 
+   (Ver "Ayuda > Panel Contratos > Multas del Contrato")
