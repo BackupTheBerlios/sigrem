@@ -27,16 +27,31 @@ public class Sigrem
 	
 	private GEconomia geconomia;
 	
-	public Sigrem()
+	private String codcontrato;
+	
+	private String codcliente;
+	
+	private String codmulta;
+	
+	private String codrecurso;
+	
+	private String codempleado;	
+	
+	public Sigrem(String[] codigos)
 	{
 		vista=new InterfazGrafica(this);
 		factoria=new FactoriaImp();
-		gclientes=factoria.generaGCliente(vista);
-		gcontratos=factoria.generaGContratos(vista);
-		gmultas=factoria.generaGMultas(vista);
-		grecursos=factoria.generaGRecursos(vista);
-		gempleados=factoria.generaGEmpleados(vista);
-		geconomia=factoria.generaGEconomia(vista);		
+		codcontrato=codigos[0];
+		codcliente=codigos[1];
+		codmulta=codigos[2];
+		codrecurso=codigos[3];
+		codempleado=codigos[4];
+		gclientes=factoria.generaGCliente(vista,codcliente);
+		gcontratos=factoria.generaGContratos(vista,codcontrato);
+//		gmultas=factoria.generaGMultas(vista,codmultas);
+//		grecursos=factoria.generaGRecursos(vista,codrecursos);
+//		gempleados=factoria.generaGEmpleados(vista,codempleados);
+//		geconomia=factoria.generaGEconomia(vista);		
 	}
 	
 	public void activa()
@@ -49,10 +64,6 @@ public class Sigrem
 		String clientenuevo=gclientes.añadirCliente(datoscliente);
 		datoscontrato.add(clientenuevo);
 		String contratonuevo=gcontratos.añadirContrato(datoscontrato);
-	}
-	
-	public void añadirCliente(String[] datos)
-	{
-	//	gclientes.añadir(datos);
+		gclientes.asociaClienteContrato(clientenuevo,clientenuevo);
 	}
 }

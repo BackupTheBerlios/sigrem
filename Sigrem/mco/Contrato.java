@@ -12,20 +12,17 @@ public class Contrato
 	
 	private String fechabaja;
 	
-	private String fecharenovacion;
-	
 	private String codigocliente;
 	
 	private LinkedList listamultas; 
 	
-	public Contrato(LinkedList datos) 
+	public Contrato(String codcontrato,LinkedList datos) 
 	{
-		codigocontrato=(String)datos.get(0);
-		matricula=(String)datos.get(1);
-		fechaalta=(String)datos.get(2);
-		fechabaja=(String)datos.get(3);
-		fecharenovacion=(String)datos.get(4);
-		codigocliente=(String)datos.get(5);
+		codigocontrato=codcontrato;
+		matricula=(String)datos.get(0);
+		fechaalta=(String)datos.get(1);
+		fechabaja="";
+		codigocliente=(String)datos.get(2);
 		listamultas=new LinkedList();
 	}
 	public String getCodigoContrato()
@@ -44,10 +41,6 @@ public class Contrato
 	{
 		return fechabaja;
 	}
-	public String getFechaRenovacion()
-	{
-		return fecharenovacion;
-	}
 	public String getCodigoCliente()
 	{
 		return codigocliente;
@@ -63,7 +56,6 @@ public class Contrato
 		datos.add(matricula);
 		datos.add(fechaalta);
 		datos.add(fechabaja);
-		datos.add(fecharenovacion);
 		datos.add(codigocliente);
 		datos.add(listamultas);
 		return datos;
@@ -88,10 +80,6 @@ public class Contrato
 	{
 		this.fechabaja=fecha;
 	}
-	public void setFechaRenovacion(String fecha)
-	{
-		this.fecharenovacion=fecha;
-	}
 	public void setCodigoCliente(String cod)
 	{
 		this.codigocliente=cod;
@@ -106,8 +94,7 @@ public class Contrato
 		matricula=(String)datos.get(1);
 		fechaalta=(String)datos.get(2);
 		fechabaja=(String)datos.get(3);
-		fecharenovacion=(String)datos.get(4);
-		codigocliente=(String)datos.get(5);
-		listamultas=(LinkedList)datos.get(6);
+		codigocliente=(String)datos.get(4);
+		listamultas=(LinkedList)datos.get(5);
 	}
 }

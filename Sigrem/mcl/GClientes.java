@@ -16,4 +16,6 @@ public interface GClientes
 	public void consultarClienteNombre(String nombre);
 	//Requisito 1.6
 	public void consultarClienteDni(String dni);	
+	
+	public void asociaClienteContrato(String codcliente,String codcontrato);
 }

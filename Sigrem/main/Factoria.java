@@ -10,10 +10,10 @@ import mem.*;
 
 public interface Factoria 
 {
-	public GClientes generaGCliente(InterfazGrafica vista);
-	public GContratos generaGContratos(InterfazGrafica vista);
-	public GMultas generaGMultas(InterfazGrafica vista);
-	public GRecursos generaGRecursos(InterfazGrafica vista);
-	public GEmpleados generaGEmpleados(InterfazGrafica vista);
+	public GClientes generaGCliente(InterfazGrafica vista,String codigo);
+	public GContratos generaGContratos(InterfazGrafica vista,String codigo);
+	public GMultas generaGMultas(InterfazGrafica vista,String codigo);
+	public GRecursos generaGRecursos(InterfazGrafica vista,String codigo);
+	public GEmpleados generaGEmpleados(InterfazGrafica vista,String codigo);
 	public GEconomia generaGEconomia(InterfazGrafica vista);	
 }

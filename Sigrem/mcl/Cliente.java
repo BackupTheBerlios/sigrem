@@ -30,20 +30,20 @@ public class Cliente
 	
 	private LinkedList listacontratos;
 
-	public Cliente(LinkedList datos) 
+	public Cliente(String codcliente,LinkedList datos) 
 	{
-		codigo=(String)datos.get(0);
+		codigo=codcliente;
+		nombre=(String)datos.get(0);
 		dni=(String)datos.get(1);
-		nombre=(String)datos.get(2);
-		direccion=(String)datos.get(3);
-		cp=(String)datos.get(4);
-		poblacion=(String)datos.get(5);
-		provincia=(String)datos.get(6);
-		telefono1=(String)datos.get(7);
-		telefono2=(String)datos.get(8);
-		movil=(String)datos.get(9);
-		email=(String)datos.get(10);
-		fax=(String)datos.get(11);
+		direccion=(String)datos.get(2);
+		cp=(String)datos.get(3);
+		poblacion=(String)datos.get(4);
+		provincia=(String)datos.get(5);
+		telefono1=(String)datos.get(6);
+		telefono2=(String)datos.get(7);
+		movil=(String)datos.get(8);
+		email=(String)datos.get(9);
+		fax=(String)datos.get(10);
 		listacontratos=new LinkedList();
 	}
 
@@ -121,6 +121,11 @@ public class Cliente
 		return datos;
 	}
 	
+	public void añadeContrato(String codigo)
+	{
+		listacontratos.add(codigo);		
+	}
+	
 	public void setCodigo(String cod)
 	{
 		this.codigo=cod;
@@ -178,18 +183,17 @@ public class Cliente
 	}
 	public void setListaDatos(LinkedList datos)
 	{
-		codigo=(String)datos.get(0);
-		dni=(String)datos.get(1);
-		nombre=(String)datos.get(2);
-		direccion=(String)datos.get(3);
-		cp=(String)datos.get(4);
-		poblacion=(String)datos.get(5);
-		provincia=(String)datos.get(6);
-		telefono1=(String)datos.get(7);
-		telefono2=(String)datos.get(8);
-		movil=(String)datos.get(9);
-		email=(String)datos.get(10);
-		fax=(String)datos.get(11);
-		listacontratos=(LinkedList)datos.get(12);
+		dni=(String)datos.get(0);
+		nombre=(String)datos.get(1);
+		direccion=(String)datos.get(2);
+		cp=(String)datos.get(3);
+		poblacion=(String)datos.get(4);
+		provincia=(String)datos.get(5);
+		telefono1=(String)datos.get(6);
+		telefono2=(String)datos.get(7);
+		movil=(String)datos.get(8);
+		email=(String)datos.get(9);
+		fax=(String)datos.get(10);
+		listacontratos=(LinkedList)datos.get(11);
 	}
 }
