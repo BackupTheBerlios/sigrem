@@ -156,7 +156,9 @@ public class Sigrem
 	public void añadirMulta(String codcontrato,LinkedList datos)
 	{
 		String codmulta=gmultas.añadirMulta(datos);
-		gcontratos.asociaContratoMulta(codcontrato,codmulta);
+		if (codmulta!=null){
+			gcontratos.asociaContratoMulta(codcontrato,codmulta);
+		}
 	}
 	
 	public void eliminarMulta(String codmulta,String codcontrato)

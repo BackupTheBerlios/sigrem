@@ -16,7 +16,11 @@ public interface GMultas
 	public String consultarMultaExpediente(String expediente);
 	//Requisito 3.6
 	public String consultarMultaBoletin(String boletin);
+/*	
+	public boolean estaMultaExpediente(String expediente);
 	
+	public boolean estaMultaBoletin(String boletin);
+	*/
 	public void consultarListaMultas(LinkedList lista);
 	
 	public void eliminaListaMultas(LinkedList lista);
