@@ -519,12 +519,12 @@ public class PanelEmpleados extends JPanel
 		JLabel lcodigo=new JLabel("Código del empleado");
 		JLabel lperfil=new JLabel("Perfil del empleado");
 		JLabel lnomina=new JLabel("Nómina del empleado");
-		String [] opciones={"Abogado","Administrativo"};
 		lcodigo.setPreferredSize(new Dimension(150,20));
 		lperfil.setPreferredSize(new Dimension(150,20));
 		lnomina.setPreferredSize(new Dimension(150,20));
 		final JTextField tcodigo=new JTextField(cod);
-		perfil=new JComboBox(opciones);
+		perfil=new JComboBox();
+		perfilesEmpleados(perfil);
 		perfil.setPreferredSize(new Dimension(100,20));
 		perfil.setEditable(false);
 		perfil.setBackground(Color.WHITE);		
@@ -592,8 +592,8 @@ public class PanelEmpleados extends JPanel
 		formulario.setTitle("Modificar estado del recurso "+codigo);		
 		JLabel l1=new JLabel("Código");
 		JLabel l2=new JLabel("Estado");
-		String [] opciones={"Pendiente","Recurso 1º","Recurso 2º","Recurso 3º","Favorable","Desfavorable"};
-		estado=new JComboBox(opciones);
+		JComboBox estado=new JComboBox();
+		estadosRecursos(estado);
 		estado.setEditable(false);
 		estado.setBackground(Color.WHITE);
 		l1.setPreferredSize(new Dimension(80,20));
@@ -742,5 +742,21 @@ public class PanelEmpleados extends JPanel
 			}
 		});
 		return panel;
-	}	
+	}
+	
+	private void perfilesEmpleados(JComboBox perfil)
+	{
+		perfil.addItem("Abogado");
+		perfil.addItem("Administrativo");
+	}
+	
+	private void estadosRecursos(JComboBox estado)
+	{
+		estado.addItem("Pendiente");
+		estado.addItem("Recurso 1º");
+		estado.addItem("Recurso 2º");
+		estado.addItem("Recurso 3º");
+		estado.addItem("Favorable");
+		estado.addItem("Desfavorable");
+	}
 }

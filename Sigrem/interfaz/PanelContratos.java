@@ -1006,10 +1006,10 @@ public class PanelContratos extends JPanel
 		l1.setPreferredSize(new Dimension(100,25));
 		l2.setPreferredSize(new Dimension(75,25));
 		l3.setPreferredSize(new Dimension(75,25));
-		l4.setPreferredSize(new Dimension(130,25));
-		l5.setPreferredSize(new Dimension(130,25));
-		l6.setPreferredSize(new Dimension(130,25));
-		l7.setPreferredSize(new Dimension(130,25));
+		l4.setPreferredSize(new Dimension(250,25));
+		l5.setPreferredSize(new Dimension(250,25));
+		l6.setPreferredSize(new Dimension(100,25));
+		l7.setPreferredSize(new Dimension(100,25));
 		l8.setPreferredSize(new Dimension(80,25));
 		l9.setPreferredSize(new Dimension(25,25));
 		l10.setPreferredSize(new Dimension(25,25));
@@ -1066,13 +1066,18 @@ public class PanelContratos extends JPanel
 		if (tipo=='c') formRecurso.setTitle("Crear recurso");
 		else if (tipo=='m') formRecurso.setTitle("Modificar recurso "+codigo);
 		formRecurso.setLocation(350,100);
-		JLabel l1=new JLabel("Código",SwingConstants.RIGHT);
-		JLabel l2=new JLabel("Fecha Cliente",SwingConstants.RIGHT);
-		JLabel l3=new JLabel("Fecha Sigrem",SwingConstants.RIGHT);
-		JLabel l4=new JLabel("Escrito recibido",SwingConstants.RIGHT);
-		JLabel l5=new JLabel("Escrito presentado",SwingConstants.RIGHT);
-		JLabel l6=new JLabel("Estado",SwingConstants.RIGHT);
-		JLabel l7=new JLabel("Abogado",SwingConstants.RIGHT);
+		JLabel l1=new JLabel("Código ",SwingConstants.RIGHT);
+		JLabel l2=new JLabel("Fecha Cliente ",SwingConstants.RIGHT);
+		JLabel l3=new JLabel("Fecha Sigrem ",SwingConstants.RIGHT);
+		JLabel l4=new JLabel("Escrito recibido ",SwingConstants.RIGHT);
+		JLabel l5=new JLabel("Escrito presentado ",SwingConstants.RIGHT);
+		JLabel l6=new JLabel("Estado ",SwingConstants.RIGHT);
+		JLabel l7=new JLabel("Abogado ",SwingConstants.RIGHT);
+		JLabel r1=new JLabel(" ",SwingConstants.RIGHT);
+		JLabel r2=new JLabel(" ",SwingConstants.RIGHT);
+		JLabel r3=new JLabel(" ",SwingConstants.RIGHT);
+		JLabel r6=new JLabel(" ",SwingConstants.RIGHT);
+		JLabel r7=new JLabel(" ",SwingConstants.RIGHT);
 		l1.setPreferredSize(new Dimension(100,25));
 		l2.setPreferredSize(new Dimension(100,25));
 		l3.setPreferredSize(new Dimension(100,25));
@@ -1080,21 +1085,29 @@ public class PanelContratos extends JPanel
 		l5.setPreferredSize(new Dimension(100,25));
 		l6.setPreferredSize(new Dimension(100,25));
 		l7.setPreferredSize(new Dimension(100,25));
+		r1.setPreferredSize(new Dimension(150,25));
+		r2.setPreferredSize(new Dimension(175,25));
+		r3.setPreferredSize(new Dimension(175,25));
+		r6.setPreferredSize(new Dimension(150,25));
+		r7.setPreferredSize(new Dimension(150,25));
 		JTextField cod=new JTextField();
 		JTextField fcl=new JTextField();
 		JTextField fsi=new JTextField();
-		JTextField ere=new JTextField();
-		JTextField epr=new JTextField();
-		JTextField est=new JTextField();
+		JComboBox ere=new JComboBox();
+		JComboBox epr=new JComboBox();
+		JComboBox est=new JComboBox();
 		JTextField abo=new JTextField();
+		escritoRecibido(ere);
+		escritoPresentado(epr);
+		estadosRecursos(est);
 		cod.setEditable(false);
-		cod.setPreferredSize(new Dimension(100,20));
-		fcl.setPreferredSize(new Dimension(100,20));
-		fsi.setPreferredSize(new Dimension(100,20));
-		ere.setPreferredSize(new Dimension(100,20));
-		epr.setPreferredSize(new Dimension(100,20));
-		est.setPreferredSize(new Dimension(100,20));
-		abo.setPreferredSize(new Dimension(100,20));
+		cod.setPreferredSize(new Dimension(100,25));
+		fcl.setPreferredSize(new Dimension(75,25));
+		fsi.setPreferredSize(new Dimension(75,25));
+		ere.setPreferredSize(new Dimension(250,25));
+		epr.setPreferredSize(new Dimension(250,25));
+		est.setPreferredSize(new Dimension(100,25));
+		abo.setPreferredSize(new Dimension(100,25));
 		JPanel p1=new JPanel();
 		JPanel p2=new JPanel();
 		JPanel p3=new JPanel();
@@ -1106,19 +1119,25 @@ public class PanelContratos extends JPanel
 		{
 			p1.add(l1);
 			p1.add(cod);
+			p1.add(r1);
+			
 		}
 		p2.add(l2);
 		p2.add(fcl);
+		p2.add(r2);
 		p3.add(l3);
 		p3.add(fsi);
+		p3.add(r3);
 		p4.add(l4);
 		p4.add(ere);
 		p5.add(l5);
 		p5.add(epr);
 		p6.add(l6);
 		p6.add(est);
+		p6.add(r6);
 		p7.add(l7);
 		p7.add(abo);
+		p7.add(r7);
 		Box caja1=Box.createVerticalBox();
 		caja1.add(p1);
 		caja1.add(p2);
@@ -1198,10 +1217,10 @@ public class PanelContratos extends JPanel
 		cod.setPreferredSize(new Dimension(100,25));
 		fcl.setPreferredSize(new Dimension(75,25));
 		fsi.setPreferredSize(new Dimension(75,25));
-		ere.setPreferredSize(new Dimension(130,25));
-		epr.setPreferredSize(new Dimension(130,25));
-		est.setPreferredSize(new Dimension(130,25));
-		abo.setPreferredSize(new Dimension(130,25));
+		ere.setPreferredSize(new Dimension(250,25));
+		epr.setPreferredSize(new Dimension(250,25));
+		est.setPreferredSize(new Dimension(100,25));
+		abo.setPreferredSize(new Dimension(100,25));
 		descrip.setPreferredSize(new Dimension(80,25));		
 		modi.setPreferredSize(new Dimension (25,25));		
 		elim.setPreferredSize(new Dimension (25,25));
@@ -1405,5 +1424,76 @@ public class PanelContratos extends JPanel
 		infracciones.addItem("TMPer.No cumplir condic. Sanidad");
 		infracciones.addItem("TMPer.No llevar abordo documentac.");
 		infracciones.addItem("Ttes. Otras");
+	}
+	
+	private void escritoPresentado(JComboBox escritos)
+	{
+		escritos.addItem("Alegaciones Boletín");
+		escritos.addItem("Alegaciones Notificación");
+		escritos.addItem("Alegaciones a las Pruebas");
+		escritos.addItem("Recurso Alzada");
+		escritos.addItem("Recurso Reposición");
+		escritos.addItem("Alegaciones Trámite Audiencia");
+		escritos.addItem("Identificación Conductor");
+		escritos.addItem("Escr. Subsanación de Firma");
+		escritos.addItem("Solicitud Aplazam, Retirada Carné");
+		escritos.addItem("Aleg. Puesta de Manifiesto(TEAR)");
+		escritos.addItem("Ejec .Recurso Reposición");
+		escritos.addItem("Carta Desestim. Recurso Adm.");
+		escritos.addItem("Carta Desestim. Recurso Ejecut.");
+		escritos.addItem("Carta Requerim. Identif. Conductor");
+		escritos.addItem("Escrito Entrada Repetido");
+		escritos.addItem("Sin Escrito de Salida");
+		escritos.addItem("Otros");		
+	}
+
+	private void escritoRecibido(JComboBox escritos)
+	{
+		escritos.addItem("Boletín sin valor de notif.");
+		escritos.addItem("Boletín con valor de notific");
+		escritos.addItem("Notificación Denuncia");
+		escritos.addItem("Remisión pruebas");
+		escritos.addItem("Notificación 1ª Resolución");
+		escritos.addItem("Notificación 2ª Resolución");
+		escritos.addItem("Requerimiento Identificación");
+		escritos.addItem("Escr. Solicitando Subsanación de Firma");
+		escritos.addItem("Notif. Trámite Audiencia");
+		escritos.addItem("Notificación Propuesta Resolución");
+		escritos.addItem("Notificación Sobreseída");
+		escritos.addItem("Notificación Retrotaida");
+		escritos.addItem("Notificación Revocada");
+		escritos.addItem("Orden Entrega Carné Conducir");
+		escritos.addItem("Requerimiento Relación Laboral");
+		escritos.addItem("Providencia de Apremio");
+		escritos.addItem("Carta de Pago");
+		escritos.addItem("Providencia Embargo(AYUNT)");
+		escritos.addItem("Providencia embargo y acumulación");
+		escritos.addItem("Diligencia Embargo(AYUNT)");
+		escritos.addItem("Prelación de Bienes(AYUNT)");
+		escritos.addItem("Señalamiento de Bienes(AYUNT))");
+		escritos.addItem("Embargo de CC y Ahorros(AYUNT)");
+		escritos.addItem("Investigación Patrimonial(AYUNT)");
+		escritos.addItem("Justificante Ingreso(AYUNT)");
+		escritos.addItem("Orden de ejec. de la Prov. de Embargo(AYUNT)");
+		escritos.addItem("Ejec.Grúa");
+		escritos.addItem("Puesta Manifiesto(TEAR)");
+		escritos.addItem("Notific. Puesta Disposic. Del interesado.");
+		escritos.addItem("Talón de Cargo(AETAT)");
+		escritos.addItem("Diligencia de Embargo(AEAT)");
+		escritos.addItem("Investigación Seguridad Social");
+		escritos.addItem("Embargo Bienes Conocidos");
+		escritos.addItem("Diligencia embargo(BANCO)");
+		escritos.addItem("Notific.Resol.Recurso Ejecutivo");
+		escritos.addItem("Otras Notificaciones");
+	}
+	
+	private void estadosRecursos(JComboBox estado)
+	{
+		estado.addItem("Pendiente");
+		estado.addItem("Recurso 1º");
+		estado.addItem("Recurso 2º");
+		estado.addItem("Recurso 3º");
+		estado.addItem("Favorable");
+		estado.addItem("Desfavorable");
 	}
 }
