@@ -1,0 +1,13 @@
+============================================
+= Ingeniería del Software: Proyecto SIGREM =
+============================================
+
+SIGREM: Sistema Integral de Gestión de Recursos de Multas
+
+Autores:
+
+- Félix Martos Trenado
+- Javier Rodríguez Horcajo
+- Miguel Ángel Ruiz Ortega
+- Francisco José Sánchez Hernando
+- Sergio Tarancón Faus
