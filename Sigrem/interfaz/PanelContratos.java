@@ -6,9 +6,12 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import main.Sigrem;
 
 public class PanelContratos extends JPanel
 {
+	private Sigrem controlador;
+	
 	private JFrame formAlta;
 	
 	private JFrame formMulta;
@@ -25,17 +28,10 @@ public class PanelContratos extends JPanel
 	
 	private JFrame formMod;
 	
-	private JButton elimcont;
-	
-	private JButton modcont;
-	
-	public PanelContratos()
+	public PanelContratos(Sigrem controlador)
 	{
 		super();
-		modcont=new JButton("Modificar");
-		elimcont=new JButton("Eliminar");
-		modcont.setEnabled(false);
-		elimcont.setEnabled(false);
+		this.controlador=controlador;
 		dibujaPaneles(false);
 		formAlta=new JFrame();
 		formAlta.setResizable(false);
@@ -67,7 +63,7 @@ public class PanelContratos extends JPanel
 	{
 		JPanel pcontrato=dibujaContrato();
 		pcontrato.setPreferredSize(new Dimension(314,0));
-		JPanel pcliente=dibujaCliente(false);
+		JPanel pcliente=dibujaCliente();
 		pcliente.setPreferredSize(new Dimension(0,260));
 		JPanel pmultas=new JPanel();
 		if (multas) 
@@ -108,9 +104,11 @@ public class PanelContratos extends JPanel
 		tcliente.setBackground(Color.WHITE);
 		tmatricula.setBackground(Color.WHITE);
 		JButton bcrea=new JButton ("Crear");
+		JButton belimcont=new JButton("Eliminar");
+		JButton bmodcont=new JButton("Modificar");
 		bcrea.setPreferredSize(new Dimension(90,25));
-		modcont.setPreferredSize(new Dimension(90,25));
-		elimcont.setPreferredSize(new Dimension(90,25));
+		bmodcont.setPreferredSize(new Dimension(90,25));
+		belimcont.setPreferredSize(new Dimension(90,25));
 		JPanel p1=new JPanel();
 		JPanel p2=new JPanel();
 		JPanel p3=new JPanel();
@@ -122,8 +120,8 @@ public class PanelContratos extends JPanel
 		p3.add(l3);
 		p3.add(tcliente);
 		botonera.add(bcrea);
-		botonera.add(elimcont);
-		botonera.add(modcont);
+		botonera.add(belimcont);
+		botonera.add(bmodcont);
 		Box caja=Box.createVerticalBox();
 		caja.add(p1);
 		caja.add(p2);
@@ -142,7 +140,7 @@ public class PanelContratos extends JPanel
 				}
 			}
 		});
-		modcont.addActionListener(new ActionListener()
+		bmodcont.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
 				if (!formMod.isVisible())
@@ -152,7 +150,7 @@ public class PanelContratos extends JPanel
 				}
 			}
 		});
-		elimcont.addActionListener(new ActionListener()
+		belimcont.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
 				if (!formBaja.isVisible())
@@ -165,7 +163,7 @@ public class PanelContratos extends JPanel
 		return pco;
 	}
 	
-	public JPanel dibujaCliente(boolean editable)
+	public JPanel dibujaCliente()
 	{
 		JPanel panel=new JPanel();
 		panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos del cliente",TitledBorder.LEFT,TitledBorder.TOP));
@@ -211,24 +209,22 @@ public class PanelContratos extends JPanel
 		tpro.setPreferredSize(new Dimension(160,20));
 		ttel.setPreferredSize(new Dimension(80,20));
 		temail.setPreferredSize(new Dimension(80,20));
-		if (!editable)
-		{	tnom.setEditable(false);
-			tdni.setEditable(false);
-			tdir.setEditable(false);
-			tcp.setEditable(false);
-			tloc.setEditable(false);
-			tpro.setEditable(false);
-			ttel.setEditable(false);
-			temail.setEditable(false);
-			tnom.setBackground(Color.WHITE);
-			tdni.setBackground(Color.WHITE);
-			tdir.setBackground(Color.WHITE);
-			tcp.setBackground(Color.WHITE);
-			tloc.setBackground(Color.WHITE);
-			tpro.setBackground(Color.WHITE);
-			ttel.setBackground(Color.WHITE);
-			temail.setBackground(Color.WHITE);
-		}
+		tnom.setEditable(false);
+		tdni.setEditable(false);
+		tdir.setEditable(false);
+		tcp.setEditable(false);
+		tloc.setEditable(false);
+		tpro.setEditable(false);
+		ttel.setEditable(false);
+		temail.setEditable(false);
+		tnom.setBackground(Color.WHITE);
+		tdni.setBackground(Color.WHITE);
+		tdir.setBackground(Color.WHITE);
+		tcp.setBackground(Color.WHITE);
+		tloc.setBackground(Color.WHITE);
+		tpro.setBackground(Color.WHITE);
+		ttel.setBackground(Color.WHITE);
+		temail.setBackground(Color.WHITE);
 		Box c1=Box.createHorizontalBox();
 		Box c2=Box.createHorizontalBox();
 		Box c3=Box.createHorizontalBox();
@@ -267,32 +263,30 @@ public class PanelContratos extends JPanel
 		caja.add(c6);
 		caja.add(c7);
 		caja.add(c8);
-		if (!editable)
-		{	JLabel l9=new JLabel("Contratos ",SwingConstants.RIGHT);
-			l9.setPreferredSize(new Dimension(80,40));
-			JTextArea conts=new JTextArea();
-			conts.setEditable(false);
-			conts.append("C001\n");
-			conts.append("C002\n");
-			conts.append("C003\n");
-			conts.append("C004\n");
-			JScrollPane spanel=new JScrollPane(conts,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-			spanel.setPreferredSize(new Dimension(20,40));
-			JLabel relleno6=new JLabel("");
-			relleno6.setPreferredSize(new Dimension(80,40));
-			JLabel relleno7=new JLabel("");
-			relleno7.setPreferredSize(new Dimension(0,10));
-			JLabel relleno8=new JLabel("");
-			relleno8.setPreferredSize(new Dimension(0,10));
-			Box c9=Box.createHorizontalBox();
-			c9.add(l9);
-			c9.add(spanel);
-			c9.add(relleno6);
-			caja.add(relleno7);
-			caja.add(new JSeparator());
-			caja.add(relleno8);
-			caja.add(c9);
-		}
+		JLabel l9=new JLabel("Contratos ",SwingConstants.RIGHT);
+		l9.setPreferredSize(new Dimension(80,40));
+		JTextArea conts=new JTextArea();
+		conts.setEditable(false);
+		conts.append("C001\n");
+		conts.append("C002\n");
+		conts.append("C003\n");
+		conts.append("C004\n");
+		JScrollPane spanel=new JScrollPane(conts,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		spanel.setPreferredSize(new Dimension(20,40));
+		JLabel relleno6=new JLabel("");
+		relleno6.setPreferredSize(new Dimension(80,40));
+		JLabel relleno7=new JLabel("");
+		relleno7.setPreferredSize(new Dimension(0,10));
+		JLabel relleno8=new JLabel("");
+		relleno8.setPreferredSize(new Dimension(0,10));
+		Box c9=Box.createHorizontalBox();
+		c9.add(l9);
+		c9.add(spanel);
+		c9.add(relleno6);
+		caja.add(relleno7);
+		caja.add(new JSeparator());
+		caja.add(relleno8);
+		caja.add(c9);
 		panel.add(caja);
 		return panel;
 	}
@@ -361,10 +355,10 @@ public class PanelContratos extends JPanel
 		l1.setPreferredSize(new Dimension(150,20));
 		l2.setPreferredSize(new Dimension(150,20));
 		l3.setPreferredSize(new Dimension(150,20));
-		JTextField tcontrato=new JTextField();
+		final JTextField tcontrato=new JTextField();
 		tcontrato.setEditable(false);
-		JTextField tcliente=new JTextField();
-		JTextField tmatricula=new JTextField();
+		final JTextField tcliente=new JTextField();
+		final JTextField tmatricula=new JTextField();
 		tcontrato.setPreferredSize(new Dimension(100,20));
 		tcliente.setPreferredSize(new Dimension(100,20));
 		tmatricula.setPreferredSize(new Dimension(100,20));
@@ -377,13 +371,95 @@ public class PanelContratos extends JPanel
 		p2.add(tmatricula);
 		p3.add(l3);
 		p3.add(tcliente);
-		Box caja=Box.createVerticalBox();
-		caja.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos del contrato",TitledBorder.LEFT,TitledBorder.TOP));
-		caja.add(p1);
-		caja.add(p2);
-		caja.add(p3);
-		JPanel pcl=dibujaCliente(true);
-		JSplitPane sp1=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja,pcl);
+		Box caja1=Box.createVerticalBox();
+		caja1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos del contrato",TitledBorder.LEFT,TitledBorder.TOP));
+		caja1.add(p1);
+		caja1.add(p2);
+		caja1.add(p3);
+		JPanel pcl=new JPanel();
+		pcl.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos del cliente",TitledBorder.LEFT,TitledBorder.TOP));
+		JLabel l9=new JLabel("Nombre ",SwingConstants.RIGHT);
+		JLabel l10=new JLabel("DNI/CIF ",SwingConstants.RIGHT);
+		JLabel l11=new JLabel("Dirección ",SwingConstants.RIGHT);
+		JLabel l4=new JLabel("Código postal ",SwingConstants.RIGHT);
+		JLabel l5=new JLabel("Localidad ",SwingConstants.RIGHT);
+		JLabel l6=new JLabel("Provincia ",SwingConstants.RIGHT);		
+		JLabel l7=new JLabel("Teléfono ",SwingConstants.RIGHT);
+		JLabel l8=new JLabel("email ",SwingConstants.RIGHT);
+		l11.setPreferredSize(new Dimension(80,20));
+		l10.setPreferredSize(new Dimension(80,20));
+		l9.setPreferredSize(new Dimension(80,20));
+		l4.setPreferredSize(new Dimension(80,20));
+		l5.setPreferredSize(new Dimension(80,20));
+		l6.setPreferredSize(new Dimension(80,20));
+		l7.setPreferredSize(new Dimension(80,20));
+		l8.setPreferredSize(new Dimension(80,20));
+		JLabel relleno1=new JLabel("");
+		JLabel relleno2=new JLabel("");
+		JLabel relleno3=new JLabel("");
+		JLabel relleno4=new JLabel("");
+		JLabel relleno5=new JLabel("");
+		relleno1.setPreferredSize(new Dimension(100,20));
+		relleno2.setPreferredSize(new Dimension(150,20));
+		relleno3.setPreferredSize(new Dimension(50,20));
+		relleno4.setPreferredSize(new Dimension(100,20));
+		relleno5.setPreferredSize(new Dimension(20,20));		
+		final JTextField tnom=new JTextField();
+		final JTextField tdni=new JTextField();
+		final JTextField tdir=new JTextField();
+		final JTextField tcp=new JTextField();
+		final JTextField tloc=new JTextField();
+		final JTextField tpro=new JTextField();
+		final JTextField ttel=new JTextField();
+		final JTextField temail=new JTextField();
+		tnom.setPreferredSize(new Dimension(200,20));
+		tdni.setPreferredSize(new Dimension(100,20));
+		tdir.setPreferredSize(new Dimension(200,20));
+		tcp.setPreferredSize(new Dimension(60,20));
+		tloc.setPreferredSize(new Dimension(180,20));
+		tpro.setPreferredSize(new Dimension(160,20));
+		ttel.setPreferredSize(new Dimension(80,20));
+		temail.setPreferredSize(new Dimension(80,20));
+		Box c1=Box.createHorizontalBox();
+		Box c2=Box.createHorizontalBox();
+		Box c3=Box.createHorizontalBox();
+		Box c4=Box.createHorizontalBox();
+		Box c5=Box.createHorizontalBox();
+		Box c6=Box.createHorizontalBox();
+		Box c7=Box.createHorizontalBox();
+		Box c8=Box.createHorizontalBox();
+		c1.add(l9);
+		c1.add(tnom);
+		c2.add(l10);
+		c2.add(tdni);
+		c2.add(relleno1);
+		c3.add(l11);
+		c3.add(tdir);
+		c4.add(l4);
+		c4.add(tcp);
+		c4.add(relleno2);
+		c5.add(l5);
+		c5.add(tloc);
+		c6.add(l6);
+		c6.add(tpro);
+		c6.add(relleno3);
+		c7.add(l7);
+		c7.add(ttel);
+		c7.add(relleno4);
+		c8.add(l8);
+		c8.add(temail);
+		c8.add(relleno5);
+		Box caja2=Box.createVerticalBox();
+		caja2.add(c1);
+		caja2.add(c2);
+		caja2.add(c3);
+		caja2.add(c4);
+		caja2.add(c5);
+		caja2.add(c6);
+		caja2.add(c7);
+		caja2.add(c8);
+		pcl.add(caja2);
+		JSplitPane sp1=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja1,pcl);
 		sp1.setEnabled(false);		
 		sp1.setDividerSize(4);
 		JButton aceptar=new JButton("Aceptar");
@@ -401,10 +477,23 @@ public class PanelContratos extends JPanel
 			{
 				formAlta.setVisible(false);
 				formAlta.getContentPane().removeAll();
-				modcont.setEnabled(true);
-				elimcont.setEnabled(true);
+				String[] datoscontrato=new String[3]; 
+				String[] datoscliente=new String[8];
+				datoscontrato[0]=tcontrato.getText();
+				datoscontrato[1]=tcliente.getText();
+				datoscontrato[2]=tmatricula.getText();
+				datoscliente[0]=tnom.getText();
+				datoscliente[1]=tdni.getText();
+				datoscliente[2]=tdir.getText();
+				datoscliente[3]=tcp.getText();
+				datoscliente[4]=tloc.getText();
+				datoscliente[5]=tpro.getText();
+				datoscliente[6]=ttel.getText();
+				datoscliente[7]=temail.getText();
+				controlador.añadirContrato(datoscontrato,datoscliente);
 				removeAll();
 				dibujaPaneles(true);
+				
 				//validar datos
 				//enviar datos a Sigrem para almacenarlos en la estructura de datos
 				//cargar contrato en el panel

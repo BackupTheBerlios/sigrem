@@ -4,7 +4,6 @@ import interfaz.InterfazGrafica;
 import med.EstructuraDatos;
 import med.ListaConIndices;
 import main.ModuloGestion;
-import java.util.LinkedList;
 
 public class GClientesImp implements ModuloGestion
 {
@@ -17,19 +16,27 @@ public class GClientesImp implements ModuloGestion
 		clientes=new ListaConIndices(3);
 	    this.vista=vista;
 	}
-	public boolean añadir(LinkedList datos)
+	public void añadir(String[] datos)
 	{
 		//recuperar los datos en el orden adecuado y crear el cliente
-		return true;
+		//insertar el cliente en la lista
+		vista.actualizaVista(1,datos);
 	}
 	
-	public Object modificar()
+	public void eliminar(Integer codigo)
 	{
-		return null;
+		
 	}
-	public Object consultarCodigo(Integer codigo)
+	
+	public void modificar(String[] datos)
 	{
-		return null;
+		//recuperar los datos en el orden adecuado y crear el cliente
+		//insertar el cliente en la lista
+		vista.actualizaVista(1,datos);
+	}
+	public void consultarCodigo(Integer codigo)
+	{
+
 	}
 /*	public boolean añadir(Integer codigo,String nombre, String dni)
 	{
@@ -48,7 +55,7 @@ public class GClientesImp implements ModuloGestion
 	  	   }
 	    return false;
 	  }
-*/
+
 	public boolean eliminar(Integer codigo)
 	{
 		boolean eliminado=clientes.eliminar(codigo,0);
@@ -57,7 +64,6 @@ public class GClientesImp implements ModuloGestion
 			//falta saber como se comunica con la interfaz
 	  	}
 	  	return eliminado;
-		
 	}
 	
 	public boolean modificarCliente(Integer codigoAntiguo, Integer codigoNuevo,String nombreNuevo, String dniNuevo)
@@ -95,7 +101,7 @@ public class GClientesImp implements ModuloGestion
 	  	return false;
 	}
 	  
-	
+*/	
 	public Cliente consultarClienteCodigo(Integer codigo)
 	{
 	  return (Cliente) this.clientes.buscar(codigo,0);

@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.border.TitledBorder;
 import java.awt.event.*;
+import main.Sigrem;
 
 public class PanelEconomia extends JPanel 
 {
@@ -12,10 +13,13 @@ public class PanelEconomia extends JPanel
 	public int [] facturacion={170,130,125, 27,150, 90,134,170,120,106, 60,169};
 	public int [] gastos=     {  0, 20,100, 10, 30, 34,134,  0, 36,  6, 10,150};
 	public int [] balance=    {170,110, 25, 17,120, 56,  0,170, 84,100, 50, 19};
+	
+	private Sigrem controlador;
 		
-	public PanelEconomia(int grafico)
+	public PanelEconomia(int grafico,Sigrem controlador)
 	{
 		super();
+		this.controlador=controlador;
 		if (grafico==1) dibujaPaneles(Color.GREEN,facturacion,"Histórico de Facturación",1);
 		else if (grafico==2) dibujaPaneles(Color.RED,gastos,"Histórico de Gastos",2);
 		else if (grafico==3) dibujaPaneles(Color.BLUE,balance,"Histórico de Balance",3);

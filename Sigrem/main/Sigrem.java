@@ -1,7 +1,7 @@
 package main;
 
 import interfaz.InterfazGrafica;
-import mcl.GClientesImp;
+//import mcl.GClientesImp;
 //import mco.GContratosImp;
 //import mmu.GMultasImp;
 //import mre.GRecursosImp;
@@ -21,13 +21,29 @@ public class Sigrem
 	
 	private ModuloGestion grecursos;
 	
-	public Sigrem(InterfazGrafica vista)
+	public Sigrem()
 	{
-		this.vista=vista;
-		gclientes=new GClientesImp(vista);
+		vista=new InterfazGrafica(this);
+//		gclientes=new GClientesImp(vista);
 //		gcontratos=new GContratosImp(vista);
 //		gmultas=new GMultasImp(vista);
 //		gempleados=new GEmpleadosImp(vista);
 //		grecursos=new GRecursosImp(vista);		
+	}
+	
+	public void activa()
+	{
+		vista.activa();		
+	}
+	
+	public void añadirContrato(String[] datoscontrato,String[] datoscliente)
+	{
+		//añadir cliene
+		//añadir contrato
+	}
+	
+	public void añadirCliente(String[] datos)
+	{
+		gclientes.añadir(datos);
 	}
 }

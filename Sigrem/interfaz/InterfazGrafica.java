@@ -8,6 +8,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.filechooser.FileFilter;
 import java.io.*;
+import main.Sigrem;
 
 class Filtro extends FileFilter
 {
@@ -31,15 +32,24 @@ public class InterfazGrafica
 	
 	private JTabbedPane panelVistas;
 	
+	private JPanel pcontratos;
+	
+	private JPanel pempleados;
+	
+	private JPanel peconomia;
+	
 	private JFileChooser selec;
 	
 	private JFrame formSigrem;
 	
 	private JFrame formacercade;
 	
-	public InterfazGrafica()
+	private Sigrem controlador;
+	
+	public InterfazGrafica(Sigrem controlador)
 	{
 		ventana=new JFrame("Sigrem");
+		this.controlador=controlador;
 		formSigrem=new JFrame();
 		formSigrem.setResizable(false);
 		formSigrem.setUndecorated(true);		
@@ -51,9 +61,12 @@ public class InterfazGrafica
 //		formacercade.setAlwaysOnTop(true);
 		formacercade.setLocation(350,250);
 		panelVistas=new JTabbedPane(JTabbedPane.BOTTOM);
-		panelVistas.addTab("Gestión Contratos",new PanelContratos());
-		panelVistas.addTab("Gestión Empleados",new PanelEmpleados());
-		panelVistas.addTab("Gestión Económica",new PanelEconomia(0));
+		pcontratos=new PanelContratos(this.controlador);
+		pempleados=new PanelEmpleados(this.controlador);
+		peconomia=new PanelEconomia(0,this.controlador);
+		panelVistas.addTab("Gestión Contratos",pcontratos);
+		panelVistas.addTab("Gestión Empleados",pempleados);
+		panelVistas.addTab("Gestión Económica",peconomia);
 		selec=new JFileChooser(new File(System.getProperty("user.dir")));
 		selec.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		selec.setFileFilter(new Filtro());
@@ -105,6 +118,19 @@ public class InterfazGrafica
 	public void activa()
 	{
 		ventana.setVisible(true);
+	}
+	
+	public void actualizaVista(int panel,String[] datos)
+	{
+		if (panel==1)
+		{	pcontratos=new PanelContratos(controlador);
+		}
+		else if (panel==2)
+		{	pempleados=new PanelEmpleados(controlador);			
+		}
+		else if (panel==3)
+		{	peconomia=new PanelEconomia(0,controlador);			
+		}	
 	}
 	
 	public JMenuBar setMenu()
@@ -308,7 +334,8 @@ public class InterfazGrafica
 		{	public void actionPerformed(ActionEvent e)
 			{
 				panelVistas.remove(2);
-				panelVistas.addTab("Gestión Económica",new PanelEconomia(1));
+				peconomia=new PanelEconomia(1,controlador);
+				panelVistas.addTab("Gestión Económica",peconomia);
 				panelVistas.setSelectedIndex(2);
 				
 			}
@@ -317,7 +344,8 @@ public class InterfazGrafica
 		{	public void actionPerformed(ActionEvent e)
 			{
 				panelVistas.remove(2);
-				panelVistas.addTab("Gestión Económica",new PanelEconomia(2));
+				peconomia=new PanelEconomia(2,controlador);
+				panelVistas.addTab("Gestión Económica",peconomia);
 				panelVistas.setSelectedIndex(2);
 			}
 		});
@@ -325,7 +353,8 @@ public class InterfazGrafica
 		{	public void actionPerformed(ActionEvent e)
 			{
 				panelVistas.remove(2);
-				panelVistas.addTab("Gestión Económica",new PanelEconomia(3));
+				peconomia=new PanelEconomia(3,controlador);
+				panelVistas.addTab("Gestión Económica",peconomia);
 				panelVistas.setSelectedIndex(2);
 			}
 		});

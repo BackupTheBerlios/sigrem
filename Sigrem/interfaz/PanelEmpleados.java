@@ -1,20 +1,22 @@
 package interfaz;
 
 import javax.swing.*;
-
+import main.Sigrem;
 import java.awt.Dimension;
 import javax.swing.border.TitledBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+//import java.awt.event.WindowAdapter;
+//import java.awt.event.WindowEvent;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class PanelEmpleados extends JPanel 
 {
-	private JFrame formAlta; 
+	private Sigrem controlador;
+	
+	private JFrame formAlta;	
 	
 	private JFrame formBaja;
 	
@@ -71,9 +73,10 @@ public class PanelEmpleados extends JPanel
 		}
 	}
 	
-	public PanelEmpleados()
+	public PanelEmpleados(Sigrem controlador)
 	{
 		super();
+		this.controlador=controlador;
 		ucod=0;
 		urec=0;
 		pmostrado=-1;

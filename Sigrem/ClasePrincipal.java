@@ -1,12 +1,12 @@
-import interfaz.*;
+import main.Sigrem;
 
 public class ClasePrincipal 
 {
-	private static InterfazGrafica ig;
+	private static Sigrem controlador;
 	
 	public static void main(String[] args) 
 	{
-		InterfazGrafica ig=new InterfazGrafica();
-		ig.activa();
+		controlador=new Sigrem();
+		controlador.activa();
 	}
 }
