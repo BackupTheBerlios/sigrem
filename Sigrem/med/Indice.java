@@ -10,19 +10,17 @@ package med;
  */
 
 
-
-
 public interface Indice {
-  public NodoLista buscar(Comparable cla);
+  public Object[] buscar(Comparable clave);
   //si no esta esa clave devuelve null
   
-  public void insertar(Comparable[] cla, NodoLista nodo);
+  public void insertar(Comparable[] clave, Object elemento);
   //necesita recibir las claves para cada uno de sus indices
   
-  public NodoLista eliminar(Comparable cla);
-  //elimina todos sus indices y devuelve el nodo de la lista que debe ser eliminado
+  public boolean eliminar(Comparable clave);
+  //elimina el PRIMER elemento con esa clave de todos los indices existentes
   
-  public boolean cambiar(Comparable cla, Comparable nuevaCla);
+  public boolean cambiar(Comparable clave, Comparable nuevaCla);
   //este metodo cambia el indice pero no el valor interno del objeto
   //devuelve si ha podido o no hacer el cambio
 }

@@ -9,15 +9,18 @@ package med;
  * @version 1.0
  */
 
+//Existe un NodoIndiceImp por cada elemento de cada estructura
+//y son referenciados desde los distintos indices
 public class NodoIndiceImp {
-  int posicion;
-  Comparable clave;
-  NodoLista nodo;
-  NodoIndiceImp[] indices;
-  public NodoIndiceImp(Comparable cla,NodoLista nod,NodoIndiceImp[] inds,int pos){
-    clave=cla;
-    nodo=nod;
-    indices=inds;
-    posicion=pos;
+  Comparable[] claves;
+  int[] posiciones;
+  Object elemento;
+  EstructuraDatos estructura;
+    
+  public NodoIndiceImp(Comparable[] clavesNuevo,Object elementoNuevo,int[] posicionesNuevo,EstructuraDatos estructuraNuevo){
+    claves=clavesNuevo;
+    posiciones=posicionesNuevo;
+    elemento=elementoNuevo;
+    estructura=estructuraNuevo;
   } 
 }
