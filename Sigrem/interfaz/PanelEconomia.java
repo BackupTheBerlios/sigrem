@@ -126,9 +126,12 @@ public class PanelEconomia extends JPanel
 		l1.setPreferredSize(new Dimension(100,20));
 		l2.setPreferredSize(new Dimension(100,20));
 		l3.setPreferredSize(new Dimension(100,20));
-		bFacturacion=new JTextField(facturacion[11]);
-		bGastos=new JTextField(gastos[11]);
-		bBalance=new JTextField(balance[11]);
+		bFacturacion=new JTextField();
+		bFacturacion.setText(""+facturacion[11]);
+		bGastos=new JTextField();
+		bFacturacion.setText(""+gastos[11]);
+		bBalance=new JTextField();
+		bFacturacion.setText(""+balance[11]);
 		bFacturacion.setPreferredSize(new Dimension(100,20));
 		bGastos.setPreferredSize(new Dimension(100,20));
 		bBalance.setPreferredSize(new Dimension(100,20));
