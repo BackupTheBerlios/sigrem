@@ -36,8 +36,8 @@ public class GMultasImp implements GMultas
 			if (consultarMultaBoletin(false,boletin)==null)
 			{	Multa nuevaMulta=new Multa(codigoMulta,datos);
 				meteMulta(nuevaMulta);
-				incrementaCodigo();
 				datos.addFirst(codigoMulta);
+				incrementaCodigo();				
 				vista.actualizaVistaCaja(1,'m','a',datos);
 				vista.actualizaVista(1,3,null);
 			}
