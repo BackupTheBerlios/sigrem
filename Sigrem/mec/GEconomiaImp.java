@@ -29,9 +29,13 @@ public class GEconomiaImp implements GEconomia
 		this.gempleados=gempleados;
 		this.gcontratos=gcontratos;
 		
-		/*int nultimomes=Integer.valueOf(ultimomes).intValue();
+		int nultimomes=Integer.valueOf(ultimomes).intValue();
 		this.ultimomes=nultimomes;
+		this.facturacion=new int[12];
+		this.gastos=new int[12];
+		this.balance=new int[12];
 		
+		//Pasamos del String al vector
 		int num=0;
 		int i=0;
 		int n=0;
@@ -48,16 +52,17 @@ public class GEconomiaImp implements GEconomia
 			}
 			num=Integer.valueOf(numero).intValue();
 			i=i+1;
-			if (signo=='+')	this.facturacion[n]=num;
-			else this.facturacion[n]=(-num);
+			if (signo=='-')	num=num*(-1);
+			this.facturacion[n]=num;
+			numero="";
 			n=n+1;
 		}
 		
-		
+		//Pasamos del String al vector
 		num=0;
 		i=0;
 		n=0;
-		numero=null;		
+		numero="";
 		while ((i<gastos.length())&&(n<12))
 		{
 			signo=gastos.charAt(i);
@@ -69,15 +74,17 @@ public class GEconomiaImp implements GEconomia
 			}
 			num=Integer.valueOf(numero).intValue();
 			i=i+1;
-			if (signo=='+')	this.gastos[n]=num;
-			else this.gastos[n]=(-num);
+			if (signo=='-')	num=num*(-1);
+			this.gastos[n]=num;
+			numero="";
 			n=n+1;
 		}
 		
+		//Pasamos del String al vector
 		num=0;
 		i=0;
 		n=0;
-		numero=null;		
+		numero="";
 		while ((i<balance.length())&&(n<12))
 		{
 			signo=balance.charAt(i);
@@ -89,21 +96,20 @@ public class GEconomiaImp implements GEconomia
 			}
 			num=Integer.valueOf(numero).intValue();
 			i=i+1;
-			if (signo=='+')	this.balance[n]=num;
-			else this.balance[n]=(-num);
+			if (signo=='-')	num=num*(-1);
+			this.balance[n]=num;
+			numero="";
 			n=n+1;
-		}*/
+		}
 		
 		this.cuotaContrato=33;
 	}
 	
-	public void gastos()
+	public void gastos(int [] vGastos, int nGastos, int ultMes)
 	{
-		int nEmp=gempleados.dameListaEmpleados().dameTamaño();
-		for(int i=0;i<nEmp;i++)
-		{
-			
-		}
+		Calendar hoy=Calendar.getInstance();
+		int i=hoy.get(Calendar.YEAR);
+		if 
 		//gempleados.dameListaEmpleados();
 		//para cada empleado mirar su nomina
 		//sumar todas las nominas		

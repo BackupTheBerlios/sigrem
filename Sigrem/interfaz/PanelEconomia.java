@@ -72,8 +72,11 @@ public class PanelEconomia extends JPanel
 		t2.setBackground(Color.WHITE);
 		t3.setBackground(Color.WHITE);
 		JButton bfacturacion=new JButton ("Calcular");
+		bfacturacion.setPreferredSize(new Dimension(80,20));
 		JButton bgastos=new JButton ("Calcular");
+		bgastos.setPreferredSize(new Dimension(80,20));
 		JButton bbalance=new JButton ("Calcular");
+		bbalance.setPreferredSize(new Dimension(80,20));
 		JButton bhfac=new JButton (new ImageIcon("interfaz/grafico.gif"));
 		bhfac.setPreferredSize(new Dimension(20,20));
 		JButton bhgas=new JButton (new ImageIcon("interfaz/grafico.gif"));
