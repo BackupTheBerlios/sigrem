@@ -1,11 +1,5 @@
 package interfaz;
 
-/*Cosas por hacer
- * Consultar por nombre y devolver varios resultados
- * Controlar DNI no repetido
- * No permitir eliminar si tiene recursos
- */
-
 import javax.swing.*;
 
 import main.Sigrem;

@@ -2,8 +2,6 @@ package mem;
 
 import java.util.LinkedList;
 import java.util.Vector;
-
-import mcl.Cliente;
 import med.*;
 import interfaz.*;
 
@@ -25,11 +23,6 @@ public class GEmpleadosImp implements GEmpleados
 	private void incrementaCodigo()
 	{
 		String numero = codigoEmpleado.substring(0,3);
-		/*Character car = null;
-		int num = car.digit(codigoEmpleado.charAt(3), 10);
-		for (int i=4;i<codigoEmpleado.length(); i++){
-			num = (num*10)+car.digit(codigoEmpleado.charAt(i), 10);
-		}*/
 		int num=Integer.valueOf(codigoEmpleado.substring(3)).intValue();
 		numero = numero + (num+1);
 		codigoEmpleado = numero;
@@ -44,36 +37,60 @@ public class GEmpleadosImp implements GEmpleados
 		else if (perfil.equals("Administrativo"))
 		{	nuevoEmpleado=new Administrativo(codigoEmpleado,perfil,datosEmpleado);}
 		String[] claves = new String[3];
-		claves[0] = codigoEmpleado;
-		claves[1] = (String)datosEmpleado.get(0);
-		claves[2] = (String)datosEmpleado.get(1);
-		listaEmpleados.insertar(claves, nuevoEmpleado);
-		String codigoAntiguo = codigoEmpleado;
-		incrementaCodigo();
-		LinkedList datosPanel1=new LinkedList();
-		datosPanel1.add(codigoAntiguo);
-		datosPanel1.add(perfil);
-		datosPanel1.add(datosEmpleado.get(11));
-		LinkedList datosPanel2=new LinkedList();
-		for (int i=0;i<11;i++) datosPanel2.add(datosEmpleado.get(i));
-		vista.actualizaVista(2,1,datosPanel1);
-		vista.actualizaVista(2,2,datosPanel2);
-		vista.actualizaVista(2,3,null);
-		return codigoAntiguo;
+		claves[0]=codigoEmpleado;
+		claves[1]=(String)datosEmpleado.get(0);
+		claves[2]=(String)datosEmpleado.get(1);
+		if (!listaEmpleados.esta(claves[2],2))
+		{	listaEmpleados.insertar(claves, nuevoEmpleado);
+			String codigoAntiguo = codigoEmpleado;
+			incrementaCodigo();
+			LinkedList datosPanel1=new LinkedList();
+			datosPanel1.add(codigoAntiguo);
+			datosPanel1.add(perfil);
+			datosPanel1.add(datosEmpleado.get(11));
+			LinkedList datosPanel2=new LinkedList();
+			for (int i=0;i<11;i++) datosPanel2.add(datosEmpleado.get(i));
+			vista.actualizaVista(2,1,datosPanel1);
+			vista.actualizaVista(2,2,datosPanel2);
+			vista.actualizaVista(2,3,null);
+			return codigoAntiguo;
+		}
+		else
+		{	vista.actualizaVistaMensaje("Error al contratar al empleado "+codigoEmpleado+". DNI repetido");
+			return null;
+		}	
 	}
 
 	public void eliminarEmpleado(boolean borrar,String codigoEmpleado)
 	{
-		boolean eliminado=listaEmpleados.eliminar(codigoEmpleado,0);
-		if (eliminado) 
-		{	vista.actualizaVistaMensaje("       Empleado "+codigoEmpleado+" despedido correctamente");
-			if (borrar)
-			{	vista.actualizaVista(2,1,null);
-				vista.actualizaVista(2,2,null);
-				vista.actualizaVista(2,3,null);
+		Vector busqueda=listaEmpleados.buscar(codigoEmpleado,0);
+		if (busqueda.size()==0)
+		{	vista.actualizaVistaMensaje("Error al buscar el empleado "+codigoEmpleado+". No se ha encontrado");}
+		else 
+		{	Empleado empleado=(Empleado)busqueda.get(0);
+			boolean eliminar=true;
+			if (empleado.damePerfil().equals("Abogado"))
+			{	Abogado abogado=(Abogado)empleado;
+				if (abogado.dameListaRecursos().size()>0)
+				{	vista.actualizaVistaMensaje("No se puede despedir al abogado "+codigoEmpleado+" mientras tenga recursos asignados");
+					eliminar=false;
+				}
+				else
+				{	eliminar=true;}
+			}
+			if (eliminar)
+			{	boolean eliminado=listaEmpleados.eliminar(codigoEmpleado,0);
+				if (eliminado) 
+				{	vista.actualizaVistaMensaje("       Empleado "+codigoEmpleado+" despedido correctamente");
+					if (borrar)
+					{	vista.actualizaVista(2,1,null);
+						vista.actualizaVista(2,2,null);
+						vista.actualizaVista(2,3,null);
+					}
+				}
+				else vista.actualizaVistaMensaje("Error al eliminar el empleado "+codigoEmpleado+". No se ha encontrado");
 			}
 		}
-		else vista.actualizaVistaMensaje("Error al eliminar el empleado "+codigoEmpleado+". No se ha encontrado");
 	}
 
 	public void modificarEmpleado(String codigoEmpleado, LinkedList datosEmpleado) 
