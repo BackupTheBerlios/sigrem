@@ -21,7 +21,7 @@ public interface GClientes
 	
 	public void meteCliente(Cliente cliente);
 	
-	public void asociaClienteContrato(String codcliente,String codcontrato);
+	public void asociaClienteContrato(boolean actualizar,String codcliente,String codcontrato);
 	
 	public EstructuraDatos dameEstructuraClientes();
 	

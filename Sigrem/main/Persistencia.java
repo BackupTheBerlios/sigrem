@@ -222,7 +222,7 @@ public class Persistencia
 							Cliente nuevoCliente=new Cliente(codigoCliente,datosCliente);
 							gclientes.meteCliente(nuevoCliente);
 							for (int i=0;i<contratosAsociados.size();i++){
-								gclientes.asociaClienteContrato(codigoCliente,(String)contratosAsociados.get(i));
+								gclientes.asociaClienteContrato(false,codigoCliente,(String)contratosAsociados.get(i));
 							}
 							lineaActual=lector.readLine();
 							tab=tab.substring(1);

@@ -81,7 +81,7 @@ public class Sigrem
 		datosContrato.addFirst(codigoCliente);
 		String codigoContratoNuevo=gcontratos.añadirContrato(datosContrato);
 		if (codigoContratoNuevo!=null)
-		{	gclientes.asociaClienteContrato(codigoCliente,codigoContratoNuevo);
+		{	gclientes.asociaClienteContrato(true,codigoCliente,codigoContratoNuevo);
 			vista.actualizaVista(1,3,null);
 		}		
 	}

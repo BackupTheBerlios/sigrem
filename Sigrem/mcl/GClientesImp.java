@@ -62,12 +62,12 @@ public class GClientesImp implements GClientes
 		this.dameEstructuraClientes().insertar(claves,cliente);
 	}
 	
-	public void asociaClienteContrato(String codcliente,String codcontrato)
+	public void asociaClienteContrato(boolean actualizar,String codcliente,String codcontrato)
 	{
 		Vector busqueda=listaClientes.buscar(codcliente,0);
 		Cliente cliente=(Cliente)busqueda.get(0);
 		cliente.añadeContrato(codcontrato);
-		vista.actualizaVista(1,2,cliente.dameListaDatos());
+		if (actualizar) vista.actualizaVista(1,2,cliente.dameListaDatos());
 	}
 	
 	public void eliminarCliente(boolean actualizar,String codcliente,String codcontrato)
