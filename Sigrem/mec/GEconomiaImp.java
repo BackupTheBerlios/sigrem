@@ -76,12 +76,12 @@ public class GEconomiaImp implements GEconomia
 			int desplazamiento=0;
 			if (mesActual>ultimoMesFac)
 			{	desplazamiento=mesActual-ultimoMesFac;}
-			else if (mesActual<ultimoMesGas)
-			{	desplazamiento=12-ultimoMesFac+mesActual;}
-			for (int i=0;i<=desplazamiento;i++)
+			else if (mesActual<ultimoMesFac)
+			{	desplazamiento=ultimoMesFac-mesActual;}
+			for (int i=0;i<desplazamiento;i++)
 			{	for (int j=0;j<11;j++)
 				{						
-					facturacion[i]=facturacion[i+1];				
+					facturacion[j]=facturacion[j+1];				
 				}
 				facturacion[11]=0;			
 			}
@@ -106,11 +106,11 @@ public class GEconomiaImp implements GEconomia
 			if (mesActual>ultimoMesGas)
 			{	desplazamiento=mesActual-ultimoMesGas;}
 			else if (mesActual<ultimoMesGas)
-			{	desplazamiento=12-ultimoMesGas+mesActual;}
-			for (int i=0;i<=desplazamiento;i++)
+			{	desplazamiento=ultimoMesGas-mesActual;}
+			for (int i=0;i<desplazamiento;i++)
 			{	for (int j=0;j<11;j++)
 				{	
-					gastos[i]=gastos[i+1];				
+					gastos[j]=gastos[j+1];				
 				}
 				gastos[11]=0;			
 			}
@@ -135,11 +135,11 @@ public class GEconomiaImp implements GEconomia
 			if (mesActual>ultimoMesBal)
 			{	desplazamiento=mesActual-ultimoMesBal;}
 			else if (mesActual<ultimoMesBal)
-			{	desplazamiento=12-ultimoMesBal+mesActual;}
-			for (int i=0;i<=desplazamiento;i++)
+			{	desplazamiento=ultimoMesBal-mesActual;}
+			for (int i=0;i<desplazamiento;i++)
 			{	for (int j=0;j<11;j++)
 				{
-					balance[i]=balance[i+1];				
+					balance[j]=balance[j+1];				
 				}
 				balance[11]=0;			
 			}

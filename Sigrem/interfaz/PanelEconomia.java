@@ -104,9 +104,10 @@ public class PanelEconomia extends JPanel
 		String [] vMeses=new String[12];
 		String [] mesesIni={"ENE ","FEB ","MAR ","ABR ","MAY ","JUN ","JUL ","AGO ","SEP ","OCT ","NOV ","DIC "};
 		while (i<12)
-		{	vMeses[i]=mesesIni[m];
-			if (m<11) m=m+1;
-			else m=0;
+		{	
+			if (m<11)	m=m+1;
+			else	m=0;
+			vMeses[i]=mesesIni[m];
 			i=i+1;
 		}
 		return vMeses;
@@ -304,8 +305,10 @@ public class PanelEconomia extends JPanel
 				if (num[i]<-maxValorGrafico)	maxValorGrafico=-num[i];
 				else if (num[i]>maxValorGrafico)	maxValorGrafico=num[i];
 			for(int i=0;i<12;i++)
-				if (num[i]<0)	caja.add(dibujaBarra(-((170*num[i])/maxValorGrafico),vMeses[i],Color.RED));
-				else	caja.add(dibujaBarra(((170*num[i])/maxValorGrafico),vMeses[i],Color.GREEN));			
+			{
+				if (num[i]<0)	caja.add(dibujaBarra(-((150*num[i])/maxValorGrafico),vMeses[i],Color.RED));
+				else	caja.add(dibujaBarra(((150*num[i])/maxValorGrafico),vMeses[i],Color.GREEN));				
+			}
 			pgra.add(caja);
 		}
 		return pgra;
@@ -316,7 +319,7 @@ public class PanelEconomia extends JPanel
 		JLabel ll1=new JLabel(mes);
 		ll1.setPreferredSize(new Dimension(30,10));
 		JLabel relleno1=new JLabel("");
-		relleno1.setPreferredSize(new Dimension(20, 180-num));
+		relleno1.setPreferredSize(new Dimension(20, 160-num));
 		JTextField t1=new JTextField();
 		t1.setPreferredSize(new Dimension(20, num));
 		t1.setEditable(false);
