@@ -8,14 +8,6 @@ import java.awt.event.*;
 
 public class PanelEconomia extends JPanel 
 {
-	private JFrame formulario;
-	private JSplitPane spx;
-	private JPanel pgrafico;
-	private JPanel pbalance;
-	private JButton bhfac;
-    private JButton bhbal;
-	private JButton bhgas;
-	
 	//valores entre 0-170
 	public int [] facturacion={170,130,125, 27,150, 90,134,170,120,106, 60,169};
 	public int [] gastos=     {  0, 20,100, 10, 30, 34,134,  0, 36,  6, 10,150};
@@ -24,17 +16,14 @@ public class PanelEconomia extends JPanel
 	public PanelEconomia()
 	{
 		super();
-		formulario=new JFrame();
-		formulario.setResizable(false);
-		formulario.setLocation(210,320);
 		dibujaPaneles(null,null,null,0);
 	}
 	
 	public void dibujaPaneles(Color c, int [] num, String s,int boton)
 	{
-		pbalance=dibujaBalance(boton);
-		pgrafico=dibujaGrafico(c,num,s);
-		spx=new JSplitPane(JSplitPane.VERTICAL_SPLIT,pbalance,pgrafico);
+		JPanel pbalance=dibujaBalance(boton);
+		JPanel pgrafico=dibujaGrafico(c,num,s);
+		JSplitPane spx=new JSplitPane(JSplitPane.VERTICAL_SPLIT,pbalance,pgrafico);
 		spx.setEnabled(false);		
 		spx.setDividerSize(4);
 		add(spx);
@@ -63,11 +52,11 @@ public class PanelEconomia extends JPanel
 		t2.setBackground(Color.WHITE);
 		t3.setBackground(Color.WHITE);
 		JButton bactualiza=new JButton ("Actualizar");
-		bhfac=new JButton (new ImageIcon("interfaz/grafico.gif"));
+		JButton bhfac=new JButton (new ImageIcon("interfaz/grafico.gif"));
 		bhfac.setPreferredSize(new Dimension(20,20));
-		bhgas=new JButton (new ImageIcon("interfaz/grafico.gif"));
+		JButton bhgas=new JButton (new ImageIcon("interfaz/grafico.gif"));
 		bhgas.setPreferredSize(new Dimension(20,20));
-		bhbal=new JButton (new ImageIcon("interfaz/grafico.gif"));
+		JButton bhbal=new JButton (new ImageIcon("interfaz/grafico.gif"));
 		bhbal.setPreferredSize(new Dimension(20,20));
 		if (boton==1) bhbal.setEnabled(false);
 		else if (boton==2) bhgas.setEnabled(false);
