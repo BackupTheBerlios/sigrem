@@ -26,10 +26,10 @@ public class GEmpleadosImp implements GEmpleados {
 	
 	// Método para calcular automáticamente el código del empleado
 	private void incrementaCodigo(){
-		String numero = codigoEmpleado.substring(0,4);
+		String numero = codigoEmpleado.substring(0,3);
 		Character car = null;
-		int num = car.digit(codigoEmpleado.charAt(4), 10);
-		for (int i=5;i<codigoEmpleado.length(); i++){
+		int num = car.digit(codigoEmpleado.charAt(3), 10);
+		for (int i=4;i<codigoEmpleado.length(); i++){
 			num = (num*10)+car.digit(codigoEmpleado.charAt(i), 10);
 		}
 		numero = numero + (num+1);
