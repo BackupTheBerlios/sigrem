@@ -1,12 +1,14 @@
 package interfaz;
 
 import javax.swing.*;
+
 import main.Sigrem;
+
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.border.TitledBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.*;
 
 public class PanelEmpleados extends JPanel 
 {
@@ -116,6 +118,9 @@ public class PanelEmpleados extends JPanel
 		t1.setEditable(false);
 		t2.setEditable(false);
 		t3.setEditable(false);
+		t1.setBackground(Color.WHITE);
+		t2.setBackground(Color.WHITE);
+		t3.setBackground(Color.WHITE);
 		JButton bcontratar=new JButton ("Contratar");
 		bdespedir.setEnabled(false);
 		bmodificar.setEnabled(false);
@@ -225,7 +230,6 @@ public class PanelEmpleados extends JPanel
 		tpro.setPreferredSize(new Dimension(160,20));
 		ttel.setPreferredSize(new Dimension(80,20));
 		temail.setPreferredSize(new Dimension(80,20));
-		if (tipo=='m') 	tdni.setEditable(false);
 		if (!editable)
 		{
 			tnom.setEditable(false);
@@ -290,6 +294,7 @@ public class PanelEmpleados extends JPanel
 	public JPanel dibujaRecursos()
 	{	
 		JPanel prec=new JPanel();
+		prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),("Recursos asignados al empleado "+cmostrado),TitledBorder.LEFT,TitledBorder.TOP));
 		if (pmostrado==0)
 		{			
 			Box tabla=Box.createVerticalBox();
@@ -318,10 +323,13 @@ public class PanelEmpleados extends JPanel
 				tabla.add(linea);		
 			}
 			JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-			ptabla.setPreferredSize(new Dimension(703,243));
-			prec.removeAll();
-			prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),("Recursos asignados al empleado "+cmostrado),TitledBorder.LEFT,TitledBorder.TOP));
-			prec.add(ptabla);		
+			ptabla.setPreferredSize(new Dimension(700,236));
+			
+			JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,ptabla,null);
+			sp.setEnabled(false);
+			sp.setDividerSize(4);
+						
+			prec.add(sp);		
 		}
 		else
 		{
@@ -523,10 +531,8 @@ public class PanelEmpleados extends JPanel
 		perfil.setEditable(false);
 		perfil.setBackground(Color.WHITE);		
 		final JTextField tnomina=new JTextField();
-		
 		perfil.setSelectedIndex(pmostrado);
 		tnomina.setText(nmostrado);
-		
 		tcodigo.setPreferredSize(new Dimension(100,20));
 		tnomina.setPreferredSize(new Dimension(100,20));
 		tcodigo.setEditable(false);
@@ -545,9 +551,7 @@ public class PanelEmpleados extends JPanel
 		caja.add(pperfil);
 		caja.add(pnomina);
 		JPanel pdat;
-		
 		pdat=dibujaDatos(true,'m');
-		
 		JPanel pbotones=new JPanel();
 		JButton bacepta=new JButton ("Aceptar");
 		JButton bcancela=new JButton ("Cancelar");
@@ -593,11 +597,11 @@ public class PanelEmpleados extends JPanel
 		JLabel l2=new JLabel("Estado");
 		String [] opciones={"Pendiente","Recurso 1º","Recurso 2º","Recurso 3º","Favorable","Perdido"};
 		estado=new JComboBox(opciones);
-		estado.setPreferredSize(new Dimension(100,20));
 		estado.setEditable(false);
 		estado.setBackground(Color.WHITE);
 		l1.setPreferredSize(new Dimension(80,20));
 		l2.setPreferredSize(new Dimension(80,20));
+		estado.setPreferredSize(new Dimension(100,20));
 		JTextField cod=new JTextField();
 		JTextField est=new JTextField();
 		cod.setPreferredSize(new Dimension(100,20));		
@@ -725,11 +729,14 @@ public class PanelEmpleados extends JPanel
 		final JButton modi=new JButton(new ImageIcon("interfaz/tick.gif"));
 		final JButton elim=new JButton(new ImageIcon("interfaz/del.gif"));
 		cod.setEditable(false);
-		cod.setPreferredSize(new Dimension(130,25));		
 		exp.setEditable(false);
-		exp.setPreferredSize(new Dimension(130,25));		
 		bol.setEditable(false);
-		bol.setPreferredSize(new Dimension(130,25));		
+		cod.setBackground(Color.WHITE);
+		exp.setBackground(Color.WHITE);
+		bol.setBackground(Color.WHITE);
+		cod.setPreferredSize(new Dimension(130,25));
+		exp.setPreferredSize(new Dimension(130,25));
+		bol.setPreferredSize(new Dimension(130,25));
 		descrip.setPreferredSize(new Dimension(80,25));		
 		modi.setPreferredSize(new Dimension (25,25));		
 		elim.setPreferredSize(new Dimension (25,25));
