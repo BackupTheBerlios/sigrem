@@ -158,5 +158,11 @@ public class GEmpleadosImp implements GEmpleados
 			vista.actualizaVista(2,2,datosPanel2);				
 		}
 	}
+	
+	// Método para obtener la lista de empleados
+	public EstructuraDatos dameListaEmpleados()
+	{
+		return listaEmpleados;
+	}
 
 }

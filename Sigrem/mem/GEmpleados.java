@@ -2,6 +2,8 @@ package mem;
 
 import java.util.LinkedList;
 
+import med.EstructuraDatos;
+
 public interface GEmpleados
 {
 	// Método para añadir un empleado al sistema
@@ -16,4 +18,6 @@ public interface GEmpleados
 	public void consultarEmpleadoNombre(String nombre);
 	// Método para consultar un empleado dado su DNI
 	public void consultarEmpleadoDni(String dni);
+	// Método para obtener la lista de empleados
+	public EstructuraDatos dameListaEmpleados();
 }
