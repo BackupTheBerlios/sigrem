@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import main.Sigrem;
 import java.util.LinkedList;
 import java.util.Date;
-import java.text.SimpleDateFormat; 
+import java.text.SimpleDateFormat;
 
 public class PanelContratos extends JPanel
 {
@@ -17,8 +17,6 @@ public class PanelContratos extends JPanel
 	
 	private JDialog formulario;
 	
-	private JPanel pcontrato;
-		
 	public PanelContratos(Sigrem controlador,JFrame v)
 	{
 		super();
@@ -30,9 +28,9 @@ public class PanelContratos extends JPanel
 	
 	public void dibujaPaneles(boolean multas)
 	{
-		pcontrato=dibujaContrato(null);
+		JPanel pcontrato=dibujaContrato(null);
 		pcontrato.setPreferredSize(new Dimension(314,0));
-		JPanel pcliente=dibujaCliente();
+		JPanel pcliente=dibujaCliente(null);
 		pcliente.setPreferredSize(new Dimension(0,320));
 		JPanel pmultas=new JPanel();
 		if (multas) 
@@ -53,21 +51,14 @@ public class PanelContratos extends JPanel
 	public void actualiza(int panel,LinkedList datos)
 	{
 		if (panel==1)
-		{	
-			System.out.println((String)datos.get(0));
-			System.out.println((String)datos.get(1));
-			System.out.println((String)datos.get(2));
-			System.out.println((String)datos.get(3));
-			pcontrato=new JPanel();
-			pcontrato=dibujaContrato(datos);
-			
-			
-		}
-		else if (panel==1)
-		{
-			
+		{	JSplitPane sp=((JSplitPane)getComponent(0));
+			((JSplitPane)sp.getComponent(0)).setLeftComponent(dibujaContrato(datos));
 		}
 		else if (panel==2)
+		{	JSplitPane sp=((JSplitPane)getComponent(0));
+			((JSplitPane)sp.getComponent(0)).setRightComponent(dibujaCliente(datos));
+		}
+		else if (panel==3)
 		{
 			
 		}
@@ -93,6 +84,7 @@ public class PanelContratos extends JPanel
 		{	tcontrato.setText((String)datos.get(0));
 			tcliente.setText((String)datos.get(1));
 			tmatricula.setText((String)datos.get(2));
+			tfechaalta.setText((String)datos.get(3));
 		}
 		tcontrato.setPreferredSize(new Dimension(100,20));
 		tcliente.setPreferredSize(new Dimension(100,20));
@@ -122,9 +114,9 @@ public class PanelContratos extends JPanel
 		p2.add(l2);
 		p2.add(tcliente);
 		p3.add(l3);
-		p3.add(tfechaalta);
+		p3.add(tmatricula);
 		p4.add(l4);
-		p4.add(tmatricula);
+		p4.add(tfechaalta);
 		botonera.add(bcrea);
 		botonera.add(belimcont);
 		botonera.add(bmodcont);
@@ -164,7 +156,7 @@ public class PanelContratos extends JPanel
 		return pco;
 	}
 	
-	public JPanel dibujaCliente()
+	public JPanel dibujaCliente(LinkedList datos)
 	{
 		JPanel panel=new JPanel();
 		panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos del cliente",TitledBorder.LEFT,TitledBorder.TOP));
@@ -216,7 +208,20 @@ public class PanelContratos extends JPanel
 		JTextField ttel2=new JTextField();
 		JTextField tmov=new JTextField();
 		JTextField temail=new JTextField();
-		JTextField tfax=new JTextField();		
+		JTextField tfax=new JTextField();
+		if (datos!=null)
+		{	tnom.setText((String)datos.get(0));
+			tdni.setText((String)datos.get(1));
+			tdir.setText((String)datos.get(2));
+			tcp.setText((String)datos.get(3));
+			tpob.setText((String)datos.get(4));
+			tpro.setText((String)datos.get(5));
+			ttel1.setText((String)datos.get(6));
+			ttel2.setText((String)datos.get(7));
+			tmov.setText((String)datos.get(8));
+			temail.setText((String)datos.get(9));
+			tfax.setText((String)datos.get(10));		
+		}
 		tnom.setPreferredSize(new Dimension(200,20));
 		tdni.setPreferredSize(new Dimension(100,20));
 		tdir.setPreferredSize(new Dimension(200,20));
@@ -333,7 +338,7 @@ public class PanelContratos extends JPanel
 		nuevoContrato.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formulario.getContentPane().add(panelAlta('n',null));
+				formulario.getContentPane().add(panelAlta('c',null));
 				formulario.pack();	
 				formulario.setVisible(true);
 			}
@@ -401,10 +406,10 @@ public class PanelContratos extends JPanel
 			formulario.setLocation(350,100);
 		}
 		else if (tipo=='m') 
-			 {
-				formulario.setTitle("Modificar contrato "+codigo);
-				formulario.setLocation(350,100);
-			 }
+		{
+			formulario.setTitle("Modificar contrato "+codigo);
+			formulario.setLocation(350,100);
+		}
 		JLabel lc1=new JLabel("Matrícula del vehículo");
 		JLabel lc2=new JLabel("Fecha de alta");
 		lc1.setPreferredSize(new Dimension(150,20));

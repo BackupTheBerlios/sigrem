@@ -29,7 +29,7 @@ public class GClientesImp implements GClientes
 		claves[1]=(String)datos.get(1);
 		claves[2]=(String)datos.get(2);
 		listaclientes.insertar(claves,nuevocliente);
-		//vista.actualizaVista(1,datos);
+		vista.actualizaVista(1,2,datos);
 		return codcliente;
 	}
 	
@@ -37,7 +37,6 @@ public class GClientesImp implements GClientes
 	{
 		Object[] busqueda=listaclientes.buscar(codcliente,0);
 		Cliente cliente=(Cliente)busqueda[0];
-		System.out.println(cliente.getDni());
 		cliente.añadeContrato(codcontrato);
 	}
 	
@@ -48,9 +47,7 @@ public class GClientesImp implements GClientes
 	
 	public void modificarCliente(String codigo)
 	{
-		//recuperar los datos en el orden adecuado y crear el cliente
-		//insertar el cliente en la lista
-		//vista.actualizaVista(1,datos);
+
 	}
 	
 	public void consultarClienteCodigo(String codigo)

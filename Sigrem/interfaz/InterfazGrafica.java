@@ -150,43 +150,9 @@ public class InterfazGrafica
 	
 	public void actualizaVista(int pestaña,int panel,LinkedList datos)
 	{
-		if (pestaña==1)
-		{	if (panel==1)
-			{	pcontratos.actualiza(panel,datos);
-			}
-			else if (panel==2)
-			{
-				
-			}
-			else if (panel==3)
-			{
-				
-			}			
-		}
-		else if (pestaña==2)
-		{	if (panel==1)
-			{
-			
-			}
-			else if (panel==2)
-			{
-				
-			}
-			else if (panel==3)
-			{
-				
-			}
-		}
-		else if (pestaña==3)
-		{	if (panel==1)
-			{
-			
-			}
-			else if (panel==2)
-			{
-				
-			}
-		}	
+		if (pestaña==1) pcontratos.actualiza(panel,datos);
+		else if (pestaña==2){} //pempleados.actualiza(panel,datos);
+		else if (pestaña==3) {}//peconomia.actualiza(panel,datos);
 	}
 	
 	public JMenuBar setMenu()
