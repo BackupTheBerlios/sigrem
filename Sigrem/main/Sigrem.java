@@ -85,7 +85,11 @@ public class Sigrem
 		String codcliente=gcontratos.modificarFechaBaja(codcontrato);
 		if (codcliente!=null) 
 		{	LinkedList listamultas=gcontratos.dameListaMultasContrato(0,codcontrato);
-			gmultas.eliminaListaMultas(listamultas);
+			for (int i=0;i<listamultas.size();i++)
+			{	LinkedList listaRecursos=gmultas.dameListaRecursosMulta((String)listamultas.get(i));
+				grecursos.eliminarListaRecursos(listaRecursos);			
+			}
+			gmultas.eliminaListaMultas(actualizar,listamultas);
 			gcontratos.eliminarContrato(borrar,codcontrato);
 			gclientes.eliminarCliente(actualizar,codcliente,codcontrato);			
 		}
@@ -161,10 +165,12 @@ public class Sigrem
 		}
 	}
 	
-	public void eliminarMulta(String codmulta,String codcontrato)
+	public void eliminarMulta(boolean actualizar,String codmulta,String codcontrato)
 	{
-		gmultas.eliminarMulta(codmulta);
-		gcontratos.eliminarMulta(codcontrato,codmulta);
+		LinkedList listaRecursos=gmultas.dameListaRecursosMulta(codmulta);
+		grecursos.eliminarListaRecursos(listaRecursos);
+		gmultas.eliminarMulta(actualizar,codmulta);
+		gcontratos.eliminarMulta(codcontrato,codmulta);		
 	}
 	
 	public void modificarMulta(String codigo,LinkedList datos)
@@ -217,9 +223,7 @@ public class Sigrem
 	{
 		String codmulta=grecursos.consultarRecursoCodigo(codigo);
 		if (codmulta!=null)
-		{	consultarMultaCodigo(codmulta);
-			
-		}
+		{	consultarMultaCodigo(codmulta);}
 	}
 	
 	public void contratarEmpleado(String perfil,LinkedList datos)

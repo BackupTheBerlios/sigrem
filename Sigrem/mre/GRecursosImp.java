@@ -104,4 +104,13 @@ public class GRecursosImp implements GRecursos
 		}
 	}
 
+	public void eliminarListaRecursos(LinkedList lista)
+	{
+		for (int i=0;i<lista.size();i++)
+		{	String codigo=(String)lista.get(i);
+			boolean eliminado=listaRecursos.eliminar(codigo,0);
+			if (!eliminado)  
+			{	vista.actualizaVistaMensaje("Error al eliminar el recurso "+codigo+". No se ha encontrado");}
+		}
+	}
 }

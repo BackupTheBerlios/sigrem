@@ -56,14 +56,16 @@ public class GMultasImp implements GMultas
 		return claves[0];
 	}
 	
-	public void eliminarMulta(String codigo)
+	public void eliminarMulta(boolean actualizar,String codigo)
 	{
 		boolean eliminado=listaMultas.eliminar(codigo,0);
 		if (eliminado) 
 		{	LinkedList datos=new LinkedList();
 			datos.add(codigo);
-			vista.actualizaVistaCaja('m','e',datos);
-			vista.actualizaVista(1,3,null);
+			if (actualizar)
+			{	vista.actualizaVistaCaja('m','e',datos);
+				vista.actualizaVista(1,3,null);
+			}
 		}
 		else vista.actualizaVistaMensaje("Error al eliminar la multa "+codigo+". No se ha encontrado");
 	}
@@ -137,7 +139,7 @@ public class GMultasImp implements GMultas
 		vista.actualizaVista(1,3,null);
 	}
 	
-	public void eliminaListaMultas(LinkedList lista)
+	public void eliminaListaMultas(boolean actualizar,LinkedList lista)
 	{
 		for (int i=0;i<lista.size();i++)
 		{	String codigo=(String)lista.get(i);
@@ -145,7 +147,7 @@ public class GMultasImp implements GMultas
 			if (!eliminado)  
 			{	vista.actualizaVistaMensaje("Error al eliminar la multa "+codigo+". No se ha encontrado");}
 		}
-		vista.actualizaVista(1,3,null);
+		if (actualizar) vista.actualizaVista(1,3,null);
 	}
 	
 	public void asociaMultaRecurso(String codmulta,String codrecurso)

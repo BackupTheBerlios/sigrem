@@ -1364,7 +1364,7 @@ public class PanelContratos extends JPanel
 			{
 				int seleccion=JOptionPane.showConfirmDialog(null,"          ¿Desea eliminar la multa "+cod.getText()+"?","Eliminar multa",JOptionPane.YES_NO_CANCEL_OPTION,-1);
 				if (seleccion==JOptionPane.YES_OPTION)
-				{	controlador.eliminarMulta(cod.getText(),codigoContrato.getText());}				
+				{	controlador.eliminarMulta(true,cod.getText(),codigoContrato.getText());}				
 			}
 		});
 		return panel;
