@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import main.Sigrem;
 import java.util.LinkedList;
+import java.util.Date;
+import java.text.SimpleDateFormat; 
 
 public class PanelContratos extends JPanel
 {
@@ -179,7 +181,7 @@ public class PanelContratos extends JPanel
 		JPanel panel=new JPanel();
 		panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos del cliente",TitledBorder.LEFT,TitledBorder.TOP));
 		JLabel l1=new JLabel("Nombre ",SwingConstants.RIGHT);
-		JLabel l2=new JLabel("DNI/CIF ",SwingConstants.RIGHT);
+		JLabel l2=new JLabel("NIF/CIF ",SwingConstants.RIGHT);
 		JLabel l3=new JLabel("Dirección ",SwingConstants.RIGHT);
 		JLabel l4=new JLabel("Código postal ",SwingConstants.RIGHT);
 		JLabel l5=new JLabel("Población ",SwingConstants.RIGHT);
@@ -416,6 +418,12 @@ public class PanelContratos extends JPanel
 		lc1.setPreferredSize(new Dimension(150,20));
 		lc2.setPreferredSize(new Dimension(150,20));
 		final JTextField tfechaalta=new JTextField();
+		if (tipo=='c')
+		{
+			Date hoy = new Date();
+			SimpleDateFormat formato=new SimpleDateFormat("dd.MM.yyyy");
+			tfechaalta.setText(formato.format(hoy));
+		}
 		tfechaalta.setEditable(false);
 		final JTextField tmatricula=new JTextField();
 		tfechaalta.setPreferredSize(new Dimension(100,20));
