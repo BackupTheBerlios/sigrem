@@ -20,11 +20,11 @@ public class PanelEconomia extends JPanel
 	
 	private Sigrem controlador;
 	
-	private JTextField bFacturacion;
+	private JTextField tFacturacion;
 	
-	private JTextField bGastos;
+	private JTextField tGastos;
 	
-	private JTextField bBalance;
+	private JTextField tBalance;
 	
 	private int [] facturacion;
 	
@@ -50,7 +50,7 @@ public class PanelEconomia extends JPanel
 		this.mesFac=new String [12];
 		this.mesGas=new String [12];
 		this.mesBal=new String [12];
-		this.maxValorGrafico=1;
+		this.maxValorGrafico=170;
 		dibujaPaneles(null,null,0,null);		
 	}
 	
@@ -126,21 +126,21 @@ public class PanelEconomia extends JPanel
 		l1.setPreferredSize(new Dimension(100,20));
 		l2.setPreferredSize(new Dimension(100,20));
 		l3.setPreferredSize(new Dimension(100,20));
-		bFacturacion=new JTextField();
-		bFacturacion.setText(""+facturacion[11]);
-		bGastos=new JTextField();
-		bFacturacion.setText(""+gastos[11]);
-		bBalance=new JTextField();
-		bFacturacion.setText(""+balance[11]);
-		bFacturacion.setPreferredSize(new Dimension(100,20));
-		bGastos.setPreferredSize(new Dimension(100,20));
-		bBalance.setPreferredSize(new Dimension(100,20));
-		bFacturacion.setEditable(false);
-		bGastos.setEditable(false);
-		bBalance.setEditable(false);
-		bFacturacion.setBackground(Color.WHITE);
-		bGastos.setBackground(Color.WHITE);
-		bBalance.setBackground(Color.WHITE);
+		tFacturacion=new JTextField();
+		tFacturacion.setText(""+facturacion[11]);
+		tGastos=new JTextField();
+		tGastos.setText(""+gastos[11]);
+		tBalance=new JTextField();
+		tBalance.setText(""+balance[11]);
+		tFacturacion.setPreferredSize(new Dimension(100,20));
+		tGastos.setPreferredSize(new Dimension(100,20));
+		tBalance.setPreferredSize(new Dimension(100,20));
+		tFacturacion.setEditable(false);
+		tGastos.setEditable(false);
+		tBalance.setEditable(false);
+		tFacturacion.setBackground(Color.WHITE);
+		tGastos.setBackground(Color.WHITE);
+		tBalance.setBackground(Color.WHITE);
 		JButton bfacturacion=new JButton ("Calcular");
 		bfacturacion.setPreferredSize(new Dimension(80,20));
 		JButton bgastos=new JButton ("Calcular");
@@ -162,15 +162,15 @@ public class PanelEconomia extends JPanel
 		JPanel p3=new JPanel();
 		p0.add(l0);
 		p1.add(l1);
-		p1.add(bFacturacion);
+		p1.add(tFacturacion);
 		p1.add(bhfac);
 		p1.add(bfacturacion);
 		p2.add(l2);
-		p2.add(bGastos);
+		p2.add(tGastos);
 		p2.add(bhgas);
 		p2.add(bgastos);
 		p3.add(l3);
-		p3.add(bBalance);
+		p3.add(tBalance);
 		p3.add(bhbal);
 		p3.add(bbalance);
 		Box caja=Box.createVerticalBox();
@@ -205,21 +205,25 @@ public class PanelEconomia extends JPanel
 		{	public void actionPerformed(ActionEvent e)
 			{
 				controlador.calculaFacturacion();
-				bFacturacion.setText(""+facturacion[11]);
+				removeAll();
+				dibujaPaneles(facturacion, "Histórico de Facturación",1,mesFac);
+				
 			}
 		});
 		bgastos.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
 				controlador.calculaGastos();			
-				bGastos.setText(""+gastos[11]);
+				removeAll();
+				dibujaPaneles(gastos, "Histórico de Gastos",2,mesGas);
 			}
 		});
 		bbalance.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
 				controlador.calculaBalance();
-				bBalance.setText(""+balance[11]);
+				removeAll();
+				dibujaPaneles(balance,"Histórico de Balance",3,mesBal);
 			}
 		});
 		return pbal;
