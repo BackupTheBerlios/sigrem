@@ -32,27 +32,34 @@ public class GClientesImp implements GClientes
 	
 	//clave0=codigo	clave1=nombre clave2=dni
 	public String añadirCliente(LinkedList datos)
-	{	String[] claves=new String[3];
-		claves[0]=null;
-		claves[1]=(String)datos.get(0);
-		claves[2]=(String)datos.get(1);
-		if (!listaClientes.esta(claves[2],2))
-		{	claves[0]=new String(siguienteCodigoCliente);
-			Cliente nuevocliente=new Cliente(claves[0],datos);
-			listaClientes.insertar(claves,nuevocliente);
+	{	String codigoCliente=null;
+		String dniCliente=(String)datos.get(1);
+	//comprueba si el dni esta repetido
+		if (!listaClientes.esta(dniCliente,2))
+		{	codigoCliente=new String(siguienteCodigoCliente);
+			Cliente nuevocliente=new Cliente(codigoCliente,datos);
+			meteCliente(nuevocliente);
 			incrementaCodigo();
 		}
 		else
-		{	Cliente clienteExistente=(Cliente)listaClientes.buscar(claves[2],2).get(0);
-			if (clienteExistente.dameNombre().equals(claves[1]))
-			{	claves[0]=new String(clienteExistente.dameCodigo());
+		{	Cliente clienteExistente=(Cliente)listaClientes.buscar(dniCliente,2).get(0);
+			if (clienteExistente.dameNombre().equals((String)datos.get(0)))
+			{	codigoCliente=new String(clienteExistente.dameCodigo());
 				vista.actualizaVistaMensaje("El cliente ya existe y se le asociara el contrato");
 			}
 			else
 			{	vista.actualizaVistaMensaje("El cliente ya existe pero no coinciden los datos. Inserción de cliente y contrato imposible");}
 			
 		}
-		return claves[0];
+		return codigoCliente;
+	}
+	
+	public void meteCliente(Cliente cliente){
+		String[] claves=new String[this.dameEstructuraClientes().dameNumeroIndices()];
+		claves[0]=new String(cliente.dameCodigo());
+		claves[1]=new String(cliente.dameNombre());
+		claves[2]=new String(cliente.dameDni());
+		this.dameEstructuraClientes().insertar(claves,cliente);
 	}
 	
 	public void asociaClienteContrato(String codcliente,String codcontrato)
@@ -171,7 +178,7 @@ public class GClientesImp implements GClientes
 		}
 	}
 	
-	public EstructuraDatos dameListaClientes(){
+	public EstructuraDatos dameEstructuraClientes(){
 		return this.listaClientes;
 	}
 }
