@@ -169,7 +169,7 @@ public class PanelContratos extends JPanel
 		bmodcont.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formulario.getContentPane().add(panelMod(tcontrato.getText()));
+				formulario.getContentPane().add(panelMododificar(tcontrato.getText()));
 				formulario.pack();	
 				formulario.setVisible(true);
 			}
@@ -752,7 +752,7 @@ public class PanelContratos extends JPanel
 		return pbaja;
 	}
 	
-	public JPanel panelMod(final String codigo)
+	public JPanel panelMododificar(final String codigo)
 	{
 		formulario.setTitle("Modificar contrato");		
 		formulario.setLocation(350,100);
@@ -812,16 +812,14 @@ public class PanelContratos extends JPanel
 		cod.setEditable(false);
 		cod.setPreferredSize(new Dimension(100,20));
 		JTextField exp=new JTextField();
-		exp.setEditable(false);
-		exp.setBackground(Color.WHITE);
 		exp.setPreferredSize(new Dimension(100,20));
 		JTextField bol=new JTextField();
-		bol.setEditable(false);
-		bol.setBackground(Color.WHITE);
 		bol.setPreferredSize(new Dimension(100,20));
+		if (tipo=='m')
+		{	exp.setEditable(false);
+			bol.setEditable(false);			
+		}
 		JTextField fecha=new JTextField();
-		fecha.setEditable(false);
-		fecha.setBackground(Color.WHITE);
 		fecha.setPreferredSize(new Dimension(100,20));
 		ButtonGroup grupo=new ButtonGroup();
 		JRadioButton rtrafico=new JRadioButton("Tráfico",true);
@@ -910,24 +908,16 @@ public class PanelContratos extends JPanel
 		return panel;
 	}
 	
-	public JPanel panelDescripM(String codigo)
+	public JPanel panelDescripcion(char tipo,String codigo)
 	{
-		formulario.setTitle("Descripción de la multa "+codigo);
-		formulario.setLocation(350,200);
-		JPanel panel=panelDescrip('m');
-		return panel;
-	}
-	
-	public JPanel panelDescripR(String codigo)
-	{
-		formulario.setTitle("Descripción del recurso "+codigo);
-		formulario.setLocation(350,100);
-		JPanel panel=panelDescrip('r');
-		return panel;
-	}
-	
-	public JPanel panelDescrip(final char tipo)
-	{
+		if (tipo=='r')
+		{	formulario.setTitle("Descripción del recurso "+codigo);
+			formulario.setLocation(350,100);			
+		}
+		else if (tipo=='m')
+		{	formulario.setTitle("Descripción de la multa "+codigo);
+			formulario.setLocation(350,200);		
+		}
 		JPanel panel=new JPanel();
 		JPanel p1=new JPanel();
 		JPanel p2=new JPanel();
@@ -948,14 +938,8 @@ public class PanelContratos extends JPanel
 		aceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				if (tipo=='m')
-				{	formulario.setVisible(false);
-					formulario.getContentPane().removeAll();
-				}
-				else if (tipo=='r')
-				{	formulario.setVisible(false);
-					formulario.getContentPane().removeAll();
-				}
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();
 			}
 		});
 		return panel;
@@ -1134,7 +1118,7 @@ public class PanelContratos extends JPanel
 		descrip.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formulario.getContentPane().add(panelDescripR(cod.getText()));
+				formulario.getContentPane().add(panelDescripcion('r',cod.getText()));
 				formulario.pack();
 				formulario.setVisible(true);				
 			}
@@ -1204,7 +1188,7 @@ public class PanelContratos extends JPanel
 		descrip.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formulario.getContentPane().add(panelDescripM(cod.getText()));
+				formulario.getContentPane().add(panelDescripcion('m',cod.getText()));
 				formulario.pack();
 				formulario.setVisible(true);				
 			}
