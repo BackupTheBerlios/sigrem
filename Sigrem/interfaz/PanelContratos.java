@@ -275,20 +275,32 @@ public class PanelContratos extends JPanel
 		JScrollPane spanel=new JScrollPane(conts,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		spanel.setPreferredSize(new Dimension(20,40));
 		JLabel relleno6=new JLabel("");
-		relleno6.setPreferredSize(new Dimension(80,40));
+		relleno6.setPreferredSize(new Dimension(15,40));
 		JLabel relleno7=new JLabel("");
 		relleno7.setPreferredSize(new Dimension(0,10));
 		JLabel relleno8=new JLabel("");
 		relleno8.setPreferredSize(new Dimension(0,10));
+		JButton nuevoContrato=new JButton("Nuevo Contrato");
 		Box c9=Box.createHorizontalBox();
 		c9.add(l9);
 		c9.add(spanel);
 		c9.add(relleno6);
+		c9.add(nuevoContrato);
 		caja.add(relleno7);
 		caja.add(new JSeparator());
 		caja.add(relleno8);
 		caja.add(c9);
 		panel.add(caja);
+		nuevoContrato.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				if (!formAlta.isVisible())
+				{	formAlta.getContentPane().add(panelAlta('n',null));
+					formAlta.pack();	
+					formAlta.setVisible(true);
+				}
+			}
+		});
 		return panel;
 	}
 
@@ -421,6 +433,17 @@ public class PanelContratos extends JPanel
 		tpro.setPreferredSize(new Dimension(160,20));
 		ttel.setPreferredSize(new Dimension(80,20));
 		temail.setPreferredSize(new Dimension(80,20));
+		if (tipo == 'n')
+		{
+			tnom.setEditable(false);
+			tdni.setEditable(false);
+			tdir.setEditable(false);
+			tcp.setEditable(false);
+			tloc.setEditable(false);
+			tpro.setEditable(false);
+			ttel.setEditable(false);
+			temail.setEditable(false);
+		}
 		Box c1=Box.createHorizontalBox();
 		Box c2=Box.createHorizontalBox();
 		Box c3=Box.createHorizontalBox();
