@@ -8,18 +8,29 @@ import java.util.LinkedList;
 
 public class GContratosImp implements GContratos
 {
-	private EstructuraDatos contratos;
-	private InterfazGrafica vista; 
+	private EstructuraDatos listacontratos;
+	
+	private InterfazGrafica vista;
+	
+	private String codcontrato;
   
-	public GContratosImp(InterfazGrafica vista) 
+	public GContratosImp(InterfazGrafica vista,String codigo) 
 	{
-		contratos=new EstructuraDatosImp(2);
+		codcontrato=codigo;
+		listacontratos=new EstructuraDatosImp(2);
 		this.vista=vista;
 	}
 	
 	public String añadirContrato(LinkedList datos)
 	{
-		return null;
+		Contrato nuevocontrato=new Contrato(codcontrato,datos);
+		//incfrementar codigo en 1
+		String[] claves=new String[2];
+		claves[0]=codcontrato;
+		claves[1]=(String)datos.get(1);
+		listacontratos.insertar(claves,nuevocontrato);
+		//vista.actualizaVista(1,datos);
+		return codcontrato;
 	}
 	
 	public void eliminarContrato(Integer codigo)

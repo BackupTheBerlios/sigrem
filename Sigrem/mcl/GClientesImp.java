@@ -6,21 +6,39 @@ import med.*;
 
 public class GClientesImp implements GClientes
 {
-	private EstructuraDatos clientes;
+	private EstructuraDatos listaclientes;
 	  
 	private InterfazGrafica vista; 
+	
+	private String codcliente;
 	 
-	public GClientesImp(InterfazGrafica vista) 
+	public GClientesImp(InterfazGrafica vista,String codigo) 
 	{
-		this.clientes=new EstructuraDatosImp(3);
+		this.listaclientes=new EstructuraDatosImp(3);
 	    this.vista=vista;
+	    this.codcliente=codigo;
 	}
+	
+	//clave0=codigo	clave1=nombre clave2=dni
 	public String añadirCliente(LinkedList datos)
 	{
-		//recuperar los datos en el orden adecuado y crear el cliente
-		//insertar el cliente en la lista
+		Cliente nuevocliente=new Cliente(codcliente,datos);
+		//incrementar codigo en 1
+		String[] claves=new String[3];
+		claves[0]=codcliente;
+		claves[1]=(String)datos.get(1);
+		claves[2]=(String)datos.get(2);
+		listaclientes.insertar(claves,nuevocliente);
 		//vista.actualizaVista(1,datos);
-		return null;
+		return codcliente;
+	}
+	
+	public void asociaClienteContrato(String codcliente,String codcontrato)
+	{
+		Object[] busqueda=listaclientes.buscar(codcliente,0);
+		Cliente cliente=(Cliente)busqueda[0];
+		System.out.println(cliente.getDni());
+		cliente.añadeContrato(codcontrato);
 	}
 	
 	public void eliminarCliente(String codigo)
