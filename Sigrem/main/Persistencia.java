@@ -243,13 +243,10 @@ public class Persistencia
 								tab=tab.concat("\t");
 								LinkedList datosCliente=leerCliente(lineaActual,lector,tab);
 								Vector contratosAsociados=(Vector)datosCliente.removeLast();
-								gclientes.dameEstructuraClientes().insertarAEliminados(datosCliente);
-								/*for (int i=0;i<contratosAsociados.size();i++){
-									gclientes.asociaClienteContrato((String)datosCliente.getFirst(),(String)contratosAsociados.get(i));
-								}
-								//gclientes.eliminarCliente(false,datosCliente.g)
-								//falta eliminar los clientes eliminados, se podría hacer en casacada eliminando exclusivamente los contratos
-							*/	lineaActual=lector.readLine();
+								String codigoCliente=(String)datosCliente.removeFirst();
+								Cliente nuevoCliente=new Cliente(codigoCliente,datosCliente);
+								gclientes.dameEstructuraClientes().insertarAEliminados(nuevoCliente);
+								lineaActual=lector.readLine();
 								tab=tab.substring(1);
 							}
 							lineaActual=lector.readLine();
@@ -473,11 +470,9 @@ public class Persistencia
 							String codigoContrato=(String)datosContrato.removeFirst();
 							Contrato nuevoContrato=new Contrato(codigoContrato,datosContrato);
 							gcontratos.meteContrato(nuevoContrato);
-							tab=tab.concat("\t");
 							for (int i=0;i<multasAsociados.size();i++){
 								gcontratos.asociaContratoMulta(codigoContrato,(String)multasAsociados.get(i));
 							}
-							tab=tab.substring(1);
 							lineaActual=lector.readLine();
 							tab=tab.substring(1);
 						}
@@ -489,14 +484,11 @@ public class Persistencia
 							while (!lineaActual.startsWith(tab+"</eliminados>")){
 								tab=tab.concat("\t");
 								LinkedList datosContrato=leerContrato(lineaActual,lector,tab);
-								Vector contratosAsociados=(Vector)datosContrato.removeLast();
-								gcontratos.dameEstructuraContratos().insertarAEliminados(datosContrato);
-								/*for (int i=0;i<contratosAsociados.size();i++){
-								gclientes.asociaClienteContrato((String)datosCliente.getFirst(),(String)contratosAsociados.get(i));
-							}
-							//gclientes.eliminarCliente(false,datosCliente.g)
-							//falta eliminar los clientes eliminados, se podría hacer en casacada eliminando exclusivamente los contratos
-						*/		lineaActual=lector.readLine();
+								Vector multasAsociados=(Vector)datosContrato.removeLast();
+								String codigoContrato=(String)datosContrato.removeFirst();
+								Contrato nuevoContrato=new Contrato(codigoContrato,datosContrato);
+								gcontratos.dameEstructuraContratos().insertarAEliminados(nuevoContrato);
+								lineaActual=lector.readLine();
 								tab=tab.substring(1);
 							}
 							tab=tab.substring(1);
@@ -699,7 +691,9 @@ public class Persistencia
 								
 								LinkedList datosMulta=leerMulta(lineaActual,lector,tab);
 								Vector recursosAsociados=(Vector)datosMulta.removeLast();
-								gmultas.dameEstructuraMultas().insertarAEliminados(datosMulta);
+								String codigoMulta=(String)datosMulta.removeFirst();
+								Multa nuevoMulta=new Multa(codigoMulta,datosMulta);
+								gmultas.dameEstructuraMultas().insertarAEliminados(nuevoMulta);
 						
 								lineaActual=lector.readLine();
 								tab=tab.substring(1);
