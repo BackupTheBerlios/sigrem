@@ -49,5 +49,5 @@ Disponemos de los siguientes Sectores:
                               -> "Expediente"
                               -> "Boletín"
                               -> "Fecha denuncia"
-                              -> "Infracción"                           
+                              -> "Infracción"
    (Ver "Ayuda > Menú > Acerca de") 
