@@ -216,9 +216,9 @@ public class Sigrem
 		}
 	}
 	
-	public void contratarEmpleado(LinkedList datos)
+	public void contratarEmpleado(String perfil,LinkedList datos)
 	{
-		gempleados.añadirEmpleado(datos);
+		gempleados.añadirEmpleado(perfil,datos);
 	}
 	
 	public void despedirEmpleado(String codigo)
@@ -229,5 +229,10 @@ public class Sigrem
 	public void consultarEmpleadoCodigo(boolean modificar,String codigo)
 	{
 		gempleados.consultarEmpleadoCodigo(modificar,codigo);
+	}
+	
+	public void modificarEmpleado(String codigo,LinkedList datos)
+	{
+		gempleados.modificarEmpleado(codigo,datos);
 	}
 }

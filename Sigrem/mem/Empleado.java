@@ -65,8 +65,9 @@ public abstract class Empleado {
 	public LinkedList dameListaDatos()
 	{
 		LinkedList datos=new LinkedList();
-		datos.add(dni);
+		datos.add(codigo);
 		datos.add(nombre);
+		datos.add(dni);
 		datos.add(direccion);
 		datos.add(cp);
 		datos.add(poblacion);
@@ -81,9 +82,6 @@ public abstract class Empleado {
 	}
 	
 	// Métodos mutadores
-	public void ponCodigo(String cod){this.codigo = cod;}
-	public void ponNombre(String nom){this.nombre = nom;}
-	public void ponDni(String dni){this.dni = dni;}
 	public void ponDireccion(String dir){this.direccion = dir;}
 	public void ponCp(String cp){this.cp = cp;}
 	public void ponPoblacion(String pob){this.poblacion = pob;}
@@ -93,21 +91,5 @@ public abstract class Empleado {
 	public void ponMovil(String mov){this.movil = mov;}
 	public void ponEmail(String email){this.email = email;}
 	public void ponFax(String fax){this.fax = fax;}
-	
-	// Método que a partir de una LinkedList de datos de un Empleado, 
-	// asigna a cada variable privada el que le corresponde
-	public void ponListaDatos(LinkedList datos)
-	{
-		dni = 		(String)datos.get(0);
-		nombre = 	(String)datos.get(1);
-		direccion = (String)datos.get(2);
-		cp = 		(String)datos.get(3);
-		poblacion = (String)datos.get(4);
-		provincia = (String)datos.get(5);
-		telefono1 = (String)datos.get(6);
-		telefono2 = (String)datos.get(7);
-		movil = 	(String)datos.get(8);
-		email = 	(String)datos.get(9);
-		fax = 		(String)datos.get(10);
-	}
+	public void ponNomina(String nomina){this.nomina = nomina;}
 }

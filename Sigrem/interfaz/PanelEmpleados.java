@@ -68,7 +68,14 @@ public class PanelEmpleados extends JPanel
 			sp.setBottomComponent(dibujaRecursos(null));
 		}
 	}
-		
+	
+	public void actualizaDatosModificables(LinkedList datos)
+	{
+		formulario.getContentPane().add(panelAltaEmpleado((String)datos.get(0),datos));
+		formulario.pack();
+		formulario.setVisible(true);
+	}
+	
 	public JPanel dibujaEmpleado(final LinkedList datos)
 	{		
 		JPanel pemp=new JPanel();
@@ -373,7 +380,7 @@ public class PanelEmpleados extends JPanel
 		return prec;		
 	}
 	
-	public JPanel panelAltaEmpleado(String codigo,final LinkedList datos) 
+	public JPanel panelAltaEmpleado(final String codigo,final LinkedList datos) 
 	{	
 		if (datos==null)
 		{	formulario.setTitle("Contratar empleado");}
@@ -399,7 +406,7 @@ public class PanelEmpleados extends JPanel
 		pnomina.add(tnomina);
 		Box caja1=Box.createVerticalBox();
 		caja1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos del empleado",TitledBorder.LEFT,TitledBorder.TOP));
-		caja1.add(pperfil);
+		if (datos==null) caja1.add(pperfil);
 		caja1.add(pnomina);
 		JPanel pdat=new JPanel();
 		pdat.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos personales",TitledBorder.LEFT,TitledBorder.TOP));
@@ -467,17 +474,18 @@ public class PanelEmpleados extends JPanel
 		{	tnom.setEditable(false);
 			tdni.setEditable(false);
 			perfil.setEditable(false);
-			tnom.setText((String)datos.get(0));
-			tdni.setText((String)datos.get(1));
-			tdir.setText((String)datos.get(2));
-			tcp.setText((String)datos.get(3));
-			tpob.setText((String)datos.get(4));
-			tpro.setText((String)datos.get(5));
-			ttel1.setText((String)datos.get(6));
-			ttel2.setText((String)datos.get(7));
-			tmov.setText((String)datos.get(8));
-			temail.setText((String)datos.get(9));
-			tfax.setText((String)datos.get(10));		
+			tnom.setText((String)datos.get(1));
+			tdni.setText((String)datos.get(2));
+			tdir.setText((String)datos.get(3));
+			tcp.setText((String)datos.get(4));
+			tpob.setText((String)datos.get(5));
+			tpro.setText((String)datos.get(6));
+			ttel1.setText((String)datos.get(7));
+			ttel2.setText((String)datos.get(8));
+			tmov.setText((String)datos.get(9));
+			temail.setText((String)datos.get(10));
+			tfax.setText((String)datos.get(11));
+			tnomina.setText((String)datos.get(12));
 		}
 		Box c1=Box.createHorizontalBox();
 		Box c2=Box.createHorizontalBox();
@@ -549,27 +557,21 @@ public class PanelEmpleados extends JPanel
 		bacepta.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				if (datos==null)
-				{	LinkedList datosEmpleado=new LinkedList();
-					datosEmpleado.add((String)perfil.getSelectedItem());
-					datosEmpleado.add(tnom.getText());
-					datosEmpleado.add(tdni.getText());
-					datosEmpleado.add(tdir.getText());
-					datosEmpleado.add(tcp.getText());
-					datosEmpleado.add(tpob.getText());
-					datosEmpleado.add(tpro.getText());
-					datosEmpleado.add(ttel1.getText());
-					datosEmpleado.add(ttel2.getText());
-					datosEmpleado.add(tmov.getText());
-					datosEmpleado.add(temail.getText());
-					datosEmpleado.add(tfax.getText());
-					datosEmpleado.add(tnomina.getText());
-					controlador.contratarEmpleado(datosEmpleado);
-				}
-				else
-				{
-					
-				}
+				LinkedList datosEmpleado=new LinkedList();
+				datosEmpleado.add(tnom.getText());
+				datosEmpleado.add(tdni.getText());
+				datosEmpleado.add(tdir.getText());
+				datosEmpleado.add(tcp.getText());
+				datosEmpleado.add(tpob.getText());
+				datosEmpleado.add(tpro.getText());
+				datosEmpleado.add(ttel1.getText());
+				datosEmpleado.add(ttel2.getText());
+				datosEmpleado.add(tmov.getText());
+				datosEmpleado.add(temail.getText());
+				datosEmpleado.add(tfax.getText());
+				datosEmpleado.add(tnomina.getText());
+				if (datos==null) controlador.contratarEmpleado((String)perfil.getSelectedItem(),datosEmpleado);
+				else controlador.modificarEmpleado(codigo,datosEmpleado);
 				formulario.setVisible(false);
 				formulario.getContentPane().removeAll();
 			}

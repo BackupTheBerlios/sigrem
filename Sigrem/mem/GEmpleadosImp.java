@@ -6,6 +6,7 @@ import java.util.Vector;
 import mcl.Cliente;
 import mco.Contrato;
 import med.*;
+import mmu.Multa;
 import interfaz.*;
 
 public class GEmpleadosImp implements GEmpleados 
@@ -39,12 +40,12 @@ public class GEmpleadosImp implements GEmpleados
 	
 	// Método para añadir un empleado al sistema 
 	// (clave0=codigo, clave1=nombre, clave2=dni)
-	public String añadirEmpleado(LinkedList datosEmpleado)
+	public String añadirEmpleado(String perfil,LinkedList datosEmpleado)
 	{
 		Empleado nuevoEmpleado=null;
-		if (((String)datosEmpleado.get(0)).equals("Abogado"))
+		if (perfil.equals("Abogado"))
 		{	nuevoEmpleado=new Abogado(codigoEmpleado,datosEmpleado);}
-		else if (((String)datosEmpleado.get(0)).equals("Administrativo"))
+		else if (perfil.equals("Administrativo"))
 		{	nuevoEmpleado=new Administrativo(codigoEmpleado,datosEmpleado);}
 		String[] claves = new String[3];
 		claves[0] = codigoEmpleado;
@@ -55,12 +56,12 @@ public class GEmpleadosImp implements GEmpleados
 		incrementaCodigo();
 		LinkedList datosPanel1=new LinkedList();
 		datosPanel1.add(codigoAntiguo);
-		datosPanel1.add(datosEmpleado.get(0));
-		datosPanel1.add(datosEmpleado.get(12));
+		datosPanel1.add(perfil);
+		datosPanel1.add(datosEmpleado.get(11));
 		LinkedList datosPanel2=new LinkedList();
-		for (int i=1;i<12;i++) datosPanel2.add(datosEmpleado.get(i));
-		vista.actualizaVista(2, 1, datosPanel1);
-		vista.actualizaVista(2, 2, datosPanel2);
+		for (int i=0;i<11;i++) datosPanel2.add(datosEmpleado.get(i));
+		vista.actualizaVista(2,1,datosPanel1);
+		vista.actualizaVista(2,2,datosPanel2);
 		return codigoAntiguo;
 	}
 	// Método para eliminar un empleado del sistema
@@ -79,8 +80,31 @@ public class GEmpleadosImp implements GEmpleados
 	// Método para modificar un empleado en el sistema
 	public void modificarEmpleado(String codigoEmpleado, LinkedList datosEmpleado) 
 	{
-		
-	
+		Vector busqueda=listaEmpleados.buscar(codigoEmpleado,0);
+		if (busqueda.size()==0)
+		{	vista.actualizaVistaMensaje("Error al buscar el empleado "+codigoEmpleado+". No se ha encontrado");}
+		else 
+		{	Empleado empleado=(Empleado)busqueda.get(0);
+			empleado.ponDireccion((String)datosEmpleado.get(2));
+			empleado.ponCp((String)datosEmpleado.get(3));
+			empleado.ponPoblacion((String)datosEmpleado.get(4));
+			empleado.ponProvincia((String)datosEmpleado.get(5));
+			empleado.ponTelefono1((String)datosEmpleado.get(6));
+			empleado.ponTelefono2((String)datosEmpleado.get(7));
+			empleado.ponMovil((String)datosEmpleado.get(8));
+			empleado.ponEmail((String)datosEmpleado.get(9));
+			empleado.ponFax((String)datosEmpleado.get(10));
+			empleado.ponNomina((String)datosEmpleado.get(11));
+			LinkedList datosPanel1=new LinkedList();
+			datosPanel1.add(empleado.dameCodigo());
+			String nombre=(empleado.getClass()).getName();
+			datosPanel1.add(nombre.substring(4));
+			datosPanel1.add(datosEmpleado.get(11));
+			LinkedList datosPanel2=empleado.dameListaDatos();
+			datosPanel2.remove(0);
+			vista.actualizaVista(2,1,datosPanel1);
+			vista.actualizaVista(2,2,datosPanel2);
+		}
 	}
 	// Método para consultar un empleado dado su Código de Empleado
 	public void consultarEmpleadoCodigo(boolean modificar,String codigo)
@@ -89,15 +113,13 @@ public class GEmpleadosImp implements GEmpleados
 		if (busqueda.size()==0)
 		{	vista.actualizaVistaMensaje("Error al buscar el empleado "+codigo+". No se ha encontrado");}
 		else 
-		{	Empleado empleado=(Empleado)busqueda.get(0);
+		{	Empleado empleado=(Empleado)busqueda.get(0);		
 			if (modificar)
-			{	LinkedList datos=empleado.dameListaDatos();
-				Class clase=empleado.getClass();				
-				datos.addFirst(clase.getName());
-				vista.actualizaVistaDatos(2,empleado.dameListaDatos(),false);
-			}
+			{	vista.actualizaVistaDatos(2,empleado.dameListaDatos(),true);}
 			else
-			{	vista.actualizaVista(1,1,contrato.dameListaDatos());}
+			{//	vista.actualizaVista(1,1,contrato.dameListaDatos());
+				
+			}
 		}
 	}
 	// Método para consultar un empleado dado su Nombre
