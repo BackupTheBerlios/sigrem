@@ -67,7 +67,7 @@ public class InterfazGrafica
 		ventana=new JFrame("Sigrem");
 		this.controlador=controlador;
 		//cambiamos el Look&Feel al de Windows
-		int lf=2;
+/*		int lf=2;
 		if (lf>=UIManager.getInstalledLookAndFeels().length) lf=0;
 		UIManager.LookAndFeelInfo lfinfo=UIManager.getInstalledLookAndFeels()[lf];
 		try
@@ -117,7 +117,7 @@ public class InterfazGrafica
 		ventana.getContentPane().add(panelVistas);
 		ventana.setJMenuBar(setMenu());
 		ventana.pack();
-		ventana.setLocation(150,30);
+		ventana.setLocation(25,30);
 		ventana.setResizable(false);
 		ventana.addWindowListener(new WindowAdapter()
 		{	public void windowClosing(WindowEvent e)

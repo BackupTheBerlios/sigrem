@@ -29,9 +29,9 @@ public class PanelEconomia extends JPanel
 	public void dibujaPaneles(Color c, int [] num, String s,int boton)
 	{
 		JPanel pbalance=dibujaBalance(boton);
-		pbalance.setPreferredSize(new Dimension(724,322));
+		pbalance.setPreferredSize(new Dimension(950,322));
 		JPanel pgrafico=dibujaGrafico(c,num,s);
-		pgrafico.setPreferredSize(new Dimension(724,280));
+		pgrafico.setPreferredSize(new Dimension(950,280));
 		JSplitPane spx=new JSplitPane(JSplitPane.VERTICAL_SPLIT,pbalance,pgrafico);
 		spx.setEnabled(false);		
 		spx.setDividerSize(4);
@@ -93,7 +93,7 @@ public class PanelEconomia extends JPanel
 		caja.add(p1);
 		caja.add(p2);
 		caja.add(p3);
-		caja.setPreferredSize(new Dimension(700,250));
+		caja.setPreferredSize(new Dimension(930,250));
 		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja,p4);
 		sp.setDividerSize(4);
 		sp.setEnabled(false);

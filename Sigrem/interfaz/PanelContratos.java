@@ -30,7 +30,7 @@ public class PanelContratos extends JPanel
 		datosmodificables=new LinkedList();
 		formulario=new JDialog(v,true);
 		formulario.setResizable(false);
-		dibujaPaneles(false);
+		dibujaPaneles(true);
 	}
 	
 	public void dibujaPaneles(boolean multas)
@@ -41,7 +41,9 @@ public class PanelContratos extends JPanel
 		pcliente.setPreferredSize(new Dimension(0,320));
 		JPanel pmultas=new JPanel();
 		if (multas) 
-		{	pmultas=dibujaMultas();}
+		{	pmultas=dibujaMultas();
+		pmultas.setPreferredSize(new Dimension(950,280));
+		}
 		else
 		{	pmultas.setPreferredSize(new Dimension(724,280));
 			pmultas.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"",TitledBorder.LEFT,TitledBorder.TOP));		
@@ -327,7 +329,7 @@ public class PanelContratos extends JPanel
 		caja.add(c10);
 		caja.add(c11);
 		JLabel l12=new JLabel("Contratos ",SwingConstants.RIGHT);
-		l12.setPreferredSize(new Dimension(50,20));
+		l12.setPreferredSize(new Dimension(80,20));
 		selector=new JComboBox();
 		selector.setEditable(false);
 		selector.setPreferredSize(new Dimension(80,20));
@@ -386,17 +388,21 @@ public class PanelContratos extends JPanel
 		JLabel l1=new JLabel("Código",SwingConstants.CENTER);
 		JLabel l2=new JLabel("Expediente",SwingConstants.CENTER);
 		JLabel l3=new JLabel("Boletín",SwingConstants.CENTER);
-		JLabel l4=new JLabel("Descripción",SwingConstants.CENTER);
-		JLabel l5=new JLabel("Recursos",SwingConstants.CENTER);
-		JLabel l6=new JLabel("");
-		JLabel l7=new JLabel("");
-		l1.setPreferredSize(new Dimension(130,25));
-		l2.setPreferredSize(new Dimension(130,25));
-		l3.setPreferredSize(new Dimension(130,25));
-		l4.setPreferredSize(new Dimension(80,25));
-		l5.setPreferredSize(new Dimension(80,25));
-		l6.setPreferredSize(new Dimension(25,25));
-		l7.setPreferredSize(new Dimension(25,25));
+		JLabel l4=new JLabel("Fecha denuncia",SwingConstants.CENTER);
+		JLabel l5=new JLabel("Infracción",SwingConstants.CENTER);
+		JLabel l6=new JLabel("Descripción",SwingConstants.CENTER);
+		JLabel l7=new JLabel("Recursos",SwingConstants.CENTER);
+		JLabel l8=new JLabel("");
+		JLabel l9=new JLabel("");
+		l1.setPreferredSize(new Dimension(100,25));
+		l2.setPreferredSize(new Dimension(100,25));
+		l3.setPreferredSize(new Dimension(100,25));
+		l4.setPreferredSize(new Dimension(100,25));
+		l5.setPreferredSize(new Dimension(200,25));
+		l6.setPreferredSize(new Dimension(80,25));
+		l7.setPreferredSize(new Dimension(80,25));
+		l8.setPreferredSize(new Dimension(25,25));
+		l9.setPreferredSize(new Dimension(25,25));
 		p.add(l1);
 		p.add(l2);
 		p.add(l3);
@@ -404,13 +410,15 @@ public class PanelContratos extends JPanel
 		p.add(l5);
 		p.add(l6);
 		p.add(l7);
+		p.add(l8);
+		p.add(l9);
 		tabla.add(p);
 		for (int i=0;i<9;i++)
 		{	JPanel linea=dibujaLineaMulta();
 			tabla.add(linea);		
 		}
 		JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		ptabla.setPreferredSize(new Dimension(700,200));
+		ptabla.setPreferredSize(new Dimension(930,200));
 		JButton bcrea=new JButton("Añadir multa");
 		JPanel botonera=new JPanel();
 		botonera.add(bcrea);
@@ -779,50 +787,82 @@ public class PanelContratos extends JPanel
 	public JPanel panelMulta(char tipo,String codigo)
 	{
 		if (tipo=='c') 
-		{
-			formulario.setTitle("Crear multa");
+		{	formulario.setTitle("Crear multa");
 			formulario.setLocation(350,100);
 		}
-		else if (tipo=='m')
-			{
-				formulario.setTitle("Modificar multa "+codigo);
+		else 
+			if (tipo=='m')
+			{	formulario.setTitle("Modificar multa "+codigo);
 				formulario.setLocation(350,100);
 			}
-		JLabel l1=new JLabel("Código");
-		JLabel l2=new JLabel("Expediente");
-		JLabel l3=new JLabel("Boletín");
-		l1.setPreferredSize(new Dimension(80,20));
-		l2.setPreferredSize(new Dimension(80,20));
-		l3.setPreferredSize(new Dimension(80,20));
-		JTextField cod=new JTextField();
+		JLabel l1=new JLabel("Código ",SwingConstants.RIGHT);
+		JLabel l2=new JLabel("Expediente ",SwingConstants.RIGHT);
+		JLabel l3=new JLabel("Boletín ",SwingConstants.RIGHT);
+		JLabel l4=new JLabel("Fecha denuncia ",SwingConstants.RIGHT);
+		JLabel l5=new JLabel("Infracción ",SwingConstants.RIGHT);
+		l1.setPreferredSize(new Dimension(100,20));
+		l2.setPreferredSize(new Dimension(100,20));
+		l3.setPreferredSize(new Dimension(100,20));
+		l4.setPreferredSize(new Dimension(100,20));
+		l5.setPreferredSize(new Dimension(100,20));
+		JTextField cod=new JTextField(codigo);
 		cod.setEditable(false);
-		JTextField exp=new JTextField();
-		JTextField bol=new JTextField();
 		cod.setPreferredSize(new Dimension(100,20));
+		JTextField exp=new JTextField();
+		exp.setEditable(false);
+		exp.setBackground(Color.WHITE);
 		exp.setPreferredSize(new Dimension(100,20));
+		JTextField bol=new JTextField();
+		bol.setEditable(false);
+		bol.setBackground(Color.WHITE);
 		bol.setPreferredSize(new Dimension(100,20));
+		JTextField fecha=new JTextField();
+		fecha.setEditable(false);
+		fecha.setBackground(Color.WHITE);
+		fecha.setPreferredSize(new Dimension(100,20));
+		ButtonGroup grupo=new ButtonGroup();
+		JRadioButton rtrafico=new JRadioButton("Tráfico",true);
+		JRadioButton rtransporte=new JRadioButton("Transporte");
+		grupo.add(rtrafico);
+		grupo.add(rtransporte);
+		final JComboBox infraccion=new JComboBox();
+		infraccionesTrafico(infraccion);
+		infraccion.setEditable(false);
+		infraccion.setPreferredSize(new Dimension(250,20));
 		JPanel p1=new JPanel();
 		JPanel p2=new JPanel();
 		JPanel p3=new JPanel();
+		JPanel p4=new JPanel();
+		JPanel p5=new JPanel();
+		JPanel p6=new JPanel();
 		p1.add(l1);
 		p1.add(cod);
 		p2.add(l2);
 		p2.add(exp);
 		p3.add(l3);
 		p3.add(bol);
-		Box caja1=Box.createVerticalBox();
-		caja1.add(p1);
-		caja1.add(p2);
-		caja1.add(p3);
-		JPanel p4=new JPanel();
-		p4.add(new JLabel("Descripción"));
+		p4.add(l4);
+		p4.add(fecha);
+		p5.add(l5);
+		p5.add(infraccion);
+		p6.add(rtrafico);
+		p6.add(rtransporte);
+		Box caja=Box.createVerticalBox();
+		caja.add(p1);
+		caja.add(p2);
+		caja.add(p3);
+		caja.add(p4);
+		caja.add(p5);
+		caja.add(p6);
+		JPanel p7=new JPanel();
+		p7.add(new JLabel("Descripción"));
 		JTextPane texto=new JTextPane();
 		JScrollPane ptexto=new JScrollPane(texto,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
 		ptexto.setPreferredSize(new Dimension(300,150));
-		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,p4,ptexto);
+		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,p7,ptexto);
 		sp.setEnabled(false);		
 		sp.setDividerSize(1);
-		JSplitPane sp1=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja1,sp);
+		JSplitPane sp1=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja,sp);
 		sp1.setEnabled(false);		
 		sp1.setDividerSize(4);
 		JButton aceptar=new JButton("Aceptar");
@@ -841,8 +881,6 @@ public class PanelContratos extends JPanel
 			{
 				formulario.setVisible(false);
 				formulario.getContentPane().removeAll();
-				//validar datos
-				//enviar datos a Sigrem para almacenarlos en la estructura de datos
 			}
 		});
 		cancelar.addActionListener(new ActionListener()
@@ -850,6 +888,20 @@ public class PanelContratos extends JPanel
 			{
 				formulario.setVisible(false);
 				formulario.getContentPane().removeAll();
+			}
+		});
+		rtrafico.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				infraccion.removeAllItems();
+				infraccionesTrafico(infraccion);
+			}
+		});
+		rtransporte.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				infraccion.removeAllItems();
+				infraccionesTransporte(infraccion);
 			}
 		});
 		return panel;
@@ -1109,18 +1161,26 @@ public class PanelContratos extends JPanel
 	public JPanel dibujaLineaMulta()
 	{		
 		JPanel panel=new JPanel();
-		final JTextField cod=new JTextField("M001");
+		final JTextField cod=new JTextField();
 		cod.setEditable(false);
 		cod.setBackground(Color.WHITE);
-		cod.setPreferredSize(new Dimension(130,25));
+		cod.setPreferredSize(new Dimension(100,25));
 		JTextField exp=new JTextField();
 		exp.setEditable(false);
 		exp.setBackground(Color.WHITE);
-		exp.setPreferredSize(new Dimension(130,25));
+		exp.setPreferredSize(new Dimension(100,25));
 		JTextField bol=new JTextField();
 		bol.setEditable(false);
 		bol.setBackground(Color.WHITE);
-		bol.setPreferredSize(new Dimension(130,25));
+		bol.setPreferredSize(new Dimension(100,25));
+		JTextField fecha=new JTextField();
+		fecha.setEditable(false);
+		fecha.setBackground(Color.WHITE);
+		fecha.setPreferredSize(new Dimension(100,25));
+		JTextField infrac=new JTextField();
+		infrac.setEditable(false);
+		infrac.setBackground(Color.WHITE);
+		infrac.setPreferredSize(new Dimension(250,25));
 		JButton descrip=new JButton(new ImageIcon("interfaz/find.gif"));
 		descrip.setPreferredSize(new Dimension(80,25));
 		JButton recur=new JButton("Ver");
@@ -1132,6 +1192,8 @@ public class PanelContratos extends JPanel
 		panel.add(cod);
 		panel.add(exp);
 		panel.add(bol);
+		panel.add(fecha);
+		panel.add(infrac);		
 		panel.add(descrip);
 		panel.add(recur);
 		panel.add(mod);
@@ -1172,5 +1234,89 @@ public class PanelContratos extends JPanel
 			}
 		});
 		return panel;
+	}
+	
+	private void infraccionesTrafico(JComboBox infracciones)
+	{
+		infracciones.addItem("Adelantamiento");
+		infracciones.addItem("Adelantamiento sin visibilidad");
+		infracciones.addItem("Adelantamiento en intersección");
+		infracciones.addItem("Alcoholemia");
+		infracciones.addItem("Ceda el paso");
+		infracciones.addItem("Cinturón de seguridad");
+		infracciones.addItem("Cinturón de seguridad menores 12 años");
+		infracciones.addItem("Circular 2 personas en ciclomotor");
+		infracciones.addItem("Circular por carril distinto");
+		infracciones.addItem("Conducción temeraria");
+		infracciones.addItem("Conducción sin diligencia y precaución");
+		infracciones.addItem("Carecer extintor");
+		infracciones.addItem("Carecer rueda repuesto");
+		infracciones.addItem("Carecer chaleco reflectante");
+		infracciones.addItem("Dirección prohibida");
+		infracciones.addItem("Docum. ITV no pasada");
+		infracciones.addItem("Docum. ITV pasa pero circula sin tarjeta");
+		infracciones.addItem("Docum. Permiso de Circulación");
+		infracciones.addItem("Docum. Permiso de Conducir");
+		infracciones.addItem("Docum. Seguro obligatorio");
+		infracciones.addItem("Docum.  Otros");
+		infracciones.addItem("Estacionamiento indebido");
+		infracciones.addItem("Estac. zona limitac. horaria");
+		infracciones.addItem("Exceso de velocidad");
+		infracciones.addItem("Exceso de dimensiones");
+		infracciones.addItem("Giro");
+		infracciones.addItem("Hablar por teléfono");
+		infracciones.addItem("Incumpl. obligac. identificar conductor");
+		infracciones.addItem("Luces. Mal funcionamiento");
+		infracciones.addItem("Luces. No llevar repuesto");
+		infracciones.addItem("Luces. No llevar en túnel");
+		infracciones.addItem("Luces. Otras");
+		infracciones.addItem("Marcha atrás. Maniobra prohibida");
+		infracciones.addItem("Matrícula ilegible o poco visible");
+		infracciones.addItem("Matrícula defectuosa");
+		infracciones.addItem("Neumáticos defectuosos");
+		infracciones.addItem("No hacer caso agente");
+		infracciones.addItem("No ceder paso peatones");
+		infracciones.addItem("Pisar línea continua");
+		infracciones.addItem("Restricciones circulación");
+		infracciones.addItem("Señal Stop");
+		infracciones.addItem("Señal de prohibición");
+		infracciones.addItem("Semáforo");
+		infracciones.addItem("Otras General");
+	}
+
+	private void infraccionesTransporte(JComboBox infracciones)
+	{
+		infracciones.addItem("Ttes. Carecer de tarjeta");
+		infracciones.addItem("Ttes. Exceder ámbito radio acción");
+		infracciones.addItem("Ttes. No visado tarjeta");
+		infracciones.addItem("Ttes. No cumplir requisitos tarjeta");
+		infracciones.addItem("Ttes. Obstrucción labor inspectora");
+		infracciones.addItem("Ttes. Manipulación tacógrafo");
+		infracciones.addItem("Ttes. Inadecuado func.tacógrafo");
+		infracciones.addItem("Ttes. Carecer tacógrafo o de sus elementos");
+		infracciones.addItem("Ttes. Carecer hojas registro o datos");
+		infracciones.addItem("Ttes. No llevar hoja  registro en tacógrafo");
+		infracciones.addItem("Ttes. Superposición disco");
+		infracciones.addItem("Ttes. Exceso de peso");
+		infracciones.addItem("Ttes. Carecer distintivos");
+		infracciones.addItem("Ttes. Distintivos no adecuados a tarjeta");
+		infracciones.addItem("Ttes. Arrendam. No llevar documentac.");
+		infracciones.addItem("Ttes. .Exceso conducción");
+		infracciones.addItem("Ttes. Minoración descanso");
+		infracciones.addItem("Ttes. Inspección discos");
+		infracciones.addItem("TMP. Carecer certific. Aprobac. del vehíc.");
+		infracciones.addItem("TMP. No llevar a bordo vehic.docum.");
+		infracciones.addItem("TMP. No llevar carta instrucciones");
+		infracciones.addItem("TMP.Utilizar envase no homologados");
+		infracciones.addItem("TMP. Carecer Consej seguridad");
+		infracciones.addItem("TMP. Equipamiento vehículo");
+		infracciones.addItem("TMP. Carecer de etiquetas de peligro");
+		infracciones.addItem("TMP. No remitir informe anual o parte accid.");
+		infracciones.addItem("TMP.Carecer certif. limpieza cisterna");
+		infracciones.addItem("TMPer.Carecer certificado conformidad");
+		infracciones.addItem("TMPer.No alcanzar temper. exigible");
+		infracciones.addItem("TMPer.No cumplir condic. Sanidad");
+		infracciones.addItem("TMPer.No llevar abordo documentac.");
+		infracciones.addItem("Ttes. Otras");
 	}
 }

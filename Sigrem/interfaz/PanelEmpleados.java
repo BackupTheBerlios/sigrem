@@ -313,7 +313,7 @@ public class PanelEmpleados extends JPanel
 				tabla.add(linea);		
 			}
 			JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-			ptabla.setPreferredSize(new Dimension(700,236));
+			ptabla.setPreferredSize(new Dimension(930,236));
 			
 			JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,ptabla,null);
 			sp.setEnabled(false);
@@ -327,14 +327,14 @@ public class PanelEmpleados extends JPanel
 			{
 				JLabel ll1=new JLabel("No hay información adicional sobre Administrativos...",SwingConstants.CENTER);
 				prec.removeAll();
-				prec.setPreferredSize(new Dimension(724,280));
+				prec.setPreferredSize(new Dimension(950,280));
 				prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Información adicional de Administrativo",TitledBorder.LEFT,TitledBorder.TOP));
 				prec.add(ll1);
 			}
 			else
 			{
 				prec.removeAll();
-				prec.setPreferredSize(new Dimension(724,280));
+				prec.setPreferredSize(new Dimension(950,280));
 				prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"",TitledBorder.LEFT,TitledBorder.TOP));
 			}
 		}
