@@ -76,7 +76,12 @@ public class InterfazGrafica
 		try
 		{	UIManager.setLookAndFeel(lfinfo.getClassName());}
 		catch (Exception ex)
-		{	ex.printStackTrace();}
+		{	lfinfo=UIManager.getInstalledLookAndFeels()[0];
+			try
+			{	UIManager.setLookAndFeel(lfinfo.getClassName());}
+			catch (Exception ex1)
+			{ex.printStackTrace();}
+		}
 		SwingUtilities.updateComponentTreeUI(ventana);
 		ventana.pack();
 		//Look&Feel cambiado
