@@ -10,15 +10,31 @@ import java.awt.event.WindowEvent;
 public class InterfazGrafica 
 {
 	private JFrame ventana;
-	private JFrame formSigrem;
 	
 	private JTabbedPane panelVistas;
+	
+	private JFrame formSigrem;
+	
+	private JFrame formacercade;
 	
 	public InterfazGrafica()
 	{
 		ventana=new JFrame("Sigrem");
 		
-		pantallaInicio(0);		
+		formSigrem=new JFrame();
+		formSigrem.setResizable(false);
+		formSigrem.setUndecorated(true);
+		formSigrem.setVisible(true);
+		formSigrem.setAlwaysOnTop(true);
+		formSigrem.setLocation(250,150);
+//		pantallaInicio();
+		
+		formacercade=new JFrame();
+		formacercade.setResizable(false);
+		formacercade.setUndecorated(true);
+		formacercade.setVisible(true);
+		formacercade.setAlwaysOnTop(true);
+		formacercade.setLocation(350,250);
 		
 		panelVistas=new JTabbedPane(JTabbedPane.BOTTOM);
 		panelVistas.addTab("Gestión Contratos",new PanelContratos());
@@ -79,7 +95,7 @@ public class InterfazGrafica
 		acercade.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-			pantallaInicio(1);
+			acercade();
 			}
 		});			
 		m1.add(mcc);
@@ -258,49 +274,36 @@ public class InterfazGrafica
 		ventana.setVisible(true);
 	}
 	
-	public void pantallaInicio(int i)
-	{
-		formSigrem=new JFrame();
-		formSigrem.setResizable(false);
-		formSigrem.setUndecorated(true);
+	public void pantallaInicio()
+	{		
+		JButton b=new JButton(new ImageIcon("interfaz/sigrem.jpg"));
+		b.setPreferredSize(new Dimension(570,350));
+		formSigrem.getContentPane().add(b);
+		formSigrem.pack();
 		formSigrem.setVisible(true);
-		formSigrem.setAlwaysOnTop(true);
-		JButton b;		
-		if (i==0) 
-			{
-			b=new JButton(new ImageIcon("interfaz/sigrem3.gif"));
-			b.setPreferredSize(new Dimension(570,350));
-			formSigrem.setLocation(250,150);
-			formSigrem.getContentPane().add(b);
-			formSigrem.pack();			
-			try
-			{
-	      		Thread.sleep(2000);
-	      	}
-	      	catch(InterruptedException e)
-	      	{
-	      		System.out.println("Sleep Interrupted");
-	      	}		
-			formSigrem.setVisible(false);
-			}
-		else 
+		try
 		{
-			b=new JButton(new ImageIcon("interfaz/sigrem2.gif"));
-			b.setPreferredSize(new Dimension(290,180));
-			formSigrem.setLocation(350,250);
-			formSigrem.getContentPane().add(b);
-			formSigrem.pack();			
-			b.addActionListener(new ActionListener()
-			{	public void actionPerformed(ActionEvent e)
-				{
-					formSigrem.setVisible(false);
-				}
-			});
-		}		
-		
-		
-				
-		
-		
+	    	Thread.sleep(2000);
+	    }
+	    catch(InterruptedException e)
+	    {
+	    	System.out.println("Sleep Interrupted");
+	    }		
+		formSigrem.setVisible(false);
+	}
+	
+	public void acercade()
+	{		
+		JButton b=new JButton(new ImageIcon("interfaz/sigrem.gif"));
+		b.setPreferredSize(new Dimension(290,180));
+		formacercade.getContentPane().add(b);
+		formacercade.pack();	
+		formacercade.setVisible(true);
+		b.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				formacercade.setVisible(false);
+			}
+		});
 	}
 }
