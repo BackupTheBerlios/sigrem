@@ -148,19 +148,19 @@ public class PanelEconomia extends JPanel
 		bfacturacion.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				//controlador.facturacion(...);				
+				//controlador.calculaFacturacion(...);				
 			}
 		});
 		bgastos.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				//controlador.gastos(...);
+				//controlador.calculaGastos(...);
 			}
 		});
 		bbalance.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				//controlador.balance(...);
+				//controlador.calculaBalance(...);
 			}
 		});
 		return pbal;
