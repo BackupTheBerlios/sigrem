@@ -1,6 +1,8 @@
 package mec;
 
 import java.util.Calendar;
+import java.util.LinkedList;
+
 import mco.*;
 import mem.*;
 import interfaz.InterfazGrafica;
@@ -165,5 +167,12 @@ public class GEconomiaImp implements GEconomia
 		vFacturacion[11]=nFacturacion;
 		vGastos[11]=nGastos;
 		vBalance[11]=nBalance;
+		String sMesActual=""+mesActual;
+		LinkedList datos=new LinkedList();
+		datos.add(vFacturacion);
+		datos.add(vGastos);
+		datos.add(vBalance);
+		datos.add(sMesActual);
+		vista.actualizaVista(3,1,datos);				
 	}
 }

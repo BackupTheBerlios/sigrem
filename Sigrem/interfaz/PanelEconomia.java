@@ -1,10 +1,13 @@
 package interfaz;
 
 import javax.swing.*;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.border.TitledBorder;
 import java.awt.event.*;
+import java.util.LinkedList;
+
 import main.Sigrem;
 
 public class PanelEconomia extends JPanel 
@@ -21,6 +24,8 @@ public class PanelEconomia extends JPanel
 	
 	private int [] balance;
 	
+	private int mesActual;
+	
 	private String [] meses;
 	
 	private Sigrem controlador;
@@ -33,6 +38,15 @@ public class PanelEconomia extends JPanel
 		else if (grafico==2) dibujaPaneles(gastos,"Histórico de Gastos",2);
 		else if (grafico==3) dibujaPaneles(balance,"Histórico de Balance",3);
 		else dibujaPaneles(null,null,0);
+	}
+	
+	public void actualiza(int panel,LinkedList datos)
+	{
+		facturacion=(int[])datos.get(0);
+		gastos=(int[])datos.get(1);
+		balance=(int[])datos.get(2);
+		String sMesActual=(String)datos.get(3);
+		mesActual=Integer.valueOf(sMesActual).intValue();
 	}
 	
 	public void dibujaPaneles(int [] num, String s,int boton)
