@@ -67,7 +67,7 @@ public class InterfazGrafica
 		ventana=new JFrame("Sigrem");
 		this.controlador=controlador;
 		//cambiamos el Look&Feel al de Windows
-/*		int lf=2;
+		int lf=2;
 		if (lf>=UIManager.getInstalledLookAndFeels().length) lf=0;
 		UIManager.LookAndFeelInfo lfinfo=UIManager.getInstalledLookAndFeels()[lf];
 		try
@@ -122,6 +122,7 @@ public class InterfazGrafica
 		ventana.addWindowListener(new WindowAdapter()
 		{	public void windowClosing(WindowEvent e)
 			{
+				System.out.println("El programa Sigrem ha terminado");
 				System.exit(0);
 			}
 		});	
@@ -232,6 +233,7 @@ public class InterfazGrafica
 		salir.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
+				System.out.println("El programa Sigrem ha terminado");
 				System.exit(0);				
 			}
 		});

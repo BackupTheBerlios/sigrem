@@ -6,6 +6,9 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import main.Sigrem;
 import java.util.LinkedList;
 import java.util.Date;
@@ -30,6 +33,12 @@ public class PanelContratos extends JPanel
 		datosmodificables=new LinkedList();
 		formulario=new JDialog(v,true);
 		formulario.setResizable(false);
+		formulario.addWindowListener(new WindowAdapter()
+		{	public void windowClosing(WindowEvent e)
+			{
+				formulario.getContentPane().removeAll();
+			}
+		});	
 		dibujaPaneles(true);
 	}
 	
@@ -42,10 +51,10 @@ public class PanelContratos extends JPanel
 		JPanel pmultas=new JPanel();
 		if (multas) 
 		{	pmultas=dibujaMultas();
-		pmultas.setPreferredSize(new Dimension(950,280));
+			pmultas.setPreferredSize(new Dimension(950,280));
 		}
 		else
-		{	pmultas.setPreferredSize(new Dimension(724,280));
+		{	pmultas.setPreferredSize(new Dimension(950,280));
 			pmultas.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"",TitledBorder.LEFT,TitledBorder.TOP));		
 		}
 		JSplitPane sp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,pcontrato,pcliente);
@@ -398,7 +407,7 @@ public class PanelContratos extends JPanel
 		l2.setPreferredSize(new Dimension(100,25));
 		l3.setPreferredSize(new Dimension(100,25));
 		l4.setPreferredSize(new Dimension(100,25));
-		l5.setPreferredSize(new Dimension(200,25));
+		l5.setPreferredSize(new Dimension(250,25));
 		l6.setPreferredSize(new Dimension(80,25));
 		l7.setPreferredSize(new Dimension(80,25));
 		l8.setPreferredSize(new Dimension(25,25));
@@ -786,15 +795,9 @@ public class PanelContratos extends JPanel
 	
 	public JPanel panelMulta(char tipo,String codigo)
 	{
-		if (tipo=='c') 
-		{	formulario.setTitle("Crear multa");
-			formulario.setLocation(350,100);
-		}
-		else 
-			if (tipo=='m')
-			{	formulario.setTitle("Modificar multa "+codigo);
-				formulario.setLocation(350,100);
-			}
+		if (tipo=='c') formulario.setTitle("Crear multa");
+		else if (tipo=='m') formulario.setTitle("Modificar multa "+codigo);
+		formulario.setLocation(300,100);
 		JLabel l1=new JLabel("Código ",SwingConstants.RIGHT);
 		JLabel l2=new JLabel("Expediente ",SwingConstants.RIGHT);
 		JLabel l3=new JLabel("Boletín ",SwingConstants.RIGHT);
