@@ -36,18 +36,24 @@ public class GMultasImp implements GMultas
 	//clave0=codigo  clave1=expediente  clave2=boletin
 	public String añadirMulta(LinkedList datos)
 	{
-		Multa nuevamulta=new Multa(codigoMulta,datos);
 		String[] claves=new String[3];
-		claves[0]=codigoMulta;
+		claves[0]=null;
 		claves[1]=(String)datos.get(0);
 		claves[2]=(String)datos.get(1);		
-		listaMultas.insertar(claves,nuevamulta);
-		String codigoantiguo=codigoMulta;
-		incrementaCodigo();
-		datos.addFirst(codigoantiguo);
-		vista.actualizaVistaCaja('m','a',datos);
-		vista.actualizaVista(1,3,null);
-		return codigoantiguo;
+		
+		if(consultarMultaExpediente((String)claves[1])==null && consultarMultaBoletin((String)claves[2])==null){
+			claves[0]=new String(codigoMulta);
+			Multa nuevamulta=new Multa(claves[0],datos);
+			listaMultas.insertar(claves,nuevamulta);
+			String codigoantiguo=codigoMulta;
+			incrementaCodigo();
+			datos.addFirst(codigoantiguo);
+			vista.actualizaVistaCaja('m','a',datos);
+			vista.actualizaVista(1,3,null);
+		}else{
+			vista.actualizaVistaMensaje("Ya existe un recurso con ese numero de boletin o expediente- Imposible crear recurso");
+		}
+		return claves[0];
 	}
 	
 	public void eliminarMulta(String codigo)
