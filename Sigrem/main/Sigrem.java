@@ -29,43 +29,21 @@ public class Sigrem
 	
 	private GEconomia geconomia;
 	
-	private String codcontrato;
-	
-	private String codcliente;
-	
-	private String codmulta;
-	
-	private String codrecurso;
-	
-	private String codempleado;
-	
-	private String ultimoMesFac;
-	
-	private String ultimoMesGas;
-	
-	private String ultimoMesBal;
-	
-	private String facturacion;
-	
-	private String gastos;
-	
-	private String balance;
-	
 	public Sigrem(String[] codigos)
 	{
 		vista=new InterfazGrafica(this);
 		factoria=new FactoriaImp();
-		codcontrato=codigos[0];
-		codcliente=codigos[1];
-		codmulta=codigos[2];
-		codrecurso=codigos[3];
-		codempleado=codigos[4];
-		ultimoMesFac=codigos[5];
-		ultimoMesGas=codigos[6];
-		ultimoMesBal=codigos[7];
-		facturacion=codigos[8];
-		gastos=codigos[9];
-		balance=codigos[10];
+		String codcontrato=codigos[0];
+		String codcliente=codigos[1];
+		String codmulta=codigos[2];
+		String codrecurso=codigos[3];
+		String codempleado=codigos[4];
+		String ultimoMesFac=codigos[5];
+		String ultimoMesGas=codigos[6];
+		String ultimoMesBal=codigos[7];
+		String facturacion=codigos[8];
+		String gastos=codigos[9];
+		String balance=codigos[10];
 		gclientes=factoria.generaGCliente(vista,codcliente);
 		gcontratos=factoria.generaGContratos(vista,codcontrato);
 		gmultas=factoria.generaGMultas(vista,codmulta);
@@ -122,7 +100,7 @@ public class Sigrem
 		for (int i=0;i<listaRecursos.size();i++)
 		{	String codrecurso=(String)listaRecursos.get(i);
 			String codabogado=grecursos.consultarAbogadoRecurso(codrecurso);
-			if ((codabogado!=null) && (!codempleado.equals("Sin asignar")))
+			if ((codabogado!=null) && (!codabogado.equals("Sin asignar")))
 			{	gempleados.eliminarRecursoAbogado(codrecurso,codabogado);}			
 		}
 	}
@@ -250,7 +228,7 @@ public class Sigrem
 		grecursos.modificarRecurso(codigo,datos);
 		String codempleado=(String)datos.get(5);
 		if (!codempleado.equals("Sin asignar"))
-			gempleados.asociaAbogadoRecurso(codrecurso,codempleado);
+			gempleados.asociaAbogadoRecurso(codigo,codempleado);
 	}
 	
 	public void consultarListaRecursos(String codigo)
