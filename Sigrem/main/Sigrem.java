@@ -299,4 +299,25 @@ public class Sigrem
 	{
 		vista.actualizarVistaConsultaAbogado(codigo);
 	}
+	
+	public void calculaFacturacion()
+	{
+		//pasar el vector de String a vector de enteros
+		//int facturacion=cuotaCOntratos*gcontratos.dameListaContratos().dameTamaño();
+		//geconomia.facturacion(...);
+	}
+	
+	public void calculaGastos()
+	{
+		//pasar el vector de String a vector de enteros
+		//int gastos=gempleados.calculaNominas();
+		//geconomia.gastos(...);
+	}
+	
+	public void calculaBalance()
+	{
+		//pasar el vector de String a vector de enteros
+		//int balance=facturacion-gastos;
+		//geconomia.balance(...);
+	}
 }
