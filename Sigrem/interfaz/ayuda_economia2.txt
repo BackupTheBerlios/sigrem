@@ -1,5 +1,32 @@
-==============
-= Históricos =
-==============
+????????????????????????????????????????????????????????????
+?                        Históricos                        ?
+????????????????????????????????????????????????????????????
 
-- ¡¡¡ UNDER CONSTRUCTION !!! -
+Descripción de utilidades de "Históricos" de SIGREM.
+
+Disponemos de lo siguiente:
+
+• Veremos un diagrama de barras de uno de los siguietes
+  datos de los últimos 12 meses:
+
+   - Facturación: En color VERDE (por ser positivos 
+                  los valores). Y aparecerá la barra
+                  vacía en los meses en los que no
+                  se haya efectuado el cálculo.
+
+   - Gastos: En color ROJO (por ser negativos 
+             los valores). Y aparecerá la barra
+             vacía en los meses en los que no
+             se haya efectuado el cálculo.
+
+   - Balance: En color VERDE las barras correspondientes
+              a meses enlos que el cálculo haya sido
+              positivo y en color ROJO las
+              correspondientes a valores negativos. Y
+              aparecerá la barra vacía en los meses en
+              los que no se haya efectuado el cálculo.
+
+
+NOTA: Los valores de las gráficas se actualizan 
+      mediante el botón correspondiente de "Datos
+      económicos" 

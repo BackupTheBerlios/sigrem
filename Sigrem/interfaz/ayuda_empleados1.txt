@@ -1,5 +1,45 @@
-======================
-= Datos del Empleado =
-======================
+????????????????????????????????????????????????????????????
+?                     Datos del empleado                   ?
+????????????????????????????????????????????????????????????
 
-- ¡¡¡ UNDER CONSTRUCTION !!! -
+Descripción de utilidades de "Datos del empleado" de SIGREM.
+
+Disponemos de lo siguiente:
+
+• Botón "Contratar":
+
+   Al pulsar sobre él nos aparecerá un formulario que nos
+   permitirá introducir los datos necesarios de un
+   emplado ("administrativo" o "Abogado")
+
+   Los datos son los siguientes:
+
+    - Perfil del empleado
+    - Nómina del empleado
+    - Nombre: Dato indispensable 
+    - DNI: Dato indispensable
+    - Dirección
+    - Código postal
+    - Población
+    - Provincia
+    - Teléfono1
+    - Teléfono2
+    - Móvil
+    - em@il
+    - Fax
+
+   Al dar sobre aceptar nos mostrará toda la información
+   del empleado contratado
+
+• Botón "Despedir":
+
+   Nos pedirá el Código del empleado que queremos
+   despedir y lo eliminará de lalista de empleados.
+
+   NOTA: No podremos despedir a un abogado que tenga
+         recursos pendientes.
+
+• Botón "Modificar":
+
+   Nos mostrará un formulario con cierta información
+   modificable del empleado mostrado.

@@ -7,4 +7,4 @@ Descripción de las utilidades del "Menú Archivo" de SIGREM.
 
 • Opción "Salir": 
 
-  Pulsando esta opción saldremos de la aplicación              
+  Pulsando esta opción saldremos de la aplicación

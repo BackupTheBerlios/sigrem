@@ -1,5 +1,46 @@
-====================
-= Datos económicos =
-====================
+????????????????????????????????????????????????????????????
+?                     Datos económicos                     ?
+????????????????????????????????????????????????????????????
 
-- ¡¡¡ UNDER CONSTRUCTION !!! -
+Descripción de utilidades de "Datos económicos" de SIGREM.
+
+Disponemos de lo siguiente:
+
+• Botón "Calcular Facturación":
+
+   Al pulsarlo calculará la Facturación del mes en curso
+   y la mostrara en la casilla correspondiente en color
+   NEGRO.
+
+• Botón "Calcular Gastos":
+
+   Al pulsarlo calculará los Gastos del mes en curso
+   y los mostrara en la casilla correspondiente en color
+   ROJO.
+        
+• Botón "Calcular Balance":
+
+   Al pulsarlo calculará el Balance del mes en curso
+   y lo mostrara en la casilla correspondiente en color
+   ROJO si es negativo y en NEGRO si es positivo.
+
+• Botón "Gráfica Facturación":
+
+   Al pulsarlo aparecerá en la parte de abajo el Historial
+   de facturación de los últimos 12 meses en forma de
+   diagrama de barras.
+
+• Botón "Gráfica Gastos":
+
+   Al pulsarlo aparecerá en la parte de abajo el Historial
+   de gastos de los últimos 12 meses en forma de
+   diagrama de barras.
+
+• Botón "Gráfica Balance":
+
+   Al pulsarlo aparecerá en la parte de abajo el Historial
+   de balance de los últimos 12 meses en forma de
+   diagrama de barras.
+
+NOTA: Sólo se podrán mostrar las gráficas si hay algún
+      valor ya calculado.
