@@ -67,8 +67,8 @@ public class Persistencia
 	public void almacenarXML(){
 		almacenarClientesXML();
 		almacenarContratosXML();
-		//almacenarMultasXML();
-		almacenarRecursosXML();
+		almacenarMultasXML();
+		//almacenarRecursosXML();
 	}
 	
 	public boolean cargarXML(){
@@ -91,7 +91,7 @@ public class Persistencia
 			System.out.println("Algun dato de gcontratos es erroneo");
 			bienCargado=false;
 		}
-		/*try {
+		try {
 			cargarMultasXML();
 			System.out.println("La carga de multas se ha realizado correctamente");
 		} catch (IOException e2) {
@@ -99,7 +99,7 @@ public class Persistencia
 			e2.printStackTrace();
 			System.out.println("Algun dato de gmultas es erroneo");
 			bienCargado=false;
-		}*/
+		}/*
 		try {	
 			cargarRecursosXML();
 			System.out.println("La carga de recursos se ha realizado correctamente");
@@ -108,7 +108,7 @@ public class Persistencia
 			e3.printStackTrace();
 			System.out.println("Algun dato de grecursos es erroneo");
 			bienCargado=false;
-		}
+		}*/
 		return bienCargado;
 	}
 	public void almacenarClientesXML(){
@@ -561,7 +561,7 @@ public class Persistencia
 				linea=lector.readLine();
 				tab=tab.substring(1);
 				if (!linea.equals(tab+"</contrato>")){
-					System.out.println("No se ha encontrado la etiqueta que cierra cliente");
+					System.out.println("No se ha encontrado la etiqueta que cierra contrato");
 				}else{
 					return datosContrato;
 				}
@@ -615,10 +615,11 @@ public class Persistencia
 		escritor.println(tab+"<fechaDenuncia>"+actual.dameFechaDenuncia()+"</fechaDenuncia>");
 		escritor.println(tab+"<infraccion>"+actual.dameInfraccion()+"</infraccion>");
 		escritor.println(tab+"<descripcion>"+actual.dameDescripcion()+"</descripcion>");
-		escritor.println(tab+"<codigoContrato>"+actual.dameCodigoContrato()+"</codigoContrato>");	
+		escritor.println(tab+"<codigoContrato>"+actual.dameCodigoContrato()+"</codigoContrato>");
+			
 		
 		escritor.println(tab+"<listacodigosmultas>");
-		LinkedList codigosrecursos=actual.dameEstructuraRecursos();
+		LinkedList codigosrecursos=actual.dameListaRecursos();
 		tab=tab.concat("\t");
 		for (int i=0;i<codigosrecursos.size();i++){
 	 		escritor.println(tab+"<codigorecurso>"+(String) codigosrecursos.get(i)+"</codigorecurso>");
@@ -658,7 +659,7 @@ public class Persistencia
 							Vector recursosAsociados=(Vector)datosMulta.removeLast();
 							String codigoMulta=(String)datosMulta.removeFirst();
 							Multa nuevoMulta=new Multa(codigoMulta,datosMulta);
-							gcontratos.meteMulta(nuevoMulta);
+							gmultas.meteMulta(nuevoMulta);
 							tab=tab.concat("\t");
 							for (int i=0;i<recursosAsociados.size();i++){
 								gmultas.asociaMultaRecurso(codigoMulta,(String)recursosAsociados.get(i));
@@ -676,7 +677,7 @@ public class Persistencia
 								tab=tab.concat("\t");
 								LinkedList datosMulta=leerMulta(lineaActual,lector,tab);
 								Vector recursosAsociados=(Vector)datosMulta.removeLast();
-								gcontratos.dameEstructuraContratos().insertarAEliminados(datosContrato);
+								gmultas.dameEstructuraMultas().insertarAEliminados(datosMulta);
 								/*for (int i=0;i<contratosAsociados.size();i++){
 								gclientes.asociaClienteContrato((String)datosCliente.getFirst(),(String)contratosAsociados.get(i));
 							}
@@ -687,12 +688,12 @@ public class Persistencia
 							}
 							tab=tab.substring(1);
 							lineaActual=lector.readLine();
-							if (!lineaActual.startsWith("</listaContratos>")){
-								System.out.println("No hay cierre de etiqueta listaContratos");
+							if (!lineaActual.startsWith("</listaMultas>")){
+								System.out.println("No hay cierre de etiqueta listaMultas");
 							}else{
 								lineaActual=lector.readLine();
 								if(lineaActual!=null){
-									System.out.println("Existen datos despues de la ultima etiqueta </listaContratos>" );
+									System.out.println("Existen datos despues de la ultima etiqueta </listaMultas>" );
 								}else return true;
 						/*catch (IOException e) {
 								return true;	
@@ -706,8 +707,87 @@ public class Persistencia
 		}	
 		return false;		
 	}
-	public LinkedList leerMulta(String linea, BufferedReader lector) throws IOException{
-		return null;
+	public LinkedList leerMulta(String linea, BufferedReader lector, String tab) throws IOException{
+		if (!linea.equals(tab+"<multa>")){
+			System.out.println("No se ha encontado una multa");
+		}else{
+			LinkedList datosContrato=new LinkedList();
+			String principio;
+			String fin;
+			String interior;
+			
+			tab=tab.concat("\t");
+			linea=lector.readLine();
+			
+			principio="<codigo>";
+			fin ="</codigo>";
+			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
+			datosContrato.add(interior);	
+			linea=lector.readLine();
+					
+			principio="<expediente>";
+			fin ="</expediente>";
+			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
+			datosContrato.add(interior);	
+			linea=lector.readLine();
+			
+			principio="<boletin>";
+			fin ="</boletin>";
+			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
+			datosContrato.add(interior);	
+			linea=lector.readLine();
+			
+			
+			principio="<fechaDenuncia>";
+			fin ="</fechaDenuncia>";
+			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
+			datosContrato.add(interior);	
+			linea=lector.readLine();
+			
+			principio="<descripcion>";
+			fin ="</descripcion>";
+			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
+			datosContrato.add(interior);	
+			linea=lector.readLine();
+			
+			principio="<infraccion>";
+			fin ="</infraccion>";
+			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
+			datosContrato.add(interior);	
+			linea=lector.readLine();
+			
+			principio="<codigocontrato>";
+			fin ="</codigocontrato>";
+			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
+			datosContrato.add(interior);	
+			linea=lector.readLine();
+			
+			
+			if (linea.indexOf(tab+"<listacodigosrecursos>")!=0){
+				System.out.println("No se ha encontado la lista de codigos de los recursos");
+			}else{
+				Vector listaCodigosRecursos=new Vector();
+				linea=lector.readLine();
+				while (linea.indexOf(tab+"</listacodigosrecursos>")!=0){
+					tab=tab.concat("\t");
+					principio="<codigoRecurso>";
+					fin ="</codigoRecurso>";
+					interior=dameInteriorEtiquetas(tab,linea,principio,fin);
+					listaCodigosRecursos.add(interior);	
+					linea=lector.readLine();
+					tab=tab.substring(1);
+				}
+				datosContrato.add(listaCodigosRecursos);
+				linea=lector.readLine();
+				tab=tab.substring(1);
+				if (!linea.equals(tab+"</multa>")){
+					System.out.println("No se ha encontrado la etiqueta que cierra multa");
+				}else{
+					return datosContrato;
+				}
+			}
+		}
+		return null;	
 	}
 		
 	public void almacenarRecursosXML(){}

@@ -47,6 +47,20 @@ public class Multa
 	 	return boletin;
 	}
 	
+	public String dameInfraccion()
+	{
+	 	return infraccion;
+	}
+	
+	public String dameDescripcion()
+	{
+	 	return descripcion;
+	}
+	
+	
+	
+	
+	
 	public String dameCodigoContrato()
 	{
 		return codigoContrato;

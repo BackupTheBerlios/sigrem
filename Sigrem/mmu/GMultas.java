@@ -28,7 +28,9 @@ public interface GMultas
 	
 	public LinkedList dameListaRecursosMulta(String codigo);
 	
-	public EstructuraDatos dameListaMultas(); 
+	public void meteMulta(Multa multa);
+	
+	public EstructuraDatos dameEstructuraMultas(); 
 	
 	public String dameCodigo();
 }

@@ -30,19 +30,16 @@ public class GMultasImp implements GMultas
 		
 	//clave0=codigo  clave1=expediente  clave2=boletin
 	public String añadirMulta(LinkedList datos)
-	{
-		String[] claves=new String[3];
-		claves[0]=null;
-		claves[1]=(String)datos.get(0);
-		claves[2]=(String)datos.get(1);		
-		if (consultarMultaExpediente(false,(String)claves[1])==null) 
-			if (consultarMultaBoletin(false,(String)claves[2])==null)
-			{	claves[0]=new String(codigoMulta);
-				Multa nuevamulta=new Multa(claves[0],datos);
-				listaMultas.insertar(claves,nuevamulta);
-				String codigoantiguo=codigoMulta;
+	{	String codigoMulta=null;
+		String expediente=(String)datos.get(0);
+		String boletin=(String)datos.get(1);		
+		if (consultarMultaExpediente(false,expediente)==null) 
+			if (consultarMultaBoletin(false,boletin)==null)
+			{	codigoMulta=new String(codigoMulta);
+				Multa nuevaMulta=new Multa(codigoMulta,datos);
+				meteMulta(nuevaMulta);
 				incrementaCodigo();
-				datos.addFirst(codigoantiguo);
+				datos.addFirst(codigoMulta);
 				vista.actualizaVistaCaja(1,'m','a',datos);
 				vista.actualizaVista(1,3,null);
 			}
@@ -50,7 +47,16 @@ public class GMultasImp implements GMultas
 			{	vista.actualizaVistaMensaje("Ya existe una multa con ese número de boletín. Imposible crear la multa");}
 		else
 		{	vista.actualizaVistaMensaje("Ya existe una multa con ese número de expediente. Imposible crear la multa");}
-		return claves[0];
+		return codigoMulta;
+	}
+	
+	
+	public void meteMulta(Multa multa){
+		String[] claves=new String[3];
+		claves[0]=multa.dameCodigoMulta();
+		claves[1]=multa.dameExpediente();
+		claves[2]=multa.dameBoletin();		
+		this.dameEstructuraMultas().insertar(claves,multa);
 	}
 	
 	public void eliminarMulta(boolean actualizar,String codigo)
@@ -172,7 +178,7 @@ public class GMultasImp implements GMultas
 		return multa.dameListaRecursos();
 	}
 	
-	public EstructuraDatos dameListaMultas()
+	public EstructuraDatos dameEstructuraMultas()
 	{
 		return this.listaMultas;
 	}
