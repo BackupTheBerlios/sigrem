@@ -77,13 +77,4 @@ public class Contrato
 	{
 		this.listaMultas=lista;
 	}
-	public void ponListaDatos(LinkedList datos)
-	{
-		codigoContrato=(String)datos.get(0);
-		codigoCliente=(String)datos.get(1);
-		matricula=(String)datos.get(2);
-		fechaAlta=(String)datos.get(3);
-		fechaBaja=(String)datos.get(4);		
-		listaMultas=(LinkedList)datos.get(5);
-	}
 }

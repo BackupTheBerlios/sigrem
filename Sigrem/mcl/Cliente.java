@@ -181,19 +181,4 @@ public class Cliente
 	{
 		this.listaContratos=lista;
 	}
-	public void ponListaDatos(LinkedList datos)
-	{
-		dni=(String)datos.get(0);
-		nombre=(String)datos.get(1);
-		direccion=(String)datos.get(2);
-		cp=(String)datos.get(3);
-		poblacion=(String)datos.get(4);
-		provincia=(String)datos.get(5);
-		telefono1=(String)datos.get(6);
-		telefono2=(String)datos.get(7);
-		movil=(String)datos.get(8);
-		email=(String)datos.get(9);
-		fax=(String)datos.get(10);
-		listaContratos=(LinkedList)datos.get(11);
-	}
 }
