@@ -99,7 +99,7 @@ public class Persistencia
 				Cliente clienteActual=(Cliente)clientesActivos.get(i);
 				escribirCliente(escritor,clienteActual,tab);
 			}
-			tab=tab.substring(2);
+			tab=tab.substring(1);
 			escritor.println(tab+"</activos>");
 			escritor.println(tab+"<eliminados>");
 			Vector clientesEliminados=clientes.dameEliminados();
@@ -108,7 +108,7 @@ public class Persistencia
 				Cliente clienteActual=(Cliente)clientesEliminados.get(i);
 				escribirCliente(escritor,clienteActual,tab);
 			}
-			tab=tab.substring(2);
+			tab=tab.substring(1);
 			escritor.println(tab+"</eliminados>");
 			escritor.println("</listaClientes>");
 			escritor.close();
@@ -141,12 +141,12 @@ public class Persistencia
 		LinkedList codigoscontratos=actual.dameListaContratos();
 		tab=tab.concat("\t");
 		for (int i=0;i<codigoscontratos.size();i++){
-	 		escritor.println(tab+"<codigocontrato>"+(String) codigoscontratos.get(i)+"<//codigocontrato>");
+	 		escritor.println(tab+"<codigocontrato>"+(String) codigoscontratos.get(i)+"</codigocontrato>");
 	 	}
-		tab=tab.substring(2);
+		tab=tab.substring(1);
 		escritor.println(tab+"</listacodigoscontratos>");
-		tab=tab.substring(2);
-		escritor.println(tab+"<//cliente>");
+		tab=tab.substring(1);
+		escritor.println(tab+"</cliente>");
 	}
 	 
 	 public boolean cargarClientesXML() throws IOException{
