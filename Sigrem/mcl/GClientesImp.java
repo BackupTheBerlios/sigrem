@@ -23,10 +23,11 @@ public class GClientesImp implements GClientes
 	private void incrementaCodigo()
 	{
 		String numero=siguienteCodigoCliente.substring(0,4);
-		Character car=null;
+		/*Character car=null;
 		int num=car.digit(siguienteCodigoCliente.charAt(4),10);
 		for (int i=5;i<siguienteCodigoCliente.length();i++)
-		{	num=(num*10)+car.digit(siguienteCodigoCliente.charAt(i),10);}
+		{	num=(num*10)+car.digit(siguienteCodigoCliente.charAt(i),10);}*/
+		int num=Integer.valueOf(siguienteCodigoCliente.substring(4)).intValue();
 		numero=numero+(num+1);
 		siguienteCodigoCliente=numero;
 	}

@@ -13,6 +13,14 @@ public class GEconomiaImp implements GEconomia
 	private GEmpleados gempleados;
 	
 	private GContratos gcontratos;
+	
+	private int ultimomes;
+	
+	private int [] facturacion;
+	
+	private int [] gastos;
+	
+	private int [] balance;
 		
 	private int cuotaContrato;
 	
@@ -21,6 +29,13 @@ public class GEconomiaImp implements GEconomia
 		this.vista=vista;
 		this.gempleados=gempleados;
 		this.gcontratos=gcontratos;
+		
+		int entero=Integer.valueOf(ultimomes).intValue();
+		this.ultimomes=entero;
+		/*
+		this.facturacion=facturacion;
+		this.gastos=gastos;
+		this.balance=balance;*/
 		this.cuotaContrato=33;
 	}
 	

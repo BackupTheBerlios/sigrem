@@ -10,10 +10,18 @@ import main.Sigrem;
 public class PanelEconomia extends JPanel 
 {
 	//valores entre 0-170
-	public int [] facturacion={170,130,125, 27,150, 90,134,170,120,106, 60,169};
-	public int [] gastos=     {  0, -140,-100, -127, -30, -34,-134,  0, -36,  -6, -10,-150};
-	public int [] balance=    {170,-10, 25, 17,-100, 56,  0,170, 84,100, 50, 19};
-	public String [] meses={"ENE ","FEB ","MAR ","ABR ","MAY ","JUN ","JUL ","AGO ","SEP ","OCT ","NOV ","DIC "};
+	//public int [] facturacion={170,130,125, 27,150, 90,134,170,120,106, 60,169};
+	//public int [] gastos=     {  0, -140,-100, -127, -30, -34,-134,  0, -36,  -6, -10,-150};
+	//public int [] balance=    {170,-10, 25, 17,-100, 56,  0,170, 84,100, 50, 19};
+	//public String [] meses={"ENE ","FEB ","MAR ","ABR ","MAY ","JUN ","JUL ","AGO ","SEP ","OCT ","NOV ","DIC "};
+	
+	private int [] facturacion;
+	
+	private int [] gastos;
+	
+	private int [] balance;
+	
+	private String [] meses;
 	
 	private Sigrem controlador;
 		

@@ -45,12 +45,16 @@ public class ClasePrincipal
 			cod=entrada.readLine();
 			pos=cod.indexOf('=');
 			codempleado=cod.substring(pos+1);
+			cod=entrada.readLine();
 			pos=cod.indexOf('=');
 			ultimomes=cod.substring(pos+1);
+			cod=entrada.readLine();
 			pos=cod.indexOf('=');
 			facturacion=cod.substring(pos+1);
+			cod=entrada.readLine();
 			pos=cod.indexOf('=');
 			gastos=cod.substring(pos+1);
+			cod=entrada.readLine();
 			pos=cod.indexOf('=');
 			balance=cod.substring(pos+1);			
 		}

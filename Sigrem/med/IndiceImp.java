@@ -1,6 +1,5 @@
 package med;
 
-
 import java.util.*;
 
 public class IndiceImp implements Indice{
