@@ -110,8 +110,9 @@ public class IndiceImp implements Indice{
   	for (int i=0;i<numeroDeIndices;i++){
   		posiciones[i]=this.estructura.dameIndice(i).dondeIria(claves[i]);
   	}
+  	Comparable[] clavesParaNodoIndice=(Comparable[])claves.clone();
   	//creamos el nodo que relaciona a todos los indices
-	NodoIndiceImp nodoIndice = new NodoIndiceImp(claves,elemento,posiciones,estructura);
+	NodoIndiceImp nodoIndice = new NodoIndiceImp(clavesParaNodoIndice,elemento,posiciones,estructura);
 	//añadimos el nodoIndice a los distintos indices de la estructura
 	boolean bienInsertado=true;
 	for (int i=0;i<numeroDeIndices;i++){

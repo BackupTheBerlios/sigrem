@@ -18,7 +18,7 @@ public class NodoIndiceImp {
   EstructuraDatos estructura;
     
   public NodoIndiceImp(Comparable[] clavesInicio,Object elementoInicio,int[] posicionesInicio,EstructuraDatos estructuraInicio){
-    claves=clavesInicio;
+    claves=clavesInicio;	
     posiciones=posicionesInicio;
     elemento=elementoInicio;
     estructura=estructuraInicio;   
