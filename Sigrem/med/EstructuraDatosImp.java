@@ -40,7 +40,7 @@ public class EstructuraDatosImp implements EstructuraDatos{
 
 	  
 //	INSERTAR
-	  public void insertar(Comparable claves[], Object elemento){
+	  public void insertar(Comparable[] claves, Object elemento){
 	   this.arrayIndices[0].insertar(claves,elemento);	   
 	  }
 	  
