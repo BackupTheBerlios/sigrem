@@ -55,7 +55,7 @@ public class PanelEmpleados extends JPanel
 		bdespedir=new JButton("Despedir");
 		JPanel pempleado=dibujaEmpleado();
 		pempleado.setPreferredSize(new Dimension(314,0));
-		JPanel pdatos=dibujaDatos(false, ' ');
+		JPanel pdatos=dibujaDatos(false);
 		pdatos.setPreferredSize(new Dimension(0,320));
 		JPanel precursos=dibujaRecursos();
 		JSplitPane sp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,pempleado,pdatos);
@@ -148,7 +148,7 @@ public class PanelEmpleados extends JPanel
 		return pemp;
 	}
 	
-	public JPanel dibujaDatos(boolean editable, char tipo) 
+	public JPanel dibujaDatos(boolean editable) 
 	{		
 		JPanel pdat=new JPanel();
 		pdat.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos personales",TitledBorder.LEFT,TitledBorder.TOP));
@@ -375,7 +375,7 @@ public class PanelEmpleados extends JPanel
 		caja.add(pperfil);
 		caja.add(pnomina);
 		JPanel pdat;
-		pdat=dibujaDatos(true,'c');
+		pdat=dibujaDatos(true);
 		tcodigo.setText("E00"+(ucod+1));
 		JPanel pbotones=new JPanel();
 		JButton bacepta=new JButton ("Aceptar");
@@ -540,7 +540,7 @@ public class PanelEmpleados extends JPanel
 		caja.add(pperfil);
 		caja.add(pnomina);
 		JPanel pdat;
-		pdat=dibujaDatos(true,'m');
+		pdat=dibujaDatos(true);
 		JPanel pbotones=new JPanel();
 		JButton bacepta=new JButton ("Aceptar");
 		JButton bcancela=new JButton ("Cancelar");
