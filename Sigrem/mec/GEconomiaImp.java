@@ -1,8 +1,7 @@
 package mec;
 
 import java.util.Calendar;
-//import java.util.LinkedList;
-
+import java.util.LinkedList;
 import mco.*;
 import mem.*;
 import interfaz.InterfazGrafica;
@@ -34,166 +33,49 @@ public class GEconomiaImp implements GEconomia
 		this.vista=vista;
 		this.gempleados=gempleados;
 		this.gcontratos=gcontratos;		
-		int nUltimoMesFac=Integer.valueOf(ultimoMesFac).intValue();
-		this.ultMesFac=nUltimoMesFac;
-		System.out.println("this.ultimoMesFac"+this.ultMesFac);
-		int nUltimoMesGas=Integer.valueOf(ultimoMesGas).intValue();
-		this.ultMesGas=nUltimoMesGas;
-		System.out.println("this.ultimoMesGas"+this.ultMesGas);
-		int nUltimoMesBal=Integer.valueOf(ultimoMesBal).intValue();
-		this.ultMesBal=nUltimoMesBal;
-		System.out.println("this.ultimoMesBal"+this.ultMesBal);
+		this.ultMesFac=Integer.valueOf(ultimoMesFac).intValue();
+		this.ultMesGas=Integer.valueOf(ultimoMesGas).intValue();
+		this.ultMesBal=Integer.valueOf(ultimoMesBal).intValue();
 		this.facturacion=stringAVector(facturacion);
 		this.gastos=stringAVector(gastos);
 		this.balance=stringAVector(balance);
 		this.cuotaContrato=33;
 	}
-	
+		
 	public void facturacion(int nFacturacion)
 	{
-		Calendar hoy=Calendar.getInstance();
-		int mesActual=hoy.get(Calendar.MONTH);
-		if (mesActual!=ultMesFac)
-		{
-			int dif;
-			int [] f=new int[12];
-			if(ultMesFac<mesActual)	dif=mesActual-ultMesFac;
-			else	dif=ultMesFac-mesActual;
-			System.out.println("ultMesFac "+ultMesFac);
-			System.out.println("mesActual "+mesActual);
-			System.out.println("dif "+dif);
-			for(int i=11;i>=dif;i--)
-			{						
-				f[i]=facturacion[i-dif];
-				System.out.println("f["+i+"] "+f[i]);
-			}
-			for(int i=(12-dif);i<12;i++)
-			{				
-				f[i-(12-dif)]=facturacion[i];
-				System.out.println("f["+(i-(12-dif))+"] "+f[i-(12-dif)]);
-			}	
-			for(int i=0;i<dif;i++)
-			{
-				f[11-i]=0;
-			}
-			facturacion=f;
-			ultMesFac=mesActual;
-		}
-		facturacion[11]=nFacturacion;
-		vista.actualizaVistaFacturacion(facturacion,ultMesFac);
+		calculaVector(facturacion,ultMesFac,nFacturacion);
+		String tipo="facturacion";
+		String sUltMesFac=""+ultMesFac;
+		LinkedList datos=new LinkedList();
+		datos.add(tipo);
+		datos.add(facturacion);
+		datos.add(sUltMesFac);
+		vista.actualizaVista(3,1,datos);
 	}
 	
-	public void gastos(int [] vGastos,int nGastos)
+	public void gastos(int nGastos)
 	{
-		Calendar hoy=Calendar.getInstance();
-		int mesActual=hoy.get(Calendar.MONTH);
-		if (mesActual!=ultMesGas)
-		{
-			int dif;
-			int [] g=new int[12];
-			if(ultMesGas<mesActual)	dif=mesActual-ultMesGas;
-			else	dif=ultMesGas-mesActual;
-			for(int i=11;i>=dif;i--)
-			{						
-				g[i]=gastos[i-dif];
-				System.out.println("g["+i+"] "+g[i]);
-			}
-			for(int i=(12-dif);i<12;i++)
-			{				
-				g[i-(12-dif)]=gastos[i];
-				System.out.println("g["+(i-(12-dif))+"] "+g[i-(12-dif)]);
-			}
-			for(int i=0;i<dif;i++)
-			{
-				g[11-i]=0;
-			}
-			gastos=g;
-			ultMesGas=mesActual;
-		}
-		gastos[11]=nGastos;
-		vista.actualizaVistaGastos(gastos,ultMesGas);
-		vGastos=gastos;
+		calculaVector(gastos,ultMesGas,nGastos);
+		String tipo="gastos";
+		String sUltMesGas=""+ultMesGas;
+		LinkedList datos=new LinkedList();
+		datos.add(tipo);
+		datos.add(gastos);
+		datos.add(sUltMesGas);
+		vista.actualizaVista(3,1,datos);
 	}
 
-	public void balance(int nFacturacion,int nGastos,int nBalance)
+	public void balance(int nBalance)
 	{
-		Calendar hoy=Calendar.getInstance();
-		int mesActual=hoy.get(Calendar.MONTH);
-		if (mesActual!=ultMesBal)
-		{
-			int difFac;
-			int difGas;
-			int difBal;
-			int [] f=new int[12];
-			int [] g=new int[12];
-			int [] b=new int[12];
-			if(ultMesFac<mesActual) difFac=mesActual-ultMesFac;
-			else	difFac=ultMesFac-mesActual;
-			if(ultMesGas<mesActual) difGas=mesActual-ultMesGas;
-			else	difGas=ultMesGas-mesActual;
-			if(ultMesBal<mesActual) difBal=mesActual-ultMesBal;
-			else	difBal=ultMesBal-mesActual;
-			for(int i=11;i>=difFac;i--)
-			{						
-				f[i]=facturacion[i-difFac];
-				System.out.println("f["+i+"] "+f[i]);
-			}
-			for(int i=(12-difFac);i<12;i++)
-			{				
-				f[i-(12-difFac)]=facturacion[i];
-				System.out.println("f["+(i-(12-difFac))+"] "+f[i-(12-difFac)]);
-			}			
-			for(int i=0;i<difFac;i++)
-			{
-				f[11-i]=0;
-			}			
-			for(int i=11;i>=difGas;i--)
-			{		
-				
-				f[i]=gastos[i-difGas];
-				System.out.println("g["+i+"] "+g[i]);
-			}
-			for(int i=(12-difGas);i<12;i++)
-			{				
-				f[i-(12-difGas)]=gastos[i];
-				System.out.println("g["+(i-(12-difGas))+"] "+g[i-(12-difGas)]);
-			}			
-			for(int i=0;i<difGas;i++)
-			{
-				g[11-i]=0;
-			}			
-			for(int i=11;i>=difBal;i--)
-			{		
-				f[i]=balance[i-difBal];
-				System.out.println("b["+i+"] "+b[i]);
-			}
-			for(int i=(12-difBal);i<12;i++)
-			{				
-				f[i-(12-difBal)]=balance[i];
-				System.out.println("b["+(i-(12-difBal))+"] "+b[i-(12-difBal)]);
-			}			
-			for(int i=0;i<difBal;i++)
-			{
-				b[11-i]=0;
-			}			
-			facturacion=f;
-			gastos=g;
-			balance=b;
-			ultMesFac=mesActual;
-			ultMesGas=mesActual;
-			ultMesBal=mesActual;
-		}
-		facturacion[11]=nFacturacion;
-		gastos[11]=nGastos;
-		balance[11]=nBalance;
-		/*String sMesActual=""+mesActual;
+		calculaVector(balance,ultMesBal,nBalance);
+		String tipo="balance";
+		String sUltMesBal=""+ultMesBal;
 		LinkedList datos=new LinkedList();
-		datos.add(facturacion);
-		datos.add(gastos);
+		datos.add(tipo);
 		datos.add(balance);
-		datos.add(sMesActual);
-		vista.actualizaVista(3,1,datos);*/
-		vista.actualizaVistaBalance(facturacion,gastos,balance,ultMesFac,ultMesGas,ultMesBal);				
+		datos.add(sUltMesBal);
+		vista.actualizaVista(3,1,datos);				
 	}
 	
 	public int dameCuotaContrato()
@@ -227,5 +109,31 @@ public class GEconomiaImp implements GEconomia
 			n=n+1;
 		}
 		return vect;
+	}
+	
+	public void calculaVector(int [] vect,int uMes,int uVal)
+	{
+		Calendar hoy=Calendar.getInstance();
+		int mesActual=hoy.get(Calendar.MONTH);
+		if (mesActual!=uMes)
+		{
+			int dif;
+			if(uMes<mesActual)	dif=mesActual-uMes;
+			else	dif=uMes-mesActual;
+			int i=0;
+			int j=0;
+			while (i<12)
+			{
+				vect[j]=vect[j+dif];
+				i=i+dif;
+				j=j+1;										   
+			}
+			for(int k=j;k<11;k++)
+			{
+				vect[k]=0;
+			}
+			uMes=mesActual;
+		}
+		vect[11]=uVal;		
 	}
 }
