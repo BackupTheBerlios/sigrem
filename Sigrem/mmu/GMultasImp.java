@@ -40,19 +40,21 @@ public class GMultasImp implements GMultas
 		claves[0]=null;
 		claves[1]=(String)datos.get(0);
 		claves[2]=(String)datos.get(1);		
-		
-		if(consultarMultaExpediente((String)claves[1])==null && consultarMultaBoletin((String)claves[2])==null){
-			claves[0]=new String(codigoMulta);
-			Multa nuevamulta=new Multa(claves[0],datos);
-			listaMultas.insertar(claves,nuevamulta);
-			String codigoantiguo=codigoMulta;
-			incrementaCodigo();
-			datos.addFirst(codigoantiguo);
-			vista.actualizaVistaCaja('m','a',datos);
-			vista.actualizaVista(1,3,null);
-		}else{
-			vista.actualizaVistaMensaje("Ya existe un recurso con ese numero de boletin o expediente- Imposible crear recurso");
-		}
+		if (consultarMultaExpediente(false,(String)claves[1])==null) 
+			if (consultarMultaBoletin(false,(String)claves[2])==null)
+			{	claves[0]=new String(codigoMulta);
+				Multa nuevamulta=new Multa(claves[0],datos);
+				listaMultas.insertar(claves,nuevamulta);
+				String codigoantiguo=codigoMulta;
+				incrementaCodigo();
+				datos.addFirst(codigoantiguo);
+				vista.actualizaVistaCaja('m','a',datos);
+				vista.actualizaVista(1,3,null);
+			}
+			else
+			{	vista.actualizaVistaMensaje("Ya existe una multa con ese número de boletín- Imposible crear la multa");}
+		else
+		{	vista.actualizaVistaMensaje("Ya existe una multa con ese número de expediente- Imposible crear la multa");}
 		return claves[0];
 	}
 	
@@ -96,11 +98,11 @@ public class GMultasImp implements GMultas
 		}
 	}
 
-	public String consultarMultaExpediente(String expediente)
+	public String consultarMultaExpediente(boolean actualizar,String expediente)
 	{
 		Vector busqueda=listaMultas.buscar(expediente,1);
 		if (busqueda.size()==0)
-		{	vista.actualizaVistaMensaje("Error al buscar la multa con expediente "+expediente+". No se ha encontrado");
+		{	if (actualizar) vista.actualizaVistaMensaje("Error al buscar la multa con expediente "+expediente+". No se ha encontrado");
 			return null;
 		}
 		else 
@@ -109,11 +111,11 @@ public class GMultasImp implements GMultas
 		}
 	}
 
-	public String consultarMultaBoletin(String boletin)
+	public String consultarMultaBoletin(boolean actualizar,String boletin)
 	{
 		Vector busqueda=listaMultas.buscar(boletin,2);
 		if (busqueda.size()==0)
-		{	vista.actualizaVistaMensaje("Error al buscar la multa con boletín "+boletin+". No se ha encontrado");
+		{	if (actualizar) vista.actualizaVistaMensaje("Error al buscar la multa con boletín "+boletin+". No se ha encontrado");
 			return null;
 		}
 		else 

@@ -13,14 +13,10 @@ public interface GMultas
 	//Requisito 3.4
 	public String consultarMultaCodigo(String codigo);
 	//Requisito 3.5
-	public String consultarMultaExpediente(String expediente);
+	public String consultarMultaExpediente(boolean actualizar,String expediente);
 	//Requisito 3.6
-	public String consultarMultaBoletin(String boletin);
-/*	
-	public boolean estaMultaExpediente(String expediente);
-	
-	public boolean estaMultaBoletin(String boletin);
-	*/
+	public String consultarMultaBoletin(boolean actualizar,String boletin);
+
 	public void consultarListaMultas(LinkedList lista);
 	
 	public void eliminaListaMultas(LinkedList lista);

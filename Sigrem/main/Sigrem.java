@@ -180,13 +180,13 @@ public class Sigrem
 	
 	public void consultarMultaExpediente(String codigo)
 	{
-		String codcontrato=gmultas.consultarMultaExpediente(codigo);
+		String codcontrato=gmultas.consultarMultaExpediente(true,codigo);
 		if (codcontrato!=null) consultarContratoCodigo(false,true,codcontrato);		
 	}
 	
 	public void consultarMultaBoletin(String codigo)
 	{
-		String codcontrato=gmultas.consultarMultaBoletin(codigo);
+		String codcontrato=gmultas.consultarMultaBoletin(true,codigo);
 		if (codcontrato!=null) consultarContratoCodigo(false,true,codcontrato);		
 	}
 	
