@@ -315,7 +315,7 @@ public class PanelEmpleados extends JPanel
 	
 	public JPanel panelBajaEmpleado()
 	{
-		formulario.setTitle("Despedidiendo empleado...");
+		formulario.setTitle("Despidiendo empleado...");
 		
 		JLabel lcodigo=new JLabel("Código del empleado");
 		
