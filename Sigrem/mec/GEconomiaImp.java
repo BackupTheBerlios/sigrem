@@ -153,7 +153,7 @@ public class GEconomiaImp implements GEconomia
 		String nuevoUltimoMes=""+ultimoMesBal;
 		datos.add(nuevoUltimoMes);
 		if (grafica==0)	vista.actualizaVista(3,1,datos);
-		else if (grafica==1)	vista.actualizaVista(3,3,datos);;
+		else if (grafica==1)	vista.actualizaVista(3,3,datos);
 	}
 	
 	public int dameCuotaContrato()
