@@ -1393,6 +1393,7 @@ public class PanelContratos extends JPanel
 		{	public void actionPerformed(ActionEvent e)
 			{
 				inicializaCajaRecursos();
+				
 				controlador.consultarListaRecursos(cod.getText());
 				panelRecursos.getContentPane().add(dibujaRecursos(cod.getText()));
 				panelRecursos.pack();
@@ -1536,16 +1537,16 @@ public class PanelContratos extends JPanel
 		infracciones.addItem("Adel. en intersección");
 		infracciones.addItem("Alcoholemia");
 		infracciones.addItem("Ceda el paso");
-		infracciones.addItem("Cinturón de seguridad");
+		infracciones.addItem("Cinturon de seguridad");
 		infracciones.addItem("Cint. seg. menores 12 años");
 		infracciones.addItem("Circ. 2 pers. en ciclomotor");
 		infracciones.addItem("Circ. por carril distinto");
-		infracciones.addItem("Conducción temeraria");
+		infracciones.addItem("Conduccion temeraria");
 		infracciones.addItem("Cond. sin diligencia y precaución");
 		infracciones.addItem("Carecer extintor");
 		infracciones.addItem("Carecer rueda repuesto");
 		infracciones.addItem("Carecer chaleco reflectante");
-		infracciones.addItem("Dirección prohibida");
+		infracciones.addItem("Direccion prohibida");
 		infracciones.addItem("Doc. ITV no pasada");
 		infracciones.addItem("Doc. ITV pasa pero circ. sin tarjeta");
 		infracciones.addItem("Doc. Permiso de Circulación");
@@ -1557,52 +1558,52 @@ public class PanelContratos extends JPanel
 		infracciones.addItem("Exceso de velocidad");
 		infracciones.addItem("Exceso de dimensiones");
 		infracciones.addItem("Giro");
-		infracciones.addItem("Hablar por teléfono");
+		infracciones.addItem("Hablar por telefono");
 		infracciones.addItem("Incumpl. obligac. ident. conductor");
 		infracciones.addItem("Luces. Mal funcionamiento");
 		infracciones.addItem("Luces. No llevar repuesto");
-		infracciones.addItem("Luces. No llevar en túnel");
+		infracciones.addItem("Luces. No llevar en tunel");
 		infracciones.addItem("Luces. Otras");
-		infracciones.addItem("Marcha atrás. Maniobra prohibida");
-		infracciones.addItem("Matrícula ilegible o poco visible");
-		infracciones.addItem("Matrícula defectuosa");
+		infracciones.addItem("Marcha atras. Maniobra prohibida");
+		infracciones.addItem("Matricula ilegible o poco visible");
+		infracciones.addItem("Matricula defectuosa");
 		infracciones.addItem("Neumáticos defectuosos");
 		infracciones.addItem("No hacer caso agente");
 		infracciones.addItem("No ceder paso peatones");
-		infracciones.addItem("Pisar línea continua");
-		infracciones.addItem("Restricciones circulación");
+		infracciones.addItem("Pisar linea continua");
+		infracciones.addItem("Restricciones circulacion");
 		infracciones.addItem("Señal Stop");
-		infracciones.addItem("Señal de prohibición");
-		infracciones.addItem("Semáforo");
+		infracciones.addItem("Señal de prohibicion");
+		infracciones.addItem("Semaforo");
 		infracciones.addItem("Otras General");
 	}
 
 	private void infraccionesTransporte(JComboBox infracciones)
 	{
 		infracciones.addItem("Ttes. Carecer de tarjeta");
-		infracciones.addItem("Ttes. Exceder ámbito radio acción");
+		infracciones.addItem("Ttes. Exceder ambito radio accion");
 		infracciones.addItem("Ttes. No visado tarjeta");
 		infracciones.addItem("Ttes. No cumplir requisitos tarjeta");
-		infracciones.addItem("Ttes. Obstrucción labor inspectora");
-		infracciones.addItem("Ttes. Manipulación tacógrafo");
-		infracciones.addItem("Ttes. Inadecuado func.tacógrafo");
-		infracciones.addItem("Ttes. Carecer tacógrafo o de sus elem.");
+		infracciones.addItem("Ttes. Obstruccion labor inspectora");
+		infracciones.addItem("Ttes. Manipulacion tacografo");
+		infracciones.addItem("Ttes. Inadecuado func.tacografo");
+		infracciones.addItem("Ttes. Carecer tacografo o de sus elem.");
 		infracciones.addItem("Ttes. Carecer hojas registro o datos");
 		infracciones.addItem("Ttes. No llevar hoja  reg. en tacógrafo");
-		infracciones.addItem("Ttes. Superposición disco");
+		infracciones.addItem("Ttes. Superposicion disco");
 		infracciones.addItem("Ttes. Exceso de peso");
 		infracciones.addItem("Ttes. Carecer distintivos");
 		infracciones.addItem("Ttes. Distintivos no adecuados a tarjeta");
 		infracciones.addItem("Ttes. Arrendam. No llevar documentac.");
 		infracciones.addItem("Ttes. .Exceso conducción");
-		infracciones.addItem("Ttes. Minoración descanso");
-		infracciones.addItem("Ttes. Inspección discos");
-		infracciones.addItem("TMP. Carecer certific. Aprobac. del vehíc.");
+		infracciones.addItem("Ttes. Minoracion descanso");
+		infracciones.addItem("Ttes. Inspeccion discos");
+		infracciones.addItem("TMP. Carecer certific. Aprobac. del vehic.");
 		infracciones.addItem("TMP. No llevar a bordo vehic.docum.");
 		infracciones.addItem("TMP. No llevar carta instrucciones");
 		infracciones.addItem("TMP.Utilizar envase no homologados");
 		infracciones.addItem("TMP. Carecer Consej seguridad");
-		infracciones.addItem("TMP. Equipamiento vehículo");
+		infracciones.addItem("TMP. Equipamiento vehiculo");
 		infracciones.addItem("TMP. Carecer de etiquetas de peligro");
 		infracciones.addItem("TMP. No remitir info. anual o parte accid.");
 		infracciones.addItem("TMP.Carecer certif. limpieza cisterna");
@@ -1615,17 +1616,17 @@ public class PanelContratos extends JPanel
 	
 	private void escritoPresentado(JComboBox escritos)
 	{
-		escritos.addItem("Alegaciones Boletín");
-		escritos.addItem("Alegaciones Notificación");
+		escritos.addItem("Alegaciones Boletin");
+		escritos.addItem("Alegaciones Notificacion");
 		escritos.addItem("Alegaciones a las Pruebas");
 		escritos.addItem("Recurso Alzada");
-		escritos.addItem("Recurso Reposición");
-		escritos.addItem("Alegaciones Trámite Audiencia");
-		escritos.addItem("Identificación Conductor");
-		escritos.addItem("Escr. Subsanación de Firma");
-		escritos.addItem("Solicitud Aplazam, Retirada Carné");
+		escritos.addItem("Recurso Reposicion");
+		escritos.addItem("Alegaciones Tramite Audiencia");
+		escritos.addItem("Identificacion Conductor");
+		escritos.addItem("Escr. Subsanacion de Firma");
+		escritos.addItem("Solicitud Aplazam, Retirada Carne");
 		escritos.addItem("Aleg. Puesta de Manifiesto(TEAR)");
-		escritos.addItem("Ejec .Recurso Reposición");
+		escritos.addItem("Ejec .Recurso Reposicion");
 		escritos.addItem("Carta Desestim. Recurso Adm.");
 		escritos.addItem("Carta Desestim. Recurso Ejecut.");
 		escritos.addItem("Carta Requerim. Identif. Conductor");
@@ -1636,38 +1637,38 @@ public class PanelContratos extends JPanel
 
 	private void escritoRecibido(JComboBox escritos)
 	{
-		escritos.addItem("Boletín sin valor de notif.");
-		escritos.addItem("Boletín con valor de notific");
-		escritos.addItem("Notificación Denuncia");
-		escritos.addItem("Remisión pruebas");
-		escritos.addItem("Notificación 1ª Resolución");
-		escritos.addItem("Notificación 2ª Resolución");
-		escritos.addItem("Requerimiento Identificación");
-		escritos.addItem("Escr. Solicitando Subsanación de Firma");
-		escritos.addItem("Notif. Trámite Audiencia");
-		escritos.addItem("Notificación Propuesta Resolución");
-		escritos.addItem("Notificación Sobreseída");
-		escritos.addItem("Notificación Retrotaida");
-		escritos.addItem("Notificación Revocada");
-		escritos.addItem("Orden Entrega Carné Conducir");
-		escritos.addItem("Requerimiento Relación Laboral");
+		escritos.addItem("Boletin sin valor de notif.");
+		escritos.addItem("Boletin con valor de notific");
+		escritos.addItem("Notificacion Denuncia");
+		escritos.addItem("Remision pruebas");
+		escritos.addItem("Notificación 1ª Resolucion");
+		escritos.addItem("Notificación 2ª Resolucion");
+		escritos.addItem("Requerimiento Identificacion");
+		escritos.addItem("Escr. Solicitando Subsanacion de Firma");
+		escritos.addItem("Notif. Tramite Audiencia");
+		escritos.addItem("Notificacion Propuesta Resolución");
+		escritos.addItem("Notificacion Sobreseida");
+		escritos.addItem("Notificacion Retrotaida");
+		escritos.addItem("Notificacion Revocada");
+		escritos.addItem("Orden Entrega Carne Conducir");
+		escritos.addItem("Requerimiento Relacion Laboral");
 		escritos.addItem("Providencia de Apremio");
 		escritos.addItem("Carta de Pago");
 		escritos.addItem("Providencia Embargo(AYUNT)");
-		escritos.addItem("Providencia embargo y acumulación");
+		escritos.addItem("Providencia embargo y acumulacion");
 		escritos.addItem("Diligencia Embargo(AYUNT)");
-		escritos.addItem("Prelación de Bienes(AYUNT)");
+		escritos.addItem("Prelacion de Bienes(AYUNT)");
 		escritos.addItem("Señalamiento de Bienes(AYUNT))");
 		escritos.addItem("Embargo de CC y Ahorros(AYUNT)");
-		escritos.addItem("Investigación Patrimonial(AYUNT)");
+		escritos.addItem("Investigacion Patrimonial(AYUNT)");
 		escritos.addItem("Justificante Ingreso(AYUNT)");
 		escritos.addItem("Orden de ejec. de la Prov. de Embargo(AYUNT)");
-		escritos.addItem("Ejec.Grúa");
+		escritos.addItem("Ejec.Grua");
 		escritos.addItem("Puesta Manifiesto(TEAR)");
 		escritos.addItem("Notific. Puesta Disposic. Del interesado.");
-		escritos.addItem("Talón de Cargo(AETAT)");
+		escritos.addItem("Talon de Cargo(AETAT)");
 		escritos.addItem("Diligencia de Embargo(AEAT)");
-		escritos.addItem("Investigación Seguridad Social");
+		escritos.addItem("Investigacion Seguridad Social");
 		escritos.addItem("Embargo Bienes Conocidos");
 		escritos.addItem("Diligencia embargo(BANCO)");
 		escritos.addItem("Notific.Resol.Recurso Ejecutivo");
