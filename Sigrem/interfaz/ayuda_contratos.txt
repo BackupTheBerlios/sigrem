@@ -1,0 +1,5 @@
+===================
+= Panel Contratos =
+===================
+
+Descripción de las utilidades del "Panel Contratos" de Sigrem.
