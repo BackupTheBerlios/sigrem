@@ -1,8 +1,8 @@
 ????????????????????????????????????????????????????????????
-?                      PANEL EMPLEADOS                     ?
+?                     GESTIÖN EMPLEADOS                    ?
 ????????????????????????????????????????????????????????????
 
-Descripción de utilidades del "Panel Empleados" de SIGREM.
+Descripción de utilidades de "Gestión Empleados" de SIGREM.
 
 Disponemos de los siguientes Sectores:
 
@@ -15,7 +15,7 @@ Disponemos de los siguientes Sectores:
                               -> "Código del empleado"
                               -> "Perfil del empleado"
                               -> "Nómina del empleado"
-   (Ver "Ayuda > Panel Empleados > Datos del empleado")
+   (Ver "Ayuda > Gestión Empleados > Datos del empleado")
    
 • "Datos personales": 
              Contiene las casillas
@@ -30,7 +30,7 @@ Disponemos de los siguientes Sectores:
                               -> "Móvil"
                               -> "em@il"
                               -> "Fax"
-   (Ver "Ayuda > Panel Empleados > Datos personales")
+   (Ver "Ayuda > Gestión Empleados > Datos personales")
    
 • "Recursos asignados al empleado":
              Contiene las casillas
@@ -40,4 +40,4 @@ Disponemos de los siguientes Sectores:
                               -> "Escrito presentado"
                               -> "Estado"
                               -> "Descripción"
-   (Ver "Ayuda > Panel Empleados > Recursos asignados")
+   (Ver "Ayuda > Gestión Empleados > Recursos asignados")

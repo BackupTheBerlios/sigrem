@@ -1,5 +1,78 @@
-=====================
-= Menú Herramientas =
-=====================
+????????????????????????????????????????????????????????????
+?                     MENÚ Herramientas                    ?
+????????????????????????????????????????????????????????????
 
-- ¡¡¡ UNDER CONSTRUCTION !!! -
+Descripción de utilidades del "Menú Herramientas" de SIGREM.
+
+Disponemos de los siguientes Menús:
+
+• Opción "Consultar": 
+
+  Contiene los siguientes submenús:
+
+  - Contrato:
+
+     Pulsando sobre el submenú "Por código" o "Por 
+     matrícula", nos dará la posibilidad mediante un 
+     formulario de buscar un "Contrato" por una de dichas
+     variables.
+
+  - Cliente:
+     
+     Pulsando sobre el submenú "Por código", "Por DNI" o
+     "Por nombre", nos dará la posibilidad mediante un 
+     formulario de buscar un "Cliente" por una de dichas 
+     variables.
+
+  - Empleado:
+
+     Pulsando sobre el submenú  "Por código", "Por DNI" o
+     "Por nombre", nos dará la posibilidad mediante un 
+     formulario de buscar un "Empleado" por una de dichas 
+     variables.
+
+  - Multa
+
+     Pulsando sobre el submenú  "Por código", "Por 
+     expediente" o "Por boletín", nos dará la posibilidad
+     mediante un formulario de buscar una "Multa" por 
+     una de dichas variables.
+
+  - Recurso
+
+     Pulsando sobre el submenú  "Por código", nos dará 
+     la posibilidad mediante un formulario de buscar un 
+     "Recurso" por una de dicha variable.
+
+ 
+• Opción "Administración":
+  
+  Contiene los siguientes submenús:
+   
+  - Facturación:
+
+     Pulsando sobre él nos llevará a la Pestaña "Gestión 
+     Económica", nos calculará la Facturación del mes en
+     curso, mostrándola en su casilla, y dibujará en 
+     color VERDE la gráfica de las facturaciones 
+     correspondiente a los 11 meses anteriores al actual
+     junto con el actual.
+
+  - Gastos:
+
+     Pulsando sobre él nos llevará a la Pestaña "Gestión 
+     Económica", nos calculará los Gastos del mes en
+     curso, mostrándolos en su casilla, y dibujará en
+     color ROJO la gráfica de los gastos correspondiente
+     a los 11 meses anteriores al actual junto con el 
+     actual.
+
+  - Balance:
+
+     Pulsando sobre él nos llevará a la Pestaña "Gestión 
+     Económica", nos calculará el Balance del mes en
+     curso, mostrándolo en su casilla, y dibujará la
+     gráfica de los balances correspondiente a los 11
+     meses anteriores al actual junto con el actual( en
+     color ROJO los valores negativos y en color VERDE
+     los positivos.

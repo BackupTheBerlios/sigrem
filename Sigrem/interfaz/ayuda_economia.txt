@@ -1,7 +1,30 @@
-==================
-= Panel Economía =
-==================
+????????????????????????????????????????????????????????????
+?                     GESTIÓN ECONÓMICA                    ?
+????????????????????????????????????????????????????????????
 
-Descripción de las utilidades del "Panel Economía" de SIGREM.
+Descripción de utilidades de "Gestión Económica" de SIGREM.
 
-- ¡¡¡ UNDER CONSTRUCTION !!! -
+Disponemos de los siguientes Sectores:
+
+• "Datos económicos": 
+             Contiene los botones 
+                              -> "Calcular Facturación" 
+                              -> "Calcular Gastos"
+                              -> "Calcular Balance"
+                              -> "Gráfica Facturación"
+                              -> "Gráfica Gastos"
+                              -> "Gráfica Balance"
+             Contiene las casillas
+                              -> "Facturación"
+                              -> "Gastos"
+                              -> "Balance"
+   (Ver "Ayuda > Gestión Económica > Datos económicos")
+   
+• "Histórico de ...":
+                - Facturación
+                - Gastos
+                - Balance 
+             Contiene gráfica de 12 meses
+                              -> ROJO: Valores negativos
+                              -> VERDE: Valores positivos
+   (Ver "Ayuda > Gestión Económica > Histórico de ...")

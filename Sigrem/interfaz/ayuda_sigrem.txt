@@ -12,7 +12,13 @@ anularla. La empresa asignará entonces un abogado de su
 plantilla a dicho recurso para intentar resolverlo
 favorablemente. 
 
-La aplicación desarrollada permite: 
+La aplicación desarrollada consta de 3 pestañas:
+
+   - Gestión Contratos
+   - Gestión empleados
+   - Gestión Económica
+
+y nos permiten: 
 
 • Gestionar los contratos con los clientes, ya sea para
   crearlos, modificarlos o cancelarlos 

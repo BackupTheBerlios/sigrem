@@ -1,24 +1,24 @@
 ????????????????????????????????????????????????????????????
-?                      PANEL CONTRATOS                     ?
+?                     GESTIÓN CONTRATOS                    ?
 ????????????????????????????????????????????????????????????
 
-Descripción de utilidades del "Panel Contratos" de SIGREM.
+Descripción de utilidades de "Gestión Contratos" de SIGREM.
 
 Disponemos de los siguientes Sectores:
 
-• "Datos del Contrato": 
+• "Datos económicos": 
              Contiene los botones 
-                              -> "Crear" 
-                              -> "Modificar"
+                              -> "Crear"
                               -> "Eliminar"
+                              -> "Modificar"
              Contiene las casillas
                               -> "Código del Contrato"
                               -> "Código del Cliente"
                               -> "Matrícula del Vehículo"
                               -> "Fecha de Alta"
-   (Ver "Ayuda > Panel Contratos > Datos del Contrato")
+   (Ver "Ayuda > Gestión Contratos > Datos del Contrato")
    
-• "Datos del Cliente": 
+• "Datos económicos": 
              Contiene los botones 
                               -> "Nuevo Contrato"
              Contiene el desplegable
@@ -35,7 +35,7 @@ Disponemos de los siguientes Sectores:
                               -> "Móvil"
                               -> "em@il"
                               -> "Fax"
-   (Ver "Ayuda > Panel Contratos > Datos del Cliente")
+   (Ver "Ayuda > Gestión Contratos > Datos del Cliente")
    
 • "Multas del Contrato":
 	     Contiene los botones
@@ -50,4 +50,4 @@ Disponemos de los siguientes Sectores:
                               -> "Boletín"
                               -> "Fecha denuncia"
                               -> "Infracción"
-   (Ver "Ayuda > Panel Contratos > Multas del Contrato")
+   (Ver "Ayuda > Gestión Contratos > Multas del Contrato")
