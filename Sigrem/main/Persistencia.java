@@ -69,6 +69,7 @@ public class Persistencia
 		almacenarContratosXML();
 		almacenarMultasXML();
 		almacenarRecursosXML();
+		almacenarEmpleadosXML();
 	}
 	
 	public boolean cargarXML(){
@@ -109,6 +110,17 @@ public class Persistencia
 			System.out.println("Algun dato de grecursos es erroneo");
 			bienCargado=false;
 		}
+		try {
+			cargarEmpleadosXML();
+			System.out.println("La carga de empleados se ha realizado correctamente");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Algun dato de gempleados es erroneo");
+			bienCargado=false;
+		} 
+		
+		
 		return bienCargado;
 	}
 	
@@ -768,8 +780,8 @@ public class Persistencia
 				linea=lector.readLine();
 				while (linea.indexOf(tab+"</listacodigosrecursos>")!=0){
 					tab=tab.concat("\t");
-					principio="<codigoRecurso>";
-					fin ="</codigoRecurso>";
+					principio="<codigorecurso>";
+					fin ="</codigorecurso>";
 					interior=dameInteriorEtiquetas(tab,linea,principio,fin);
 					listaCodigosRecursos.add(interior);	
 					linea=lector.readLine();
@@ -907,7 +919,7 @@ public class Persistencia
 	
 	
 	public LinkedList leerRecurso(String linea, BufferedReader lector, String tab) throws IOException{
-		if (!linea.equals(tab+"<contrato>")){
+		if (!linea.equals(tab+"<recurso>")){
 			System.out.println("No se ha encontado un contrato");
 		}else{
 			LinkedList datosRecurso=new LinkedList();
@@ -965,6 +977,7 @@ public class Persistencia
 			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
 			datosRecurso.add(interior);	
 			linea=lector.readLine();
+			tab=tab.substring(1);
 			
 			if (!linea.equals(tab+"</recurso>")){
 					System.out.println("No se ha encontrado la etiqueta que cierra recurso");
@@ -1016,9 +1029,12 @@ public class Persistencia
 	}
 
 	void escribirEmpleado(PrintWriter escritor, Empleado actual, String tab){
+		String perfil=actual.damePerfil();
 		escritor.println(tab+"<empleado>");
 		tab=tab.concat("\t");
+		
 		escritor.println(tab+"<codigo>"+actual.dameCodigo()+"</codigo>");
+		escritor.println(tab+"<perfil>"+perfil+"</perfil>");
 		escritor.println(tab+"<nombre>"+actual.dameNombre()+"</nombre>");
 		escritor.println(tab+"<dni>"+actual.dameDni()+"</dni>");
 		escritor.println(tab+"<direccion>"+actual.dameDireccion()+"</direccion>");
@@ -1030,20 +1046,23 @@ public class Persistencia
 		escritor.println(tab+"<movil>"+actual.dameMovil()+"</movil>");
 		escritor.println(tab+"<email>"+actual.dameEmail()+"</email>");
 		escritor.println(tab+"<fax>"+actual.dameFax()+"</fax>");
-		escritor.println(tab+"<listacodigoscontratos>");
-		LinkedList codigoscontratos=actual.dameListaContratos();
-		tab=tab.concat("\t");
-		for (int i=0;i<codigoscontratos.size();i++){
-	 		escritor.println(tab+"<codigocontrato>"+(String) codigoscontratos.get(i)+"</codigocontrato>");
-	 	}
-		tab=tab.substring(1);
-		escritor.println(tab+"</listacodigoscontratos>");
-		tab=tab.substring(1);
-		escritor.println(tab+"</cliente>");
+		escritor.println(tab+"<nomina>"+actual.dameNomina()+"</nomina>");
+		if (!perfil.equals("Administrativo")){
+			escritor.println(tab+"<listacodigosrecursos>");
+			LinkedList codigosrecursos=((Abogado)actual).dameListaRecursos();
+			tab=tab.concat("\t");
+			for (int i=0;i<codigosrecursos.size();i++){
+				escritor.println(tab+"<codigorecurso>"+(String) codigosrecursos.get(i)+"</codigorecurso>");
+			}
+			tab=tab.substring(1);
+			escritor.println(tab+"</listacodigosrecursos>");
+			tab=tab.substring(1);
+		}
+		escritor.println(tab+"</empleado>");
 	}
 	 
-	 public boolean cargarEmpleadoXML() throws IOException{
-		BufferedReader lector=new BufferedReader(new FileReader("clientes.xml"));
+	 public boolean cargarEmpleadosXML() throws IOException{
+		BufferedReader lector=new BufferedReader(new FileReader("empleados.xml"));
 		String lineaActual;
 		String tab="";
 		lineaActual=lector.readLine();
@@ -1051,12 +1070,12 @@ public class Persistencia
 			System.out.println("La primera linea es incorrecta");
 		}else{
 			lineaActual=lector.readLine();
-			if (!lineaActual.startsWith("<!DOCTYPE listaClientes>")){
+			if (!lineaActual.startsWith("<!DOCTYPE listaEmpleados>")){
 				System.out.println("La segunda linea es incorrecta");
 			}else{
 				lineaActual=lector.readLine();
-				if (!lineaActual.startsWith("<listaClientes>")){
-					System.out.println("No hay etiqueta listaClientes");
+				if (!lineaActual.startsWith("<listaEmpleados>")){
+					System.out.println("No hay etiqueta listaEmpleados");
 				}else{
 					tab=tab.concat("\t");
 					lineaActual=lector.readLine();
@@ -1066,14 +1085,20 @@ public class Persistencia
 						lineaActual=lector.readLine();
 						while (!lineaActual.startsWith(tab+"</activos>")){
 							tab=tab.concat("\t");
-							LinkedList datosCliente=leerCliente(lineaActual,lector,tab);
-							//sacamos los contratos y el codigo de ese cliente de la LinkedList 
-							Vector contratosAsociados=(Vector)datosCliente.removeLast();
-							String codigoCliente=(String)datosCliente.removeFirst();
-							Cliente nuevoCliente=new Cliente(codigoCliente,datosCliente);
-							gclientes.meteCliente(nuevoCliente);
-							for (int i=0;i<contratosAsociados.size();i++){
-								gclientes.asociaClienteContrato(codigoCliente,(String)contratosAsociados.get(i));
+							LinkedList datosEmpleado=leerEmpleado(lineaActual,lector,tab);
+							String codigoEmpleado=(String)datosEmpleado.removeFirst();
+							String perfilEmpleado=(String)datosEmpleado.removeFirst();
+							Empleado nuevoEmpleado;
+							if (perfilEmpleado.equals("Administrativo")){
+								nuevoEmpleado=new Administrativo(codigoEmpleado,perfilEmpleado,datosEmpleado);
+								gempleados.meteEmpleado(nuevoEmpleado);
+							}else{
+								Vector recursosAsociados=(Vector)datosEmpleado.removeLast();
+								nuevoEmpleado=new Abogado(codigoEmpleado,perfilEmpleado,datosEmpleado);
+								gempleados.meteEmpleado(nuevoEmpleado);
+								for (int i=0;i<recursosAsociados.size();i++){
+									gempleados.asociaAbogadoRecurso(codigoEmpleado,(String)recursosAsociados.get(i));
+								}
 							}
 							lineaActual=lector.readLine();
 							tab=tab.substring(1);
@@ -1085,24 +1110,29 @@ public class Persistencia
 							lineaActual=lector.readLine();
 							while (!lineaActual.startsWith(tab+"</eliminados>")){
 								tab=tab.concat("\t");
-								LinkedList datosCliente=leerCliente(lineaActual,lector,tab);
-								Vector contratosAsociados=(Vector)datosCliente.removeLast();
-								gclientes.dameEstructuraClientes().insertarAEliminados(datosCliente);
-								/*for (int i=0;i<contratosAsociados.size();i++){
-									gclientes.asociaClienteContrato((String)datosCliente.getFirst(),(String)contratosAsociados.get(i));
-								}
-								//gclientes.eliminarCliente(false,datosCliente.g)
-								//falta eliminar los clientes eliminados, se podría hacer en casacada eliminando exclusivamente los contratos
-							*/	lineaActual=lector.readLine();
+								LinkedList datosEmpleado=leerEmpleado(lineaActual,lector,tab);
+								String codigoEmpleado=(String)datosEmpleado.removeFirst();
+								String perfilEmpleado=(String)datosEmpleado.removeFirst();
+								Empleado nuevoEmpleado;
+								if (perfilEmpleado.equals("Administrativo")){
+									nuevoEmpleado=new Administrativo(codigoEmpleado,perfilEmpleado,datosEmpleado);
+									gempleados.dameEstructuraEmpleados().insertarAEliminados(nuevoEmpleado);
+								}else{
+									datosEmpleado.removeLast();
+									nuevoEmpleado=new Abogado(codigoEmpleado,perfilEmpleado,datosEmpleado);
+									gempleados.dameEstructuraEmpleados().insertarAEliminados(nuevoEmpleado);
+					
+								}	
+								lineaActual=lector.readLine();
 								tab=tab.substring(1);
 							}
 							lineaActual=lector.readLine();
-							if (!lineaActual.startsWith("</listaClientes>")){
-								System.out.println("No hay cierre de etiqueta listaClientes");
+							if (!lineaActual.startsWith("</listaEmpleados>")){
+								System.out.println("No hay cierre de etiqueta listaEmpleados");
 							}else{
 								lineaActual=lector.readLine();
 								if(lineaActual!=null){
-									System.out.println("Existen datos despues de la ultima etiqueta </listaClientes>");
+									System.out.println("Existen datos despues de la ultima etiqueta </listaEmpleados>");
 								}else return true;
 							/*catch (IOException e) {
 									return true;	
@@ -1119,10 +1149,10 @@ public class Persistencia
 	}
  
 	LinkedList leerEmpleado(String linea, BufferedReader lector,String tab) throws IOException{
-		if (!linea.equals(tab+"<cliente>")){
+		if (!linea.equals(tab+"<empleado>")){
 			System.out.println("No se ha encontado un cliente");
 		}else{
-			LinkedList datosCliente=new LinkedList();
+			LinkedList datosEmpleado=new LinkedList();
 			String principio;
 			String fin;
 			String interior;
@@ -1133,102 +1163,116 @@ public class Persistencia
 			principio="<codigo>";
 			fin ="</codigo>";
 			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
-			datosCliente.add(interior);	
+			datosEmpleado.add(interior);	
+			linea=lector.readLine();
+			
+			principio="<perfil>";
+			fin ="</perfil>";
+			String perfil=dameInteriorEtiquetas(tab,linea,principio,fin);
+			datosEmpleado.add(perfil);	
 			linea=lector.readLine();
 			
 			principio="<nombre>";
 			fin ="</nombre>";
 			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
-			datosCliente.add(interior);	
+			datosEmpleado.add(interior);	
 			linea=lector.readLine();
 			
 			principio="<dni>";
 			fin ="</dni>";
 			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
-			datosCliente.add(interior);	
+			datosEmpleado.add(interior);	
 			linea=lector.readLine();
 			
 			
 			principio="<direccion>";
 			fin ="</direccion>";
 			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
-			datosCliente.add(interior);	
+			datosEmpleado.add(interior);	
 			linea=lector.readLine();
 			
 			principio="<cp>";
 			fin ="</cp>";
 			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
-			datosCliente.add(interior);	
+			datosEmpleado.add(interior);	
 			linea=lector.readLine();
 			
 			principio="<poblacion>";
 			fin ="</poblacion>";
 			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
-			datosCliente.add(interior);	
+			datosEmpleado.add(interior);	
 			linea=lector.readLine();
 			
 			principio="<provincia>";
 			fin ="</provincia>";
 			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
-			datosCliente.add(interior);	
+			datosEmpleado.add(interior);	
 			linea=lector.readLine();
 			
 			principio="<telefono1>";
 			fin ="</telefono1>";
 			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
-			datosCliente.add(interior);	
+			datosEmpleado.add(interior);	
 			linea=lector.readLine();
 			
 			principio="<telefono2>";
 			fin ="</telefono2>";
 			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
-			datosCliente.add(interior);	
+			datosEmpleado.add(interior);	
 			linea=lector.readLine();
 			
 			principio="<movil>";
 			fin ="</movil>";
 			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
-			datosCliente.add(interior);	
+			datosEmpleado.add(interior);	
 			linea=lector.readLine();
 			
 			principio="<email>";
 			fin ="</email>";
 			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
-			datosCliente.add(interior);	
+			datosEmpleado.add(interior);	
 			linea=lector.readLine();
 			
 			principio="<fax>";
 			fin ="</fax>";
 			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
-			datosCliente.add(interior);	
+			datosEmpleado.add(interior);	
 			linea=lector.readLine();
-				
-			if (linea.indexOf(tab+"<listacodigoscontratos>")!=0){
-				System.out.println("No se ha encontado la lista de contratos del cliente");
-			}else{
-				Vector listaCodigosContrato=new Vector();
-				linea=lector.readLine();
-				while (linea.indexOf(tab+"</listacodigoscontratos>")!=0){
-					tab=tab.concat("\t");
-					principio="<codigocontrato>";
-					fin ="</codigocontrato>";
-					interior=dameInteriorEtiquetas(tab,linea,principio,fin);
-					listaCodigosContrato.add(interior);	
-					linea=lector.readLine();
-					tab=tab.substring(1);
-				}
-				datosCliente.add(listaCodigosContrato);
-				linea=lector.readLine();
-				tab=tab.substring(1);
-				if (!linea.equals(tab+"</cliente>")){
-					System.out.println("No se ha encontrado la etiqueta que cierra cliente");
+			
+			principio="<nomina>";
+			fin ="</nomina>";
+			interior=dameInteriorEtiquetas(tab,linea,principio,fin);
+			datosEmpleado.add(interior);	
+			linea=lector.readLine();
+			
+			if (!perfil.equals("Administrativo")){
+				if (!linea.startsWith(tab+"<listacodigosrecursos>")){
+					System.out.println("No se ha encontado la lista de recursos del empleado");
 				}else{
-					return datosCliente;
+					Vector listaCodigosRecurso=new Vector();
+					linea=lector.readLine();
+					while (!linea.startsWith(tab+"</listacodigosrecursos>")){
+						tab=tab.concat("\t");
+						principio="<codigorecurso>";
+						fin ="</codigorecurso>";
+						interior=dameInteriorEtiquetas(tab,linea,principio,fin);
+						listaCodigosRecurso.add(interior);	
+						linea=lector.readLine();
+						tab=tab.substring(1);
+					}
+					datosEmpleado.add(listaCodigosRecurso);
 				}
+			}		
+			linea=lector.readLine();
+			tab=tab.substring(1);
+			if (!linea.startsWith(tab+"</empleado>")){
+				System.out.println("No se ha encontrado la etiqueta que cierra empleado");
+			}else{
+				return datosEmpleado;
 			}
+			
 		}
-		return null;	
-		
+		return null;			
 	}
 	
 	public void almacenarConfigIni()

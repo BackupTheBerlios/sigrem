@@ -19,7 +19,9 @@ public interface GEmpleados
 	//Requisito 6.6
 	public void consultarEmpleadoDni(String dni);
 	
-	public EstructuraDatos dameListaEmpleados();
+	public void meteEmpleado(Empleado empleado);
+	
+	public EstructuraDatos dameEstructuraEmpleados();
 	
 	public String dameCodigo();
 	

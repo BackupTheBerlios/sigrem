@@ -219,7 +219,7 @@ public class Sigrem
 		gmultas.asociaMultaRecurso(codmulta,codrecurso);
 		String codempleado=(String)datos.get(5);
 		if (!codempleado.equals("Sin asignar"))
-			gempleados.asociaAbogadoRecurso(codrecurso,codempleado);
+			gempleados.asociaAbogadoRecurso(codempleado,codrecurso);
 	}
 	
 	public void eliminarRecurso(String codrecurso,String codmulta,String codempleado)
@@ -235,7 +235,7 @@ public class Sigrem
 		grecursos.modificarRecurso(codigo,datos);
 		String codempleado=(String)datos.get(5);
 		if (!codempleado.equals("Sin asignar"))
-			gempleados.asociaAbogadoRecurso(codigo,codempleado);
+			gempleados.asociaAbogadoRecurso(codempleado,codigo);
 	}
 	
 	public void consultarListaRecursos(String codigo)
@@ -306,8 +306,8 @@ public class Sigrem
 	public void calculaGastos(int grafica)
 	{
 		int gas=0;
-		for(int i=0;i<gempleados.dameListaEmpleados().dameTamaño();i++)
-		{	gas=gas+Integer.valueOf(((Empleado)gempleados.dameListaEmpleados().dameIndice(0).dameElementos().get(i)).dameNomina()).intValue();}
+		for(int i=0;i<gempleados.dameEstructuraEmpleados().dameTamaño();i++)
+		{	gas=gas+Integer.valueOf(((Empleado)gempleados.dameEstructuraEmpleados().dameIndice(0).dameElementos().get(i)).dameNomina()).intValue();}
 		geconomia.gastos(-gas,grafica);
 	}
 	
@@ -315,8 +315,8 @@ public class Sigrem
 	{
 		int fac=geconomia.dameCuotaContrato()*gcontratos.dameEstructuraContratos().dameTamaño();
 		int gas=0;
-		for(int i=0;i<gempleados.dameListaEmpleados().dameTamaño();i++)
-		{	gas=gas+Integer.valueOf(((Empleado)gempleados.dameListaEmpleados().dameIndice(0).dameElementos().get(i)).dameNomina()).intValue();}
+		for(int i=0;i<gempleados.dameEstructuraEmpleados().dameTamaño();i++)
+		{	gas=gas+Integer.valueOf(((Empleado)gempleados.dameEstructuraEmpleados().dameIndice(0).dameElementos().get(i)).dameNomina()).intValue();}
 		int bal=fac-gas;
 		geconomia.balance(bal,grafica);				
 	}

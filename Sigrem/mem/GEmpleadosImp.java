@@ -30,22 +30,20 @@ public class GEmpleadosImp implements GEmpleados
 	
 	// (clave0=codigo, clave1=nombre, clave2=dni)
 	public String añadirEmpleado(String perfil,LinkedList datosEmpleado)
-	{
+	{	String codigo=this.dameCodigo();
+		String nombre=(String)datosEmpleado.get(0);
+		String dni=(String)datosEmpleado.get(1);
+		
 		Empleado nuevoEmpleado=null;
 		if (perfil.equals("Abogado"))
 		{	nuevoEmpleado=new Abogado(codigoEmpleado,perfil,datosEmpleado);}
 		else if (perfil.equals("Administrativo"))
 		{	nuevoEmpleado=new Administrativo(codigoEmpleado,perfil,datosEmpleado);}
-		String[] claves = new String[3];
-		claves[0]=codigoEmpleado;
-		claves[1]=(String)datosEmpleado.get(0);
-		claves[2]=(String)datosEmpleado.get(1);
-		if (!listaEmpleados.esta(claves[2],2))
-		{	listaEmpleados.insertar(claves, nuevoEmpleado);
-			String codigoAntiguo = codigoEmpleado;
+			if (!listaEmpleados.esta(dni,2))
+		{	meteEmpleado(nuevoEmpleado);
 			incrementaCodigo();
 			LinkedList datosPanel1=new LinkedList();
-			datosPanel1.add(codigoAntiguo);
+			datosPanel1.add(codigo);
 			datosPanel1.add(perfil);
 			datosPanel1.add(datosEmpleado.get(11));
 			LinkedList datosPanel2=new LinkedList();
@@ -53,12 +51,20 @@ public class GEmpleadosImp implements GEmpleados
 			vista.actualizaVista(2,1,datosPanel1);
 			vista.actualizaVista(2,2,datosPanel2);
 			vista.actualizaVista(2,3,null);
-			return codigoAntiguo;
+			return codigo;
 		}
 		else
 		{	vista.actualizaVistaMensaje("Error al contratar al empleado "+codigoEmpleado+". DNI repetido");
 			return null;
 		}	
+	}
+	
+	public void meteEmpleado(Empleado empleado){
+		String[] claves = new String[3];
+		claves[0]=empleado.dameCodigo();
+		claves[1]=empleado.dameNombre();
+		claves[2]=empleado.dameDni();
+		this.dameEstructuraEmpleados().insertar(claves,empleado);
 	}
 
 	public void eliminarEmpleado(boolean borrar,String codigoEmpleado)
@@ -190,7 +196,7 @@ public class GEmpleadosImp implements GEmpleados
 		}
 	}
 	
-	public EstructuraDatos dameListaEmpleados()
+	public EstructuraDatos dameEstructuraEmpleados()
 	{
 		return listaEmpleados;
 	}
@@ -207,7 +213,7 @@ public class GEmpleadosImp implements GEmpleados
 		}
 	}
 	
-	public void asociaAbogadoRecurso(String codrecurso,String codempleado)
+	public void asociaAbogadoRecurso(String codempleado,String codrecurso)
 	{
 		Vector busqueda=listaEmpleados.buscar(codempleado,0);
 		if (busqueda.size()==0)

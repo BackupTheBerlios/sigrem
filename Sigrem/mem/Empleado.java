@@ -20,22 +20,22 @@ public abstract class Empleado
 	private String nomina;
 	
 	// Constructor
-	public Empleado(String codigoEmpleado,String perfilEmpleado,LinkedList listaEmpleados) 
+	public Empleado(String codigoEmpleado,String perfilEmpleado,LinkedList listaEmpleado) 
 	{
 		codigo = 	codigoEmpleado;
 		perfil =	perfilEmpleado;
-		nombre = 	(String)listaEmpleados.get(0);
-		dni = 		(String)listaEmpleados.get(1);
-		direccion = (String)listaEmpleados.get(2);
-		cp = 		(String)listaEmpleados.get(3);
-		poblacion = (String)listaEmpleados.get(4);
-		provincia = (String)listaEmpleados.get(5);
-		telefono1 = (String)listaEmpleados.get(6);
-		telefono2 = (String)listaEmpleados.get(7);
-		movil = 	(String)listaEmpleados.get(8);
-		email = 	(String)listaEmpleados.get(9);
-		fax = 		(String)listaEmpleados.get(10);
-		nomina =	(String)listaEmpleados.get(11);
+		nombre = 	(String)listaEmpleado.get(0);
+		dni = 		(String)listaEmpleado.get(1);
+		direccion = (String)listaEmpleado.get(2);
+		cp = 		(String)listaEmpleado.get(3);
+		poblacion = (String)listaEmpleado.get(4);
+		provincia = (String)listaEmpleado.get(5);
+		telefono1 = (String)listaEmpleado.get(6);
+		telefono2 = (String)listaEmpleado.get(7);
+		movil = 	(String)listaEmpleado.get(8);
+		email = 	(String)listaEmpleado.get(9);
+		fax = 		(String)listaEmpleado.get(10);
+		nomina =	(String)listaEmpleado.get(11);
 	}
 	// métodos accesores
 	public String dameCodigo(){return codigo;}
