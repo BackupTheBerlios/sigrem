@@ -63,7 +63,7 @@ public class InterfazGrafica
 	
 	private String linea;
 	
-	private Sigrem controlador;
+	final private Sigrem controlador;
 	
 	public InterfazGrafica(Sigrem controlador)
 	{		
@@ -125,12 +125,18 @@ public class InterfazGrafica
 		ventana.addWindowListener(new WindowAdapter()
 		{	public void windowClosing(WindowEvent e)
 			{
-				System.out.println("El programa Sigrem ha terminado");
-				System.exit(0);
+				acabarAplicacion();				
 			}
 		});	
 	}
-			
+		
+	public void acabarAplicacion()
+	{
+		controlador.desactiva();
+		System.out.println("El programa Sigrem ha terminado");
+		System.exit(0);
+	}
+	
 	private void guardar()
 	{
 		try
@@ -266,9 +272,8 @@ public class InterfazGrafica
 		menu.add(m4);
 		salir.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
-			{
-				System.out.println("El programa Sigrem ha terminado");
-				System.exit(0);				
+			{	
+				acabarAplicacion();		
 			}
 		});
 		acercade.addActionListener(new ActionListener()

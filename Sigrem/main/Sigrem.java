@@ -58,6 +58,11 @@ public class Sigrem
 		vista.activa();		
 	}
 	
+	public void desactiva()
+	{
+		//persistencia.almacenarXML();
+	}
+	
 	public void añadirContrato(LinkedList datosContrato,LinkedList datosCliente)
 	{
 		if (gcontratos.consultarContratoMatricula(false,(String)datosContrato.get(0))==null)
