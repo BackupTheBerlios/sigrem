@@ -63,7 +63,7 @@ public class Sigrem
 		gmultas=factoria.generaGMultas(vista,codmulta);
 		grecursos=factoria.generaGRecursos(vista,codrecurso);
 		gempleados=factoria.generaGEmpleados(vista,codempleado);
-		geconomia=factoria.generaGEconomia(vista,gempleados,gcontratos);		
+		geconomia=factoria.generaGEconomia(vista,gempleados,gcontratos,ultimomes,facturacion,gastos,balance);		
 	}
 	
 	public void activa()

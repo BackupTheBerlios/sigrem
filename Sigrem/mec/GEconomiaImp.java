@@ -21,7 +21,7 @@ public class GEconomiaImp implements GEconomia
 		
 	private int cuotaContrato;
 	
-	public GEconomiaImp(InterfazGrafica vista,GEmpleados gempleados,GContratos gcontratos)
+	public GEconomiaImp(InterfazGrafica vista,GEmpleados gempleados,GContratos gcontratos,String ultimomes,String facturacion,String gastos,String balance)
 	{
 		this.vista=vista;
 		this.gempleados=gempleados;
