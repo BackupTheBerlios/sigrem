@@ -74,12 +74,13 @@ public class Sigrem
 	
 	public void modificarContrato(String codigo)
 	{
-		
+		String codcliente=gcontratos.modificarContrato(codigo);
+		if (codcliente!=null) gclientes.modificarCliente(codcliente);		
 	}
 	
-	public void consultarContratoCodigo(String codigo)
+	public void consultarContratoCodigo(boolean modificar,String codigo)
 	{
-		String codcliente=gcontratos.consultarContratoCodigo(codigo);
-		if (codcliente!=null) gclientes.consultarClienteCodigo(codcliente);
+		String codcliente=gcontratos.consultarContratoCodigo(modificar,codigo);
+		if (codcliente!=null) gclientes.consultarClienteCodigo(modificar,codcliente);
 	}	
 }

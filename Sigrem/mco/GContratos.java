@@ -10,9 +10,9 @@ public interface GContratos
 	//Requisito 2.2
 	public void eliminarContrato(boolean borrar,String codigo);
 	//Requisito 2.3
-	public void modificarContrato(String codigo);
+	public String modificarContrato(String codigo);
 	//Requisito 2.4
-	public String consultarContratoCodigo(String codigo);
+	public String consultarContratoCodigo(boolean modificar,String codigo);
 	//Requisito 2.5
 	public void consultarContratoMatricula(String matricula);
 }

@@ -48,34 +48,46 @@ public class GContratosImp implements GContratos
 	{
 		boolean eliminado=listacontratos.eliminar(codigo,0);
 		if (eliminado) 
-		{	vista.actualizaMensaje("       Contrato "+codigo+" eliminado correctamente");
+		{	vista.actualizaVistaMensaje("       Contrato "+codigo+" eliminado correctamente");
 			if (borrar)
 			{	vista.actualizaVista(1,1,null);
 				vista.actualizaVista(1,2,null);				
 			}
 		
 		}
-		else vista.actualizaMensaje("Error al eliminar el contrato "+codigo+". No se ha encontrado");
+		else vista.actualizaVistaMensaje("Error al eliminar el contrato "+codigo+". No se ha encontrado");
 	}
 
-	public void modificarContrato(String codigo)
+	public String modificarContrato(String codigo)
 	{
-		
+		return null;
 	}
 	
-	public String consultarContratoCodigo(String codigo)
+	public String consultarContratoCodigo(boolean modificar,String codigo)
 	{
 		Object[] busqueda=listacontratos.buscar(codigo,0);
-		
-		if (busqueda[0]!=null)
-		{	Contrato contrato=(Contrato)busqueda[0];
-			vista.actualizaVista(1,1,contrato.getListaDatos());
-			return contrato.getCodigoCliente();
+		if (busqueda.length==0)
+		{	vista.actualizaVistaMensaje("Error al buscar el contrato "+codigo+". No se ha encontrado");
+			return null;			
 		}
-		else
-		{	vista.actualizaMensaje("Error al buscar el contrato "+codigo+". No se ha encontrado");
+		else 
+			if (busqueda[0]!=null)
+			{	Contrato contrato=(Contrato)busqueda[0];
+				if (modificar)
+				{	LinkedList datos=new LinkedList();
+					datos.add(contrato.getCodigoContrato());
+					datos.add(contrato.getMatricula());
+					datos.add(contrato.getFechaAlta());
+					vista.actualizaVistaDatos(1,datos,false);
+				}
+				else
+				{	vista.actualizaVista(1,1,contrato.getListaDatos());}
+				return contrato.getCodigoCliente();
+			}
+			else
+			{	vista.actualizaVistaMensaje("Error al buscar el contrato "+codigo+". No se ha encontrado");
 			return null;
-		}		
+			}		
 	}
 	
 	public void consultarContratoMatricula(String matricula)

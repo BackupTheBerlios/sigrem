@@ -11,7 +11,7 @@ public interface GClientes
 	//Requisito 1.3
 	public void modificarCliente(String codigo);
 	//Requisito 1.4
-	public void consultarClienteCodigo(String codigo);
+	public void consultarClienteCodigo(boolean modificar,String codigo);
 	//Requisito 1.5
 	public void consultarClienteNombre(String nombre);
 	//Requisito 1.6

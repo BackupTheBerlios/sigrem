@@ -17,10 +17,13 @@ public class PanelContratos extends JPanel
 	
 	private JDialog formulario;
 	
+	private LinkedList datosmodificables;
+	
 	public PanelContratos(Sigrem controlador,JFrame v)
 	{
 		super();
 		this.controlador=controlador;
+		datosmodificables=new LinkedList();
 		formulario=new JDialog(v,true);
 		formulario.setResizable(false);
 		dibujaPaneles(false);
@@ -45,7 +48,7 @@ public class PanelContratos extends JPanel
 		JSplitPane sp2=new JSplitPane(JSplitPane.VERTICAL_SPLIT,sp1,pmultas);
 		sp2.setEnabled(false);		
 		sp2.setDividerSize(4);
-		add(sp2);		
+		add(sp2);
 	}
 	
 	public void actualiza(int panel,LinkedList datos)
@@ -61,6 +64,16 @@ public class PanelContratos extends JPanel
 		else if (panel==3)
 		{
 			
+		}
+	}
+	
+	public void actualizaDatosModificables(LinkedList datos,boolean dibujar)
+	{
+		for (int i=0;i<datos.size();i++) datosmodificables.addLast(datos.get(i));
+		if (dibujar)
+		{	formulario.getContentPane().add(panelAlta('m',(String)datosmodificables.get(0),datosmodificables));
+			formulario.pack();
+			formulario.setVisible(true);
 		}
 	}
 	
@@ -338,7 +351,7 @@ public class PanelContratos extends JPanel
 		nuevoContrato.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formulario.getContentPane().add(panelAlta('c',null,datos));
+				formulario.getContentPane().add(panelAlta('n',null,datos));
 				formulario.pack();	
 				formulario.setVisible(true);
 			}
@@ -400,24 +413,23 @@ public class PanelContratos extends JPanel
 	
 	public JPanel panelAlta(char tipo,String codigo,LinkedList datos)
 	{
-		if (tipo=='c')
-		{	formulario.setTitle("Crear contrato");
-			formulario.setLocation(350,100);
-		}
+		if ((tipo=='c') || (tipo=='n'))
+		{	formulario.setTitle("Crear contrato");}
 		else if (tipo=='m') 
-		{	formulario.setTitle("Modificar contrato "+codigo);
-			formulario.setLocation(350,100);
-		}
+		{	formulario.setTitle("Modificar contrato "+codigo);}
+		formulario.setLocation(350,100);
 		JLabel lc1=new JLabel("Matrícula del vehículo");
 		JLabel lc2=new JLabel("Fecha de alta");
 		lc1.setPreferredSize(new Dimension(150,20));
 		lc2.setPreferredSize(new Dimension(150,20));
 		final JTextField tfechaalta=new JTextField();
-		if (tipo=='c')
+		if ((tipo=='c') || (tipo=='n'))
 		{	Date hoy = new Date();
 			SimpleDateFormat formato=new SimpleDateFormat("dd.MM.yyyy");
 			tfechaalta.setText(formato.format(hoy));
 		}
+		else if (tipo=='m')
+		{	tfechaalta.setText((String)datos.get(2));}
 		tfechaalta.setEditable(false);
 		final JTextField tmatricula=new JTextField();
 		tfechaalta.setPreferredSize(new Dimension(100,20));
@@ -495,28 +507,37 @@ public class PanelContratos extends JPanel
 		temail.setPreferredSize(new Dimension(80,20));
 		tfax.setPreferredSize(new Dimension(60,20));
 		if (datos!=null)
-		{	tnom.setEnabled(false);
-			tdni.setEnabled(false);
-			tdir.setEnabled(false);
-			tcp.setEnabled(false);
-			tpob.setEnabled(false);
-			tpro.setEnabled(false);
-			ttel1.setEnabled(false);
-			ttel2.setEnabled(false);
-			tmov.setEnabled(false);
-			temail.setEnabled(false);
-			tfax.setEnabled(false);
-			tnom.setText((String)datos.get(0));
-			tdni.setText((String)datos.get(1));
-			tdir.setText((String)datos.get(2));
-			tcp.setText((String)datos.get(3));
-			tpob.setText((String)datos.get(4));
-			tpro.setText((String)datos.get(5));
-			ttel1.setText((String)datos.get(6));
-			ttel2.setText((String)datos.get(7));
-			tmov.setText((String)datos.get(8));
-			temail.setText((String)datos.get(9));
-			tfax.setText((String)datos.get(10));
+		{	tnom.setEditable(false);
+			tdni.setEditable(false);
+			int i=0;
+			if (tipo=='m')
+			{	tmatricula.setText((String)datos.get(1));
+				tmatricula.setEditable(false);
+				i=3;
+			}
+			else if (tipo=='n')
+			{	tdir.setEditable(false);
+				tcp.setEditable(false);
+				tpob.setEditable(false);
+				tpro.setEditable(false);
+				ttel1.setEditable(false);
+				ttel2.setEditable(false);
+				tmov.setEditable(false);
+				temail.setEditable(false);
+				tfax.setEditable(false);
+				
+			}
+			tnom.setText((String)datos.get(0+i));
+			tdni.setText((String)datos.get(1+i));
+			tdir.setText((String)datos.get(2+i));
+			tcp.setText((String)datos.get(3+i));
+			tpob.setText((String)datos.get(4+i));
+			tpro.setText((String)datos.get(5+i));
+			ttel1.setText((String)datos.get(6+i));
+			ttel2.setText((String)datos.get(7+i));
+			tmov.setText((String)datos.get(8+i));
+			temail.setText((String)datos.get(9+i));
+			tfax.setText((String)datos.get(10+i));
 		}
 		Box c1=Box.createHorizontalBox();
 		Box c2=Box.createHorizontalBox();
@@ -693,9 +714,7 @@ public class PanelContratos extends JPanel
 			{
 				formulario.setVisible(false);
 				formulario.getContentPane().removeAll();
-				formulario.getContentPane().add(panelAlta('m',codigo,null));
-				formulario.pack();	
-				formulario.setVisible(true);				
+				controlador.consultarContratoCodigo(true,tcodigo.getText());
 			}
 		});
 		bcancela.addActionListener(new ActionListener()
@@ -707,7 +726,7 @@ public class PanelContratos extends JPanel
 		});
 		return pmod;
 	}
-			
+	
 	public JPanel panelMulta(char tipo,String codigo)
 	{
 		if (tipo=='c') 
