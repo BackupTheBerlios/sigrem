@@ -100,8 +100,8 @@ public class GContratosImp implements GContratos
 			}
 			else
 			{	vista.actualizaVista(1,1,contrato.dameListaDatos());}
-				return contrato.dameCodigoCliente();
-			}
+			return contrato.dameCodigoCliente();
+		}
 	}
 	
 	public String consultarContratoMatricula(String matricula)
@@ -134,5 +134,12 @@ public class GContratosImp implements GContratos
 		{	Contrato contrato=(Contrato)busqueda.get(0);
 			contrato.eliminaMulta(codmulta);
 		}
+	}
+	
+	public LinkedList dameListaMultasContrato(int clave,String codigo)
+	{
+		Vector busqueda=listaContratos.buscar(codigo,clave);
+		Contrato contrato=(Contrato)busqueda.get(0);
+		return contrato.dameListaMultas();
 	}
 }

@@ -1107,7 +1107,6 @@ public class PanelContratos extends JPanel
 		if (tipo=='c') formRecurso.setTitle("Crear recurso");
 		else if (tipo=='m') formRecurso.setTitle("Modificar recurso "+codigo);
 		formRecurso.setLocation(300,100);
-		JLabel l1=new JLabel("Código ",SwingConstants.RIGHT);
 		JLabel l2=new JLabel("Fecha de emisión ",SwingConstants.RIGHT);
 		JLabel l4=new JLabel("Escrito recibido ",SwingConstants.RIGHT);
 		JLabel l5=new JLabel("Escrito presentado ",SwingConstants.RIGHT);
@@ -1118,12 +1117,11 @@ public class PanelContratos extends JPanel
 		JLabel r3=new JLabel(" ",SwingConstants.RIGHT);
 		JLabel r6=new JLabel(" ",SwingConstants.RIGHT);
 		JLabel r7=new JLabel(" ",SwingConstants.RIGHT);
-		l1.setPreferredSize(new Dimension(100,20));
-		l2.setPreferredSize(new Dimension(100,20));
+		l2.setPreferredSize(new Dimension(105,20));
 		l4.setPreferredSize(new Dimension(100,20));
 		l5.setPreferredSize(new Dimension(100,20));
-		l6.setPreferredSize(new Dimension(100,20));
-		l7.setPreferredSize(new Dimension(100,20));
+		l6.setPreferredSize(new Dimension(105,20));
+		l7.setPreferredSize(new Dimension(105,20));
 		r1.setPreferredSize(new Dimension(150,20));
 		r2.setPreferredSize(new Dimension(175,20));
 		r3.setPreferredSize(new Dimension(175,20));
@@ -1149,19 +1147,11 @@ public class PanelContratos extends JPanel
 		epr.setPreferredSize(new Dimension(250,20));
 		est.setPreferredSize(new Dimension(100,20));
 		abo.setPreferredSize(new Dimension(100,20));
-		JPanel p1=new JPanel();
 		JPanel p2=new JPanel();
 		JPanel p4=new JPanel();
 		JPanel p5=new JPanel();
 		JPanel p6=new JPanel();
 		JPanel p7=new JPanel();
-		if (tipo=='m')
-		{
-			p1.add(l1);
-			p1.add(cod);
-			p1.add(r1);
-			
-		}
 		p2.add(l2);
 		p2.add(femi);
 		p2.add(r2);
@@ -1176,7 +1166,6 @@ public class PanelContratos extends JPanel
 		p7.add(abo);
 		p7.add(r7);
 		Box caja1=Box.createVerticalBox();
-		caja1.add(p1);
 		caja1.add(p2);
 		caja1.add(p4);
 		caja1.add(p5);

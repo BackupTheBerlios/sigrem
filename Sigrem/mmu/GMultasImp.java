@@ -75,10 +75,6 @@ public class GMultasImp implements GMultas
 			multa.ponFechaDenuncia((String)datos.get(3));
 			multa.ponInfraccion((String)datos.get(4));
 			multa.ponDescripcion((String)datos.get(5));
-			System.out.println((String)datos.get(0));
-			System.out.println((String)datos.get(3));
-			System.out.println((String)datos.get(4));
-			System.out.println((String)datos.get(5));
 			vista.actualizaVistaCajaMultas('m',datos);
 			vista.actualizaVista(1,3,null);
 		}
@@ -97,5 +93,20 @@ public class GMultasImp implements GMultas
 	public void consultarMultaBoletin(String boletin)
 	{
 		
+	}
+	
+	public void consultarListaMultas(LinkedList lista)
+	{
+		for (int i=0;i<lista.size();i++)
+		{	String codigo=(String)lista.get(i);
+			Vector busqueda=listaMultas.buscar(codigo,0);
+			if (busqueda.size()==0)
+			{	vista.actualizaVistaMensaje("Error al buscar la multa "+codigo+". No se ha encontrado");}
+			else 
+			{	Multa multa=(Multa)busqueda.get(0);
+				vista.actualizaVistaCajaMultas('a',multa.dameListaDatos());
+			}
+		}
+		vista.actualizaVista(1,3,null);
 	}
 }

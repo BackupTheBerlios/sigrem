@@ -21,4 +21,6 @@ public interface GContratos
 	public void asociaContratoMulta(String codcontrato,String codmulta);
 	
 	public void eliminarMulta(String codcontrato,String codmulta);
+	
+	public LinkedList dameListaMultasContrato(int clave,String codigo);
 }

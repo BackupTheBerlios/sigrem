@@ -266,6 +266,7 @@ public class InterfazGrafica
 				String valor=JOptionPane.showInputDialog(null,"Introduce el código del contrato","Consultar contrato",-1);
 				if (valor!=null)
 				{	panelVistas.setSelectedIndex(0);
+					pcontratos.inicializaCajaMultas();
 					controlador.consultarContratoCodigo(false,true,valor);			
 				}
 			}
@@ -276,6 +277,7 @@ public class InterfazGrafica
 				String valor=JOptionPane.showInputDialog(null,"Introduce la matrícula del vehículo","Consultar contrato",-1);
 				if (valor!=null)
 				{	panelVistas.setSelectedIndex(0);
+					pcontratos.inicializaCajaMultas();
 					controlador.consultarContratoMatricula(valor);
 				}
 			}
@@ -286,6 +288,7 @@ public class InterfazGrafica
 				String valor=JOptionPane.showInputDialog(null,"Introduce el código del cliente","Consultar cliente",-1);
 				if (valor!=null)
 				{	panelVistas.setSelectedIndex(0);
+					pcontratos.inicializaCajaMultas();
 					controlador.consultarClienteCodigo(false,true,valor);
 				}
 			}
@@ -296,6 +299,7 @@ public class InterfazGrafica
 				String valor=JOptionPane.showInputDialog(null,"Introduce el DNI/CIF del cliente","Consultar cliente",-1);
 				if (valor!=null)
 				{	panelVistas.setSelectedIndex(0);
+					pcontratos.inicializaCajaMultas();
 					controlador.consultarClienteDni(valor);
 				}
 			}
@@ -306,6 +310,7 @@ public class InterfazGrafica
 				String valor=JOptionPane.showInputDialog(null,"Introduce el nombre del cliente","Consultar cliente",-1);
 				if (valor!=null)
 				{	panelVistas.setSelectedIndex(0);
+					pcontratos.inicializaCajaMultas();
 					controlador.consultarClienteNombre(valor);
 				}
 			}
@@ -347,6 +352,7 @@ public class InterfazGrafica
 				if (valor!=null)
 				{	
 					panelVistas.setSelectedIndex(0);
+					pcontratos.inicializaCajaMultas();
 				}
 			}
 		});
@@ -357,6 +363,7 @@ public class InterfazGrafica
 				if (valor!=null)
 				{	
 					panelVistas.setSelectedIndex(0);
+					pcontratos.inicializaCajaMultas();
 				}
 			}
 		});
@@ -367,6 +374,7 @@ public class InterfazGrafica
 				if (valor!=null)
 				{	
 					panelVistas.setSelectedIndex(0);
+					pcontratos.inicializaCajaMultas();
 				}
 			}
 		});
@@ -377,6 +385,7 @@ public class InterfazGrafica
 				if (valor!=null)
 				{	
 					panelVistas.setSelectedIndex(0);
+					pcontratos.inicializaCajaMultas();
 				}
 			}
 		});

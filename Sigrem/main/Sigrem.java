@@ -88,31 +88,53 @@ public class Sigrem
 	public void consultarContratoCodigo(boolean modificar,boolean actualizar,String codigo)
 	{
 		String codcliente=gcontratos.consultarContratoCodigo(modificar,codigo);
-		if (codcliente!=null) gclientes.consultarClienteCodigo(modificar,actualizar,codcliente);
+		if (codcliente!=null)
+		{	gclientes.consultarClienteCodigo(modificar,actualizar,codcliente);
+			if (!modificar) 
+			{	LinkedList listamultas=gcontratos.dameListaMultasContrato(0,codigo);
+				gmultas.consultarListaMultas(listamultas);
+			}
+		}
 	}	
 	
 	public void consultarContratoMatricula(String matricula)
 	{
 		String codcliente=gcontratos.consultarContratoMatricula(matricula);
-		if (codcliente!=null) gclientes.consultarClienteCodigo(false,true,codcliente);
+		if (codcliente!=null) 
+		{	gclientes.consultarClienteCodigo(false,true,codcliente);
+			LinkedList listamultas=gcontratos.dameListaMultasContrato(1,matricula);
+			gmultas.consultarListaMultas(listamultas);
+		}
 	}	
 	
 	public void consultarClienteCodigo(boolean modificar,boolean actualizar,String codigo)
 	{
 		String codcontrato=gclientes.consultarClienteCodigo(modificar,actualizar,codigo);
-		if (codcontrato!=null) gcontratos.consultarContratoCodigo(modificar,codcontrato); 
+		if (codcontrato!=null) 
+		{	gcontratos.consultarContratoCodigo(modificar,codcontrato);
+			LinkedList listamultas=gcontratos.dameListaMultasContrato(0,codcontrato);
+			gmultas.consultarListaMultas(listamultas);
+		}
 	}
 	
 	public void consultarClienteDni(String dni)
 	{
 		String codcontrato=gclientes.consultarClienteDni(dni);
-		if (codcontrato!=null) gcontratos.consultarContratoCodigo(false,codcontrato); 
+		if (codcontrato!=null) 
+		{	gcontratos.consultarContratoCodigo(false,codcontrato);
+			LinkedList listamultas=gcontratos.dameListaMultasContrato(0,codcontrato);
+			gmultas.consultarListaMultas(listamultas);
+		}
 	}
 	
 	public void consultarClienteNombre(String nombre)
 	{
 		String codcontrato=gclientes.consultarClienteNombre(nombre);
-		if (codcontrato!=null) gcontratos.consultarContratoCodigo(false,codcontrato); 
+		if (codcontrato!=null) 
+		{	gcontratos.consultarContratoCodigo(false,codcontrato);
+			LinkedList listamultas=gcontratos.dameListaMultasContrato(0,codcontrato);
+			gmultas.consultarListaMultas(listamultas);
+		}
 	}
 	
 	public void modificarCliente(String codcliente,LinkedList datos)

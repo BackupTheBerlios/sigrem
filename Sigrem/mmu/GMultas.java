@@ -16,4 +16,6 @@ public interface GMultas
 	public void consultarMultaExpediente(String expediente);
 	//Requisito 3.6
 	public void consultarMultaBoletin(String boletin);
+	
+	public void consultarListaMultas(LinkedList lista);
 }

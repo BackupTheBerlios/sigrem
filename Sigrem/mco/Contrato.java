@@ -45,7 +45,7 @@ public class Contrato
 	{
 		return codigoCliente;
 	}
-	public LinkedList dameListamultas()
+	public LinkedList dameListaMultas()
 	{
 		return listaMultas;
 	}
