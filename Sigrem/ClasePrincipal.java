@@ -18,7 +18,7 @@ public class ClasePrincipal
 	
 	private static String codempleado;
 	
-	private static String mes;
+	private static String ultimomes;
 	
 	private static String facturacion;
 	
@@ -46,7 +46,7 @@ public class ClasePrincipal
 			pos=cod.indexOf('=');
 			codempleado=cod.substring(pos+1);
 			pos=cod.indexOf('=');
-			mes=cod.substring(pos+1);
+			ultimomes=cod.substring(pos+1);
 			pos=cod.indexOf('=');
 			facturacion=cod.substring(pos+1);
 			pos=cod.indexOf('=');
@@ -70,7 +70,7 @@ public class ClasePrincipal
 		codigos[2]=codmulta;
 		codigos[3]=codrecurso;
 		codigos[4]=codempleado;
-		codigos[5]=mes;
+		codigos[5]=ultimomes;
 		codigos[6]=facturacion;
 		codigos[7]=gastos;
 		codigos[8]=balance;
