@@ -50,7 +50,7 @@ public class Sigrem
 		gcontratos=factoria.generaGContratos(vista,codcontrato);
 //		gmultas=factoria.generaGMultas(vista,codmultas);
 //		grecursos=factoria.generaGRecursos(vista,codrecursos);
-//		gempleados=factoria.generaGEmpleados(vista,codempleados);
+		gempleados=factoria.generaGEmpleados(vista,codempleado);
 //		geconomia=factoria.generaGEconomia(vista);		
 	}
 	

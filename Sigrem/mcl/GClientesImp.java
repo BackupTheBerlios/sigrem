@@ -1,6 +1,7 @@
 package mcl;
 
 import java.util.LinkedList;
+
 import interfaz.InterfazGrafica;
 import med.*;
 
