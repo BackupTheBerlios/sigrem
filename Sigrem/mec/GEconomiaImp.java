@@ -113,24 +113,14 @@ public class GEconomiaImp implements GEconomia
 		int mesActual=hoy.get(Calendar.MONTH);
 		if (mesActual!=ultMes)
 		{
-			if(ultMes<mesActual)
+			int dif;
+			if(ultMes<mesActual)	dif=mesActual-ultMes;
+			else	dif=ultMes-mesActual;
+			for(int i=0;i<dif;i++)
 			{
-				int dif=mesActual-ultMes;
-				for(int i=0;i<dif;i++)
-				{
-					vFacturacion[i]=vFacturacion[i+dif];
-					vFacturacion[i+dif]=0;
-				}
-			}
-			else
-			{
-				int dif=ultMes-mesActual;
-				for(int i=0;i<dif;i++)
-				{
-					vFacturacion[i]=vFacturacion[i+dif];
-					vFacturacion[i+dif]=0;
-				}
-			}
+				vFacturacion[i]=vFacturacion[i+dif];
+				vFacturacion[i+dif]=0;
+			}			
 		}
 		vFacturacion[11]=nFacturacion;
 	}
@@ -141,30 +131,39 @@ public class GEconomiaImp implements GEconomia
 		int mesActual=hoy.get(Calendar.MONTH);
 		if (mesActual!=ultMes)
 		{
-			if(ultMes<mesActual)
+			int dif;
+			if(ultMes<mesActual)	dif=mesActual-ultMes;
+			else	dif=ultMes-mesActual;
+			for(int i=0;i<dif;i++)
 			{
-				int dif=mesActual-ultMes;
-				for(int i=0;i<dif;i++)
-				{
-					vGastos[i]=vGastos[i+dif];
-					vGastos[i+dif]=0;
-				}
-			}
-			else
-			{
-				int dif=ultMes-mesActual;
-				for(int i=0;i<dif;i++)
-				{
-					vGastos[i]=vGastos[i+dif];
-					vGastos[i+dif]=0;
-				}
-			}
+				vGastos[i]=vGastos[i+dif];
+				vGastos[i+dif]=0;
+			}			
 		}
 		vGastos[11]=nGastos;
 	}
 
-	public void balance(int [] vBalance, int nFacturacion, int nGastos, int nBalance, int ultMes)
+	public void balance(int [] vFacturacion, int [] vGastos, int [] vBalance, int nFacturacion, int nGastos, int nBalance, int ultMes)
 	{
-		//facturacion-gastos
+		Calendar hoy=Calendar.getInstance();
+		int mesActual=hoy.get(Calendar.MONTH);
+		if (mesActual!=ultMes)
+		{
+			int dif;
+			if(ultMes<mesActual) dif=mesActual-ultMes;
+			else	dif=ultMes-mesActual;
+			for(int i=0;i<dif;i++)
+			{
+				vFacturacion[i]=vFacturacion[i+dif];
+				vFacturacion[i+dif]=0;
+				vGastos[i]=vGastos[i+dif];
+				vGastos[i+dif]=0;
+				vBalance[i]=vBalance[i+dif];
+				vBalance[i+dif]=0;
+			}			
+		}
+		vFacturacion[11]=nFacturacion;
+		vGastos[11]=nGastos;
+		vBalance[11]=nBalance;
 	}
 }

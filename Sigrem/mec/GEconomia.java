@@ -9,6 +9,6 @@ public interface GEconomia
 	public void gastos(int [] vGastos, int nGastos, int ultMes);
 	
 	//Requisito 5.3
-	public void balance(int [] vBalance, int nFacturacion, int nGastos, int nBalance, int ultMes);
+	public void balance(int [] vFacturacion, int [] vGastos, int [] vBalance, int nFacturacion, int nGastos, int nBalance, int ultMes);
 		
 }
