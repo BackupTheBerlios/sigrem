@@ -229,21 +229,24 @@ public class PanelEmpleados extends JPanel
 	{	
 		Box tabla=Box.createVerticalBox();
 		JPanel p=new JPanel();
-		JLabel l1=new JLabel("",SwingConstants.CENTER);
-		JLabel l2=new JLabel("Código",SwingConstants.CENTER);
-		JLabel l3=new JLabel("Multa",SwingConstants.CENTER);
-		JLabel l4=new JLabel("Estado",SwingConstants.CENTER);
-		JLabel l5=new JLabel("Descripción",SwingConstants.CENTER);
-		l1.setPreferredSize(new Dimension(25,25));
+		JLabel l1=new JLabel("Código",SwingConstants.CENTER);
+		JLabel l2=new JLabel("Multa",SwingConstants.CENTER);
+		JLabel l3=new JLabel("Estado",SwingConstants.CENTER);
+		JLabel l4=new JLabel("Descripción",SwingConstants.CENTER);
+		JLabel l5=new JLabel("",SwingConstants.CENTER);
+		JLabel l6=new JLabel("",SwingConstants.CENTER);
+		l1.setPreferredSize(new Dimension(130,25));
 		l2.setPreferredSize(new Dimension(130,25));
 		l3.setPreferredSize(new Dimension(130,25));
-		l4.setPreferredSize(new Dimension(130,25));
-		l5.setPreferredSize(new Dimension(80,25));
+		l4.setPreferredSize(new Dimension(80,25));
+		l5.setPreferredSize(new Dimension(25,25));
+		l6.setPreferredSize(new Dimension(25,25));
 		p.add(l1);
 		p.add(l2);
 		p.add(l3);
 		p.add(l4);
 		p.add(l5);
+		p.add(l6);
 		tabla.add(p);
 		for (int i=0;i<9;i++)
 		{	JPanel linea=dibujaTabla();
@@ -251,42 +254,26 @@ public class PanelEmpleados extends JPanel
 		}
 		JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		ptabla.setPreferredSize(new Dimension(700,200));
-		JButton bcrea=new JButton("Añadir");
-		bcrea.addActionListener(new ActionListener()
-				{	public void actionPerformed(ActionEvent e)
-					{
-						if (!formRecurso.isVisible())
-						{	formRecurso.getContentPane().add(anadeRecurso());
-							formRecurso.pack();
-							formRecurso.setVisible(true);
-						}
-					}
-				});
-		JButton bmod=new JButton("Modificar");
-		bmod.addActionListener(new ActionListener()
-				{	public void actionPerformed(ActionEvent e)
-					{
-						if (!formRecurso.isVisible())
-						{	formRecurso.getContentPane().add(modificaRecurso());
-							formRecurso.pack();
-							formRecurso.setVisible(true);
-						}
-					}
-				});
-		JButton belim=new JButton("Eliminar");
-		bcrea.setPreferredSize(new Dimension(90,25));
-		bmod.setPreferredSize(new Dimension(90,25));
-		belim.setPreferredSize(new Dimension(90,25));
+		JButton bcrea=new JButton("Añadir recurso");
+		//bcrea.setPreferredSize(new Dimension(150,25));
 		JPanel botonera=new JPanel();
 		botonera.add(bcrea);
-		botonera.add(bmod);
-		botonera.add(belim);
 		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,ptabla,botonera);
 		sp.setEnabled(false);
 		sp.setDividerSize(4);
 		JPanel prec=new JPanel();
 		prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Recursos asignados",TitledBorder.LEFT,TitledBorder.TOP));
 		prec.add(sp);						
+		bcrea.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				if (!formRecurso.isVisible())
+				{	formRecurso.getContentPane().add(anadeRecurso());
+					formRecurso.pack();
+					formRecurso.setVisible(true);
+				}
+			}
+		});
 		return prec;		
 	}
 	
@@ -515,8 +502,6 @@ public class PanelEmpleados extends JPanel
 	public JPanel dibujaTabla()
 	{		
 		JPanel panel=new JPanel();
-		final JButton selec=new JButton(new ImageIcon("interfaz/tick.gif"));
-		selec.setPreferredSize(new Dimension (23,23));
 		final JTextField cod=new JTextField();
 		cod.setEnabled(false);
 		cod.setPreferredSize(new Dimension(130,25));
@@ -526,14 +511,29 @@ public class PanelEmpleados extends JPanel
 		final JTextField bol=new JTextField();
 		bol.setEnabled(false);
 		bol.setPreferredSize(new Dimension(130,25));
-		final JButton descrip=new JButton("Ver");
+		final JButton descrip=new JButton(new ImageIcon("interfaz/find.gif"));
 		descrip.setPreferredSize(new Dimension(80,25));
-		panel.add(selec);
+		final JButton modi=new JButton(new ImageIcon("interfaz/tick.gif"));
+		modi.setPreferredSize(new Dimension (25,25));
+		final JButton elim=new JButton(new ImageIcon("interfaz/del.gif"));
+		elim.setPreferredSize(new Dimension (25,25));
 		panel.add(cod);
 		panel.add(exp);
 		panel.add(bol);
 		panel.add(descrip);
-		selec.addActionListener(new ActionListener()
+		panel.add(modi);
+		panel.add(elim);
+		modi.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{	
+				if (!formRecurso.isVisible())
+				{	formRecurso.getContentPane().add(modificaRecurso());
+					formRecurso.pack();
+					formRecurso.setVisible(true);
+				}		
+			}
+		});
+		elim.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{	
 				
