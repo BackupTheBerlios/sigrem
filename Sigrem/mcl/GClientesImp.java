@@ -52,9 +52,24 @@ public class GClientesImp implements GClientes
 		cliente.añadeContrato(codcontrato);
 	}
 	
-	public void eliminarCliente(String codigo)
+	public void eliminarCliente(String codcliente,String codcontrato)
 	{
-		
+		Object[] busqueda=listaclientes.buscar(codcliente,0);
+		if (busqueda.length==0)
+		{	vista.actualizaVistaMensaje("Error al buscar el cliente "+codcliente+". No se ha encontrado");}
+		else 
+			if (busqueda[0]!=null)
+			{	Cliente cliente=(Cliente)busqueda[0];
+				cliente.eliminaContrato(codcontrato);
+				if (cliente.getNumeroContratos()==0)
+				{	boolean eliminado=listaclientes.eliminar(codcliente,0);
+					if (eliminado) 
+					{	vista.actualizaVistaMensaje("El cliente "+codcliente+" ha sido eliminado al no tener contratos asociados");}
+					else vista.actualizaVistaMensaje("Error al eliminar el cliente "+codcliente+". No se ha encontrado");
+				}
+			}
+			else
+			{	vista.actualizaVistaMensaje("Error al buscar el cliente "+codcliente+". No se ha encontrado");}
 	}
 	
 	public void modificarCliente(String codigo)

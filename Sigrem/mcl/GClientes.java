@@ -7,7 +7,7 @@ public interface GClientes
 	//Requisito 1.1
 	public String añadirCliente(LinkedList datos);
 	//Requisito 1.2
-	public void eliminarCliente(String codigo);
+	public void eliminarCliente(String codcliente,String codcontrato);
 	//Requisito 1.3
 	public void modificarCliente(String codigo);
 	//Requisito 1.4

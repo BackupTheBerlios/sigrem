@@ -2,6 +2,9 @@ package mco;
 
 import med.*;
 import interfaz.*;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 
 public class GContratosImp implements GContratos
@@ -60,7 +63,23 @@ public class GContratosImp implements GContratos
 
 	public String modificarContrato(String codigo)
 	{
-		return null;
+		Object[] busqueda=listacontratos.buscar(codigo,0);
+		if (busqueda.length==0)
+		{	vista.actualizaVistaMensaje("Error al buscar el contrato "+codigo+". No se ha encontrado");
+			return null;			
+		}
+		else 
+			if (busqueda[0]!=null)
+			{	Contrato contrato=(Contrato)busqueda[0];
+				Date hoy=new Date();
+				SimpleDateFormat formato=new SimpleDateFormat("dd.MM.yyyy");
+				contrato.setFechaBaja(formato.format(hoy));
+				return contrato.getCodigoCliente();
+			}
+			else
+			{	vista.actualizaVistaMensaje("Error al buscar el contrato "+codigo+". No se ha encontrado");
+				return null;
+			}		
 	}
 	
 	public String consultarContratoCodigo(boolean modificar,String codigo)

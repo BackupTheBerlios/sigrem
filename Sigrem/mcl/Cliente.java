@@ -124,6 +124,22 @@ public class Cliente
 		listacontratos.add(codigo);		
 	}
 	
+	public void eliminaContrato(String codigo)
+	{
+		int i=0;
+		boolean esta=false;
+		while ((!esta) && (i<listacontratos.size()))
+		{	esta=codigo.equals((String)listacontratos.get(i));
+			i++;			
+		}
+		if (esta)listacontratos.remove(i-1);		
+	}
+	
+	public int getNumeroContratos()
+	{
+		return listacontratos.size();
+	}
+	
 	public void setCodigo(String cod)
 	{
 		this.codigo=cod;
