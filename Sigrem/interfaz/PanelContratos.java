@@ -104,10 +104,26 @@ public class PanelContratos extends JPanel
 		}
 	}
 	
-	public void actualizaCajaMultas(LinkedList datos)
+	public void actualizaCajaMultas(boolean borrar,LinkedList datos)
 	{
-		int lineas=cajaMultas.getComponentCount();
-		cajaMultas.add(dibujaLineaMulta(datos),lineas-1);
+		if (!borrar)
+		{	int lineas=cajaMultas.getComponentCount();
+			cajaMultas.add(dibujaLineaMulta(datos),lineas-1);
+		}
+		else
+		{	int i=1;
+			boolean esta=false;
+			while((!esta) && (i<cajaMultas.getComponentCount()-1))
+			{	JPanel panel=(JPanel)cajaMultas.getComponent(i);
+				JTextField texto=(JTextField)panel.getComponent(0);
+				String codigo=(String)datos.get(0);
+				if (codigo.equals(texto.getText()))
+				{	esta=true;
+					cajaMultas.remove(i);
+				}
+				i++;
+			}			
+		}
 	}
 	
 	public void actualizaPanelConsulta(String nombre,Vector dnis)
@@ -1268,10 +1284,7 @@ public class PanelContratos extends JPanel
 			{
 				int seleccion=JOptionPane.showConfirmDialog(null,"          ¿Desea eliminar la multa "+cod.getText()+"?","Eliminar multa",JOptionPane.YES_NO_CANCEL_OPTION,-1);
 				if (seleccion==JOptionPane.YES_OPTION)
-				{	//eliminar multa
-					//borrar el panel de multas
-					//llamar a dibujaMulta()
-				}				
+				{	controlador.eliminarMulta(cod.getText(),codigoContrato.getText());}				
 			}
 		});
 		return panel;

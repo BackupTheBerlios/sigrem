@@ -19,4 +19,6 @@ public interface GContratos
 	public String modificarFechaBaja(String codigo);
 	
 	public void asociaContratoMulta(String codcontrato,String codmulta);
+	
+	public void eliminarMulta(String codcontrato,String codmulta);
 }

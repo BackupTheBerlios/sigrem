@@ -59,10 +59,21 @@ public class Contrato
 		datos.add(fechaBaja);
 		return datos;
 	}
-	public void añadeMulta(String codmulta)
+	public void añadeMulta(String codigo)
 	{
-		listaMultas.add(codmulta);
+		listaMultas.add(codigo);
 	}
+	public void eliminaMulta(String codigo)
+	{
+		int i=0;
+		boolean esta=false;
+		while ((!esta) && (i<listaMultas.size()))
+		{	esta=codigo.equals((String)listaMultas.get(i));
+			i++;			
+		}
+		if (esta)listaMultas.remove(i-1);
+	}
+	
 	public void ponFechaAlta(String fecha)
 	{
 		this.fechaAlta=fecha;

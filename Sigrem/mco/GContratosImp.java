@@ -1,6 +1,5 @@
 package mco;
 
-import mcl.Cliente;
 import med.*;
 import interfaz.*;
 import java.util.Vector;
@@ -124,5 +123,16 @@ public class GContratosImp implements GContratos
 		Vector busqueda=listaContratos.buscar(codcontrato,0);
 		Contrato contrato=(Contrato)busqueda.get(0);
 		contrato.añadeMulta(codmulta);
+	}
+	
+	public void eliminarMulta(String codcontrato,String codmulta)
+	{
+		Vector busqueda=listaContratos.buscar(codcontrato,0);
+		if (busqueda.size()==0)
+		{	vista.actualizaVistaMensaje("Error al buscar el contrato "+codcontrato+". No se ha encontrado");}
+		else 
+		{	Contrato contrato=(Contrato)busqueda.get(0);
+			contrato.eliminaMulta(codmulta);
+		}
 	}
 }

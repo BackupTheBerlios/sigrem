@@ -177,9 +177,9 @@ public class InterfazGrafica
 	}
 	
 	
-	public void actualizaVistaCajaMultas(LinkedList datos)
+	public void actualizaVistaCajaMultas(boolean borrar,LinkedList datos)
 	{
-		pcontratos.actualizaCajaMultas(datos);
+		pcontratos.actualizaCajaMultas(borrar,datos);
 	}
 	
 	public JMenuBar setMenu()
