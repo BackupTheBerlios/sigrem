@@ -60,7 +60,7 @@ public class Sigrem
 	}
 	
 	public void desactiva()
-	{
+	{	System.out.println("Finalizando....");
 		persistencia.almacenarXML();
 		persistencia.almacenarConfigIni();
 	}

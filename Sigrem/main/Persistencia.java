@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedList;
@@ -57,10 +58,10 @@ public class Persistencia
 		grecursos=rec;
 		gempleados=emp;
 		geconomia=eco;
-		//File archivo=new File("clientes.xml");
-		//archivo.exists();
 		if (!cargarXML()){
 			System.out.println("La carga de XML no ha sido correcta");				
+		}else{
+			System.out.println("Iniciando......");
 		}
 	}
 	
@@ -70,57 +71,63 @@ public class Persistencia
 		almacenarMultasXML();
 		almacenarRecursosXML();
 		almacenarEmpleadosXML();
+			
 	}
 	
 	public boolean cargarXML(){
 		boolean bienCargado=true;
+		boolean iniciando=true;
 		try {
 			cargarClientesXML();
+			iniciando=false;
 			System.out.println("La carga de clientes se ha realizado correctamente");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Algun dato de gclientes es erroneo");
+		} catch (FileNotFoundException e1){
+			System.out.println("No existe el archivo clientes.txt");		
+		}catch (IOException e0) {
+			System.out.println("Algun dato de gclientes es erroneo IOException e0");	
 			bienCargado=false;
-		} 
+		}
 		try {
 			cargarContratosXML();	
+			iniciando=false;
 			System.out.println("La carga de contratos se ha realizado correctamente");
+		} catch (FileNotFoundException e1){
+			System.out.println("No existe el archivo contratos.txt");
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 			System.out.println("Algun dato de gcontratos es erroneo");
 			bienCargado=false;
 		}
 		try {
-			cargarMultasXML();
+			cargarMultasXML();	
+			iniciando=false;
 			System.out.println("La carga de multas se ha realizado correctamente");
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
+		} catch (FileNotFoundException e1){
+			System.out.println("No existe el archivo multas.txt");
+		} catch (IOException e1) {
 			System.out.println("Algun dato de gmultas es erroneo");
 			bienCargado=false;
-		}
-		try {	
-			cargarRecursosXML();
+		}try {
+			cargarRecursosXML();	
+			iniciando=false;
 			System.out.println("La carga de recursos se ha realizado correctamente");
-		} catch (IOException e3) {
-			// TODO Auto-generated catch block
-			e3.printStackTrace();
+		} catch (FileNotFoundException e1){
+			System.out.println("No existe el archivo recursos.txt");
+		} catch (IOException e1) {
 			System.out.println("Algun dato de grecursos es erroneo");
 			bienCargado=false;
-		}
-		try {
-			cargarEmpleadosXML();
+		}try {
+			cargarEmpleadosXML();	
+			iniciando=false;
 			System.out.println("La carga de empleados se ha realizado correctamente");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (FileNotFoundException e1){
+			System.out.println("No existe el archivo empleados.txt");
+		} catch (IOException e1) {
 			System.out.println("Algun dato de gempleados es erroneo");
 			bienCargado=false;
-		} 
-		
-		
+		}
+		if (iniciando){
+			System.out.println("No existen los archivos de datos,se creara una estructura nueva");
+		}
 		return bienCargado;
 	}
 	
