@@ -57,189 +57,67 @@ public class InterfazGrafica
 		JMenu m2=new JMenu("Edición");
 		JMenu m3=new JMenu("Herramientas");
 		JMenu m4=new JMenu("Acerca de");
+		
+		JMenuItem mac=new JMenuItem("Abrir datos");
+		JMenuItem mgc=new JMenuItem("Guardar datos");
+		JMenuItem mgg=new JMenuItem("Guardar datos como");
 		JMenuItem mcc=new JMenuItem("Crear contrato");
-		mcc.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-			panelVistas.setSelectedIndex(0);
-			}
-		});
 		JMenuItem mec=new JMenuItem("Eliminar contrato");
-		mec.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-			panelVistas.setSelectedIndex(0);
-			}
-		});
 		JMenuItem mce=new JMenuItem("Contratar empleado");
-		mce.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-				panelVistas.setSelectedIndex(1);
-			}
-		});
 		JMenuItem mee=new JMenuItem("Despedir empleado");
-		mee.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-			panelVistas.setSelectedIndex(1);
-			}
-		});
 		JMenuItem salir=new JMenuItem("Salir");
 		JMenuItem acercade=new JMenuItem("Acerca de");
-		acercade.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-			acercade();
-			}
-		});			
-		m1.add(mcc);
+		
+		m1.add(mac);
+		m1.add(mgc);
+		m1.add(mgg);
+		
+		/*m1.add(mcc);
 		m1.add(mec);
 		m1.add(new JSeparator());
 		m1.add(mce);
-		m1.add(mee);
+		m1.add(mee);*/
+		
 		m1.add(new JSeparator());
 		m1.add(salir);
 		JMenuItem modc=new JMenuItem("Modificar contrato");
-		modc.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-			panelVistas.setSelectedIndex(0);
-			}
-		});
 		JMenuItem mode=new JMenuItem("Modificar empleado");
-		mode.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-			panelVistas.setSelectedIndex(1);
-			}
-		});
 		m2.add(modc);
 		m2.add(mode);
 		JMenu consul=new JMenu("Consultar");
 		JMenu cont=new JMenu("Contrato");
 		JMenuItem ccod=new JMenuItem("Por código");
-		ccod.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-			panelVistas.setSelectedIndex(0);
-			}
-		});
 		JMenuItem cmat=new JMenuItem("Por matrícula");
-		cmat.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-			panelVistas.setSelectedIndex(0);
-			}
-		});
 		cont.add(ccod);
 		cont.add(cmat);
 		JMenu cli=new JMenu("Cliente");
 		JMenuItem clcod=new JMenuItem("Por código");
-		clcod.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-			panelVistas.setSelectedIndex(0);
-			}
-		});
 		JMenuItem cldni=new JMenuItem("Por DNI");
-		cldni.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-			panelVistas.setSelectedIndex(0);
-			}
-		});
 		JMenuItem clnom=new JMenuItem("Por nombre");
-		clnom.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-			panelVistas.setSelectedIndex(0);
-			}
-		});
 		cli.add(clcod);
 		cli.add(cldni);
 		cli.add(clnom);
 		JMenu emp=new JMenu("Empleado");
 		JMenuItem emcod=new JMenuItem("Por código");
-		emcod.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-			panelVistas.setSelectedIndex(1);
-			}
-		});
 		JMenuItem emdni=new JMenuItem("Por DNI");
-		emdni.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-			panelVistas.setSelectedIndex(1);
-			}
-		});
 		JMenuItem emnom=new JMenuItem("Por nombre");
-		emnom.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-			panelVistas.setSelectedIndex(1);
-			}
-		});
 		emp.add(emcod);
 		emp.add(emdni);
 		emp.add(emnom);
 		JMenu mult=new JMenu("Multa");
 		JMenuItem mcod=new JMenuItem("Por código");
-		mcod.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-			panelVistas.setSelectedIndex(0);
-			}
-		});
 		JMenuItem mexp=new JMenuItem("Por expediente");
-		mexp.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-			panelVistas.setSelectedIndex(0);
-			}
-		});
 		JMenuItem mbol=new JMenuItem("Por boletín");
-		mbol.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-			panelVistas.setSelectedIndex(0);
-			}
-		});
 		mult.add(mcod);
 		mult.add(mexp);
 		mult.add(mbol);
 		JMenu rec=new JMenu("Recurso");
 		JMenuItem rcod=new JMenuItem("Por código");
-		rcod.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-			panelVistas.setSelectedIndex(0);
-			}
-		});
 		rec.add(rcod);
 		JMenu adm=new JMenu("Administración");
 		JMenuItem fac=new JMenuItem("Facturación");
-		fac.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-			panelVistas.setSelectedIndex(2);
-			}
-		});
 		JMenuItem gas=new JMenuItem("Gastos");
-		gas.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-			panelVistas.setSelectedIndex(2);
-			}
-		});
 		JMenuItem bal=new JMenuItem("Balance");
-		bal.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-			panelVistas.setSelectedIndex(2);
-			}
-		});
 		adm.add(fac);
 		adm.add(gas);
 		adm.add(bal);
@@ -255,10 +133,142 @@ public class InterfazGrafica
 		menu.add(m2);
 		menu.add(m3);
 		menu.add(m4);
+		mcc.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				panelVistas.setSelectedIndex(0);
+			}
+		});
+		mec.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				panelVistas.setSelectedIndex(0);
+			}
+		});
+		mce.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				panelVistas.setSelectedIndex(1);
+			}
+		});
+		mee.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				panelVistas.setSelectedIndex(1);
+			}
+		});
 		salir.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				System.exit(0);
+				System.exit(0);				
+			}
+		});
+		acercade.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				acercade();
+			}
+		});			
+		modc.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				panelVistas.setSelectedIndex(0);
+			}
+		});
+		mode.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				panelVistas.setSelectedIndex(1);
+			}
+		});
+		ccod.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				panelVistas.setSelectedIndex(0);
+			}
+		});
+		cmat.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				panelVistas.setSelectedIndex(0);
+			}
+		});
+		clcod.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				panelVistas.setSelectedIndex(0);
+			}
+		});
+		cldni.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				panelVistas.setSelectedIndex(0);
+			}
+		});
+		clnom.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				panelVistas.setSelectedIndex(0);
+			}
+		});
+		emcod.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				panelVistas.setSelectedIndex(1);
+			}
+		});
+		emdni.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				panelVistas.setSelectedIndex(1);
+			}
+		});
+		emnom.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				panelVistas.setSelectedIndex(1);
+			}
+		});
+		mcod.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				panelVistas.setSelectedIndex(0);
+			}
+		});
+		mexp.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				panelVistas.setSelectedIndex(0);
+			}
+		});
+		mbol.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				panelVistas.setSelectedIndex(0);
+			}
+		});
+		rcod.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				panelVistas.setSelectedIndex(0);
+			}
+		});
+		fac.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				panelVistas.setSelectedIndex(2);
+			}
+		});
+		gas.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				panelVistas.setSelectedIndex(2);
+			}
+		});
+		bal.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				panelVistas.setSelectedIndex(2);
 			}
 		});
 		return menu;	
