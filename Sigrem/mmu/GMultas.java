@@ -20,4 +20,6 @@ public interface GMultas
 	public void consultarListaMultas(LinkedList lista);
 	
 	public void eliminaListaMultas(LinkedList lista);
+	
+	public void asociaMultaRecurso(String codmulta,String codrecurso);
 }

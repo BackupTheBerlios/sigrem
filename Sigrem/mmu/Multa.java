@@ -73,6 +73,10 @@ public class Multa
 		datos.add(listaRecursos);
 		return datos;
 	}
+	public void añadeRecurso(String codigo)
+	{
+		listaRecursos.add(codigo);
+	}
 	public void ponExpediente(String exp)
 	{
 		expediente=exp;

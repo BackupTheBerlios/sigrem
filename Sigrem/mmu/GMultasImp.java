@@ -144,4 +144,11 @@ public class GMultasImp implements GMultas
 		}
 		vista.actualizaVista(1,3,null);
 	}
+	
+	public void asociaMultaRecurso(String codmulta,String codrecurso)
+	{
+		Vector busqueda=listaMultas.buscar(codmulta,0);
+		Multa multa=(Multa)busqueda.get(0);
+		multa.añadeRecurso(codrecurso);
+	}
 }

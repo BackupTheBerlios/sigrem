@@ -183,4 +183,10 @@ public class Sigrem
 		String codcontrato=gmultas.consultarMultaBoletin(codigo);
 		consultarContratoCodigo(false,true,codcontrato);		
 	}
+	
+	public void añadirRecurso(String codmulta,LinkedList datos)
+	{
+		String codrecurso=grecursos.añadirRecurso(datos);
+		gmultas.asociaMultaRecurso(codmulta,codrecurso);
+	}
 }

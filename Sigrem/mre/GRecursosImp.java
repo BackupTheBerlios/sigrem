@@ -32,7 +32,18 @@ public class GRecursosImp implements GRecursos
 		
 	public String añadirRecurso(LinkedList datos)
 	{
-		return null;
+		Recurso nuevorecurso=new Recurso(codigoRecurso,datos);
+		String[] claves=new String[3];
+		claves[0]=codigoRecurso;
+		listaRecursos.insertar(claves,nuevorecurso);
+		String codigoantiguo=codigoRecurso;
+		incrementaCodigo();
+		datos.addFirst(codigoantiguo);
+		LinkedList datosrecurso=new LinkedList();
+		datosrecurso.add(datos);
+	//	vista.actualizaVistaCajaMultas('a',datos);
+	//	vista.actualizaVista(1,3,null);
+		return codigoantiguo;
 	}
 	
 	public void eliminarRecurso(String codigo)

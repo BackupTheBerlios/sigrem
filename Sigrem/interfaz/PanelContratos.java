@@ -520,7 +520,7 @@ public class PanelContratos extends JPanel
 		return pmul;
 	}
 	
-	public JPanel dibujaRecursos(String codigo)
+	public JPanel dibujaRecursos(final String codigo)
 	{
 		formulario.setTitle("Recursos de la multa "+codigo);
 		formulario.setLocation(25,100);
@@ -578,7 +578,7 @@ public class PanelContratos extends JPanel
 		bcrea.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formRecurso.getContentPane().add(panelAltaRecurso('c',null));
+				formRecurso.getContentPane().add(panelAltaRecurso('c',codigo));
 				formRecurso.pack();
 				formRecurso.setVisible(true);				
 			}
@@ -1106,7 +1106,7 @@ public class PanelContratos extends JPanel
 		return panel;
 	}
 	
-	public JPanel panelAltaRecurso(char tipo, String codigo)
+	public JPanel panelAltaRecurso(char tipo,final String codigo)
 	{
 		if (tipo=='c') formRecurso.setTitle("Crear recurso");
 		else if (tipo=='m') formRecurso.setTitle("Modificar recurso "+codigo);
@@ -1131,21 +1131,18 @@ public class PanelContratos extends JPanel
 		r3.setPreferredSize(new Dimension(175,20));
 		r6.setPreferredSize(new Dimension(150,20));
 		r7.setPreferredSize(new Dimension(150,20));
-		JTextField cod=new JTextField();
-		JTextField femi=new JTextField();
+		final JTextField femi=new JTextField();
 		Date hoy = new Date();
 		SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
 		femi.setText(formato.format(hoy));
 		femi.setEditable(false);
-		JComboBox ere=new JComboBox();
-		JComboBox epr=new JComboBox();
-		JComboBox est=new JComboBox();
-		JTextField abo=new JTextField();
+		final JComboBox ere=new JComboBox();
+		final JComboBox epr=new JComboBox();
+		final JComboBox est=new JComboBox();
+		final JTextField abo=new JTextField();
 		escritoRecibido(ere);
 		escritoPresentado(epr);
 		estadosRecursos(est);
-		cod.setEditable(false);
-		cod.setPreferredSize(new Dimension(100,20));
 		femi.setPreferredSize(new Dimension(75,20));
 		ere.setPreferredSize(new Dimension(250,20));
 		epr.setPreferredSize(new Dimension(250,20));
@@ -1177,8 +1174,8 @@ public class PanelContratos extends JPanel
 		caja1.add(p7);
 		JPanel p8=new JPanel();
 		p8.add(new JLabel("Descripción"));
-		JTextPane texto=new JTextPane();
-		JScrollPane ptexto=new JScrollPane(texto,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
+		final JTextPane descrip=new JTextPane();
+		JScrollPane ptexto=new JScrollPane(descrip,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
 		ptexto.setPreferredSize(new Dimension(300,150));
 		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,p8,ptexto);
 		sp.setEnabled(false);		
@@ -1200,10 +1197,18 @@ public class PanelContratos extends JPanel
 		aceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
+				LinkedList datos=new LinkedList();
+				datos.add(femi.getText());
+				datos.add((String)ere.getSelectedItem());
+				datos.add((String)epr.getSelectedItem());
+				datos.add((String)est.getSelectedItem());
+				datos.add(abo.getText());
+				datos.add(descrip.getText());
+				System.out.println(codigo);
+				datos.add(codigo);
+				controlador.añadirRecurso(codigo,datos);
 				formRecurso.setVisible(false);
 				formRecurso.getContentPane().removeAll();
-				//validar datos
-				//enviar datos a Sigrem para almacenarlos en la estructura de datos
 			}
 		});
 		cancelar.addActionListener(new ActionListener()
