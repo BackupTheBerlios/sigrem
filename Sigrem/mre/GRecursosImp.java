@@ -3,9 +3,7 @@ package mre;
 import interfaz.InterfazGrafica;
 import java.util.LinkedList;
 import java.util.Vector;
-
 import med.*;
-import mmu.Multa;
 
 public class GRecursosImp implements GRecursos 
 {
@@ -77,9 +75,33 @@ public class GRecursosImp implements GRecursos
 		}
 	}
 
-	public void consultarRecursoCodigo(String codigo)
+	public String consultarRecursoCodigo(String codigo)
 	{
-		
+		Vector busqueda=listaRecursos.buscar(codigo,0);
+		if (busqueda.size()==0)
+		{	vista.actualizaVistaMensaje("Error al buscar el recurso "+codigo+". No se ha encontrado");
+			return null;
+		}
+		else 
+		{	Recurso recurso=(Recurso)busqueda.get(0);
+			String codmulta=recurso.dameCodigoMulta();
+			vista.muestraPanelRecursos(codmulta);
+			return codmulta;
+		}
+	}
+	
+	public void consultarListaRecursos(LinkedList lista)
+	{
+		for (int i=0;i<lista.size();i++)
+		{	String codigo=(String)lista.get(i);
+			Vector busqueda=listaRecursos.buscar(codigo,0);
+			if (busqueda.size()==0)
+			{	vista.actualizaVistaMensaje("Error al buscar el recurso "+codigo+". No se ha encontrado");}
+			else 
+			{	Recurso recurso=(Recurso)busqueda.get(0);
+				vista.actualizaVistaCaja('r','a',recurso.dameListaDatos());
+			}
+		}
 	}
 
 }

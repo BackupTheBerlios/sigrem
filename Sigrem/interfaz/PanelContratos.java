@@ -105,7 +105,6 @@ public class PanelContratos extends JPanel
 		}
 		else if (panel==4)
 		{	panelRecursos.getContentPane().removeAll();
-	//	System.out.println((String)datos.getLast());
 			panelRecursos.getContentPane().add(dibujaRecursos((String)datos.getLast()));
 			panelRecursos.pack();			
 		}
@@ -167,6 +166,7 @@ public class PanelContratos extends JPanel
 			}			
 		}		
 	}
+	
 	public void actualizaPanelConsulta(String nombre,Vector dnis)
 	{
 		formConsulta.setTitle("Resultados de la consulta");
@@ -194,6 +194,15 @@ public class PanelContratos extends JPanel
 				formConsulta.getContentPane().removeAll();				
 			}
 		});
+	}
+	
+	public void muestraPanelRecursos(String codmulta)
+	{
+		inicializaCajaRecursos();
+		controlador.consultarListaRecursos(codmulta);
+		panelRecursos.getContentPane().add(dibujaRecursos(codmulta));
+		panelRecursos.pack();
+		panelRecursos.setVisible(true);
 	}
 	
 	public void inicializaCajaMultas()
@@ -1161,7 +1170,7 @@ public class PanelContratos extends JPanel
 		JLabel l4=new JLabel("Escrito recibido ",SwingConstants.RIGHT);
 		JLabel l5=new JLabel("Escrito presentado ",SwingConstants.RIGHT);
 		JLabel l6=new JLabel("Estado ",SwingConstants.RIGHT);
-		JLabel l7=new JLabel("Abogado ",SwingConstants.RIGHT);
+		JLabel l7=new JLabel("* Abogado ",SwingConstants.RIGHT);
 		JLabel r1=new JLabel(" ",SwingConstants.RIGHT);
 		JLabel r2=new JLabel(" ",SwingConstants.RIGHT);
 		JLabel r3=new JLabel(" ",SwingConstants.RIGHT);
@@ -1249,24 +1258,29 @@ public class PanelContratos extends JPanel
 		aceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				LinkedList datos=new LinkedList();
-				datos.add(femi.getText());
-				datos.add((String)ere.getSelectedItem());
-				datos.add((String)epr.getSelectedItem());
-				datos.add((String)est.getSelectedItem());
-				datos.add(abo.getText());
-				datos.add(descrip.getText());
-				if (tipo=='c') 
-				{	datos.add(codigo);
-					controlador.añadirRecurso(codigo,datos);					
+				if (abo.getText().equals(""))
+				{
+					JOptionPane.showMessageDialog(null,"El campo marcado con * es obligatorio");
 				}
-				else if (tipo=='m') 
-				{	datos.addFirst(codigo);
-					controlador.modificarRecurso(codigo,datos);
+				else
+				{	LinkedList datos=new LinkedList();
+					datos.add(femi.getText());
+					datos.add((String)ere.getSelectedItem());
+					datos.add((String)epr.getSelectedItem());
+					datos.add((String)est.getSelectedItem());
+					datos.add(abo.getText());
+					datos.add(descrip.getText());
+					if (tipo=='c') 
+					{	datos.add(codigo);
+						controlador.añadirRecurso(codigo,datos);					
+					}
+					else if (tipo=='m') 
+					{	datos.addFirst(codigo);
+						controlador.modificarRecurso(codigo,datos);
+					}
+					formRecurso.setVisible(false);
+					formRecurso.getContentPane().removeAll();
 				}
-				System.out.println("ok");
-				formRecurso.setVisible(false);
-				formRecurso.getContentPane().removeAll();
 			}
 		});
 		cancelar.addActionListener(new ActionListener()
@@ -1331,6 +1345,7 @@ public class PanelContratos extends JPanel
 		{	public void actionPerformed(ActionEvent e)
 			{
 				inicializaCajaRecursos();
+				controlador.consultarListaRecursos(cod.getText());
 				panelRecursos.getContentPane().add(dibujaRecursos(cod.getText()));
 				panelRecursos.pack();
 				panelRecursos.setVisible(true);				

@@ -169,19 +169,19 @@ public class Sigrem
 	public void consultarMultaCodigo(String codigo)
 	{
 		String codcontrato=gmultas.consultarMultaCodigo(codigo);
-		consultarContratoCodigo(false,true,codcontrato);		
+		if (codcontrato!=null) consultarContratoCodigo(false,true,codcontrato);		
 	}
 	
 	public void consultarMultaExpediente(String codigo)
 	{
 		String codcontrato=gmultas.consultarMultaExpediente(codigo);
-		consultarContratoCodigo(false,true,codcontrato);		
+		if (codcontrato!=null) consultarContratoCodigo(false,true,codcontrato);		
 	}
 	
 	public void consultarMultaBoletin(String codigo)
 	{
 		String codcontrato=gmultas.consultarMultaBoletin(codigo);
-		consultarContratoCodigo(false,true,codcontrato);		
+		if (codcontrato!=null) consultarContratoCodigo(false,true,codcontrato);		
 	}
 	
 	public void añadirRecurso(String codmulta,LinkedList datos)
@@ -199,5 +199,20 @@ public class Sigrem
 	public void modificarRecurso(String codigo,LinkedList datos)
 	{
 		grecursos.modificarRecurso(codigo,datos);
+	}
+	
+	public void consultarListaRecursos(String codigo)
+	{
+		LinkedList listarecursos=gmultas.dameListaRecursosMulta(codigo);
+		grecursos.consultarListaRecursos(listarecursos);
+	}
+	
+	public void consultarRecursoCodigo(String codigo)
+	{
+		String codmulta=grecursos.consultarRecursoCodigo(codigo);
+		if (codmulta!=null)
+		{	consultarMultaCodigo(codmulta);
+			
+		}
 	}
 }

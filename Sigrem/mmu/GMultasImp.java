@@ -159,4 +159,11 @@ public class GMultasImp implements GMultas
 			multa.eliminaRecurso(codrecurso);
 		}
 	}
+	
+	public LinkedList dameListaRecursosMulta(String codigo)
+	{
+		Vector busqueda=listaMultas.buscar(codigo,0);
+		Multa multa=(Multa)busqueda.get(0);
+		return multa.dameListaRecursos();
+	}
 }

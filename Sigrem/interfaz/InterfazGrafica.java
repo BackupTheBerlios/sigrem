@@ -183,6 +183,11 @@ public class InterfazGrafica
 		else if (caja=='r') pcontratos.actualizaCajaRecursos(tipo,datos);
 	}
 	
+	public void muestraPanelRecursos(String codmulta)
+	{
+		pcontratos.muestraPanelRecursos(codmulta);
+	}
+	
 	public JMenuBar setMenu()
 	{
 		JMenuBar menu=new JMenuBar();
@@ -390,6 +395,8 @@ public class InterfazGrafica
 				{	
 					panelVistas.setSelectedIndex(0);
 					pcontratos.inicializaCajaMultas();
+					pcontratos.inicializaCajaRecursos();
+					controlador.consultarRecursoCodigo(valor);
 				}
 			}
 		});
