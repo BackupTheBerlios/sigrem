@@ -467,12 +467,6 @@ public class PanelContratos extends JPanel
 		JPanel pmul=new JPanel();
 		pmul.setPreferredSize(new Dimension(950,280));
 		pmul.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Multas del contrato",TitledBorder.LEFT,TitledBorder.TOP));
-		
-		//cajaMultas=Box.createVerticalBox();
-		//cajaMultas.add(p);
-		//JLabel relleno=new JLabel("");
-		//relleno.setPreferredSize(new Dimension(20,135));
-		//cajaMultas.add(relleno);
 		if (activo)
 		{	JPanel p=new JPanel();
 			JLabel l1=new JLabel("Código",SwingConstants.CENTER);
