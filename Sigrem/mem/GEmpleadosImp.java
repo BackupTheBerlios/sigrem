@@ -100,6 +100,7 @@ public class GEmpleadosImp implements GEmpleados
 			datosPanel1.add(empleado.dameNomina());
 			vista.actualizaVista(2,1,datosPanel1);
 			vista.actualizaVista(2,2,datosEmpleado);
+			vista.actualizaVista(2,3,null);
 		}
 	}
 	// Método para consultar un empleado dado su Código de Empleado
@@ -120,7 +121,8 @@ public class GEmpleadosImp implements GEmpleados
 				datosPanel1.add(empleado.damePerfil());
 				datosPanel1.add(empleado.dameNomina());
 				vista.actualizaVista(2,1,datosPanel1);
-				vista.actualizaVista(2,2,datosPanel2);				
+				vista.actualizaVista(2,2,datosPanel2);
+				vista.actualizaVista(2,3,null);
 			}
 		}
 	}
@@ -139,7 +141,8 @@ public class GEmpleadosImp implements GEmpleados
 			datosPanel1.add(empleado.damePerfil());
 			datosPanel1.add(empleado.dameNomina());
 			vista.actualizaVista(2,1,datosPanel1);
-			vista.actualizaVista(2,2,datosPanel2);				
+			vista.actualizaVista(2,2,datosPanel2);	
+			vista.actualizaVista(2,3,null);
 		}
 	}
 	// Método para consultar un empleado dado su DNI
@@ -209,9 +212,11 @@ public class GEmpleadosImp implements GEmpleados
 			return null;
 		}
 		else 
-		{	Abogado empleado=(Abogado)busqueda.get(0);
+		{	Empleado empleado=(Empleado)busqueda.get(0);
 			if (empleado.damePerfil().equals("Abogado"))
-				return empleado.dameListaRecursos();
+			{	Abogado abogado=(Abogado)empleado;
+				return abogado.dameListaRecursos();
+			}
 			else
 				return null;			
 		}
