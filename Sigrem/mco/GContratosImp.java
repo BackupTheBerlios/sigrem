@@ -9,38 +9,38 @@ import java.util.LinkedList;
 
 public class GContratosImp implements GContratos
 {
-	private EstructuraDatos listacontratos;
+	private EstructuraDatos listaContratos;
 	
 	private InterfazGrafica vista;
 	
-	private String codcontrato;
+	private String codigoContrato;
 	
-	private void incrementaCodigo()
-	{
-		String numero=codcontrato.substring(0,4);
-		Character car=null;
-		int num=car.digit(codcontrato.charAt(4),10);
-		for (int i=5;i<codcontrato.length();i++)
-		{	num=(num*10)+car.digit(codcontrato.charAt(i),10);}
-		numero=numero+(num+1);
-		codcontrato=numero;
-	}
-  
 	public GContratosImp(InterfazGrafica vista,String codigo) 
 	{
-		codcontrato=codigo;
-		listacontratos=new EstructuraDatosImp(2);
+		codigoContrato=codigo;
+		listaContratos=new EstructuraDatosImp(2);
 		this.vista=vista;
 	}
 	
+	private void incrementaCodigo()
+	{
+		String numero=codigoContrato.substring(0,4);
+		Character car=null;
+		int num=car.digit(codigoContrato.charAt(4),10);
+		for (int i=5;i<codigoContrato.length();i++)
+		{	num=(num*10)+car.digit(codigoContrato.charAt(i),10);}
+		numero=numero+(num+1);
+		codigoContrato=numero;
+	}
+  
 	public String añadirContrato(LinkedList datos)
 	{
-		Contrato nuevocontrato=new Contrato(codcontrato,datos);
+		Contrato nuevocontrato=new Contrato(codigoContrato,datos);
 		String[] claves=new String[2];
-		claves[0]=codcontrato;
+		claves[0]=codigoContrato;
 		claves[1]=(String)datos.get(1);
-		listacontratos.insertar(claves,nuevocontrato);
-		String codigoantiguo=codcontrato;
+		listaContratos.insertar(claves,nuevocontrato);
+		String codigoantiguo=codigoContrato;
 		incrementaCodigo();
 		datos.addFirst(codigoantiguo);
 		vista.actualizaVista(1,1,datos);
@@ -49,7 +49,7 @@ public class GContratosImp implements GContratos
 	
 	public void eliminarContrato(boolean borrar, String codigo)
 	{
-		boolean eliminado=listacontratos.eliminar(codigo,0);
+		boolean eliminado=listaContratos.eliminar(codigo,0);
 		if (eliminado) 
 		{	vista.actualizaVistaMensaje("       Contrato "+codigo+" eliminado correctamente");
 			if (borrar)
@@ -67,7 +67,7 @@ public class GContratosImp implements GContratos
 	
 	public String modificarFechaBaja(String codigo)
 	{
-		Vector busqueda=listacontratos.buscar(codigo,0);
+		Vector busqueda=listaContratos.buscar(codigo,0);
 		if (busqueda.size()==0)
 		{	vista.actualizaVistaMensaje("Error al buscar el contrato "+codigo+". No se ha encontrado");
 			return null;			
@@ -83,7 +83,7 @@ public class GContratosImp implements GContratos
 	
 	public String consultarContratoCodigo(boolean modificar,String codigo)
 	{
-		Vector busqueda=listacontratos.buscar(codigo,0);
+		Vector busqueda=listaContratos.buscar(codigo,0);
 		if (busqueda.size()==0)
 		{	vista.actualizaVistaMensaje("Error al buscar el contrato "+codigo+". No se ha encontrado");
 			return null;			
@@ -106,7 +106,7 @@ public class GContratosImp implements GContratos
 	
 	public String consultarContratoMatricula(String matricula)
 	{
-		Vector busqueda=listacontratos.buscar(matricula,1);
+		Vector busqueda=listaContratos.buscar(matricula,1);
 		if (busqueda.size()==0)
 		{	vista.actualizaVistaMensaje("Error al buscar el contrato con matrícula "+matricula+". No se ha encontrado");
 			return null;			

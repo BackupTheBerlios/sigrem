@@ -26,7 +26,11 @@ public class PanelContratos extends JPanel
 		
 	private LinkedList datosModificables;
 	
-	private JTextField tcodcliente;
+	private JTextField codigoCliente;
+	
+	private JTextField codigoContrato;
+	
+	private Box cajaMultas;
 	
 	private JComboBox selector;
 	
@@ -59,24 +63,9 @@ public class PanelContratos extends JPanel
 				formConsulta.getContentPane().removeAll();
 			}
 		});
-		dibujaPaneles(true);
-	}
-	
-	public void dibujaPaneles(boolean multas)
-	{
 		JPanel pcontrato=dibujaContrato(null);
-		pcontrato.setPreferredSize(new Dimension(314,0));
 		JPanel pcliente=dibujaCliente(null);
-		pcliente.setPreferredSize(new Dimension(0,320));
-		JPanel pmultas=new JPanel();
-		if (multas) 
-		{	pmultas=dibujaMultas();
-			pmultas.setPreferredSize(new Dimension(950,280));
-		}
-		else
-		{	pmultas.setPreferredSize(new Dimension(950,280));
-			pmultas.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"",TitledBorder.LEFT,TitledBorder.TOP));		
-		}
+		JPanel pmultas=dibujaMultas(false,null);
 		JSplitPane sp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,pcontrato,pcliente);
 		sp1.setDividerSize(4);
 		sp1.setEnabled(false);
@@ -84,6 +73,7 @@ public class PanelContratos extends JPanel
 		sp2.setEnabled(false);		
 		sp2.setDividerSize(4);
 		add(sp2);
+		cajaMultas=inicializaCajaMultas();
 	}
 	
 	public void actualiza(int panel,LinkedList datos)
@@ -97,8 +87,8 @@ public class PanelContratos extends JPanel
 			((JSplitPane)sp.getComponent(0)).setRightComponent(dibujaCliente(datos));
 		}
 		else if (panel==3)
-		{
-			
+		{	JSplitPane sp=((JSplitPane)getComponent(0));
+			sp.setBottomComponent(dibujaMultas(true,datos));
 		}
 	}
 	
@@ -106,11 +96,16 @@ public class PanelContratos extends JPanel
 	{
 		for (int i=0;i<datos.size();i++) datosModificables.addLast(datos.get(i));
 		if (dibujar)
-		{	formulario.getContentPane().add(panelAlta('m',(String)datosModificables.get(0),datosModificables));
+		{	formulario.getContentPane().add(panelAltaContrato('m',(String)datosModificables.get(0),datosModificables));
 			formulario.pack();
 			formulario.setVisible(true);
 			datosModificables=new LinkedList();
 		}
+	}
+	
+	public void actualizaCajaMultas(LinkedList datos)
+	{
+		cajaMultas.add(dibujaLineaMulta(datos));
 	}
 	
 	public void actualizaPanelConsulta(String nombre,Vector dnis)
@@ -142,9 +137,45 @@ public class PanelContratos extends JPanel
 		});
 	}
 	
+	public Box inicializaCajaMultas()
+	{
+		JPanel p=new JPanel();
+		JLabel l1=new JLabel("Código",SwingConstants.CENTER);
+		JLabel l2=new JLabel("Expediente",SwingConstants.CENTER);
+		JLabel l3=new JLabel("Boletín",SwingConstants.CENTER);
+		JLabel l4=new JLabel("Fecha denuncia",SwingConstants.CENTER);
+		JLabel l5=new JLabel("Infracción",SwingConstants.CENTER);
+		JLabel l6=new JLabel("Descripción",SwingConstants.CENTER);
+		JLabel l7=new JLabel("Recursos",SwingConstants.CENTER);
+		JLabel l8=new JLabel("");
+		JLabel l9=new JLabel("");
+		l1.setPreferredSize(new Dimension(100,25));
+		l2.setPreferredSize(new Dimension(100,25));
+		l3.setPreferredSize(new Dimension(100,25));
+		l4.setPreferredSize(new Dimension(100,25));
+		l5.setPreferredSize(new Dimension(250,25));
+		l6.setPreferredSize(new Dimension(80,25));
+		l7.setPreferredSize(new Dimension(80,25));
+		l8.setPreferredSize(new Dimension(25,25));
+		l9.setPreferredSize(new Dimension(25,25));
+		p.add(l1);
+		p.add(l2);
+		p.add(l3);
+		p.add(l4);
+		p.add(l5);
+		p.add(l6);
+		p.add(l7);
+		p.add(l8);
+		p.add(l9);
+		Box caja=Box.createVerticalBox();
+		caja.add(p);
+		return caja;
+	}
+	
 	public JPanel dibujaContrato(LinkedList datos)
 	{
 		JPanel pco=new JPanel();
+		pco.setPreferredSize(new Dimension(314,0));
 		pco.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos del contrato",TitledBorder.LEFT,TitledBorder.TOP));
 		JLabel l1=new JLabel("Código del contrato");
 		JLabel l2=new JLabel("Código del cliente");
@@ -154,26 +185,26 @@ public class PanelContratos extends JPanel
 		l2.setPreferredSize(new Dimension(150,20));
 		l3.setPreferredSize(new Dimension(150,20));
 		l4.setPreferredSize(new Dimension(150,20));
-		final JTextField tcontrato=new JTextField();
-		tcodcliente=new JTextField();
+		codigoContrato=new JTextField();
+		codigoCliente=new JTextField();
 		JTextField tfechaalta=new JTextField();
 		JTextField tmatricula=new JTextField();
 		if (datos!=null)
-		{	tcontrato.setText((String)datos.get(0));
-			tcodcliente.setText((String)datos.get(1));
+		{	codigoContrato.setText((String)datos.get(0));
+			codigoCliente.setText((String)datos.get(1));
 			tmatricula.setText((String)datos.get(2));
 			tfechaalta.setText((String)datos.get(3));
 		}
-		tcontrato.setPreferredSize(new Dimension(100,20));
-		tcodcliente.setPreferredSize(new Dimension(100,20));
+		codigoContrato.setPreferredSize(new Dimension(100,20));
+		codigoCliente.setPreferredSize(new Dimension(100,20));
 		tmatricula.setPreferredSize(new Dimension(100,20));
 		tfechaalta.setPreferredSize(new Dimension(100,20));
-		tcontrato.setEditable(false);
-		tcodcliente.setEditable(false);
+		codigoContrato.setEditable(false);
+		codigoCliente.setEditable(false);
 		tfechaalta.setEditable(false);
 		tmatricula.setEditable(false);
-		tcontrato.setBackground(Color.WHITE);
-		tcodcliente.setBackground(Color.WHITE);
+		codigoContrato.setBackground(Color.WHITE);
+		codigoCliente.setBackground(Color.WHITE);
 		tfechaalta.setBackground(Color.WHITE);
 		tmatricula.setBackground(Color.WHITE);
 		JButton bcrea=new JButton ("Crear");
@@ -188,9 +219,9 @@ public class PanelContratos extends JPanel
 		JPanel p4=new JPanel();
 		JPanel botonera=new JPanel();
 		p1.add(l1);
-		p1.add(tcontrato);
+		p1.add(codigoContrato);
 		p2.add(l2);
-		p2.add(tcodcliente);
+		p2.add(codigoCliente);
 		p3.add(l3);
 		p3.add(tmatricula);
 		p4.add(l4);
@@ -210,7 +241,7 @@ public class PanelContratos extends JPanel
 		bcrea.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formulario.getContentPane().add(panelAlta('c',null,null));
+				formulario.getContentPane().add(panelAltaContrato('c',null,null));
 				formulario.pack();	
 				formulario.setVisible(true);
 			}
@@ -218,7 +249,7 @@ public class PanelContratos extends JPanel
 		bmodcont.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formulario.getContentPane().add(panelMododificar(tcontrato.getText()));
+				formulario.getContentPane().add(panelMododificarContrato(codigoContrato.getText()));
 				formulario.pack();	
 				formulario.setVisible(true);
 			}
@@ -226,7 +257,7 @@ public class PanelContratos extends JPanel
 		belimcont.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formulario.getContentPane().add(panelBaja(tcontrato.getText()));
+				formulario.getContentPane().add(panelBajaContrato(codigoContrato.getText()));
 				formulario.pack();	
 				formulario.setVisible(true);				
 			}
@@ -236,8 +267,9 @@ public class PanelContratos extends JPanel
 	
 	public JPanel dibujaCliente(final LinkedList datos)
 	{
-		JPanel panel=new JPanel();
-		panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos del cliente",TitledBorder.LEFT,TitledBorder.TOP));
+		JPanel pcl=new JPanel();
+		pcl.setPreferredSize(new Dimension(0,320));
+		pcl.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos del cliente",TitledBorder.LEFT,TitledBorder.TOP));
 		JLabel l1=new JLabel("Nombre ",SwingConstants.RIGHT);
 		JLabel l2=new JLabel("DNI/CIF ",SwingConstants.RIGHT);
 		JLabel l3=new JLabel("Dirección ",SwingConstants.RIGHT);
@@ -412,17 +444,17 @@ public class PanelContratos extends JPanel
 		caja.add(new JSeparator());
 		caja.add(relleno11);
 		caja.add(c12);
-		panel.add(caja);
+		pcl.add(caja);
 		nuevoContrato.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
 				if (datos!=null)
-				{	formulario.getContentPane().add(panelAlta('n',null,datos));
+				{	formulario.getContentPane().add(panelAltaContrato('n',null,datos));
 					formulario.pack();
 					formulario.setVisible(true);
 				}
 				else
-				{	formulario.getContentPane().add(panelAlta('c',null,datos));
+				{	formulario.getContentPane().add(panelAltaContrato('c',null,datos));
 					formulario.pack();	
 					formulario.setVisible(true);
 				}
@@ -434,68 +466,110 @@ public class PanelContratos extends JPanel
 				controlador.consultarContratoCodigo(false,false,(String)selector.getSelectedItem());
 			}
 		});
-		return panel;
+		return pcl;
 	}
 
-	public JPanel dibujaMultas()
+	public JPanel dibujaMultas(boolean activo,LinkedList datos)
 	{
 		JPanel pmul=new JPanel();
+		pmul.setPreferredSize(new Dimension(950,280));
 		pmul.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Multas del contrato",TitledBorder.LEFT,TitledBorder.TOP));
+		if (activo)
+		{	JScrollPane ptabla=new JScrollPane(cajaMultas,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+			ptabla.setPreferredSize(new Dimension(930,200));
+			JButton bcrea=new JButton("Añadir multa");
+			JPanel botonera=new JPanel();
+			botonera.add(bcrea);
+			JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,ptabla,botonera);
+			sp.setEnabled(false);
+			sp.setDividerSize(4);
+			pmul.add(sp);
+			bcrea.addActionListener(new ActionListener()
+			{	public void actionPerformed(ActionEvent e)
+				{
+					formulario.getContentPane().add(panelAltaMulta('c',null));
+					formulario.pack();
+					formulario.setVisible(true);				
+				}
+			});
+		}
+		return pmul;
+	}
+	
+	public JPanel dibujaRecursos(String codigo)
+	{
+		formulario.setTitle("Recursos de la multa "+codigo);
+		formulario.setLocation(25,100);
+		JPanel prec=new JPanel();
+		prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Recursos de la multa "+codigo,TitledBorder.LEFT,TitledBorder.TOP));
 		Box tabla=Box.createVerticalBox();
 		JPanel p=new JPanel();
 		JLabel l1=new JLabel("Código",SwingConstants.CENTER);
-		JLabel l2=new JLabel("Expediente",SwingConstants.CENTER);
-		JLabel l3=new JLabel("Boletín",SwingConstants.CENTER);
-		JLabel l4=new JLabel("Fecha denuncia",SwingConstants.CENTER);
-		JLabel l5=new JLabel("Infracción",SwingConstants.CENTER);
-		JLabel l6=new JLabel("Descripción",SwingConstants.CENTER);
-		JLabel l7=new JLabel("Recursos",SwingConstants.CENTER);
-		JLabel l8=new JLabel("");
-		JLabel l9=new JLabel("");
-		l1.setPreferredSize(new Dimension(100,25));
-		l2.setPreferredSize(new Dimension(100,25));
-		l3.setPreferredSize(new Dimension(100,25));
-		l4.setPreferredSize(new Dimension(100,25));
-		l5.setPreferredSize(new Dimension(250,25));
-		l6.setPreferredSize(new Dimension(80,25));
-		l7.setPreferredSize(new Dimension(80,25));
-		l8.setPreferredSize(new Dimension(25,25));
-		l9.setPreferredSize(new Dimension(25,25));
+		JLabel l2=new JLabel("Fecha de emisión",SwingConstants.CENTER);
+		JLabel l4=new JLabel("Escrito recibido",SwingConstants.CENTER);
+		JLabel l5=new JLabel("Escrito presentado",SwingConstants.CENTER);
+		JLabel l6=new JLabel("Estado",SwingConstants.CENTER);
+		JLabel l7=new JLabel("Abogado",SwingConstants.CENTER);
+		JLabel l8=new JLabel("Descripción",SwingConstants.CENTER);
+		JLabel l9=new JLabel("",SwingConstants.CENTER);
+		JLabel l10=new JLabel("",SwingConstants.CENTER);
+		l1.setPreferredSize(new Dimension(80,20));
+		l2.setPreferredSize(new Dimension(90,20));
+		l4.setPreferredSize(new Dimension(190,20));
+		l5.setPreferredSize(new Dimension(190,20));
+		l6.setPreferredSize(new Dimension(90,20));
+		l7.setPreferredSize(new Dimension(90,20));
+		l8.setPreferredSize(new Dimension(80,20));
+		l9.setPreferredSize(new Dimension(25,20));
+		l10.setPreferredSize(new Dimension(25,20));
 		p.add(l1);
 		p.add(l2);
-		p.add(l3);
 		p.add(l4);
 		p.add(l5);
 		p.add(l6);
 		p.add(l7);
 		p.add(l8);
 		p.add(l9);
+		p.add(l10);
 		tabla.add(p);
 		for (int i=0;i<9;i++)
-		{	JPanel linea=dibujaLineaMulta();
+		{	JPanel linea=dibujaLineaRecurso();
 			tabla.add(linea);		
 		}
 		JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		ptabla.setPreferredSize(new Dimension(930,200));
-		JButton bcrea=new JButton("Añadir multa");
+		ptabla.setPreferredSize(new Dimension(940,300));
+		JButton bcrea=new JButton("Añadir recurso");
+		JButton baceptar=new JButton("Aceptar");
 		JPanel botonera=new JPanel();
 		botonera.add(bcrea);
-		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,ptabla,botonera);
-		sp.setEnabled(false);
-		sp.setDividerSize(4);
-		pmul.add(sp);
+		JSplitPane sp1=new JSplitPane(JSplitPane.VERTICAL_SPLIT,ptabla,botonera);
+		sp1.setEnabled(false);
+		sp1.setDividerSize(4);
+		JPanel paceptar=new JPanel();
+		paceptar.add(baceptar);
+		JSplitPane sp2=new JSplitPane(JSplitPane.VERTICAL_SPLIT,sp1,paceptar);
+		sp2.setEnabled(false);
+		sp2.setDividerSize(4);
+		prec.add(sp2);
 		bcrea.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formulario.getContentPane().add(panelMulta('c',null));
-				formulario.pack();
-				formulario.setVisible(true);				
+				formRecurso.getContentPane().add(panelAltaRecurso('c',null));
+				formRecurso.pack();
+				formRecurso.setVisible(true);				
 			}
 		});
-		return pmul;
+		baceptar.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				formulario.setVisible(false);
+				formulario.getContentPane().removeAll();			
+			}
+		});
+		return prec;
 	}
 	
-	public JPanel panelAlta(final char tipo,String codigo,final LinkedList datos)
+	public JPanel panelAltaContrato(final char tipo,String codigo,final LinkedList datos)
 	{
 		if ((tipo=='c') || (tipo=='n'))
 		{	formulario.setTitle("Crear contrato");}
@@ -692,13 +766,12 @@ public class PanelContratos extends JPanel
 		aceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{			
-				if ((tmatricula.getText().equals("")) && (tdni.getText().equals(""))
-						&& (tnom.getText().equals("")))
+			/*	if ((tmatricula.getText().equals("")) && (tdni.getText().equals("")) && (tnom.getText().equals("")))
 				{
-					JOptionPane.showMessageDialog(null,"Lo campos marcados con * son obligatorios");
+					JOptionPane.showMessageDialog(null,"Los campos marcados con * son obligatorios");
 				}
 				else
-				{	LinkedList datoscontrato=new LinkedList();
+				{*/	LinkedList datoscontrato=new LinkedList();
 					LinkedList datoscliente=new LinkedList();
 					if (tipo=='c')
 					{	datoscontrato.add(tmatricula.getText());
@@ -738,11 +811,11 @@ public class PanelContratos extends JPanel
 					else if(tipo=='n')
 					{	datoscontrato.add(tmatricula.getText());
 						datoscontrato.add(tfechaalta.getText());
-						controlador.añadirContratoACliente(datoscontrato,tcodcliente.getText());
+						controlador.añadirContratoACliente(datoscontrato,codigoCliente.getText());
 					}
 					formulario.setVisible(false);
-					formulario.getContentPane().removeAll();
-				}
+					formulario.getContentPane().removeAll();										
+			//	}
 			}
 		});
 		cancelar.addActionListener(new ActionListener()
@@ -755,7 +828,7 @@ public class PanelContratos extends JPanel
 		return panel;
 	}
 	
-	public JPanel panelBaja(final String codigo)
+	public JPanel panelBajaContrato(final String codigo)
 	{
 		formulario.setTitle("Eliminar contrato");
 		formulario.setLocation(350,100);
@@ -808,7 +881,7 @@ public class PanelContratos extends JPanel
 		return pbaja;
 	}
 	
-	public JPanel panelMododificar(final String codigo)
+	public JPanel panelMododificarContrato(final String codigo)
 	{
 		formulario.setTitle("Modificar contrato");		
 		formulario.setLocation(350,100);
@@ -849,12 +922,11 @@ public class PanelContratos extends JPanel
 		return pmod;
 	}
 	
-	public JPanel panelMulta(char tipo,String codigo)
+	public JPanel panelAltaMulta(char tipo,String codigo)
 	{
 		if (tipo=='c') formulario.setTitle("Crear multa");
 		else if (tipo=='m') formulario.setTitle("Modificar multa "+codigo);
 		formulario.setLocation(300,100);
-		JLabel l1=new JLabel("Código ",SwingConstants.RIGHT);
 		JLabel l2=new JLabel("Expediente ",SwingConstants.RIGHT);
 		JLabel l3=new JLabel("Boletín ",SwingConstants.RIGHT);
 		JLabel l4=new JLabel("Fecha denuncia ",SwingConstants.RIGHT);
@@ -864,7 +936,6 @@ public class PanelContratos extends JPanel
 		JLabel r3=new JLabel(" ",SwingConstants.RIGHT);
 		JLabel r4=new JLabel(" ",SwingConstants.RIGHT);
 		JLabel r5=new JLabel(" ",SwingConstants.RIGHT);
-		l1.setPreferredSize(new Dimension(100,20));
 		l2.setPreferredSize(new Dimension(100,20));
 		l3.setPreferredSize(new Dimension(100,20));
 		l4.setPreferredSize(new Dimension(100,20));
@@ -874,19 +945,16 @@ public class PanelContratos extends JPanel
 		r3.setPreferredSize(new Dimension(150,20));
 		r4.setPreferredSize(new Dimension(150,20));
 		r5.setPreferredSize(new Dimension(150,20));
-		JTextField cod=new JTextField(codigo);
-		cod.setEditable(false);
-		cod.setPreferredSize(new Dimension(100,20));
-		JTextField exp=new JTextField();
+		final JTextField exp=new JTextField();
 		exp.setPreferredSize(new Dimension(100,20));
-		JTextField bol=new JTextField();
+		final JTextField bol=new JTextField();
 		bol.setPreferredSize(new Dimension(100,20));
+		final JTextField fecha=new JTextField();
+		fecha.setPreferredSize(new Dimension(100,20));
 		if (tipo=='m')
 		{	exp.setEditable(false);
 			bol.setEditable(false);			
 		}
-		JTextField fecha=new JTextField();
-		fecha.setPreferredSize(new Dimension(100,20));
 		ButtonGroup grupo=new ButtonGroup();
 		JRadioButton rtrafico=new JRadioButton("Tráfico",true);
 		JRadioButton rtransporte=new JRadioButton("Transporte");
@@ -896,17 +964,11 @@ public class PanelContratos extends JPanel
 		infraccionesTrafico(infraccion);
 		infraccion.setEditable(false);
 		infraccion.setPreferredSize(new Dimension(250,20));
-		JPanel p1=new JPanel();
 		JPanel p2=new JPanel();
 		JPanel p3=new JPanel();
 		JPanel p4=new JPanel();
 		JPanel p5=new JPanel();
 		JPanel p6=new JPanel();
-		if (tipo=='m')
-		{	p1.add(l1);
-			p1.add(cod);
-			p1.add(r1);
-		}
 		p2.add(l2);
 		p2.add(exp);
 		p2.add(r2);
@@ -921,7 +983,6 @@ public class PanelContratos extends JPanel
 		p6.add(rtrafico);
 		p6.add(rtransporte);
 		Box caja=Box.createVerticalBox();
-		caja.add(p1);
 		caja.add(p2);
 		caja.add(p3);
 		caja.add(p4);
@@ -929,8 +990,8 @@ public class PanelContratos extends JPanel
 		caja.add(p6);
 		JPanel p7=new JPanel();
 		p7.add(new JLabel("Descripción"));
-		JTextPane texto=new JTextPane();
-		JScrollPane ptexto=new JScrollPane(texto,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
+		final JTextPane descrip=new JTextPane();
+		JScrollPane ptexto=new JScrollPane(descrip,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
 		ptexto.setPreferredSize(new Dimension(300,150));
 		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,p7,ptexto);
 		sp.setEnabled(false);		
@@ -952,8 +1013,16 @@ public class PanelContratos extends JPanel
 		aceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
+				LinkedList datos=new LinkedList();
+				datos.add(exp.getText());
+				datos.add(bol.getText());
+				datos.add(fecha.getText());
+				datos.add((String)infraccion.getSelectedItem());
+				datos.add(descrip.getText());
+				datos.add(codigoContrato.getText());
+				controlador.añadirMulta(datos);
 				formulario.setVisible(false);
-				formulario.getContentPane().removeAll();
+				formulario.getContentPane().removeAll();				
 			}
 		});
 		cancelar.addActionListener(new ActionListener()
@@ -978,124 +1047,6 @@ public class PanelContratos extends JPanel
 			}
 		});
 		return panel;
-	}
-	
-	public JPanel panelDescripcion(final char tipo,String codigo)
-	{
-		if (tipo=='r')
-		{	formRecurso.setTitle("Descripción del recurso "+codigo);
-			formRecurso.setLocation(350,100);			
-		}
-		else if (tipo=='m')
-		{	formulario.setTitle("Descripción de la multa "+codigo);
-			formulario.setLocation(350,200);		
-		}
-		JPanel panel=new JPanel();
-		JPanel p1=new JPanel();
-		JPanel p2=new JPanel();
-		p1.add(new JLabel("Descripción"));
-		JTextPane texto=new JTextPane();
-		texto.setEditable(false);
-		JScrollPane ptexto=new JScrollPane(texto,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
-		ptexto.setPreferredSize(new Dimension(300,150));
-		JSplitPane sp1=new JSplitPane(JSplitPane.VERTICAL_SPLIT,p1,ptexto);
-		sp1.setEnabled(false);
-		sp1.setDividerSize(1);
-		JButton aceptar=new JButton("Aceptar");
-		p2.add(aceptar);
-		JSplitPane sp2=new JSplitPane(JSplitPane.VERTICAL_SPLIT,sp1,p2);
-		sp2.setEnabled(false);
-		sp2.setDividerSize(4);
-		panel.add(sp2);
-		aceptar.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-				if (tipo=='r')
-				{
-					formRecurso.setVisible(false);
-					formRecurso.getContentPane().removeAll();
-				}
-				else if (tipo=='m')
-				{
-					formulario.setVisible(false);
-					formulario.getContentPane().removeAll();
-				}
-			}
-		});
-		return panel;
-	}
-	
-	public JPanel panelRecurso(String codigo)
-	{
-		formulario.setTitle("Recursos de la multa "+codigo);
-		formulario.setLocation(25,100);
-		JPanel prec=new JPanel();
-		prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Recursos de la multa "+codigo,TitledBorder.LEFT,TitledBorder.TOP));
-		Box tabla=Box.createVerticalBox();
-		JPanel p=new JPanel();
-		JLabel l1=new JLabel("Código",SwingConstants.CENTER);
-		JLabel l2=new JLabel("Fecha de emisión",SwingConstants.CENTER);
-		JLabel l4=new JLabel("Escrito recibido",SwingConstants.CENTER);
-		JLabel l5=new JLabel("Escrito presentado",SwingConstants.CENTER);
-		JLabel l6=new JLabel("Estado",SwingConstants.CENTER);
-		JLabel l7=new JLabel("Abogado",SwingConstants.CENTER);
-		JLabel l8=new JLabel("Descripción",SwingConstants.CENTER);
-		JLabel l9=new JLabel("",SwingConstants.CENTER);
-		JLabel l10=new JLabel("",SwingConstants.CENTER);
-		l1.setPreferredSize(new Dimension(80,20));
-		l2.setPreferredSize(new Dimension(90,20));
-		l4.setPreferredSize(new Dimension(190,20));
-		l5.setPreferredSize(new Dimension(190,20));
-		l6.setPreferredSize(new Dimension(90,20));
-		l7.setPreferredSize(new Dimension(90,20));
-		l8.setPreferredSize(new Dimension(80,20));
-		l9.setPreferredSize(new Dimension(25,20));
-		l10.setPreferredSize(new Dimension(25,20));
-		p.add(l1);
-		p.add(l2);
-		p.add(l4);
-		p.add(l5);
-		p.add(l6);
-		p.add(l7);
-		p.add(l8);
-		p.add(l9);
-		p.add(l10);
-		tabla.add(p);
-		for (int i=0;i<9;i++)
-		{	JPanel linea=dibujaLineaRecurso();
-			tabla.add(linea);		
-		}
-		JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		ptabla.setPreferredSize(new Dimension(940,300));
-		JButton bcrea=new JButton("Añadir recurso");
-		JButton baceptar=new JButton("Aceptar");
-		JPanel botonera=new JPanel();
-		botonera.add(bcrea);
-		JSplitPane sp1=new JSplitPane(JSplitPane.VERTICAL_SPLIT,ptabla,botonera);
-		sp1.setEnabled(false);
-		sp1.setDividerSize(4);
-		JPanel paceptar=new JPanel();
-		paceptar.add(baceptar);
-		JSplitPane sp2=new JSplitPane(JSplitPane.VERTICAL_SPLIT,sp1,paceptar);
-		sp2.setEnabled(false);
-		sp2.setDividerSize(4);
-		prec.add(sp2);
-		bcrea.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-				formRecurso.getContentPane().add(panelAltaRecurso('c',null));
-				formRecurso.pack();
-				formRecurso.setVisible(true);				
-			}
-		});
-		baceptar.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-				formulario.setVisible(false);
-				formulario.getContentPane().removeAll();			
-			}
-		});
-		return prec;
 	}
 	
 	public JPanel panelAltaRecurso(char tipo, String codigo)
@@ -1219,6 +1170,84 @@ public class PanelContratos extends JPanel
 		return panel;
 	}
 	
+	public JPanel dibujaLineaMulta(final LinkedList datos)
+	{		
+		JPanel panel=new JPanel();
+		final JTextField cod=new JTextField((String)datos.get(0));
+		cod.setEditable(false);
+		cod.setBackground(Color.WHITE);
+		cod.setPreferredSize(new Dimension(100,25));
+		JTextField exp=new JTextField((String)datos.get(1));
+		exp.setEditable(false);
+		exp.setBackground(Color.WHITE);
+		exp.setPreferredSize(new Dimension(100,25));
+		JTextField bol=new JTextField((String)datos.get(2));
+		bol.setEditable(false);
+		bol.setBackground(Color.WHITE);
+		bol.setPreferredSize(new Dimension(100,25));
+		JTextField fecha=new JTextField((String)datos.get(3));
+		fecha.setEditable(false);
+		fecha.setBackground(Color.WHITE);
+		fecha.setPreferredSize(new Dimension(100,25));
+		JTextField infrac=new JTextField((String)datos.get(4));
+		infrac.setEditable(false);
+		infrac.setBackground(Color.WHITE);
+		infrac.setPreferredSize(new Dimension(250,25));
+		JButton descrip=new JButton(new ImageIcon("interfaz/find.gif"));
+		descrip.setPreferredSize(new Dimension(80,25));		
+		JButton recur=new JButton("Ver");
+		recur.setPreferredSize(new Dimension(80,25));
+		JButton mod=new JButton(new ImageIcon("interfaz/tick.gif"));
+		mod.setPreferredSize(new Dimension(25,25));
+		JButton elim=new JButton(new ImageIcon("interfaz/del.gif"));
+		elim.setPreferredSize(new Dimension(25,25));
+		panel.add(cod);
+		panel.add(exp);
+		panel.add(bol);
+		panel.add(fecha);
+		panel.add(infrac);		
+		panel.add(descrip);
+		panel.add(recur);
+		panel.add(mod);
+		panel.add(elim);
+		descrip.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				formulario.getContentPane().add(panelDescripcion('m',cod.getText(),(String)datos.get(5)));
+				formulario.pack();
+				formulario.setVisible(true);				
+			}
+		});
+		recur.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				formulario.getContentPane().add(dibujaRecursos(cod.getText()));
+				formulario.pack();
+				formulario.setVisible(true);				
+			}
+		});
+		mod.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				formulario.getContentPane().add(panelAltaMulta('m',cod.getText()));
+				formulario.pack();
+				formulario.setVisible(true);				
+			}
+		});
+		elim.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				int seleccion=JOptionPane.showConfirmDialog(null,"          ¿Desea eliminar la multa "+cod.getText()+"?","Eliminar multa",JOptionPane.YES_NO_CANCEL_OPTION,-1);
+				if (seleccion==JOptionPane.YES_OPTION)
+				{	//eliminar multa
+					//borrar el panel de multas
+					//llamar a dibujaMulta()
+				}				
+			}
+		});
+		return panel;
+	}
+	
 	public JPanel dibujaLineaRecurso()
 	{		
 		JPanel panel=new JPanel();
@@ -1264,7 +1293,7 @@ public class PanelContratos extends JPanel
 		descrip.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formRecurso.getContentPane().add(panelDescripcion('r',cod.getText()));
+				formRecurso.getContentPane().add(panelDescripcion('r',cod.getText(),""));
 				formRecurso.pack();
 				formRecurso.setVisible(true);	
 			}
@@ -1290,80 +1319,48 @@ public class PanelContratos extends JPanel
 		});
 		return panel;
 	}
-	
-	public JPanel dibujaLineaMulta()
-	{		
+		
+	public JPanel panelDescripcion(final char tipo,String codigo,String texto)
+	{
+		if (tipo=='r')
+		{	formRecurso.setTitle("Descripción del recurso "+codigo);
+			formRecurso.setLocation(350,100);			
+		}
+		else if (tipo=='m')
+		{	formulario.setTitle("Descripción de la multa "+codigo);
+			formulario.setLocation(350,200);		
+		}
 		JPanel panel=new JPanel();
-		final JTextField cod=new JTextField();
-		cod.setEditable(false);
-		cod.setBackground(Color.WHITE);
-		cod.setPreferredSize(new Dimension(100,25));
-		JTextField exp=new JTextField();
-		exp.setEditable(false);
-		exp.setBackground(Color.WHITE);
-		exp.setPreferredSize(new Dimension(100,25));
-		JTextField bol=new JTextField();
-		bol.setEditable(false);
-		bol.setBackground(Color.WHITE);
-		bol.setPreferredSize(new Dimension(100,25));
-		JTextField fecha=new JTextField();
-		fecha.setEditable(false);
-		fecha.setBackground(Color.WHITE);
-		fecha.setPreferredSize(new Dimension(100,25));
-		JTextField infrac=new JTextField();
-		infrac.setEditable(false);
-		infrac.setBackground(Color.WHITE);
-		infrac.setPreferredSize(new Dimension(250,25));
-		JButton descrip=new JButton(new ImageIcon("interfaz/find.gif"));
-		descrip.setPreferredSize(new Dimension(80,25));
-		JButton recur=new JButton("Ver");
-		recur.setPreferredSize(new Dimension(80,25));
-		JButton mod=new JButton(new ImageIcon("interfaz/tick.gif"));
-		mod.setPreferredSize(new Dimension(25,25));
-		JButton elim=new JButton(new ImageIcon("interfaz/del.gif"));
-		elim.setPreferredSize(new Dimension(25,25));
-		panel.add(cod);
-		panel.add(exp);
-		panel.add(bol);
-		panel.add(fecha);
-		panel.add(infrac);		
-		panel.add(descrip);
-		panel.add(recur);
-		panel.add(mod);
-		panel.add(elim);
-		descrip.addActionListener(new ActionListener()
+		JPanel p1=new JPanel();
+		JPanel p2=new JPanel();
+		p1.add(new JLabel("Descripción"));
+		JTextPane descrip=new JTextPane();
+		descrip.setText(texto);
+		descrip.setEditable(false);
+		JScrollPane ptexto=new JScrollPane(descrip,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
+		ptexto.setPreferredSize(new Dimension(300,150));
+		JSplitPane sp1=new JSplitPane(JSplitPane.VERTICAL_SPLIT,p1,ptexto);
+		sp1.setEnabled(false);
+		sp1.setDividerSize(1);
+		JButton aceptar=new JButton("Aceptar");
+		p2.add(aceptar);
+		JSplitPane sp2=new JSplitPane(JSplitPane.VERTICAL_SPLIT,sp1,p2);
+		sp2.setEnabled(false);
+		sp2.setDividerSize(4);
+		panel.add(sp2);
+		aceptar.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formulario.getContentPane().add(panelDescripcion('m',cod.getText()));
-				formulario.pack();
-				formulario.setVisible(true);				
-			}
-		});
-		recur.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-				formulario.getContentPane().add(panelRecurso(cod.getText()));
-				formulario.pack();
-				formulario.setVisible(true);				
-			}
-		});
-		mod.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-				formulario.getContentPane().add(panelMulta('m',cod.getText()));
-				formulario.pack();
-				formulario.setVisible(true);				
-			}
-		});
-		elim.addActionListener(new ActionListener()
-		{	public void actionPerformed(ActionEvent e)
-			{
-				int seleccion=JOptionPane.showConfirmDialog(null,"          ¿Desea eliminar la multa "+cod.getText()+"?","Eliminar multa",JOptionPane.YES_NO_CANCEL_OPTION,-1);
-				if (seleccion==JOptionPane.YES_OPTION)
-				{	//eliminar multa
-					//borrar el panel de multas
-					//llamar a dibujaMulta()
-				}				
+				if (tipo=='r')
+				{
+					formRecurso.setVisible(false);
+					formRecurso.getContentPane().removeAll();
+				}
+				else if (tipo=='m')
+				{
+					formulario.setVisible(false);
+					formulario.getContentPane().removeAll();
+				}
 			}
 		});
 		return panel;

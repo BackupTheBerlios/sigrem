@@ -25,14 +25,13 @@ public class Multa
 	public Multa(String codmulta,LinkedList datos) 
 	{
 		codigoMulta=codmulta;
-		codigoContrato=(String)datos.get(0);
-		expediente=(String)datos.get(1);
-		boletin=(String)datos.get(2);
-		fechaDenuncia=(String)datos.get(3);
+		expediente=(String)datos.get(0);
+		boletin=(String)datos.get(1);
+		fechaDenuncia=(String)datos.get(2);
 		fechaResolucion="";
-		infraccion=(String)datos.get(4);
-		descripcion=(String)datos.get(5);
-		codigoContrato=(String)datos.get(6);
+		infraccion=(String)datos.get(3);
+		descripcion=(String)datos.get(4);
+		codigoContrato=(String)datos.get(5);
 		listaRecursos=new LinkedList();		
 	}
 	

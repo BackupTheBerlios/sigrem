@@ -48,8 +48,8 @@ public class Sigrem
 		codempleado=codigos[4];
 		gclientes=factoria.generaGCliente(vista,codcliente);
 		gcontratos=factoria.generaGContratos(vista,codcontrato);
-//		gmultas=factoria.generaGMultas(vista,codmultas);
-//		grecursos=factoria.generaGRecursos(vista,codrecursos);
+		gmultas=factoria.generaGMultas(vista,codmulta);
+//		grecursos=factoria.generaGRecursos(vista,codrecurso);
 		gempleados=factoria.generaGEmpleados(vista,codempleado);
 		geconomia=factoria.generaGEconomia(vista,gempleados,gcontratos);		
 	}
@@ -65,6 +65,7 @@ public class Sigrem
 		datoscontrato.addFirst(clientenuevo);
 		String contratonuevo=gcontratos.añadirContrato(datoscontrato);
 		gclientes.asociaClienteContrato(clientenuevo,contratonuevo);
+		vista.actualizaVista(1,3,null);
 	}
 	
 	public void añadirContratoACliente(LinkedList datoscontrato,String codcliente)
@@ -121,5 +122,10 @@ public class Sigrem
 	public void modificarContrato(String codcontrato,LinkedList datos)
 	{
 		gcontratos.modificarContrato(codcontrato,datos);
+	}
+	
+	public void añadirMulta(LinkedList datos)
+	{
+		String codmulta=gmultas.añadirMulta(datos);
 	}
 }

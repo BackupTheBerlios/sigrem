@@ -7,47 +7,47 @@ import med.*;
 
 public class GClientesImp implements GClientes
 {
-	private EstructuraDatos listaclientes;
+	private EstructuraDatos listaClientes;
 	  
 	private InterfazGrafica vista; 
 	
-	private String codcliente;
+	private String codigoCliente;
 	 
-	private void incrementaCodigo()
-	{
-		String numero=codcliente.substring(0,4);
-		Character car=null;
-		int num=car.digit(codcliente.charAt(4),10);
-		for (int i=5;i<codcliente.length();i++)
-		{	num=(num*10)+car.digit(codcliente.charAt(i),10);}
-		numero=numero+(num+1);
-		codcliente=numero;
-	}
-	
 	public GClientesImp(InterfazGrafica vista,String codigo) 
 	{
-		this.listaclientes=new EstructuraDatosImp(3);
+		this.listaClientes=new EstructuraDatosImp(3);
 	    this.vista=vista;
-	    this.codcliente=codigo;
+	    this.codigoCliente=codigo;
+	}
+	
+	private void incrementaCodigo()
+	{
+		String numero=codigoCliente.substring(0,4);
+		Character car=null;
+		int num=car.digit(codigoCliente.charAt(4),10);
+		for (int i=5;i<codigoCliente.length();i++)
+		{	num=(num*10)+car.digit(codigoCliente.charAt(i),10);}
+		numero=numero+(num+1);
+		codigoCliente=numero;
 	}
 	
 	//clave0=codigo	clave1=nombre clave2=dni
 	public String añadirCliente(LinkedList datos)
 	{
-		Cliente nuevocliente=new Cliente(codcliente,datos);
+		Cliente nuevocliente=new Cliente(codigoCliente,datos);
 		String[] claves=new String[3];
-		claves[0]=codcliente;
+		claves[0]=codigoCliente;
 		claves[1]=(String)datos.get(0);
 		claves[2]=(String)datos.get(1);
-		listaclientes.insertar(claves,nuevocliente);
-		String codigoantiguo=codcliente;
+		listaClientes.insertar(claves,nuevocliente);
+		String codigoantiguo=codigoCliente;
 		incrementaCodigo();
 		return codigoantiguo;
 	}
 	
 	public void asociaClienteContrato(String codcliente,String codcontrato)
 	{
-		Vector busqueda=listaclientes.buscar(codcliente,0);
+		Vector busqueda=listaClientes.buscar(codcliente,0);
 		Cliente cliente=(Cliente)busqueda.get(0);
 		cliente.añadeContrato(codcontrato);
 		vista.actualizaVista(1,2,cliente.dameListaDatos());
@@ -55,14 +55,14 @@ public class GClientesImp implements GClientes
 	
 	public void eliminarCliente(boolean actualizar,String codcliente,String codcontrato)
 	{
-		Vector busqueda=listaclientes.buscar(codcliente,0);
+		Vector busqueda=listaClientes.buscar(codcliente,0);
 		if (busqueda.size()==0)
 		{	vista.actualizaVistaMensaje("Error al buscar el cliente "+codcliente+". No se ha encontrado");}
 		else 
 		{	Cliente cliente=(Cliente)busqueda.get(0);
 			cliente.eliminaContrato(codcontrato);
 			if (cliente.dameNumeroContratos()==0)
-			{	boolean eliminado=listaclientes.eliminar(codcliente,0);
+			{	boolean eliminado=listaClientes.eliminar(codcliente,0);
 				if (eliminado) 
 				{	vista.actualizaVistaMensaje("El cliente "+codcliente+" ha sido eliminado al no tener contratos asociados");}
 				else vista.actualizaVistaMensaje("Error al eliminar el cliente "+codcliente+". No se ha encontrado");
@@ -74,7 +74,7 @@ public class GClientesImp implements GClientes
 	
 	public void modificarCliente(String codigo,LinkedList datos)
 	{
-		Vector busqueda=listaclientes.buscar(codigo,0);
+		Vector busqueda=listaClientes.buscar(codigo,0);
 		if (busqueda.size()==0)
 		{	vista.actualizaVistaMensaje("Error al buscar el cliente "+codigo+". No se ha encontrado");}
 		else 
@@ -94,7 +94,7 @@ public class GClientesImp implements GClientes
 	
 	public String consultarClienteCodigo(boolean modificar,boolean actualizar,String codigo)
 	{
-		Vector busqueda=listaclientes.buscar(codigo,0);
+		Vector busqueda=listaClientes.buscar(codigo,0);
 		if (busqueda.size()==0)
 		{	vista.actualizaVistaMensaje("Error al buscar el cliente "+codigo+". No se ha encontrado");
 			return null;
@@ -124,7 +124,7 @@ public class GClientesImp implements GClientes
 	
 	public String consultarClienteNombre(String nombre)
 	{
-		Vector busqueda=listaclientes.buscar(nombre,1);
+		Vector busqueda=listaClientes.buscar(nombre,1);
 		if (busqueda.size()==0)
 		{	vista.actualizaVistaMensaje("Error al buscar el cliente con nombre "+nombre+". No se ha encontrado");
 			return null;			
@@ -149,7 +149,7 @@ public class GClientesImp implements GClientes
 	
 	public String consultarClienteDni(String dni)
 	{
-		Vector busqueda=listaclientes.buscar(dni,2);
+		Vector busqueda=listaClientes.buscar(dni,2);
 		if (busqueda.size()==0)
 		{	vista.actualizaVistaMensaje("Error al buscar el cliente con dni "+dni+". No se ha encontrado");
 			return null;			

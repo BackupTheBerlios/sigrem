@@ -1,20 +1,19 @@
 package mmu;
 
-//import mco.*;
+import java.util.LinkedList;
 
 public interface GMultas 
 {
-/*	//Requisito 3.1
-	public void añadirMultas(Contrato contrato, Integer codigo,String matricula);
+	//Requisito 3.1
+	public String añadirMulta(LinkedList datos);
 	//Requisito 3.2
-	public void eliminarMultas(Integer codigo);
+	public void eliminarMulta(String codigo);
 	//Requisito 3.3
-	public void modificarMultas(Integer codigo);
+	public void modificarMulta(String codigo);
 	//Requisito 3.4
-	public void consultarMultas(Integer codigo);
+	public void consultarMultaCodigo(String codigo);
 	//Requisito 3.5
-	public void consultarMultasExpediente(String expediente);
+	public void consultarMultaExpediente(String expediente);
 	//Requisito 3.6
-	public void consultarMultasBoletin(String boletin);	
-*/
+	public void consultarMultaBoletin(String boletin);
 }
