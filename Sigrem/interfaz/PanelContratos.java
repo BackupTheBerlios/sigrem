@@ -1006,8 +1006,8 @@ public class PanelContratos extends JPanel
 		l1.setPreferredSize(new Dimension(80,25));
 		l2.setPreferredSize(new Dimension(75,25));
 		l3.setPreferredSize(new Dimension(75,25));
-		l4.setPreferredSize(new Dimension(200,25));
-		l5.setPreferredSize(new Dimension(200,25));
+		l4.setPreferredSize(new Dimension(190,25));
+		l5.setPreferredSize(new Dimension(190,25));
 		l6.setPreferredSize(new Dimension(90,25));
 		l7.setPreferredSize(new Dimension(90,25));
 		l8.setPreferredSize(new Dimension(80,25));
@@ -1029,7 +1029,7 @@ public class PanelContratos extends JPanel
 			tabla.add(linea);		
 		}
 		JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		ptabla.setPreferredSize(new Dimension(1050,300));
+		ptabla.setPreferredSize(new Dimension(995,300));
 		JButton bcrea=new JButton("Añadir recurso");
 		JButton baceptar=new JButton("Aceptar");
 		JPanel botonera=new JPanel();
@@ -1217,8 +1217,8 @@ public class PanelContratos extends JPanel
 		cod.setPreferredSize(new Dimension(80,25));
 		fcl.setPreferredSize(new Dimension(75,25));
 		fsi.setPreferredSize(new Dimension(75,25));
-		ere.setPreferredSize(new Dimension(200,25));
-		epr.setPreferredSize(new Dimension(200,25));
+		ere.setPreferredSize(new Dimension(190,25));
+		epr.setPreferredSize(new Dimension(190,25));
 		est.setPreferredSize(new Dimension(90,25));
 		abo.setPreferredSize(new Dimension(90,25));
 		descrip.setPreferredSize(new Dimension(80,25));		
