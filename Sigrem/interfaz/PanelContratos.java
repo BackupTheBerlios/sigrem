@@ -994,7 +994,7 @@ public class PanelContratos extends JPanel
 		bcrea.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formulario.getContentPane().add(panelAltaRec('c',null));
+				formulario.getContentPane().add(panelAltaRecurso('c',null));
 				formulario.pack();
 				formulario.setVisible(true);				
 			}
@@ -1009,18 +1009,11 @@ public class PanelContratos extends JPanel
 		return prec;
 	}
 	
-	public JPanel panelAltaRec(char tipo, String codigo)
+	public JPanel panelAltaRecurso(char tipo, String codigo)
 	{
-		if (tipo=='c') 
-		{
-			formulario.setTitle("Crear recurso");
-			formulario.setLocation(350,100);
-		}
-		else if (tipo=='m')
-			{
-				formulario.setTitle("Modificar recurso "+codigo);
-				formulario.setLocation(350,100);
-			}
+		if (tipo=='c') formulario.setTitle("Crear recurso");
+		else if (tipo=='m') formulario.setTitle("Modificar recurso "+codigo);
+		formulario.setLocation(350,100);
 		JLabel l1=new JLabel("Código");
 		JLabel l2=new JLabel("Estado");
 		JLabel l3=new JLabel("Abogado");
@@ -1120,13 +1113,13 @@ public class PanelContratos extends JPanel
 			{
 				formulario.getContentPane().add(panelDescripcion('r',cod.getText()));
 				formulario.pack();
-				formulario.setVisible(true);				
+				formulario.setVisible(true);	
 			}
 		});
 		mod.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				formulario.getContentPane().add(panelAltaRec('m',cod.getText()));
+				formulario.getContentPane().add(panelAltaRecurso('m',cod.getText()));
 				formulario.pack();
 				formulario.setVisible(true);				
 			}
