@@ -1,0 +1,5 @@
+===================
+= Panel Empleados =
+===================
+
+Descripción de las utilidades del "Panel Empleados" de SIGREM.

@@ -2,4 +2,4 @@
 = MENÚ =
 ========
 
-Descripción de las utilidades del "Menú" de Sigrem.
+Descripción de las utilidades del "Menú" de SIGREM.

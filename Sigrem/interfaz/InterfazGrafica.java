@@ -1,6 +1,7 @@
 package interfaz;
 
 import javax.swing.*;
+
 import java.util.LinkedList;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
@@ -11,6 +12,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileFilter;
 import java.io.*;
+
 import javax.swing.JList;
 import java.util.Vector;
 import main.Sigrem;
@@ -458,7 +460,8 @@ public class InterfazGrafica
 			if (npanel==1)	panel1();
 			else 
 				if (npanel==2) panel2();
-				else formayuda.getContentPane().removeAll();
+				else panel0();
+				
 				
 	}
 	
@@ -483,29 +486,56 @@ public class InterfazGrafica
 			{
 				psalida.removeAll();
 				salida.removeAll();
-				if(lista.getSelectedIndex()==1)	
+				if (lista.getSelectedIndex()==0)
 				{
-					dibujaAyuda(1);
+					dibujaAyuda(0);
 					try
 					{
-						fd = new BufferedReader (new FileReader ("interfaz/ayuda_menu.txt"));
+						fd = new BufferedReader (new FileReader ("interfaz/ayuda_sigrem.txt"));
 					}
 					catch(FileNotFoundException e)
 					{}
-					
 				}
-				else
-					if(lista.getSelectedIndex()==2)
+				else if(lista.getSelectedIndex()==1)	
 					{
-						dibujaAyuda(2);
+						dibujaAyuda(1);
 						try
 						{
-							fd = new BufferedReader (new FileReader ("interfaz/ayuda_contratos.txt"));
+							fd = new BufferedReader (new FileReader ("interfaz/ayuda_menu.txt"));
 						}
 						catch(FileNotFoundException e)
-						{}
-						
+						{}					
 					}
+					else if(lista.getSelectedIndex()==2)
+						{
+							dibujaAyuda(2);
+							try
+							{
+								fd = new BufferedReader (new FileReader ("interfaz/ayuda_contratos.txt"));
+							}
+							catch(FileNotFoundException e)
+							{}					
+						}
+						else if(lista.getSelectedIndex()==3)
+						{
+							dibujaAyuda(3);
+							try
+							{
+								fd = new BufferedReader (new FileReader ("interfaz/ayuda_empleados.txt"));
+							}
+							catch(FileNotFoundException e)
+							{}					
+						}
+							else if(lista.getSelectedIndex()==4)
+							{
+								dibujaAyuda(4);
+								try
+								{
+									fd = new BufferedReader (new FileReader ("interfaz/ayuda_economia.txt"));
+								}
+								catch(FileNotFoundException e)
+								{}					
+							}
 				try
 				{
 					if (fd!=null)
@@ -520,8 +550,7 @@ public class InterfazGrafica
 				catch(IOException e)
 				{}							
 			}
-		});
-		
+		});		
 	}
 	
 	public void panel1()
@@ -545,27 +574,36 @@ public class InterfazGrafica
 			{
 				psalida.removeAll();
 				salida.removeAll();
-				if(lista.getSelectedIndex()==1)	
+				if (lista.getSelectedIndex()==0)
 				{
 					dibujaAyuda(0);
 					try
 					{
-						fd = new BufferedReader (new FileReader ("interfaz/ayuda_menu.txt"));
+						fd = new BufferedReader (new FileReader ("interfaz/ayuda_sigrem.txt"));
 					}
 					catch(FileNotFoundException e)
-					{}					
+					{}
 				}
-				else
-					if(lista.getSelectedIndex()==5)
+				else if(lista.getSelectedIndex()==1)	
 					{
-						dibujaAyuda(2);
+						dibujaAyuda(0);
 						try
 						{
-							fd = new BufferedReader (new FileReader ("interfaz/ayuda_contratos.txt"));
+							fd = new BufferedReader (new FileReader ("interfaz/ayuda_menu.txt"));
 						}
 						catch(FileNotFoundException e)
-						{}						
-					}	
+						{}					
+					}
+					else if(lista.getSelectedIndex()==5)
+						{
+							dibujaAyuda(2);
+							try
+							{
+								fd = new BufferedReader (new FileReader ("interfaz/ayuda_contratos.txt"));
+							}
+							catch(FileNotFoundException e)
+							{}						
+						}				
 				try
 				{
 					if (fd!=null)
