@@ -1,5 +1,90 @@
-=======================
-= Multas del Contrato =
-=======================
+????????????????????????????????????????????????????????????
+?                    Multas del Contrato                   ?
+????????????????????????????????????????????????????????????
 
-- ¡¡¡ UNDER CONSTRUCTION !!! -
+Descripción de utilidades "Multas del Contrato" de SIGREM.
+
+Disponemos de lo siguiente:
+
+   
+• Botón "Añadir Multa":
+
+   Al pulsar sobre él nos aparecerá un formulario para
+   introducir los datos correspondientes a la multa que 
+   queremos añadir al contrato presentado.
+
+    Los datos son los siguientes:
+
+    - Expediente: Dato indispensable
+    - Boletín: Dato indispensable
+    - Fecha de la denuncia: Dato opcional
+    - Infracción: Dato opcional
+    - Tipo de la infracción: Dato opcional
+    - Descripción: Dato opcional
+  
+    Al dar sobre "Aceptar" se añadirá la multa a la 
+    lista de multas del contrato mostrado
+
+
+• Botón "Descripción":
+
+   Al pulsar sobre él nos aparecerá la descripción de 
+   la multa correspondiente a la fila donde estaba 
+   dicho botón.
+
+
+• Botón "Ver Recursos":
+
+   Al pulsar sobre él nos aparecerá una lista de los 
+   recursos asociados a esa multa con los siguientes 
+   datos:
+   
+    - Código
+    - Fecha de emisión
+    - Escrito recibido
+    - Escrito presentado
+    - Estado
+    - Abogado
+   
+   y con los siguientes botones:
+
+    - Añadir recurso
+
+       Que nospermitirá mediante un formulario poder 
+       añadir recursos a la lista
+
+    - Descripción
+
+       Que nos mostrará la descripción del recurso en
+       cuestión
+
+    - Modificar
+ 
+       Que nos permitirá mosdificar ciertos datos del
+       recurso
+  
+    - Eliminar
+
+       Que nos permitirá eliminar un recurso de la
+       lista
+
+
+• Botón "Modificar":
+
+   Mediante la aparición de un formulario nos permitirá 
+   modificar la información correspondiente a la multa 
+   de la misma fila.
+
+• Botón "Eliminar":
+
+   Nos dará la posibilidad de eliminar la multa de la
+   misma
+   fila de la lista
+
+• Contiene casillas con la siguiente información:
+
+   - "Código"
+   - "Expediente"
+   - "Boletín"
+   - "Fecha denuncia"
+   - "Infracción"

@@ -6,7 +6,7 @@ Descripción de utilidades de "Gestión Contratos" de SIGREM.
 
 Disponemos de los siguientes Sectores:
 
-• "Datos económicos": 
+• "Datos del Contrato": 
              Contiene los botones 
                               -> "Crear"
                               -> "Eliminar"
@@ -18,7 +18,7 @@ Disponemos de los siguientes Sectores:
                               -> "Fecha de Alta"
    (Ver "Ayuda > Gestión Contratos > Datos del Contrato")
    
-• "Datos económicos": 
+• "Datos del Cliente": 
              Contiene los botones 
                               -> "Nuevo Contrato"
              Contiene el desplegable

@@ -1,5 +1,55 @@
-======================
-= Datos del Contrato =
-======================
+????????????????????????????????????????????????????????????
+?                     Datos del Contrato                   ?
+????????????????????????????????????????????????????????????
 
-- ¡¡¡ UNDER CONSTRUCTION !!! -
+Descripción de utilidades de "Datos del Contrato" de SIGREM.
+
+Disponemos de lo siguiente:
+
+• Botón "Crear":
+
+   Pulsando sobre él aparecerá un formulario con el que 
+   podrás introducir los datos necesarios para crear un
+   contrato:
+
+
+    Datos del Contrato
+
+    - Matrícula del vehículo: Dato indispensable
+    - Fecha de alta: Incluida por defecto (no modificable)
+
+    Datos del Cliente
+
+    - Nombre: Dato indispensable
+    - DNI/CIF: Dato indispensable
+    - Dirección: Dato opcional
+    - Código postal: Dato opcional
+    - Población: Dato opcional
+    - Provincia: Dato opcional
+    - Teléfono1: Dato opcional
+    - Teléfono2: Dato opcional
+    - Móvil: (teléfono) Dato opcional
+    - em@ail: Dato opcional
+    - Fax: Dato opcional
+
+    Al pulsar sobre "Aceptar" se creará el contrato y
+    se rellenerán las casillas de Datos del Contrato
+    con los datos introducidos sobre "Cancelar" 
+    volveremos a donde estávamos antes de pulsar sobre
+    "Crear"
+
+
+• Botón "Eliminar":
+
+   Pulsando sobre él aparecerá un formulario para pedirnos
+   el Código del contrato que queremos eliminar. Y dando a 
+   "Aceptar" eliminaremos dicho contrato y con "cancelar"
+   volveremos al estado anterior.
+
+
+• Botón "Modificar":
+
+   Pulsando sobre él nos aparecerá un formulario pidiendo el
+   código del contrato a modificar y al dar a "Aceptar" 
+   aparecerá otro formulario con los   datos que podemos 
+   modificar del contrato en custión.
