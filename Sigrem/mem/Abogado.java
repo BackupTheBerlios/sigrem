@@ -38,8 +38,4 @@ public class Abogado extends Empleado {
 			System.out.println("Este recurso no lo lleva este abogado");
 	}
 }
-package mem;
 
-public class Abogado {
-
-}
