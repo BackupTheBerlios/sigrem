@@ -1,5 +1,5 @@
 ==========
-= SIGREM = Sistema Integ \n ral de Gestión de REcursos de Multas
+= SIGREM = Sistema Integral de Gestión de REcursos de Multas
 ========== =================================================
 
 Producto que satisface las necesidades de una empresa de 
