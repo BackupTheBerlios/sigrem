@@ -20,6 +20,8 @@ public class PanelContratos extends JPanel
 	
 	private JFrame formAltaRec;
 	
+	private JFrame formBaja;
+	
 	private JButton elimcont;
 	
 	private JButton modcont;
@@ -44,6 +46,9 @@ public class PanelContratos extends JPanel
 		formAlta=new JFrame();
 		formAlta.setResizable(false);
 		formAlta.setLocation(350,100);
+		formBaja=new JFrame();
+		formBaja.setResizable(false);
+		formBaja.setLocation(350,100);
 		formMulta=new JFrame();
 		formMulta.setResizable(false);
 		formMulta.setLocation(350,150);
@@ -128,7 +133,11 @@ public class PanelContratos extends JPanel
 		elimcont.addActionListener(new ActionListener()
 		{	public void actionPerformed(ActionEvent e)
 			{
-				
+				if (!formBaja.isVisible())
+				{	formBaja.getContentPane().add(panelBaja(tcontrato.getText()));
+					formBaja.pack();	
+					formBaja.setVisible(true);
+				}
 			}
 		});
 		return pco;
@@ -377,6 +386,51 @@ public class PanelContratos extends JPanel
 			}
 		});
 		return panel;
+	}
+	
+	public JPanel panelBaja(String codigo)
+	{
+		formBaja.setTitle("Eliminar contrato");		
+		JLabel l=new JLabel("Introduce el código del contrato");
+		codigo="C001";
+		final JTextField tcodigo=new JTextField(codigo);		
+		tcodigo.setPreferredSize(new Dimension(100,20));		
+		JPanel pcodigo=new JPanel();		
+		pcodigo.add(l);
+		pcodigo.add(tcodigo);	
+		Box caja=Box.createVerticalBox();
+		caja.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Datos del contrato",TitledBorder.LEFT,TitledBorder.TOP));
+		caja.add(pcodigo);		
+		JPanel p2=new JPanel();
+		JButton bacepta=new JButton ("Aceptar");
+		JButton bcancela=new JButton ("Cancelar");
+		p2.add(bacepta);
+		p2.add(bcancela);
+		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja,p2);
+		sp.setDividerSize(4);
+		sp.setEnabled(false);
+		JPanel pndat=new JPanel();
+		pndat.add(sp);
+		bacepta.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				formBaja.setVisible(false);
+				int seleccion=JOptionPane.showConfirmDialog(null,"           ¿Desea eliminar el contrato "+tcodigo.getText()+"?","Eliminar contrato",JOptionPane.YES_NO_CANCEL_OPTION,-1);
+				if (seleccion==JOptionPane.YES_OPTION)
+				{	
+					
+				}
+				formBaja.getContentPane().removeAll();
+			}
+		});
+		bcancela.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				formBaja.setVisible(false);
+				formBaja.getContentPane().removeAll();
+			}
+		});
+		return pndat;
 	}
 		
 	public JPanel panelMulta(char tipo,String codigo)
