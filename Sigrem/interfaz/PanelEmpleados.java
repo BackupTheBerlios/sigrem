@@ -1,7 +1,8 @@
 package interfaz;
 
-import javax.swing.*;import java.awt.Dimension;
-import java.awt.GridLayout;
+import javax.swing.*;
+
+import java.awt.Dimension;
 import javax.swing.border.TitledBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,19 +12,28 @@ import java.awt.*;
 
 public class PanelEmpleados extends JPanel 
 {
-	private JFrame formulario; 
+	private JFrame formAlta; 
+	private JFrame formBaja;
+	private JFrame formRecurso;
 	private JButton bmodificar;
 	private JButton bdespedir;
 	
 	public PanelEmpleados()
 	{
 		super();
-		formulario=new JFrame();
-		formulario.setResizable(false);
-		formulario.setLocation(350,100);
+		formAlta=new JFrame();
+		formAlta.setResizable(false);
+		formAlta.setLocation(350,100);
+		formBaja=new JFrame();
+		formBaja.setResizable(false);
+		formBaja.setLocation(350,100);
+		formRecurso=new JFrame();
+		formRecurso.setResizable(false);
+		formRecurso.setLocation(350,100);
 		JPanel pempleado=dibujaEmpleado();
 		JPanel pdatos=dibujaDatos(false);
 		JPanel precursos=dibujaRecursos();
+		precursos.setPreferredSize(new Dimension(775,280));
 		JSplitPane sp1=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,pempleado,pdatos);
 		sp1.setDividerSize(4);
 		sp1.setEnabled(false);
@@ -63,11 +73,11 @@ public class PanelEmpleados extends JPanel
 		bcontratar.addActionListener(new ActionListener()
 				{	public void actionPerformed(ActionEvent e)
 					{
-						if (!formulario.isVisible())
+						if (!formAlta.isVisible())
 						{	JPanel panel=panelAltaEmpleado();
-							formulario.getContentPane().add(panel);
-							formulario.pack();	
-							formulario.setVisible(true);
+							formAlta.getContentPane().add(panel);
+							formAlta.pack();	
+							formAlta.setVisible(true);
 						}
 					}
 				});
@@ -217,46 +227,53 @@ public class PanelEmpleados extends JPanel
 	}
 	
 	public JPanel dibujaRecursos()
-	{
-		int f=8;
-		int c=5;
-		JPanel tabla=new JPanel(new GridLayout(f,c));
-		tabla.add(new JLabel("",SwingConstants.CENTER));
-		tabla.add(new JLabel("Código",SwingConstants.CENTER));
-		tabla.add(new JLabel("Multa",SwingConstants.CENTER));
-		tabla.add(new JLabel("Estado",SwingConstants.CENTER));
-		tabla.add(new JLabel("Descripción",SwingConstants.CENTER));
-		
-
-		
-		for (int i=1;i<f;i++)
-			for (int j=0;j<c;j++)
-			{	if (j==0)
-				{	Checkbox sel = new Checkbox("Seleccionar");
-					tabla.add(sel);
-					
-					
-				}
-				else
-				{
-					if ((j>0)&&(j<4))
-					{	JTextField texto=new JTextField();
-						texto.setEnabled(false);
-						texto.setPreferredSize(new Dimension(70,20));
-						tabla.add(texto);
-					}
-					else
-					{	JButton boton=new JButton("Ver");
-						boton.setPreferredSize(new Dimension(30,20));
-						tabla.add(boton);					
-					}
-				}
-			}
-		
+	{	
+		Box tabla=Box.createVerticalBox();
+		JPanel p=new JPanel();
+		JLabel l1=new JLabel("",SwingConstants.CENTER);
+		JLabel l2=new JLabel("Código",SwingConstants.CENTER);
+		JLabel l3=new JLabel("Multa",SwingConstants.CENTER);
+		JLabel l4=new JLabel("Estado",SwingConstants.CENTER);
+		JLabel l5=new JLabel("Descripción",SwingConstants.CENTER);
+		l1.setPreferredSize(new Dimension(25,25));
+		l2.setPreferredSize(new Dimension(130,25));
+		l3.setPreferredSize(new Dimension(130,25));
+		l4.setPreferredSize(new Dimension(130,25));
+		l5.setPreferredSize(new Dimension(80,25));
+		p.add(l1);
+		p.add(l2);
+		p.add(l3);
+		p.add(l4);
+		p.add(l5);
+		tabla.add(p);
+		for (int i=0;i<9;i++)
+		{	JPanel linea=dibujaTabla();
+			tabla.add(linea);		
+		}
 		JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		ptabla.setPreferredSize(new Dimension(600,200));
 		JButton bcrea=new JButton("Añadir");
+		bcrea.addActionListener(new ActionListener()
+				{	public void actionPerformed(ActionEvent e)
+					{
+						if (!formRecurso.isVisible())
+						{	formRecurso.getContentPane().add(anadeRecurso());
+							formRecurso.pack();
+							formRecurso.setVisible(true);
+						}
+					}
+				});
 		JButton bmod=new JButton("Modificar");
+		bmod.addActionListener(new ActionListener()
+				{	public void actionPerformed(ActionEvent e)
+					{
+						if (!formRecurso.isVisible())
+						{	formRecurso.getContentPane().add(modificaRecurso());
+							formRecurso.pack();
+							formRecurso.setVisible(true);
+						}
+					}
+				});
 		JButton belim=new JButton("Eliminar");
 		bcrea.setPreferredSize(new Dimension(90,25));
 		bmod.setPreferredSize(new Dimension(90,25));
@@ -265,18 +282,20 @@ public class PanelEmpleados extends JPanel
 		botonera.add(bcrea);
 		botonera.add(bmod);
 		botonera.add(belim);
+		ptabla.setPreferredSize(new Dimension(752,211));
+		botonera.setPreferredSize(new Dimension(752,25));
 		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,ptabla,botonera);
 		sp.setEnabled(false);
 		sp.setDividerSize(4);
 		JPanel prec=new JPanel();
 		prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Recursos asignados",TitledBorder.LEFT,TitledBorder.TOP));
-		prec.add(sp);		
+		prec.add(sp);						
 		return prec;		
 	}
 	
 	public JPanel panelAltaEmpleado() 
 	{		
-		formulario.setTitle("Nuevo empleado");
+		formAlta.setTitle("Nuevo empleado");
 		JLabel lcodigo=new JLabel("Código del empleado");
 		JLabel lperfil=new JLabel("Perfil del empleado");
 		JLabel lnomina=new JLabel("Nómina del empleado");
@@ -312,8 +331,8 @@ public class PanelEmpleados extends JPanel
 		bacepta.addActionListener(new ActionListener()
 				{	public void actionPerformed(ActionEvent e)
 					{
-						formulario.setVisible(false);
-						formulario.getContentPane().removeAll();
+						formAlta.setVisible(false);
+						formAlta.getContentPane().removeAll();
 						bdespedir.setEnabled(true);
 						bmodificar.setEnabled(true);
 					}
@@ -321,8 +340,8 @@ public class PanelEmpleados extends JPanel
 		bcancela.addActionListener(new ActionListener()
 				{	public void actionPerformed(ActionEvent e)
 					{
-						formulario.setVisible(false);
-						formulario.getContentPane().removeAll();
+						formAlta.setVisible(false);
+						formAlta.getContentPane().removeAll();
 					}
 				});
 		JSplitPane sp1=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja,pdat);
@@ -339,20 +358,20 @@ public class PanelEmpleados extends JPanel
 	public void eliminaEmpleado()
 	{
 		JPanel pd=panelBajaEmpleado();
-		formulario.getContentPane().add(pd);
-		formulario.pack();
-		formulario.setVisible(true);
-		formulario.addWindowListener(new WindowAdapter()
+		formBaja.getContentPane().add(pd);
+		formBaja.pack();
+		formBaja.setVisible(true);
+		formBaja.addWindowListener(new WindowAdapter()
 		{	public void windowClosing(WindowEvent e)
 			{
-				formulario.setVisible(false);	
+				formBaja.setVisible(false);	
 			}
 		});
 	}
 	
 	public JPanel panelBajaEmpleado()
 	{
-		formulario.setTitle("Despidiendo empleado...");
+		formBaja.setTitle("Despidiendo empleado...");
 		
 		JLabel lcodigo=new JLabel("Código del empleado");
 		
@@ -380,15 +399,15 @@ public class PanelEmpleados extends JPanel
 		bacepta.addActionListener(new ActionListener()
 				{	public void actionPerformed(ActionEvent e)
 					{
-						formulario.setVisible(false);
-						formulario.getContentPane().removeAll();
+						formBaja.setVisible(false);
+						formBaja.getContentPane().removeAll();
 					}
 				});
 		bcancela.addActionListener(new ActionListener()
 				{	public void actionPerformed(ActionEvent e)
 					{
-						formulario.setVisible(false);
-						formulario.getContentPane().removeAll();
+						formBaja.setVisible(false);
+						formBaja.getContentPane().removeAll();
 					}
 				});
 		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja,p2);
@@ -402,6 +421,129 @@ public class PanelEmpleados extends JPanel
 	public void modificaEmpleado()
 	{
 	
+	}
+	
+	public JPanel modificaRecurso()
+	{
+		formRecurso.setTitle("Modificar estado de recurso");
+		JLabel l1=new JLabel("Código");
+		JLabel l2=new JLabel("Estado");
+		l1.setPreferredSize(new Dimension(80,20));
+		l2.setPreferredSize(new Dimension(80,20));
+		JTextField cod=new JTextField();
+		JTextField est=new JTextField();
+		cod.setPreferredSize(new Dimension(100,20));
+		est.setPreferredSize(new Dimension(100,20));
+		JPanel p1=new JPanel();
+		JPanel p2=new JPanel();
+		p1.add(l1);
+		p1.add(cod);
+		p2.add(l2);
+		p2.add(est);
+		Box caja=Box.createVerticalBox();
+		caja.add(p1);
+		caja.add(p2);
+		JButton aceptar=new JButton("Aceptar");
+		JButton cancelar=new JButton("Cancelar");
+		JPanel botonera=new JPanel();
+		botonera.add(aceptar);
+		botonera.add(cancelar);
+		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja,botonera);
+		sp.setEnabled(false);		
+		sp.setDividerSize(4);
+		JPanel panel=new JPanel();
+		panel.add(sp);
+		panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Modificar estado de recurso",TitledBorder.LEFT,TitledBorder.TOP));
+		aceptar.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				formRecurso.setVisible(false);
+				formRecurso.getContentPane().removeAll();
+				//validar datos
+				//enviar datos a Sigrem para almacenarlos en la estructura de datos
+			}
+		});
+		cancelar.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				formRecurso.setVisible(false);
+				formRecurso.getContentPane().removeAll();
+			}
+		});
+		return panel;
+	}
+	
+	public JPanel anadeRecurso()
+	{
+		formRecurso.setTitle("Asignar recurso");
+		JLabel l1=new JLabel("Código");
+		l1.setPreferredSize(new Dimension(80,20));
+		JTextField cod=new JTextField();
+		cod.setPreferredSize(new Dimension(100,20));
+		JPanel p1=new JPanel();
+		p1.add(l1);
+		p1.add(cod);
+		Box caja=Box.createVerticalBox();
+		caja.add(p1);
+		JButton aceptar=new JButton("Aceptar");
+		JButton cancelar=new JButton("Cancelar");
+		JPanel botonera=new JPanel();
+		botonera.add(aceptar);
+		botonera.add(cancelar);
+		JSplitPane sp=new JSplitPane(JSplitPane.VERTICAL_SPLIT,caja,botonera);
+		sp.setEnabled(false);		
+		sp.setDividerSize(4);
+		JPanel panel=new JPanel();
+		panel.add(sp);
+		panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Añadir recurso",TitledBorder.LEFT,TitledBorder.TOP));
+		aceptar.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				formRecurso.setVisible(false);
+				formRecurso.getContentPane().removeAll();
+				//validar datos
+				//enviar datos a Sigrem para almacenarlos en la estructura de datos
+			}
+		});
+		cancelar.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{
+				formRecurso.setVisible(false);
+				formRecurso.getContentPane().removeAll();
+			}
+		});
+		return panel;
+	}
+	
+	public JPanel dibujaTabla()
+	{		
+		JPanel panel=new JPanel();
+		final JButton selec=new JButton(new ImageIcon("interfaz/tick.gif"));
+		selec.setPreferredSize(new Dimension (23,23));
+		final JTextField cod=new JTextField();
+		cod.setEnabled(false);
+		cod.setPreferredSize(new Dimension(130,25));
+		final JTextField exp=new JTextField();
+		exp.setEnabled(false);
+		exp.setPreferredSize(new Dimension(130,25));
+		final JTextField bol=new JTextField();
+		bol.setEnabled(false);
+		bol.setPreferredSize(new Dimension(130,25));
+		final JButton descrip=new JButton("Ver");
+		descrip.setPreferredSize(new Dimension(80,25));
+		panel.add(selec);
+		panel.add(cod);
+		panel.add(exp);
+		panel.add(bol);
+		panel.add(descrip);
+		selec.addActionListener(new ActionListener()
+		{	public void actionPerformed(ActionEvent e)
+			{	
+				
+		
+			}
+		});
+		return panel;
 	}
 }
 
