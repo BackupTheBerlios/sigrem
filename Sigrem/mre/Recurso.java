@@ -4,13 +4,13 @@ import java.util.LinkedList;
 
 public class Recurso {
 	
-	private String codigorecurso;
+	private String codigoRecurso;
 	
-	private String fechaemision;
+	private String fechaEmision;
 	
-	private String escritorecibido;
+	private String escritoRecibido;
 	
-	private String escritopresentado;
+	private String escritoPresentado;
 	
 	private String estado;
 	
@@ -18,35 +18,38 @@ public class Recurso {
 	
 	private String descripcion;
 	
+	private String codigoMulta;
+	
 	public Recurso(String codrecurso,LinkedList datos) 
 	{
-		codigorecurso=codrecurso;
-		fechaemision=(String)datos.get(0);
-		escritorecibido=(String)datos.get(1);
-		escritopresentado=(String)datos.get(2);
+		codigoRecurso=codrecurso;
+		fechaEmision=(String)datos.get(0);
+		escritoRecibido=(String)datos.get(1);
+		escritoPresentado=(String)datos.get(2);
 		estado=(String)datos.get(3);
 		abogado=(String)datos.get(4);
 		descripcion=(String)datos.get(5);		
+		codigoMulta=(String)datos.get(6);
 	}
 
 	public String dameCodigo()
 	{
-		return codigorecurso;
+		return codigoRecurso;
 	}
 
 	public String dameFechaEmision()
 	{
-		return fechaemision;
+		return fechaEmision;
 	}
 	
 	public String dameEscritoRecibido()
 	{
-		return escritorecibido;
+		return escritoRecibido;
 	}
 	
 	public String dameEscritoPresentado()
 	{
-		return escritopresentado;
+		return escritoPresentado;
 	}
 	
 	public String dameEstado()
@@ -64,32 +67,38 @@ public class Recurso {
 		return descripcion;
 	}
 	
+	public String dameCodigoMulta()
+	{
+		return codigoMulta;
+	}
+	
 	public LinkedList dameListaDatos()
 	{
 		LinkedList datos=new LinkedList();
-		datos.add(codigorecurso);
-		datos.add(fechaemision);
-		datos.add(escritorecibido);
-		datos.add(escritopresentado);
+		datos.add(codigoRecurso);
+		datos.add(fechaEmision);
+		datos.add(escritoRecibido);
+		datos.add(escritoPresentado);
 		datos.add(estado);
 		datos.add(abogado);
 		datos.add(descripcion);
+		datos.add(codigoMulta);
 		return datos;
 	}
 	
 	public void ponFechaEmision(String fem)
 	{
-		this.fechaemision=fem;
+		this.fechaEmision=fem;
 	}
 	
 	public void ponEscritoRecibido(String erec)
 	{
-		this.escritorecibido=erec;
+		this.escritoRecibido=erec;
 	}
 	
 	public void ponEscritoPresentado(String epre)
 	{
-		this.escritopresentado=epre;
+		this.escritoPresentado=epre;
 	}
 	
 	public void ponEstado(String est)
