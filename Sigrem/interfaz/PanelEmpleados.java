@@ -517,10 +517,10 @@ public class PanelEmpleados extends JPanel
 				bmodificar.setEnabled(true);								
 				idespedir.setEnabled(true);
 				imodificar.setEnabled(true);
+				urec=0;
 				if (tipo=='c')	
 				{	
 					ucod=ucod+1;
-					urec=0;
 				}
 				
 			}
