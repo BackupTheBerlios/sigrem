@@ -13,6 +13,8 @@ public class Sigrem
 {
 	private InterfazGrafica vista;
 	
+	private Persistencia persistencia;
+	
 	private Factoria factoria;
 	
 	private GClientes gclientes;
@@ -63,7 +65,8 @@ public class Sigrem
 		gmultas=factoria.generaGMultas(vista,codmulta);
 		grecursos=factoria.generaGRecursos(vista,codrecurso);
 		gempleados=factoria.generaGEmpleados(vista,codempleado);
-		geconomia=factoria.generaGEconomia(vista,gempleados,gcontratos,ultimomes,facturacion,gastos,balance);		
+		geconomia=factoria.generaGEconomia(vista,gempleados,gcontratos,ultimomes,facturacion,gastos,balance);
+		persistencia=new Persistencia(gcontratos,gclientes,gempleados,gmultas,grecursos,geconomia);
 	}
 	
 	public void activa()
