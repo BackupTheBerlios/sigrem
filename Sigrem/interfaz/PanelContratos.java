@@ -988,7 +988,7 @@ public class PanelContratos extends JPanel
 	public JPanel panelRecurso(String codigo)
 	{
 		formulario.setTitle("Recursos de la multa "+codigo);
-		formulario.setLocation(200,100);
+		formulario.setLocation(100,100);
 		JPanel prec=new JPanel();
 		prec.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),"Recursos de la multa "+codigo,TitledBorder.LEFT,TitledBorder.TOP));
 		Box tabla=Box.createVerticalBox();
@@ -1006,8 +1006,8 @@ public class PanelContratos extends JPanel
 		l1.setPreferredSize(new Dimension(100,25));
 		l2.setPreferredSize(new Dimension(75,25));
 		l3.setPreferredSize(new Dimension(75,25));
-		l4.setPreferredSize(new Dimension(250,25));
-		l5.setPreferredSize(new Dimension(250,25));
+		l4.setPreferredSize(new Dimension(180,25));
+		l5.setPreferredSize(new Dimension(180,25));
 		l6.setPreferredSize(new Dimension(100,25));
 		l7.setPreferredSize(new Dimension(100,25));
 		l8.setPreferredSize(new Dimension(80,25));
@@ -1029,7 +1029,7 @@ public class PanelContratos extends JPanel
 			tabla.add(linea);		
 		}
 		JScrollPane ptabla=new JScrollPane(tabla,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		ptabla.setPreferredSize(new Dimension(900,250));
+		ptabla.setPreferredSize(new Dimension(1050,300));
 		JButton bcrea=new JButton("Añadir recurso");
 		JButton baceptar=new JButton("Aceptar");
 		JPanel botonera=new JPanel();
@@ -1217,8 +1217,8 @@ public class PanelContratos extends JPanel
 		cod.setPreferredSize(new Dimension(100,25));
 		fcl.setPreferredSize(new Dimension(75,25));
 		fsi.setPreferredSize(new Dimension(75,25));
-		ere.setPreferredSize(new Dimension(250,25));
-		epr.setPreferredSize(new Dimension(250,25));
+		ere.setPreferredSize(new Dimension(180,25));
+		epr.setPreferredSize(new Dimension(180,25));
 		est.setPreferredSize(new Dimension(100,25));
 		abo.setPreferredSize(new Dimension(100,25));
 		descrip.setPreferredSize(new Dimension(80,25));		
@@ -1345,33 +1345,33 @@ public class PanelContratos extends JPanel
 	private void infraccionesTrafico(JComboBox infracciones)
 	{
 		infracciones.addItem("Adelantamiento");
-		infracciones.addItem("Adelantamiento sin visibilidad");
-		infracciones.addItem("Adelantamiento en intersección");
+		infracciones.addItem("Adel. sin visibilidad");
+		infracciones.addItem("Adel. en intersección");
 		infracciones.addItem("Alcoholemia");
 		infracciones.addItem("Ceda el paso");
 		infracciones.addItem("Cinturón de seguridad");
-		infracciones.addItem("Cinturón de seguridad menores 12 años");
-		infracciones.addItem("Circular 2 personas en ciclomotor");
-		infracciones.addItem("Circular por carril distinto");
+		infracciones.addItem("Cint. seg. menores 12 años");
+		infracciones.addItem("Circ. 2 pers. en ciclomotor");
+		infracciones.addItem("Circ. por carril distinto");
 		infracciones.addItem("Conducción temeraria");
-		infracciones.addItem("Conducción sin diligencia y precaución");
+		infracciones.addItem("Cond. sin diligencia y precaución");
 		infracciones.addItem("Carecer extintor");
 		infracciones.addItem("Carecer rueda repuesto");
 		infracciones.addItem("Carecer chaleco reflectante");
 		infracciones.addItem("Dirección prohibida");
-		infracciones.addItem("Docum. ITV no pasada");
-		infracciones.addItem("Docum. ITV pasa pero circula sin tarjeta");
-		infracciones.addItem("Docum. Permiso de Circulación");
-		infracciones.addItem("Docum. Permiso de Conducir");
-		infracciones.addItem("Docum. Seguro obligatorio");
-		infracciones.addItem("Docum.  Otros");
+		infracciones.addItem("Doc. ITV no pasada");
+		infracciones.addItem("Doc. ITV pasa pero circ. sin tarjeta");
+		infracciones.addItem("Doc. Permiso de Circulación");
+		infracciones.addItem("Doc. Permiso de Conducir");
+		infracciones.addItem("Doc. Seguro obligatorio");
+		infracciones.addItem("Doc.  Otros");
 		infracciones.addItem("Estacionamiento indebido");
 		infracciones.addItem("Estac. zona limitac. horaria");
 		infracciones.addItem("Exceso de velocidad");
 		infracciones.addItem("Exceso de dimensiones");
 		infracciones.addItem("Giro");
 		infracciones.addItem("Hablar por teléfono");
-		infracciones.addItem("Incumpl. obligac. identificar conductor");
+		infracciones.addItem("Incumpl. obligac. ident. conductor");
 		infracciones.addItem("Luces. Mal funcionamiento");
 		infracciones.addItem("Luces. No llevar repuesto");
 		infracciones.addItem("Luces. No llevar en túnel");
@@ -1399,9 +1399,9 @@ public class PanelContratos extends JPanel
 		infracciones.addItem("Ttes. Obstrucción labor inspectora");
 		infracciones.addItem("Ttes. Manipulación tacógrafo");
 		infracciones.addItem("Ttes. Inadecuado func.tacógrafo");
-		infracciones.addItem("Ttes. Carecer tacógrafo o de sus elementos");
+		infracciones.addItem("Ttes. Carecer tacógrafo o de sus elem.");
 		infracciones.addItem("Ttes. Carecer hojas registro o datos");
-		infracciones.addItem("Ttes. No llevar hoja  registro en tacógrafo");
+		infracciones.addItem("Ttes. No llevar hoja  reg. en tacógrafo");
 		infracciones.addItem("Ttes. Superposición disco");
 		infracciones.addItem("Ttes. Exceso de peso");
 		infracciones.addItem("Ttes. Carecer distintivos");
@@ -1417,7 +1417,7 @@ public class PanelContratos extends JPanel
 		infracciones.addItem("TMP. Carecer Consej seguridad");
 		infracciones.addItem("TMP. Equipamiento vehículo");
 		infracciones.addItem("TMP. Carecer de etiquetas de peligro");
-		infracciones.addItem("TMP. No remitir informe anual o parte accid.");
+		infracciones.addItem("TMP. No remitir info. anual o parte accid.");
 		infracciones.addItem("TMP.Carecer certif. limpieza cisterna");
 		infracciones.addItem("TMPer.Carecer certificado conformidad");
 		infracciones.addItem("TMPer.No alcanzar temper. exigible");
