@@ -2,9 +2,7 @@ package mmu;
 
 import java.util.LinkedList;
 import java.util.Vector;
-
 import interfaz.InterfazGrafica;
-import mco.Contrato;
 import med.*;
 
 public class GMultasImp implements GMultas 
