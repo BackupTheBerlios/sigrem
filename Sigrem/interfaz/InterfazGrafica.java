@@ -83,8 +83,6 @@ public class InterfazGrafica
 		{	public void actionPerformed(ActionEvent e)
 			{
 			panelVistas.setSelectedIndex(1);
-			PanelEmpleados p=new PanelEmpleados();
-			p.eliminaEmpleado();
 			}
 		});
 		JMenuItem salir=new JMenuItem("Salir");
