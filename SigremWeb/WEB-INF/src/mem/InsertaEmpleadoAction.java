@@ -26,20 +26,20 @@ public class InsertaEmpleadoAction extends Action
 		    EmpleadoForm empleadoForm = (EmpleadoForm) form;
 		    
 		    //al códgio hay que ponerle un valor correcto
-		    empleado.ponCodigo(empleadoForm.dameNombre()+"algo");
-			empleado.ponNombre(empleadoForm.dameNombre());
-			empleado.ponDni(empleadoForm.dameDni());
-			empleado.ponDireccion(empleadoForm.dameDireccion());
-			empleado.ponCp(empleadoForm.dameCp());
-			empleado.ponPoblacion(empleadoForm.damePoblacion());
-			empleado.ponProvincia(empleadoForm.dameProvincia());
-			empleado.ponTelefono1(empleadoForm.dameTelefono1());
-			empleado.ponTelefono2(empleadoForm.dameTelefono2());
-			empleado.ponMovil(empleadoForm.dameMovil());
-			empleado.ponEmail(empleadoForm.dameEmail());
-			empleado.ponFax(empleadoForm.dameFax());
-			empleado.ponNomina(empleadoForm.dameNomina());
-			empleado.ponPerfil(empleadoForm.damePerfil());
+		    empleado.setCodigo(empleadoForm.getNombre()+"algo");
+			empleado.setNombre(empleadoForm.getNombre());
+			empleado.setDni(empleadoForm.getDni());
+			empleado.setDireccion(empleadoForm.getDireccion());
+			empleado.setCp(empleadoForm.getCp());
+			empleado.setPoblacion(empleadoForm.getPoblacion());
+			empleado.setProvincia(empleadoForm.getProvincia());
+			empleado.setTelefono1(empleadoForm.getTelefono1());
+			empleado.setTelefono2(empleadoForm.getTelefono2());
+			empleado.setMovil(empleadoForm.getMovil());
+			empleado.setEmail(empleadoForm.getEmail());
+			empleado.setFax(empleadoForm.getFax());
+			empleado.setNomina(empleadoForm.getNomina());
+			empleado.setPerfil(empleadoForm.getPerfil());
 		    EmpleadoBaseDatos.insertaEmpleado(empleado, getDataSource(request));
 		}
 		catch ( Exception e ) 

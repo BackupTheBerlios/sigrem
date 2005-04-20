@@ -5,6 +5,7 @@
 <html>
   <head>
     <title><bean:message key="app.title" /></title>
+    <link type="text/css" href="estilo.css" rel="stylesheet" media="screen">
   </head>
   <body>
 
@@ -47,7 +48,7 @@
       </tr>
       <!-- iterate over the results of the query -->
       <logic:iterate id="empleado" name="empleados">
-	<tr align="left">
+	<tr align="center">
 	  <td>
             <bean:write name="empleado" property="codigo" />
 	  </td>
@@ -91,9 +92,9 @@
             <bean:write name="empleado" property="nomina" />
 	  </td>
 	  <td>
-        <a href="Edit.do?username=<bean:write name="empleado"
+            <a href="Edit.do?codigo=<bean:write name="empleado"
 	      property="codigo" />">Edit</a>
-	    <a href="Delete.do?username=<bean:write name="empleado"
+	    <a href="Delete.do?codigo=<bean:write name="empleado"
 	      property="codigo" />">Delete</a>
 	  </td>
 	</tr>

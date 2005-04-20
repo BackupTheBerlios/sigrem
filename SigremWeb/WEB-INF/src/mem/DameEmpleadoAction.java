@@ -21,20 +21,20 @@ public class DameEmpleadoAction extends Action
 		Empleado empleado = EmpleadoBaseDatos.dameEmpleado(codigo, getDataSource(request));
 		if ( empleado != null ) 
 		{	form = new EmpleadoForm();
-			form.ponCodigo(empleado.dameCodigo());
-			form.ponNombre(empleado.dameNombre());
-			form.ponDni(empleado.dameDni());
-			form.ponDireccion(empleado.dameDireccion());
-			form.ponCp(empleado.dameCp());
-			form.ponPoblacion(empleado.damePoblacion());
-			form.ponProvincia(empleado.dameProvincia());
-			form.ponTelefono1(empleado.dameTelefono1());
-			form.ponTelefono2(empleado.dameTelefono2());
-			form.ponMovil(empleado.dameMovil());
-			form.ponEmail(empleado.dameEmail());
-			form.ponFax(empleado.dameFax());
-			form.ponNomina(empleado.dameNomina());
-			form.ponPerfil(empleado.damePerfil());
+			form.setCodigo(empleado.getCodigo());
+			form.setNombre(empleado.getNombre());
+			form.setDni(empleado.getDni());
+			form.setDireccion(empleado.getDireccion());
+			form.setCp(empleado.getCp());
+			form.setPoblacion(empleado.getPoblacion());
+			form.setProvincia(empleado.getProvincia());
+			form.setTelefono1(empleado.getTelefono1());
+			form.setTelefono2(empleado.getTelefono2());
+			form.setMovil(empleado.getMovil());
+			form.setEmail(empleado.getEmail());
+			form.setFax(empleado.getFax());
+			form.setNomina(empleado.getNomina());
+			form.setPerfil(empleado.getPerfil());
 		}
 		else 
 		{	throw new Exception("Empleado " + codigo + " no encontrado");}

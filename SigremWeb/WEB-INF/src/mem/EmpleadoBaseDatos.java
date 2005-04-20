@@ -22,20 +22,20 @@ public class EmpleadoBaseDatos
 			rs = stmt.executeQuery("select * from empleados where codigo=\'"+ codigo + "'");
 			if ( rs.next() ) 
 			{	empleado=new Empleado();
-				empleado.ponCodigo(rs.getString("codigo"));
-				empleado.ponNombre(rs.getString("nombre"));
-				empleado.ponDni(rs.getString("dni"));
-				empleado.ponDireccion(rs.getString("direccion"));
-				empleado.ponCp(rs.getString("cp"));
-				empleado.ponPoblacion(rs.getString("poclacion"));
-				empleado.ponProvincia(rs.getString("provincia"));
-				empleado.ponTelefono1(rs.getString("telefono1"));
-				empleado.ponTelefono2(rs.getString("telefono2"));
-				empleado.ponMovil(rs.getString("movil"));
-				empleado.ponEmail(rs.getString("email"));
-				empleado.ponFax(rs.getString("fax"));
-				empleado.ponNomina(rs.getString("nomina"));
-				empleado.ponPerfil(rs.getString("perfil"));
+				empleado.setCodigo(rs.getString("codigo"));
+				empleado.setNombre(rs.getString("nombre"));
+				empleado.setDni(rs.getString("dni"));
+				empleado.setDireccion(rs.getString("direccion"));
+				empleado.setCp(rs.getString("cp"));
+				empleado.setPoblacion(rs.getString("poblacion"));
+				empleado.setProvincia(rs.getString("provincia"));
+				empleado.setTelefono1(rs.getString("telefono1"));
+				empleado.setTelefono2(rs.getString("telefono2"));
+				empleado.setMovil(rs.getString("movil"));
+				empleado.setEmail(rs.getString("email"));
+				empleado.setFax(rs.getString("fax"));
+				empleado.setNomina(rs.getString("nomina"));
+				empleado.setPerfil(rs.getString("perfil"));
 			}
 			else 
 			{	throw new Exception("Empleado " + codigo + " no encontrado");}
@@ -67,20 +67,20 @@ public class EmpleadoBaseDatos
 			rs = stmt.executeQuery("select * from empleados");
 			while (rs.next()) 
 			{	empleado = new Empleado();
-				empleado.ponCodigo(rs.getString("codigo"));
-				empleado.ponNombre(rs.getString("nombre"));
-				empleado.ponDni(rs.getString("dni"));
-				empleado.ponDireccion(rs.getString("direccion"));
-				empleado.ponCp(rs.getString("cp"));
-				empleado.ponPoblacion(rs.getString("poclacion"));
-				empleado.ponProvincia(rs.getString("provincia"));
-				empleado.ponTelefono1(rs.getString("telefono1"));
-				empleado.ponTelefono2(rs.getString("telefono2"));
-				empleado.ponMovil(rs.getString("movil"));
-				empleado.ponEmail(rs.getString("email"));
-				empleado.ponFax(rs.getString("fax"));
-				empleado.ponNomina(rs.getString("nomina"));
-				empleado.ponPerfil(rs.getString("perfil"));
+				empleado.setCodigo(rs.getString("codigo"));
+				empleado.setNombre(rs.getString("nombre"));
+				empleado.setDni(rs.getString("dni"));
+				empleado.setDireccion(rs.getString("direccion"));
+				empleado.setCp(rs.getString("cp"));
+				empleado.setPoblacion(rs.getString("poblacion"));
+				empleado.setProvincia(rs.getString("provincia"));
+				empleado.setTelefono1(rs.getString("telefono1"));
+				empleado.setTelefono2(rs.getString("telefono2"));
+				empleado.setMovil(rs.getString("movil"));
+				empleado.setEmail(rs.getString("email"));
+				empleado.setFax(rs.getString("fax"));
+				empleado.setNomina(rs.getString("nomina"));
+				empleado.setPerfil(rs.getString("perfil"));
 				empleados.add(empleado);
 			}
 		}	
@@ -150,20 +150,20 @@ public class EmpleadoBaseDatos
 		{	conn = dataSource.getConnection();
 			stmt = conn.createStatement();
 			StringBuffer sqlString =new StringBuffer("insert into empleados ");
-			sqlString.append("values (\""+empleado.dameCodigo()+ "\", ");
-			sqlString.append("\"" +empleado.damePerfil()+ "\", ");
-			sqlString.append("\""+empleado.dameDni()+ "\", ");
-			sqlString.append("\""+empleado.dameNombre()+ "\", ");
-			sqlString.append("\""+empleado.dameDireccion()+ "\", ");
-			sqlString.append("\""+empleado.dameCp()+ "\", ");
-			sqlString.append("\""+empleado.damePoblacion()+ "\", ");
-			sqlString.append("\""+empleado.dameProvincia()+ "\", ");
-			sqlString.append("\""+empleado.dameTelefono1()+ "\", ");
-			sqlString.append("\""+empleado.dameTelefono2()+ "\", ");
-			sqlString.append("\""+empleado.dameMovil()+ "\", ");
-			sqlString.append("\""+empleado.dameEmail()+ "\", ");
-			sqlString.append("\""+empleado.dameFax()+ "\", ");
-			sqlString.append("\""+empleado.dameNomina()+ "\")");
+			sqlString.append("values (\""+empleado.getCodigo()+ "\", ");
+			sqlString.append("\"" +empleado.getPerfil()+ "\", ");
+			sqlString.append("\""+empleado.getDni()+ "\", ");
+			sqlString.append("\""+empleado.getNombre()+ "\", ");
+			sqlString.append("\""+empleado.getDireccion()+ "\", ");
+			sqlString.append("\""+empleado.getCp()+ "\", ");
+			sqlString.append("\""+empleado.getPoblacion()+ "\", ");
+			sqlString.append("\""+empleado.getProvincia()+ "\", ");
+			sqlString.append("\""+empleado.getTelefono1()+ "\", ");
+			sqlString.append("\""+empleado.getTelefono2()+ "\", ");
+			sqlString.append("\""+empleado.getMovil()+ "\", ");
+			sqlString.append("\""+empleado.getEmail()+ "\", ");
+			sqlString.append("\""+empleado.getFax()+ "\", ");
+			sqlString.append("\""+empleado.getNomina()+ "\")");
 			stmt.execute(sqlString.toString());
 		}
 		finally {
@@ -188,17 +188,17 @@ public class EmpleadoBaseDatos
 		{	conn = dataSource.getConnection();
       		stmt = conn.createStatement();
       		StringBuffer sqlString=new StringBuffer("update empleados ");
-      		sqlString.append("set direccion='"+ empleado.dameDireccion()+ "', ");
-      		sqlString.append("cp="+ empleado.dameCp()+ ", ");
-      		sqlString.append("poblacion='"+ empleado.damePoblacion() + "', ");
-      		sqlString.append("provincia='"+ empleado.dameProvincia() + "', ");
-      		sqlString.append("telefono1='"+ empleado.dameTelefono1() + "', ");
-      		sqlString.append("telefono2="+ empleado.dameTelefono2()+ "', ");
-      		sqlString.append("movil="+ empleado.dameMovil()+ "', ");
-      		sqlString.append("email="+ empleado.dameEmail()+ "', ");
-      		sqlString.append("fax="+ empleado.dameFax()+ "', ");
-      		sqlString.append("nomina="+ empleado.dameNomina());
-      		sqlString.append(" where codigo='"+ empleado.dameCodigo()+ "'");
+      		sqlString.append("set direccion='"+ empleado.getDireccion()+ "', ");
+      		sqlString.append("cp='"+ empleado.getCp()+ "', ");
+      		sqlString.append("poblacion='"+ empleado.getPoblacion() + "', ");
+      		sqlString.append("provincia='"+ empleado.getProvincia() + "', ");
+      		sqlString.append("telefono1='"+ empleado.getTelefono1() + "', ");
+      		sqlString.append("telefono2='"+ empleado.getTelefono2()+ "', ");
+      		sqlString.append("movil='"+ empleado.getMovil()+ "', ");
+      		sqlString.append("email='"+ empleado.getEmail()+ "', ");
+      		sqlString.append("fax='"+ empleado.getFax()+ "', ");
+      		sqlString.append("nomina='"+ empleado.getNomina());
+      		sqlString.append(" where codigo='"+ empleado.getCodigo()+ "'");
       		stmt.execute(sqlString.toString());
 		}
 		finally {

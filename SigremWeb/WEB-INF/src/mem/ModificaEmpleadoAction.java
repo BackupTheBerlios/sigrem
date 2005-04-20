@@ -1,9 +1,3 @@
-/*
- * Created on 19-abr-2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
 package mem;
 
 import java.io.IOException;
@@ -23,20 +17,20 @@ public class ModificaEmpleadoAction extends Action
 	protected void modificarEmpleado(EmpleadoForm form, HttpServletRequest request) throws Exception 
 	{
 		Empleado empleado = new Empleado();
-		empleado.ponCodigo(form.dameNombre()+"algo");
-		empleado.ponNombre(form.dameNombre());
-		empleado.ponDni(form.dameDni());
-		empleado.ponDireccion(form.dameDireccion());
-		empleado.ponCp(form.dameCp());
-		empleado.ponPoblacion(form.damePoblacion());
-		empleado.ponProvincia(form.dameProvincia());
-		empleado.ponTelefono1(form.dameTelefono1());
-		empleado.ponTelefono2(form.dameTelefono2());
-		empleado.ponMovil(form.dameMovil());
-		empleado.ponEmail(form.dameEmail());
-		empleado.ponFax(form.dameFax());
-		empleado.ponNomina(form.dameNomina());
-		empleado.ponPerfil(form.damePerfil());
+		empleado.setCodigo(form.getNombre()+"algo");
+		empleado.setNombre(form.getNombre());
+		empleado.setDni(form.getDni());
+		empleado.setDireccion(form.getDireccion());
+		empleado.setCp(form.getCp());
+		empleado.setPoblacion(form.getPoblacion());
+		empleado.setProvincia(form.getProvincia());
+		empleado.setTelefono1(form.getTelefono1());
+		empleado.setTelefono2(form.getTelefono2());
+		empleado.setMovil(form.getMovil());
+		empleado.setEmail(form.getEmail());
+		empleado.setFax(form.getFax());
+		empleado.setNomina(form.getNomina());
+		empleado.setPerfil(form.getPerfil());
 		EmpleadoBaseDatos.modificaEmpleado(empleado, getDataSource(request));
 	}
 

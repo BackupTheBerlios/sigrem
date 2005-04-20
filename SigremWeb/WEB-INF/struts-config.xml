@@ -25,7 +25,7 @@
   </form-beans>
 
   <global-forwards>
-    <forward name="listaempleados" path="/EmployeeList"/>
+    <forward name="employeelist" path="/EmployeeList"/>
   </global-forwards>
 
   <action-mappings>

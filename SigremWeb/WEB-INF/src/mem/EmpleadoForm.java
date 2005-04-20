@@ -23,35 +23,35 @@ public class EmpleadoForm extends ActionForm
 	protected String fax;
 	protected String nomina;
 	
-	public String dameCodigo(){return codigo;}
-	public String dameNombre(){return nombre;}
-	public String dameDni(){return dni;}
-	public String dameDireccion(){return direccion;}
-	public String dameCp(){return cp;}
-	public String damePoblacion(){return poblacion;}
-	public String dameProvincia(){return provincia;}
-	public String dameTelefono1(){return telefono1;}
-	public String dameTelefono2(){return telefono2;}
-	public String dameMovil(){return movil;}
-	public String dameEmail(){return email;}
-	public String dameFax(){return fax;}
-	public String dameNomina(){return nomina;}
-	public String damePerfil(){return perfil;}
+	public String getCodigo(){return codigo;}
+	public String getNombre(){return nombre;}
+	public String getDni(){return dni;}
+	public String getDireccion(){return direccion;}
+	public String getCp(){return cp;}
+	public String getPoblacion(){return poblacion;}
+	public String getProvincia(){return provincia;}
+	public String getTelefono1(){return telefono1;}
+	public String getTelefono2(){return telefono2;}
+	public String getMovil(){return movil;}
+	public String getEmail(){return email;}
+	public String getFax(){return fax;}
+	public String getNomina(){return nomina;}
+	public String getPerfil(){return perfil;}
 	
-	public void ponCodigo(String cod){this.codigo = cod;}
-	public void ponNombre(String nom){this.nombre = nom;}
-	public void ponDni(String dni){this.direccion = dni;}
-	public void ponDireccion(String dir){this.direccion = dir;}
-	public void ponCp(String cp){this.cp = cp;}
-	public void ponPoblacion(String pob){this.poblacion = pob;}
-	public void ponProvincia(String pro){this.provincia = pro;}
-	public void ponTelefono1(String tel){this.telefono1 = tel;}
-	public void ponTelefono2(String tel){this.telefono2 = tel;}
-	public void ponMovil(String mov){this.movil = mov;}
-	public void ponEmail(String email){this.email = email;}
-	public void ponFax(String fax){this.fax = fax;}
-	public void ponNomina(String nomina){this.nomina = nomina;}
-	public void ponPerfil(String perfil){this.perfil = perfil;}
+	public void setCodigo(String cod){this.codigo = cod;}
+	public void setNombre(String nom){this.nombre = nom;}
+	public void setDni(String dni){this.dni = dni;}
+	public void setDireccion(String dir){this.direccion = dir;}
+	public void setCp(String cp){this.cp = cp;}
+	public void setPoblacion(String pob){this.poblacion = pob;}
+	public void setProvincia(String pro){this.provincia = pro;}
+	public void setTelefono1(String tel){this.telefono1 = tel;}
+	public void setTelefono2(String tel){this.telefono2 = tel;}
+	public void setMovil(String mov){this.movil = mov;}
+	public void setEmail(String email){this.email = email;}
+	public void setFax(String fax){this.fax = fax;}
+	public void setNomina(String nomina){this.nomina = nomina;}
+	public void setPerfil(String perfil){this.perfil = perfil;}
 	
 	//Este método es llamado con cada petición. Resetea los atributos del Form
 	//para poner los de la nueva petición
