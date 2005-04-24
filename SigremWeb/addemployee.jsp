@@ -33,10 +33,6 @@
       type="mem.EmpleadoForm" >
       <table width="500" border="0">
         <tr>
-          <td><bean:message key="app.codigo" />:</td>
-          <td><html:text property="codigo" /></td>
-	</tr>
-	<tr>
           <td><bean:message key="app.nombre" />:</td>
           <td><html:text property="nombre" /></td>
 	</tr>
@@ -89,7 +85,8 @@
 	</tr>
 	<tr>
           <td colspan="2" align="center">
-            <html:submit /><html:cancel /><html:reset />
+            <html:submit />
+	    <html:cancel />
           </td>
         </tr>
       </table>

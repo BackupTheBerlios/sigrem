@@ -33,18 +33,23 @@
       type="mem.EmpleadoForm"
       scope="request" > 
       <table width="500" border="0">
-        <tr>
-          <td><bean:message key="app.codigo" />:</td>
+	<tr>
+          <td><bean:message key="app.codigoe" />:</td>
           <td><html:text property="codigo" /></td>
 	</tr>
 	<tr>
           <td><bean:message key="app.nombre" />:</td>
           <td><html:text property="nombre" /></td>
 	</tr>
+	<tr>
 	  <td><bean:message key="app.dni" />:</td>
           <td><html:text property="dni" /></td>
         </tr>
-        <tr>
+	</tr>
+	  <td><bean:message key="app.perfil" />:</td>
+          <td><html:text property="perfil" /></td>
+        </tr>
+	<tr>
           <td><bean:message key="app.direccion" />:</td>
           <td><html:text property="direccion" /></td>
 	</tr>
@@ -81,18 +86,13 @@
           <td><html:text property="fax" /></td>
 	</tr>
         <tr>
-          <td><bean:message key="app.perfil" />:</td>
-          <td><html:text property="perfil" /></td>
-	</tr>
-	<tr>
           <td><bean:message key="app.nomina" />:</td>
           <td><html:text property="nomina" /></td>
 	</tr>
 	<tr>
           <td colspan="2" align="center">
-	    <html:submit />
+            <html:submit />
 	    <html:cancel />
-	    <html:reset />
 	  </td>
         </tr>
       </table>

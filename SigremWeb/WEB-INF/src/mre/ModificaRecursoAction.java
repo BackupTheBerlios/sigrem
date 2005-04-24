@@ -1,4 +1,4 @@
-package mem;
+package mre;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -12,26 +12,20 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionError;
 
-public class ModificaEmpleadoAction extends Action
+public class ModificaRecursoAction extends Action
 {
-	protected void modificarEmpleado(EmpleadoForm form, HttpServletRequest request) throws Exception 
+	protected void modificarRecurso(RecursoForm form, HttpServletRequest request) throws Exception 
 	{
-		Empleado empleado = new Empleado();
-		empleado.setCodigo(form.getCodigo());
-		empleado.setNombre(form.getNombre());
-		empleado.setDni(form.getDni());
-		empleado.setDireccion(form.getDireccion());
-		empleado.setCp(form.getCp());
-		empleado.setPoblacion(form.getPoblacion());
-		empleado.setProvincia(form.getProvincia());
-		empleado.setTelefono1(form.getTelefono1());
-		empleado.setTelefono2(form.getTelefono2());
-		empleado.setMovil(form.getMovil());
-		empleado.setEmail(form.getEmail());
-		empleado.setFax(form.getFax());
-		empleado.setNomina(form.getNomina());
-		empleado.setPerfil(form.getPerfil());
-		EmpleadoBaseDatos.modificaEmpleado(empleado, getDataSource(request));
+		Recurso recurso = new Recurso();
+		recurso.setCodigoRecurso(form.getCodigoRecurso());
+		recurso.setFechaEmision(form.getFechaEmision());
+		recurso.setEscritoPresentado(form.getEscritoPresentado());
+		recurso.setEscritoRecibido(form.getEscritoRecibido());
+		recurso.setEstado(form.getEstado());
+		recurso.setDescripcion(form.getDescripcion());
+		recurso.setCodigoMulta(form.getCodigoMulta());
+		recurso.setAbogado(form.getAbogado());
+		RecursoBaseDatos.modificaRecurso(recurso, getDataSource(request));
 	}
 
 	public ActionForward execute(ActionMapping mapping,
@@ -43,7 +37,7 @@ public class ModificaEmpleadoAction extends Action
 		if ( isCancelled(request) ) 
 		{	return (mapping.findForward("success"));}
 		try 
-		{	modificarEmpleado((EmpleadoForm) form, request);}
+		{	modificarRecurso((RecursoForm) form, request);}
 		catch ( Exception e ) 
 		{	target = new String("error");
 			ActionErrors errors = new ActionErrors();

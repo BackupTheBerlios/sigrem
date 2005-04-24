@@ -9,7 +9,43 @@ import java.sql.SQLException;
 
 public class EmpleadoBaseDatos 
 {
-
+	public static String asignaCodigo(DataSource dataSource) throws Exception
+	{
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		Empleado empleado = null;
+		String codigo=null;
+		try 
+		{	conn = dataSource.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("select max(codigo) as codigo from empleados");
+			if (rs.next())
+			{	codigo=rs.getString("codigo");
+				if (codigo!=null)
+				{	String numero=codigo.substring(0,4);
+					int num=Integer.valueOf(codigo.substring(4)).intValue();
+					numero=numero+(num+1);
+					codigo=numero;
+				}
+				else
+				{	codigo="EM000";}
+			}
+		}
+		finally 
+		{	if ( rs != null ) {
+				rs.close();
+      		}	
+      		if ( stmt != null ) {
+      			stmt.close();
+      		}
+      		if ( conn != null ) {
+      			conn.close();
+      		}
+		}
+		return codigo;		
+	}
+		
 	public static Empleado dameEmpleado(String codigo, DataSource dataSource) throws Exception 
 	{
 		Connection conn = null;
@@ -145,7 +181,6 @@ public class EmpleadoBaseDatos
 	{
 		Connection conn = null;
 		Statement stmt = null;
-		ResultSet rs = null;
 		try 
 		{	conn = dataSource.getConnection();
 			stmt = conn.createStatement();
@@ -167,9 +202,6 @@ public class EmpleadoBaseDatos
 			stmt.execute(sqlString.toString());
 		}
 		finally {
-			if ( rs != null ) {
-				rs.close();
-			}
 			if ( stmt != null ) {
 				stmt.close();
 			}
@@ -197,7 +229,7 @@ public class EmpleadoBaseDatos
       		sqlString.append("movil='"+ empleado.getMovil()+ "', ");
       		sqlString.append("email='"+ empleado.getEmail()+ "', ");
       		sqlString.append("fax='"+ empleado.getFax()+ "', ");
-      		sqlString.append("nomina='"+ empleado.getNomina());
+      		sqlString.append("nomina='"+ empleado.getNomina()+"'");
       		sqlString.append(" where codigo='"+ empleado.getCodigo()+ "'");
       		stmt.execute(sqlString.toString());
 		}

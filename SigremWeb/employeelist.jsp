@@ -31,7 +31,7 @@
     <table width="700"
       border="0" cellspacing="0" cellpadding="0">
       <tr align="left">
-        <th><bean:message key="app.codigo" /></th>
+        <th><bean:message key="app.codigoe" /></th>
         <th><bean:message key="app.nombre" /></th>
         <th><bean:message key="app.dni" /></th>
         <th><bean:message key="app.perfil" /></th>
@@ -93,9 +93,9 @@
 	  </td>
 	  <td>
             <a href="Edit.do?codigo=<bean:write name="empleado"
-	      property="codigo" />">Edit</a>
+	      property="codigo" />">Modificar</a>
 	    <a href="Delete.do?codigo=<bean:write name="empleado"
-	      property="codigo" />">Delete</a>
+	      property="codigo" />">Eliminar</a>
 	  </td>
 	</tr>
       </logic:iterate>

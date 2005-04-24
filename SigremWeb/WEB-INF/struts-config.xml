@@ -13,19 +13,23 @@
       <set-property property="url"
         value="jdbc:mysql://localhost/sigremBD" />
       <set-property property="username"
-        value="username"/>
+        value=""/>
       <set-property property="password"
-        value="password"/>
+        value=""/>
     </data-source>
   </data-sources>
 
   <form-beans>
     <form-bean name="empleadoForm"
       type="mem.EmpleadoForm" />
+    <form-bean name="recursoForm"
+      type="mre.RecursoForm" />
+    <form-bean name="multaForm"
+      type="mmu.MultaForm" />
   </form-beans>
 
   <global-forwards>
-    <forward name="employeelist" path="/EmployeeList"/>
+    <forward name="listaempleados" path="/EmployeeList"/>
   </global-forwards>
 
   <action-mappings>
@@ -72,6 +76,95 @@
       <forward name="success" path="/EmployeeList.do"/>
     </action>
 
+
+
+
+    <action path="/RecursosList"
+      type="mre.ListaRecursosAction"
+      scope="request" >
+      <forward name="success" path="/recursoslist.jsp"/>
+    </action>
+
+    <action path="/EditRecurso"
+      type="mre.ModificaRecursoAction"
+      name="recursoForm"
+      scope="request"
+      input="/editrecurso.jsp"
+      validate="true" >
+      <forward name="success" path="/RecursosList.do"/>
+      <forward name="error" path="/editrecurso.jsp"/>
+    </action>
+
+    <action path="/DeleteRecurso"
+      type="mre.EliminaRecursoAction"
+      scope="request"
+      validate="false" >
+      <forward name="success" path="/RecursosList.do"/>
+    </action>
+
+    <action path="/EditR"
+      type="mre.DameRecursoAction"
+      name="recursoForm"
+      scope="request"
+      validate="false" >
+      <forward name="success" path="/editrecurso.jsp"/>
+      <forward name="error" path="/RecursosList.do"/>
+    </action>
+
+    <action path="/AddRecurso"
+      type="mre.InsertaRecursoAction"
+      name="recursoForm"
+      scope="request"
+      input="/addrecurso.jsp"
+      validate="true" >
+      <forward name="success" path="/RecursosList.do"/>
+      <forward name="error" path="/addrecurso.jsp"/>
+    </action>
+
+
+
+
+    <action path="/MultasList"
+      type="mmu.ListaMultasAction"
+      scope="request" >
+      <forward name="success" path="/multaslist.jsp"/>
+    </action>
+
+    <action path="/AddMulta"
+      type="mmu.InsertaMultaAction"
+      name="multaForm"
+      scope="request"
+      input="/addmulta.jsp"
+      validate="true" >
+      <forward name="success" path="/MultasList.do"/>
+      <forward name="error" path="/addmulta.jsp"/>
+    </action>
+
+    <action path="/EditM"
+      type="mmu.DameMultaAction"
+      name="multaForm"
+      scope="request"
+      validate="false" >
+      <forward name="success" path="/editmulta.jsp"/>
+      <forward name="error" path="/MultasList.do"/>
+    </action>
+
+    <action path="/EditMulta"
+      type="mmu.ModificaMultaAction"
+      name="multaForm"
+      scope="request"
+      input="/editmulta.jsp"
+      validate="true" >
+      <forward name="success" path="/MultasList.do"/>
+      <forward name="error" path="/editmulta.jsp"/>
+    </action>
+
+    <action path="/DeleteMulta"
+      type="mmu.EliminaMultaAction"
+      scope="request"
+      validate="false" >
+      <forward name="success" path="/MultasList.do"/>
+    </action>
   </action-mappings>
 
 </struts-config>

@@ -1,4 +1,4 @@
-package mem;
+package mmu;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -11,7 +11,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionError;
 
-public class InsertaEmpleadoAction extends Action
+public class InsertaMultaAction extends Action
 {
 	public ActionForward execute(ActionMapping mapping,
 		    ActionForm form,
@@ -22,24 +22,17 @@ public class InsertaEmpleadoAction extends Action
 	    if ( isCancelled(request) ) 
 	    {	return (mapping.findForward("success"));}
 	    try 
-		{	Empleado empleado = new Empleado();
-		    EmpleadoForm empleadoForm = (EmpleadoForm) form;
-		    String codigo=EmpleadoBaseDatos.asignaCodigo(getDataSource(request));
-		    empleado.setCodigo(codigo);
-			empleado.setNombre(empleadoForm.getNombre());
-			empleado.setDni(empleadoForm.getDni());
-			empleado.setDireccion(empleadoForm.getDireccion());
-			empleado.setCp(empleadoForm.getCp());
-			empleado.setPoblacion(empleadoForm.getPoblacion());
-			empleado.setProvincia(empleadoForm.getProvincia());
-			empleado.setTelefono1(empleadoForm.getTelefono1());
-			empleado.setTelefono2(empleadoForm.getTelefono2());
-			empleado.setMovil(empleadoForm.getMovil());
-			empleado.setEmail(empleadoForm.getEmail());
-			empleado.setFax(empleadoForm.getFax());
-			empleado.setNomina(empleadoForm.getNomina());
-			empleado.setPerfil(empleadoForm.getPerfil());
-		    EmpleadoBaseDatos.insertaEmpleado(empleado, getDataSource(request));
+		{	Multa multa = new Multa();
+		    MultaForm multaForm = (MultaForm) form;
+		    String codigo=MultaBaseDatos.asignaCodigo(getDataSource(request));
+		    multa.setCodigoMulta(codigo);
+		    multa.setExpediente(multaForm.getExpediente());
+		    multa.setBoletin(multaForm.getBoletin());
+		    multa.setFechaDenuncia(multaForm.getFechaDenuncia());
+		    multa.setInfraccion(multaForm.getInfraccion());
+		    multa.setDescripcion(multaForm.getDescripcion());
+		    multa.setCodigoContrato(multaForm.getCodigoContrato());
+			MultaBaseDatos.insertaMulta(multa, getDataSource(request));
 		}
 		catch ( Exception e ) 
 		{	target = new String("error");
