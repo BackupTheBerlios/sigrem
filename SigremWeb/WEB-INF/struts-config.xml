@@ -26,6 +26,10 @@
       type="mre.RecursoForm" />
     <form-bean name="multaForm"
       type="mmu.MultaForm" />
+    <form-bean name="contratoForm"
+      type="mco.ContratoForm" />
+    <form-bean name="clienteForm"
+      type="mcl.ClienteForm" />
   </form-beans>
 
   <global-forwards>
@@ -165,6 +169,98 @@
       validate="false" >
       <forward name="success" path="/MultasList.do"/>
     </action>
+
+
+
+
+
+    <action path="/ContratosList"
+      type="mco.ListaContratosAction"
+      scope="request" >
+      <forward name="success" path="/contratoslist.jsp"/>
+    </action>
+
+    <action path="/AddContrato"
+      type="mco.InsertaContratoAction"
+      name="contratoForm"
+      scope="request"
+      input="/addcontrato.jsp"
+      validate="true" >
+      <forward name="success" path="/ContratosList.do"/>
+      <forward name="error" path="/addcontrato.jsp"/>
+    </action>
+
+    <action path="/EditCo"
+      type="mco.DameContratoAction"
+      name="contratoForm"
+      scope="request"
+      validate="false" >
+      <forward name="success" path="/editcontrato.jsp"/>
+      <forward name="error" path="/ContratosList.do"/>
+    </action>
+
+    <action path="/EditContrato"
+      type="mco.ModificaContratoAction"
+      name="contratoForm"
+      scope="request"
+      input="/editcontrato.jsp"
+      validate="true" >
+      <forward name="success" path="/ContratosList.do"/>
+      <forward name="error" path="/editcontrato.jsp"/>
+    </action>
+
+    <action path="/DeleteContrato"
+      type="mco.EliminaContratoAction"
+      scope="request"
+      validate="false" >
+      <forward name="success" path="/ContratosList.do"/>
+    </action>
+
+
+
+
+    <action path="/ClientesList"
+      type="mcl.ListaClientesAction"
+      scope="request" >
+      <forward name="success" path="/clienteslist.jsp"/>
+    </action>
+
+    <action path="/AddCliente"
+      type="mcl.InsertaClienteAction"
+      name="clienteForm"
+      scope="request"
+      input="/addclente.jsp"
+      validate="true" >
+      <forward name="success" path="/ClientesList.do"/>
+      <forward name="error" path="/addcliente.jsp"/>
+    </action>
+
+    <action path="/EditCl"
+      type="mcl.DameClienteAction"
+      name="clienteForm"
+      scope="request"
+      validate="false" >
+      <forward name="success" path="/editcliente.jsp"/>
+      <forward name="error" path="/ClientesList.do"/>
+    </action>
+
+    <action path="/EditCliente"
+      type="mcl.ModificaClienteAction"
+      name="clienteForm"
+      scope="request"
+      input="/editcliente.jsp"
+      validate="true" >
+      <forward name="success" path="/ClientesList.do"/>
+      <forward name="error" path="/editcliente.jsp"/>
+    </action>
+
+    <action path="/DeleteCliente"
+      type="mcl.EliminaClienteAction"
+      scope="request"
+      validate="false" >
+      <forward name="success" path="/ClientesList.do"/>
+    </action>
+
   </action-mappings>
 
 </struts-config>
