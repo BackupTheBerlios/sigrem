@@ -28,29 +28,34 @@
 
     <html:errors />
 
-    <html:form action="/AddMulta"
-      name="multaForm"
-      type="mmu.MultaForm" >
+    <html:form action="/AddUsuario"
+      name="usuarioForm"
+      type="login.UsuarioForm" >
       <table width="500" border="0">
+	<tr>
+          <td><bean:message key="app.nombreusuario" />:</td>
+          <td><html:text property="nombreUsuario" /></td>
+	</tr>
+	<tr>
+          <td><bean:message key="app.password" />:</td>
+          <td><html:text property="password" /></td>
+	</tr>
+	<tr>
+          <td><bean:message key="app.passwordr" />:</td>
+          <td><html:text property="passwordRepe" /></td>
+	</tr>
         <tr>
-          <td><bean:message key="app.expediente" />:</td>
-          <td><html:text property="expediente" /></td>
-	</tr>
-	<tr>
-	  <td><bean:message key="app.boletin" />:</td>
-          <td><html:text property="boletin" /></td>
-        </tr>
-        <tr>
-          <td><bean:message key="app.fechadenuncia" />:</td>
-          <td><html:text property="fechaDenuncia" /></td>
-	</tr>
-	<tr>
-          <td><bean:message key="app.infraccion" />:</td>
-          <td><html:text property="infraccion" /></td>
-	</tr>
-	<tr>
-	  <td><bean:message key="app.descripcion" />:</td>
-          <td><html:text property="descripcion" /></td>
+          <td><bean:message key="app.tipousuario" />:</td>
+	  <td>
+	    <html:select property="tipoUsuario" size="1">
+              <html:option value="Cliente">
+	        <bean:message key="app.cliente" />
+	      </html:option>
+              <html:option value="Empleado">
+	        <bean:message key="app.empleado" />
+	      </html:option>
+            </html:select>
+          </td>
 	</tr>
 	<tr>
           <td colspan="2" align="center">

@@ -28,30 +28,18 @@
 
     <html:errors />
 
-    <html:form action="/AddMulta"
-      name="multaForm"
-      type="mmu.MultaForm" >
+    <html:form action="/LoginUsuario"
+      name="usuarioForm"
+      type="login.UsuarioForm" >
       <table width="500" border="0">
         <tr>
-          <td><bean:message key="app.expediente" />:</td>
-          <td><html:text property="expediente" /></td>
+          <td><bean:message key="app.nombreusuario" />:</td>
+          <td><html:text property="nombreUsuario" /></td>
 	</tr>
 	<tr>
-	  <td><bean:message key="app.boletin" />:</td>
-          <td><html:text property="boletin" /></td>
+	  <td><bean:message key="app.password" />:</td>
+          <td><html:text property="password" /></td>
         </tr>
-        <tr>
-          <td><bean:message key="app.fechadenuncia" />:</td>
-          <td><html:text property="fechaDenuncia" /></td>
-	</tr>
-	<tr>
-          <td><bean:message key="app.infraccion" />:</td>
-          <td><html:text property="infraccion" /></td>
-	</tr>
-	<tr>
-	  <td><bean:message key="app.descripcion" />:</td>
-          <td><html:text property="descripcion" /></td>
-	</tr>
 	<tr>
           <td colspan="2" align="center">
             <html:submit />
@@ -60,6 +48,9 @@
         </tr>
       </table>
     </html:form> 
-
+    <hr>
+    <font size="-1" face="arial">
+      <a href="addusuario.jsp">Registrarse</a>
+    </font>
   </body>
 </html>

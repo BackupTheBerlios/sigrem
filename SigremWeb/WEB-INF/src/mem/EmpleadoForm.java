@@ -89,5 +89,5 @@ public class EmpleadoForm extends ActionForm
 	      errors.add("nombre", new ActionError("errors.nombre.required"));
 	    }
 	    return errors;
-	  }
+	}
 }

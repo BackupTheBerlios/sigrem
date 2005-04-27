@@ -17,7 +17,7 @@
       <tr> 
         <td height="68" width="48%">
           <div align="left">
-            <img src="imagenes/sigrem.png">
+            <img src="images/sigrem.png">
           </div>
         </td>
       </tr>
@@ -36,6 +36,7 @@
           <td><bean:message key="app.matricula" />:</td>
           <td><html:text property="matricula" /></td>
 	</tr>
+	<tr>
 	  <td><bean:message key="app.fechaalta" />:</td>
           <td><html:text property="fechaAlta" /></td>
         </tr>

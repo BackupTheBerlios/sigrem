@@ -17,7 +17,7 @@
       <tr> 
 	<td height="68" width="48%"> 
           <div align="left">
-            <img src="imagenes/sigrem.png">
+            <img src="images/sigrem.png">
           </div>
         </td>
       </tr>

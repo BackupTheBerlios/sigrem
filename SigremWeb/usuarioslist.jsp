@@ -31,35 +31,27 @@
     <table width="700"
       border="0" cellspacing="0" cellpadding="0">
       <tr align="left">
-        <th><bean:message key="app.codigoco" /></th>
-        <th><bean:message key="app.matricula" /></th>
-        <th><bean:message key="app.fechaalta" /></th>
-        <th><bean:message key="app.fechabaja" /></th>
-        <th><bean:message key="app.codigocl" /></th>
+        <th><bean:message key="app.nombreusuario" /></th>
+        <th><bean:message key="app.password" /></th>
+        <th><bean:message key="app.tipousuario" /></th>
       </tr>
       <!-- iterate over the results of the query -->
-      <logic:iterate id="contrato" name="contratos">
+      <logic:iterate id="usuario" name="usuarios">
 	<tr align="center">
 	  <td>
-            <bean:write name="contrato" property="codigoContrato" />
+            <bean:write name="usuario" property="nombreUsuario" />
 	  </td>
 	  <td>
-            <bean:write name="contrato" property="matricula" />
+            <bean:write name="usuario" property="password" />
 	  </td>
 	  <td>
-            <bean:write name="contrato" property="fechaAlta" />
+            <bean:write name="usuario" property="tipoUsuario" />
 	  </td>
 	  <td>
-            <bean:write name="contrato" property="fechaBaja" />
-	  </td>
-	  <td>
-            <bean:write name="contrato" property="codigoCliente" />
-	  </td>
-	  <td>
-            <a href="EditCo.do?codigo=<bean:write name="contrato"
-	      property="codigoContrato" />">Modificar</a>
-	    <a href="DeleteContrato.do?codigo=<bean:write name="contrato"
-	      property="codigoContrato" />">Eliminar</a>
+            <a href="EditU.do?nombre=<bean:write name="usuario"
+	      property="nombreUsuario" />">Modificar</a>
+	    <a href="DeleteUsuario.do?nombre=<bean:write name="usuario"
+	      property="nombreUsuario" />">Eliminar</a>
 	  </td>
 	</tr>
       </logic:iterate>
@@ -69,9 +61,6 @@
 	</td>
       </tr>
     </table>
-    <font size="-1" face="arial">
-      <a href="addcontrato.jsp">Añadir contrato</a>
-    </font>
-
+    
   </body>
 </html>

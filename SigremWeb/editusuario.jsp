@@ -28,39 +28,23 @@
 
     <html:errors />
 
-    <html:form action="/EditRecurso"
-      name="recursoForm"
-      type="mre.RecursoForm"
+    <html:form action="/EditUsuario"
+      name="usuarioForm"
+      type="login.UsuarioForm"
       scope="request" > 
       <table width="500" border="0">
 	<tr>
-          <td><bean:message key="app.codigor" />:</td>
-          <td><html:text property="codigoRecurso" /></td>
+          <td><bean:message key="app.nombreusuario" />:</td>
+          <td><html:text property="nombreUsuario" /></td>
 	</tr>
 	<tr>
-          <td><bean:message key="app.fechaemision" />:</td>
-          <td><html:text property="fechaEmision" /></td>
+          <td><bean:message key="app.password" />:</td>
+          <td><html:text property="password" /></td>
 	</tr>
 	<tr>
-	  <td><bean:message key="app.escrec" />:</td>
-          <td><html:text property="escritoRecibido" /></td>
+	  <td><bean:message key="app.tipousuario" />:</td>
+          <td><html:text property="tipoUsuario" /></td>
         </tr>
-        <tr>
-          <td><bean:message key="app.escpre" />:</td>
-          <td><html:text property="escritoPresentado" /></td>
-	</tr>
-	<tr>
-          <td><bean:message key="app.estado" />:</td>
-          <td><html:text property="estado" /></td>
-	</tr>
-	<tr>
-	  <td><bean:message key="app.descripcion" />:</td>
-          <td><html:text property="descripcion" /></td>
-	</tr>
-	<tr>
-	  <td><bean:message key="app.abogado" />:</td>
-          <td><html:text property="abogado" /></td>
-	</tr>
 	<tr>
           <td colspan="2" align="center">
             <html:submit />

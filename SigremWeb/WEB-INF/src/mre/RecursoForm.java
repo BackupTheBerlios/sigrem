@@ -3,8 +3,6 @@ package mre;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
-//import org.apache.struts.action.ActionErrors;
-//import org.apache.struts.action.ActionError;
 
 public class RecursoForm extends ActionForm
 {
@@ -117,9 +115,4 @@ public class RecursoForm extends ActionForm
 	    this.abogado="";
 	    this.descripcion="";
 	}
-/*
-	public ActionErrors validate(ActionMapping mapping,HttpServletRequest request) 
-	{
-		;
-	}*/
 }

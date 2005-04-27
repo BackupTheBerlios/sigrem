@@ -30,6 +30,8 @@
       type="mco.ContratoForm" />
     <form-bean name="clienteForm"
       type="mcl.ClienteForm" />
+    <form-bean name="usuarioForm"
+      type="login.UsuarioForm" />
   </form-beans>
 
   <global-forwards>
@@ -259,6 +261,64 @@
       scope="request"
       validate="false" >
       <forward name="success" path="/ClientesList.do"/>
+    </action>
+
+
+
+
+
+    <action path="/LoginUsuario"
+      type="login.LoginUsuarioAction"
+      name="usuarioForm"
+      scope="request"
+      validate="false" >
+      <forward name="success" path="/index.html"/>
+      <forward name="error" path="/login.jsp"/>
+      <forward name="root" path="/administrador.html"/>
+      <forward name="cliente" path="/ClientesList.do"/>
+      <forward name="empleado" path="/EmployeeList.do"/>
+    </action>
+
+    <action path="/AddUsuario"
+      type="login.AltaUsuarioAction"
+      name="usuarioForm"
+      input="/addusuario.jsp"
+      scope="request"
+      validate="true" >
+      <forward name="success" path="/login.jsp"/>
+      <forward name="error" path="/addusuario.jsp"/>
+    </action>
+
+    <action path="/UsuariosList"
+      type="login.ListaUsuariosAction"
+      scope="request" >
+      <forward name="success" path="/usuarioslist.jsp"/>
+    </action>
+
+    <action path="/EditU"
+      type="login.DameUsuarioAction"
+      name="usuarioForm"
+      scope="request"
+      validate="false" >
+      <forward name="success" path="/editusuario.jsp"/>
+      <forward name="error" path="/UsuariosList.do"/>
+    </action>
+
+    <action path="/EditUsuario"
+      type="login.ModificaUsuarioAction"
+      name="usuarioForm"
+      scope="request"
+      input="/editusuario.jsp"
+      validate="false" >
+      <forward name="success" path="/UsuariosList.do"/>
+      <forward name="error" path="/editusuario.jsp"/>
+    </action>
+
+    <action path="/DeleteUsuario"
+      type="login.EliminaUsuarioAction"
+      scope="request"
+      validate="false" >
+      <forward name="success" path="/UsuariosList.do"/>
     </action>
 
   </action-mappings>
