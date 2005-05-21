@@ -1,0 +1,100 @@
+body { 
+  font-family: Arial,sans-serif;
+  color: #333333;
+  line-height: 1.166;	
+  margin: 0px;
+  padding: 0px;
+  background: #cccccc url(images/bg_grad.jpg) fixed; 
+}
+ 
+a:link, a:visited{
+  color: blue;
+  text-decoration: none;
+}
+
+a:hover.enlace{
+  text-decoration: underline;
+  color:white;
+}
+p,address { 
+  margin-left:1em;
+  margin-right:1em;
+}
+p { 
+  text-indent:2em;
+ }
+ 
+p:first-letter{ 
+  font-size:200%;
+ }
+ 
+ol { 
+  list-style-type: lower-roman;
+ }
+ 
+h1,h2,h3,h4 {
+  background-image:  url(images/glbnav_background.gif); 
+  font-variant:small-caps;
+  padding-left:1em;
+  padding-right:1em;
+  border: solid 1pt black;
+ }
+ 
+ol,ul { 
+  margin-left:2em;
+ }
+ 
+h1,h2 { 
+  text-align:center;
+ }
+
+h3,h4{
+  margin-left:2em;
+  margin-right:1.7em;
+} 
+
+h3{ 
+  text-align:left;
+}
+
+div#titulo{
+  margin-left:10em;
+  margin-right:2em;
+}
+
+div#menu{ 
+  position:absolute;
+  left:0;
+  width:50%;
+ }
+ 
+div#enlaces{ 
+  position:absolute;
+  left:50%;
+  width:50%;
+ }
+ 
+div#cuerpo{ 
+  position:absolute;
+  top:100%;
+}
+img{ 
+  border:1;
+  border-color:black;
+}
+
+img.logo{
+  border:0;
+}
+
+a.imagen{ 
+  float:left;
+  padding-left:1em;
+  padding-right:1em;
+}
+
+form{
+  margin-left:1em;
+  margin-right:1em;
+  text-indent:2em;
+}
