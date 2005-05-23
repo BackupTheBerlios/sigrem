@@ -19,11 +19,14 @@ public class UsuarioBaseDatos
 		{	conn = dataSource.getConnection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("select * from usuarios where nombre=\'"+ nombre + "'");
-			usuario=new Usuario();
-			usuario.setPassword(rs.getString("password"));
-			usuario.setNombreUsuario(rs.getString("nombre"));
-			usuario.setTipoUsuario(rs.getString("tipo"));
-		
+			if ( rs.next() ) 
+			{	usuario=new Usuario();
+				usuario.setPassword(rs.getString("password"));
+				usuario.setNombreUsuario(rs.getString("nombre"));
+				usuario.setTipoUsuario(rs.getString("tipo"));
+			}
+			else 
+			{	throw new Exception("Usuario " + nombre + " no encontrado");}
 		}
 		finally 
 		{	if ( rs != null ) {
@@ -99,7 +102,7 @@ public class UsuarioBaseDatos
 		try 
 		{	conn = dataSource.getConnection();
 			stmt = conn.createStatement();
-			StringBuffer sqlString=new StringBuffer("delete from usuarios where nombre='" + nombre + "'");
+			StringBuffer sqlString=new StringBuffer("delete from usuarios where nombre='" + nombe + "'");
 			stmt.execute(sqlString.toString());
 		}
 		finally {
