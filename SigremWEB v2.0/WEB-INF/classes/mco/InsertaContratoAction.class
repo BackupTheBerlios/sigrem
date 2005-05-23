@@ -41,7 +41,9 @@ Exceptions java/io/IOException  javax/servlet/ServletException  java/l
  ' ï setFechaBaja ó 
  Ä ò setCodigoCliente ö 
  Ä õ insertaContrato '(Lmco/Contrato;Ljavax/sql/DataSource;)V ù û
- É ü error ° %org/apache/stru §  %org.apache.struts.action.GLOBAL_ERROR ¶ $org/apache/struts/action/ActionErr™ java/lang/va/lang/String;Ljava/lang/Object;)V  ±
+ É ü error ° %org/apache/stru §  %org.apache.struts.action.GLOBAL_ERROR ¶ $org/apache/struts/action/ActionErr™ java/lang/Exception ¨ 
+getMessage Æ 9
+ ≠ Ø '(Ljava/lang/String;Ljava/lang/Object;)V  ±
  © ≤ add ;(Ljava/lang/String;Lorg/apache/struts/action/ActionError;)V ¥ µ
  § ∂ isEmpty ()Z ∏ π
  § ∫ 
