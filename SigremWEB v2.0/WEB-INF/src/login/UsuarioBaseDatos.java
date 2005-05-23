@@ -102,7 +102,7 @@ public class UsuarioBaseDatos
 		try 
 		{	conn = dataSource.getConnection();
 			stmt = conn.createStatement();
-			StringBuffer sqlString=new StringBuffer("delete from usuarios where nombre='" + nombe + "'");
+			StringBuffer sqlString=new StringBuffer("delete from usuarios where nombre='" + nombre + "'");
 			stmt.execute(sqlString.toString());
 		}
 		finally {

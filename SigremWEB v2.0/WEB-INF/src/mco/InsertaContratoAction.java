@@ -25,6 +25,22 @@ public class InsertaContratoAction extends Action
 	    {	return (mapping.findForward("success"));}
 	    try 
 		{	ContratoForm contratoForm = (ContratoForm) form;
+	    	Cliente cliente = new Cliente();
+			String codigocl=ClienteBaseDatos.asignaCodigo(getDataSource(request));
+			cliente.setCodigo(codigocl);
+			cliente.setNombre(contratoForm.getNombre());
+			cliente.setDni(contratoForm.getDni());
+			cliente.setDireccion(contratoForm.getDireccion());
+			cliente.setCp(contratoForm.getCp());
+			cliente.setPoblacion(contratoForm.getPoblacion());
+			cliente.setProvincia(contratoForm.getProvincia());
+			cliente.setTelefono1(contratoForm.getTelefono1());
+			cliente.setTelefono2(contratoForm.getTelefono2());
+			cliente.setMovil(contratoForm.getMovil());
+			cliente.setEmail(contratoForm.getEmail());
+			cliente.setFax(contratoForm.getFax());
+			ClienteBaseDatos.insertaCliente(cliente, getDataSource(request));
+	    	Contrato contrato = new Contrato();
 	    	String codigoco=ContratoBaseDatos.asignaCodigo(getDataSource(request));
 		    contrato.setCodigoContrato(codigoco);
 		    contrato.setMatricula(contratoForm.getMatricula());
