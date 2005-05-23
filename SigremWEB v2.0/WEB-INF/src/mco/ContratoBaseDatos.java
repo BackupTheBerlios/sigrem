@@ -206,12 +206,7 @@ public class ContratoBaseDatos
 			rs2=stmt2.executeQuery("select codigoCliente from contratos where codigoContrato=\'"+ codigo + "'");
 			StringBuffer sqlString=new StringBuffer("delete from contratos where codigoContrato='" + codigo + "'");
 			stmt.execute(sqlString.toString());
-			if (rs2.next()) 
-			{	String cliente=rs2.getString("codigoCliente");
-				rs3=stmt2.executeQuery("select * from contratos where codigoCliente=\'"+ cliente + "'");
-				if (!rs3.next())
-				{	ClienteBaseDatos.eliminaCliente(cliente,dataSource);}		
-			}
+			String cliente=rs2.getString("codigoCliente");
 			rs = stmt.executeQuery("select codigoMulta from multas where codigoContrato=\'"+ codigo + "'");
 			while (rs.next())
 			{	MultaBaseDatos.eliminaMulta(rs.getString("codigoMulta"),dataSource);}

@@ -26,7 +26,6 @@ public class InsertaContratoAction extends Action
 	    try 
 		{	ContratoForm contratoForm = (ContratoForm) form;
 	    	Cliente cliente = new Cliente();
-			String codigocl=ClienteBaseDatos.asignaCodigo(getDataSource(request));
 			cliente.setCodigo(codigocl);
 			cliente.setNombre(contratoForm.getNombre());
 			cliente.setDni(contratoForm.getDni());
