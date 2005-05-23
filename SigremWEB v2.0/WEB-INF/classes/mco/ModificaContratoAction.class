@@ -13,7 +13,7 @@ Exceptions java/lang/Exception  mco/Contrato 
   3 setCodigoCliente 5 
   6 getDataSource ?(Ljavax/servlet/http/HttpServletRequest;)Ljavax/sql/DataSource; 8 9
   : mco/ContratoBaseDatos < modificaContrato '(Lmco/Contrato;Ljavax/sql/DataSource;)V > ?
- = @ form Lmco/ContratoForm; request 'Ljavax/servlet/http/HttpServletRequest; contrato Lmco/Contrato; execute Æ(Lorg/apache/struts/action/ActionMapping;Lorg/apache/struts/action/ActionForm;Ljavax/servlet/http/HttpServletRequest;Ljavax/servlet/http/HttpServletResponse;)Lorg/apache/struts/action/ActionForward; java/io/IOException J javax/servlet/ServletException L java/lang/String N success P  
+ = @ form Lmco/ContratoForm; request 'Ljavax/servlet/http/HttpServletRequest; contrato Lmco/Contrato; execute Æ(Lorg/apache/struts/action/ActionMapping;Lorg/apache/struts/action/ActionForm;Ljavax/servlet/http/HttpServletRequest;pache/struts/action/ActionForward; java/io/IOException J javax/servlet/ServletException L java/lang/String N success P  
  O R isCancelled *(Ljavax/servlet/http/HttpServletRequest;)Z T U
   V &org/apache/struts/action/ActionMapping X findForward <(Ljava/lang/String;)Lorg/apache/struts/action/ActionForward; Z [
  Y \  
