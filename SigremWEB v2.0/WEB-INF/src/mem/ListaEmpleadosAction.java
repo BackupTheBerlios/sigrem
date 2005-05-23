@@ -22,7 +22,7 @@ public class ListaEmpleadosAction extends Action
 		String target = new String("success");
 	    ArrayList empleados = null;
 	    empleados = EmpleadoBaseDatos.dameEmpleados(getDataSource(request));
-	    request.setAttribute("empleados", empleados);
+	    request.setAttribute("empleados", employees);
 	    //actualizar la vista con el objetivo apropiado
 	    return (mapping.findForward(target));
 	  }	

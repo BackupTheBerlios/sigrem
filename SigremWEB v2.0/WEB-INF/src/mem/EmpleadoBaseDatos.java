@@ -21,17 +21,16 @@ public class EmpleadoBaseDatos
 		{	conn = dataSource.getConnection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("select max(codigo) as codigo from empleados");
-			if (rs.next())
-			{	codigo=rs.getString("codigo");
-				if (codigo!=null)
-				{	String numero=codigo.substring(0,4);
-					int num=Integer.valueOf(codigo.substring(4)).intValue();
-					numero=numero+(num+1);
-					codigo=numero;
-				}
-				else
-				{	codigo="EM000";}
+			codigo=rs.getString("codigo");
+			if (codigo!=null)
+			{	String numero=codigo.substring(0,4);
+				int num=Integer.valueOf(codigo.substring(4)).intValue();
+				numero=numero+(num+1);
+				codigo=numero;
 			}
+			else
+			{	codigo="EM000";}
+			
 		}
 		finally 
 		{	if ( rs != null ) {
