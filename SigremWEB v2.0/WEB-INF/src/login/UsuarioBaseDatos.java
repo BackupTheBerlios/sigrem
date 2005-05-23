@@ -19,14 +19,11 @@ public class UsuarioBaseDatos
 		{	conn = dataSource.getConnection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("select * from usuarios where nombre=\'"+ nombre + "'");
-			if ( rs.next() ) 
-			{	usuario=new Usuario();
-				usuario.setPassword(rs.getString("password"));
-				usuario.setNombreUsuario(rs.getString("nombre"));
-				usuario.setTipoUsuario(rs.getString("tipo"));
-			}
-			else 
-			{	throw new Exception("Usuario " + nombre + " no encontrado");}
+			usuario=new Usuario();
+			usuario.setPassword(rs.getString("password"));
+			usuario.setNombreUsuario(rs.getString("nombre"));
+			usuario.setTipoUsuario(rs.getString("tipo"));
+		
 		}
 		finally 
 		{	if ( rs != null ) {
