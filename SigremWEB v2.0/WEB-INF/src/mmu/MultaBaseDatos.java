@@ -176,7 +176,6 @@ public class MultaBaseDatos
 			stmt = conn.createStatement();
 			StringBuffer sqlString =new StringBuffer("insert into multas ");
 			sqlString.append("values (\""+multa.getCodigoMulta()+ "\", ");
-			sqlString.append("\"" +multa.getExpediente()+ "\", ");
 			sqlString.append("\""+multa.getBoletin()+ "\", ");
 			sqlString.append("\""+multa.getFechaDenuncia()+ "\", ");
 			sqlString.append("\""+multa.getInfraccion()+ "\", ");

@@ -33,7 +33,7 @@ public class InsertaContratoAction extends Action
 			cliente.setDireccion(contratoForm.getDireccion());
 			cliente.setCp(contratoForm.getCp());
 			cliente.setPoblacion(contratoForm.getPoblacion());
-			cliente.setProvincia(contratoForm.getProvincia());
+			cliente.setProvincia(contratoForm.getPoblacion());
 			cliente.setTelefono1(contratoForm.getTelefono1());
 			cliente.setTelefono2(contratoForm.getTelefono2());
 			cliente.setMovil(contratoForm.getMovil());
@@ -50,9 +50,8 @@ public class InsertaContratoAction extends Action
 			ContratoBaseDatos.insertaContrato(contrato, getDataSource(request));			
 		}
 		catch ( Exception e ) 
-		{	target = new String("error");
+		{	target = new String("");
 		    ActionErrors errors = new ActionErrors();
-		    errors.add(ActionErrors.GLOBAL_ERROR,new ActionError("errors.database.error", e.getMessage()));
 		    if ( !errors.isEmpty() ) 
 		    {	saveErrors(request, errors);}
 		}
